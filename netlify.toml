@@ -5,16 +5,15 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Force the netlify.app subdomain to redirect to the custom domain.
-# DISABLED until griotmoon.com is attached to this Netlify site and DNS points
-# here — with the rule active before that, the site is unreachable (netlify.app
-# 301s to a domain that doesn't resolve). Re-enable once the domain is live:
-#
-# [[redirects]]
-#   from = "https://griotmoon.netlify.app/*"
-#   to = "https://griotmoon.com/:splat"
-#   status = 301
-#   force = true
+# Force the legacy netlify.app subdomain to redirect to the custom domain.
+# (Netlify's automatic "primary domain" redirect doesn't always engage; this
+# explicit rule is version-controlled and reliable. Uses `force = true` to
+# override any static match.)
+[[redirects]]
+  from = "https://griotmoon.netlify.app/*"
+  to = "https://griotmoon.com/:splat"
+  status = 301
+  force = true
 
 # No SPA catch-all on purpose. Every real route (incl. /es,/fr variants, all book
 # pages, and the noindex /profile,/search) is prerendered to its own static
