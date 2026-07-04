@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multilingual Word Flashcards | Griot Moon</title>
+  <link rel="canonical" href="https://griotmoon.com/games/bilingual-flashcards.html" />
+  <meta name="description" content="Tap a card to flip it and learn the word in another language! A free interactive activity from Griot Moon." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Multilingual Word Flashcards | Griot Moon" />
+  <meta property="og:description" content="Tap a card to flip it and learn the word in another language! A free interactive activity from Griot Moon." />
+  <meta property="og:url" content="https://griotmoon.com/games/bilingual-flashcards.html" />
+  <meta property="og:image" content="https://griotmoon.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Multilingual Word Flashcards | Griot Moon" />
+  <meta name="twitter:description" content="Tap a card to flip it and learn the word in another language! A free interactive activity from Griot Moon." />
+  <meta name="twitter:image" content="https://griotmoon.com/og-image.jpg" />
+  <link rel="stylesheet" href="/games/games.css">
+  <script>
+    window.GAME_I18N = {
+      en: {
+        title: '🌍 Multilingual Word Flashcards',
+        subtitle: 'Tap a card to flip it and learn the word in another language!',
+        howto1: 'Pick a category below (Colors, Animals, Numbers, or Feelings)',
+        howto2: 'Choose your language pair: English ↔ Spanish or English ↔ French',
+        howto3: 'Tap a card to flip it and see the translation!',
+        howto4: 'Say the word out loud in both languages',
+        howto5: 'Complete all cards to earn your Star Badge! ⭐',
+        langPairLabel: 'Language pair:',
+        catColors: '🎨 Colors', catAnimals: '🐾 Animals', catNumbers: '🔢 Numbers', catFeelings: '💛 Feelings',
+        flashcard: 'flashcard',
+        cardsFlipped: 'Cards flipped: {flipped} / {total}', scoreLabel: '⭐ Score: {score}',
+        celebTitle: 'Amazing job!', celebSubtitle: "You flipped all the cards! You're a multilingual superstar! ⭐",
+        printTitle: '🖨️ Want a printable version?',
+        printBlurb: 'Download the FREE 20-Page Trilingual Starter Kit, includes vocabulary sheets, coloring pages, and more!',
+        getKit: 'Get Free Kit 🎨',
+      },
+      es: {
+        title: '🌍 Tarjetas de palabras multilingües',
+        subtitle: 'Toca una tarjeta para voltearla y aprende la palabra en otro idioma.',
+        howto1: 'Elige una categoría abajo (colores, animales, números o sentimientos)',
+        howto2: 'Elige tu par de idiomas: inglés ↔ español o inglés ↔ francés',
+        howto3: 'Toca una tarjeta para voltearla y ver la traducción.',
+        howto4: 'Di la palabra en voz alta en los dos idiomas',
+        howto5: '¡Completa todas las tarjetas para ganar tu estrella! ⭐',
+        langPairLabel: 'Par de idiomas:',
+        catColors: '🎨 Colores', catAnimals: '🐾 Animales', catNumbers: '🔢 Números', catFeelings: '💛 Sentimientos',
+        flashcard: 'tarjeta',
+        cardsFlipped: 'Tarjetas volteadas: {flipped} / {total}', scoreLabel: '⭐ Puntos: {score}',
+        celebTitle: '¡Increíble!', celebSubtitle: '¡Volteaste todas las tarjetas! ¡Eres una estrella multilingüe! ⭐',
+        printTitle: '🖨️ ¿Quieres una versión imprimible?',
+        printBlurb: 'Descarga el kit trilingüe GRATIS de 20 páginas, incluye hojas de vocabulario, páginas para colorear y más.',
+        getKit: 'Obtener kit gratis 🎨',
+      },
+      fr: {
+        title: '🌍 Cartes de mots multilingues',
+        subtitle: 'Touche une carte pour la retourner et apprends le mot dans une autre langue !',
+        howto1: 'Choisis une catégorie ci-dessous (couleurs, animaux, nombres ou émotions)',
+        howto2: 'Choisis ta paire de langues : anglais ↔ espagnol ou anglais ↔ français',
+        howto3: 'Touche une carte pour la retourner et voir la traduction !',
+        howto4: 'Dis le mot à voix haute dans les deux langues',
+        howto5: 'Termine toutes les cartes pour gagner ton étoile ! ⭐',
+        langPairLabel: 'Paire de langues :',
+        catColors: '🎨 Couleurs', catAnimals: '🐾 Animaux', catNumbers: '🔢 Nombres', catFeelings: '💛 Émotions',
+        flashcard: 'carte',
+        cardsFlipped: 'Cartes retournées : {flipped} / {total}', scoreLabel: '⭐ Score : {score}',
+        celebTitle: 'Bravo !', celebSubtitle: 'Tu as retourné toutes les cartes ! Tu es une superstar multilingue ! ⭐',
+        printTitle: '🖨️ Tu veux une version à imprimer ?',
+        printBlurb: 'Télécharge le kit trilingue GRATUIT de 20 pages, avec des fiches de vocabulaire, des pages à colorier et plus encore !',
+        getKit: 'Obtenir le kit gratuit 🎨',
+      },
+    };
+  </script>
+  <script src="/games/i18n.js"></script>
+  <style>
+    @font-face{font-family:'Lexend';src:url('/games/lexend.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+    * { font-family: 'Lexend', 'Segoe UI', system-ui, sans-serif; }
+
+    /* Card flip animation */
+    .card-scene { perspective: 800px; }
+    .card-flip {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .card-flip.flipped { transform: rotateY(180deg); }
+    .card-front, .card-back {
+      position: absolute; inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 1.5rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .card-back { transform: rotateY(180deg); }
+
+    /* Bounce animation for correct */
+    @keyframes bounce-in {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .bounce-in { animation: bounce-in 0.4s ease forwards; }
+
+    /* Pulse for tap hint */
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.4); }
+      70% { box-shadow: 0 0 0 14px rgba(168, 85, 247, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+    }
+    .pulse-ring { animation: pulse-ring 2s infinite; }
+
+    /* Star sparkle */
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+      50% { opacity: 0.7; transform: scale(1.3) rotate(20deg); }
+    }
+    .sparkle { animation: sparkle 1.5s ease-in-out infinite; }
+
+    /* Progress bar fill */
+    .progress-fill { transition: width 0.5s ease; }
+
+    /* Category pill active */
+    .cat-btn.active {
+      background: linear-gradient(to right, rgb(168, 85, 247), rgb(236, 72, 153));
+      color: white;
+      box-shadow: 0 4px 12px rgba(168,85,247,0.4);
+    }
+
+    /* Language toggle active */
+    .lang-btn.active {
+      background: rgb(147, 51, 234);
+      color: white;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-green-50 to-white">
+
+  <!-- Nav (standardized across all game pages — matches the site nav) -->
+  <nav class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="/" class="flex items-center gap-2 font-extrabold text-purple-700 text-lg">🐾 Griot Moon</a>
+        <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-600">
+          <a href="/" class="hover:text-purple-600 transition-colors">Home</a>
+          <a href="/books" class="hover:text-purple-600 transition-colors">Books</a>
+          <a href="/activities" class="hover:text-purple-600 transition-colors">Activities</a>
+          <a href="/resources" class="hover:text-purple-600 transition-colors">Resources</a>
+          <a href="/about" class="hover:text-purple-600 transition-colors">About</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Back link -->
+  <div class="max-w-4xl mx-auto px-4 pt-6">
+    <a href="/activities" data-i18n="backToActivities" class="inline-flex items-center gap-1 text-purple-600 font-semibold hover:underline text-sm">
+      ← Back to Activities
+    </a>
+    <button id="markCompleted" data-i18n="markCompleted"
+      class="float-right px-4 py-2 border-2 border-purple-300 text-purple-600 rounded-full text-sm font-bold hover:bg-purple-50 transition-all">
+      ✓ Mark Completed
+    </button>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 pb-16 pt-4">
+
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 data-i18n="title" class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-2">
+        🌍 Multilingual Word Flashcards
+      </h1>
+      <p data-i18n="subtitle" class="text-gray-500 text-base">Tap a card to flip it and learn the word in another language!</p>
+      <div class="w-20 h-1 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <!-- How to Play -->
+    <div class="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 rounded-2xl p-5 mb-6 text-white shadow-lg">
+      <h2 data-i18n="howToPlay" class="font-extrabold text-lg mb-2">✨ How to Play ✨</h2>
+      <ol class="list-decimal list-inside space-y-1 text-sm font-semibold">
+        <li data-i18n="howto1">Pick a category below (Colors, Animals, Numbers, or Feelings)</li>
+        <li data-i18n="howto2">Choose your language pair: English ↔ Spanish or English ↔ French</li>
+        <li data-i18n="howto3">Tap a card to flip it and see the translation!</li>
+        <li data-i18n="howto4">Say the word out loud in both languages</li>
+        <li data-i18n="howto5">Complete all cards to earn your Star Badge! ⭐</li>
+      </ol>
+    </div>
+
+    <!-- Language Toggle -->
+    <div class="flex justify-center gap-3 mb-5">
+      <span data-i18n="langPairLabel" class="font-bold text-gray-600 self-center text-sm">Language pair:</span>
+      <button id="langES" class="lang-btn active px-4 py-2 rounded-full border-2 border-purple-300 font-bold text-sm transition-all">
+        🇺🇸 EN ↔ 🇪🇸 ES
+      </button>
+      <button id="langFR" class="lang-btn px-4 py-2 rounded-full border-2 border-purple-300 font-bold text-sm text-gray-600 transition-all hover:bg-purple-50">
+        🇺🇸 EN ↔ 🇫🇷 FR
+      </button>
+    </div>
+
+    <!-- Category Buttons -->
+    <div class="flex flex-wrap justify-center gap-3 mb-6">
+      <button class="cat-btn active px-5 py-2 rounded-full border-2 border-purple-300 font-bold text-sm transition-all" data-cat="colors" data-i18n="catColors">🎨 Colors</button>
+      <button class="cat-btn px-5 py-2 rounded-full border-2 border-purple-300 font-bold text-sm text-gray-600 transition-all hover:bg-purple-50" data-cat="animals" data-i18n="catAnimals">🐾 Animals</button>
+      <button class="cat-btn px-5 py-2 rounded-full border-2 border-purple-300 font-bold text-sm text-gray-600 transition-all hover:bg-purple-50" data-cat="numbers" data-i18n="catNumbers">🔢 Numbers</button>
+      <button class="cat-btn px-5 py-2 rounded-full border-2 border-purple-300 font-bold text-sm text-gray-600 transition-all hover:bg-purple-50" data-cat="feelings" data-i18n="catFeelings">💛 Feelings</button>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="mb-6">
+      <div class="flex justify-between text-xs font-bold text-gray-500 mb-1">
+        <span id="progressLabel">Cards flipped: 0 / 8</span>
+        <span id="scoreLabel">⭐ Score: 0</span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-3">
+        <div id="progressBar" class="progress-fill h-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Flashcard Grid -->
+    <div id="cardGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"></div>
+
+    <!-- Badge / Celebration -->
+    <div id="celebration" class="hidden text-center py-8 bounce-in">
+      <div class="text-6xl mb-3 sparkle">🏆</div>
+      <h2 data-i18n="celebTitle" class="text-2xl font-extrabold text-purple-700 mb-1">Amazing job!</h2>
+      <p data-i18n="celebSubtitle" class="text-gray-600 mb-4">You flipped all the cards! You're a multilingual superstar! ⭐</p>
+      <button id="playAgain" data-i18n="playAgain" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-extrabold rounded-full shadow-lg hover:shadow-xl transition-all text-base">
+        🔄 Play Again!
+      </button>
+    </div>
+
+    <!-- Printable Sheet CTA -->
+    <div class="bg-purple-50 border-2 border-purple-200 rounded-2xl p-5 text-center">
+      <p data-i18n="printTitle" class="font-bold text-purple-700 text-base mb-1">🖨️ Want a printable version?</p>
+      <p data-i18n="printBlurb" class="text-gray-500 text-sm mb-3">Download the FREE 20-Page Trilingual Starter Kit, includes vocabulary sheets, coloring pages, and more!</p>
+      <a href="/#email-signup" data-i18n="getKit" class="inline-block px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-full shadow hover:shadow-lg transition-all text-sm">
+        Get Free Kit 🎨
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    // Shared voice picker, aligned with the site's src/lib/speech.ts:
+    // prefer an exact BCP-47 match (en-US / es-ES / fr-FR), else the 2-letter
+    // language prefix, else the browser default. getVoices() can be empty on
+    // first call, so we refresh and also listen for 'voiceschanged'.
+    let _voices = [];
+    function _refreshVoices() {
+      if (window.speechSynthesis) _voices = window.speechSynthesis.getVoices() || [];
+    }
+    _refreshVoices();
+    if (window.speechSynthesis && window.speechSynthesis.addEventListener) {
+      window.speechSynthesis.addEventListener('voiceschanged', _refreshVoices);
+    }
+    function pickVoice(langCode) {
+      if (!_voices.length) _refreshVoices();
+      const exact = _voices.find(v => v.lang === langCode);
+      if (exact) return exact;
+      const prefix = langCode.slice(0, 2).toLowerCase();
+      return _voices.find(v => v.lang && v.lang.toLowerCase().startsWith(prefix)) || null;
+    }
+
+    // ─── DATA ───────────────────────────────────────────────────────────────────
+    const vocab = {
+      colors: [
+        { emoji: '🔴', en: 'Red',    es: 'Rojo',    fr: 'Rouge',   bg: 'bg-red-100',    accent: '#ef4444' },
+        { emoji: '🔵', en: 'Blue',   es: 'Azul',    fr: 'Bleu',    bg: 'bg-blue-100',   accent: '#3b82f6' },
+        { emoji: '🟡', en: 'Yellow', es: 'Amarillo',fr: 'Jaune',   bg: 'bg-yellow-100', accent: '#eab308' },
+        { emoji: '🟢', en: 'Green',  es: 'Verde',   fr: 'Vert',    bg: 'bg-green-100',  accent: '#22c55e' },
+        { emoji: '🟣', en: 'Purple', es: 'Morado',  fr: 'Violet',  bg: 'bg-purple-100', accent: '#a855f7' },
+        { emoji: '🟠', en: 'Orange', es: 'Naranja', fr: 'Orange',  bg: 'bg-orange-100', accent: '#f97316' },
+        { emoji: '⚫', en: 'Black',  es: 'Negro',   fr: 'Noir',    bg: 'bg-gray-100',   accent: '#374151' },
+        { emoji: '⚪', en: 'White',  es: 'Blanco',  fr: 'Blanc',   bg: 'bg-slate-100',  accent: '#94a3b8' },
+      ],
+      animals: [
+        { emoji: '🐶', en: 'Dog',      es: 'Perro',    fr: 'Chien',   bg: 'bg-amber-100',  accent: '#f59e0b' },
+        { emoji: '🐱', en: 'Cat',      es: 'Gato',     fr: 'Chat',    bg: 'bg-pink-100',   accent: '#ec4899' },
+        { emoji: '🐦', en: 'Bird',     es: 'Pájaro',   fr: 'Oiseau',  bg: 'bg-sky-100',    accent: '#0ea5e9' },
+        { emoji: '🐟', en: 'Fish',     es: 'Pez',      fr: 'Poisson', bg: 'bg-cyan-100',   accent: '#06b6d4' },
+        { emoji: '🦋', en: 'Butterfly',es: 'Mariposa', fr: 'Papillon',bg: 'bg-purple-100', accent: '#a855f7' },
+        { emoji: '🐘', en: 'Elephant', es: 'Elefante', fr: 'Éléphant',bg: 'bg-gray-100',   accent: '#6b7280' },
+        { emoji: '🦁', en: 'Lion',     es: 'León',     fr: 'Lion',    bg: 'bg-yellow-100', accent: '#eab308' },
+        { emoji: '🐸', en: 'Frog',     es: 'Rana',     fr: 'Grenouille',bg:'bg-green-100', accent: '#22c55e' },
+      ],
+      numbers: [
+        { emoji: '1️⃣', en: 'One',   es: 'Uno',   fr: 'Un',    bg: 'bg-red-100',    accent: '#ef4444' },
+        { emoji: '2️⃣', en: 'Two',   es: 'Dos',   fr: 'Deux',  bg: 'bg-orange-100', accent: '#f97316' },
+        { emoji: '3️⃣', en: 'Three', es: 'Tres',  fr: 'Trois', bg: 'bg-yellow-100', accent: '#eab308' },
+        { emoji: '4️⃣', en: 'Four',  es: 'Cuatro',fr: 'Quatre',bg: 'bg-green-100',  accent: '#22c55e' },
+        { emoji: '5️⃣', en: 'Five',  es: 'Cinco', fr: 'Cinq',  bg: 'bg-cyan-100',   accent: '#06b6d4' },
+        { emoji: '6️⃣', en: 'Six',   es: 'Seis',  fr: 'Six',   bg: 'bg-blue-100',   accent: '#3b82f6' },
+        { emoji: '7️⃣', en: 'Seven', es: 'Siete', fr: 'Sept',  bg: 'bg-indigo-100', accent: '#6366f1' },
+        { emoji: '8️⃣', en: 'Eight', es: 'Ocho',  fr: 'Huit',  bg: 'bg-purple-100', accent: '#a855f7' },
+      ],
+      feelings: [
+        { emoji: '😊', en: 'Happy',    es: 'Feliz',     fr: 'Heureux', bg: 'bg-yellow-100', accent: '#eab308' },
+        { emoji: '😢', en: 'Sad',      es: 'Triste',    fr: 'Triste',  bg: 'bg-blue-100',   accent: '#3b82f6' },
+        { emoji: '😠', en: 'Angry',    es: 'Enojado',   fr: 'En colère',bg:'bg-red-100',    accent: '#ef4444' },
+        { emoji: '😨', en: 'Scared',   es: 'Asustado',  fr: 'Effrayé', bg: 'bg-purple-100', accent: '#a855f7' },
+        { emoji: '😲', en: 'Surprised',es: 'Sorprendido',fr:'Surpris', bg: 'bg-orange-100', accent: '#f97316' },
+        { emoji: '🥰', en: 'Loved',    es: 'Amado',     fr: 'Aimé',    bg: 'bg-pink-100',   accent: '#ec4899' },
+        { emoji: '😴', en: 'Sleepy',   es: 'Somnoliento',fr:'Somnolent',bg:'bg-indigo-100', accent: '#6366f1' },
+        { emoji: '💪', en: 'Brave',    es: 'Valiente',  fr: 'Courageux',bg:'bg-green-100',  accent: '#22c55e' },
+      ],
+    };
+
+    // ─── STATE ──────────────────────────────────────────────────────────────────
+    let currentCat = 'colors';
+    let currentLang = 'es'; // 'es' or 'fr'
+    let flippedCards = new Set();
+    let score = 0;
+
+    // ─── RENDER ─────────────────────────────────────────────────────────────────
+    function renderCards() {
+      const grid = document.getElementById('cardGrid');
+      const celebration = document.getElementById('celebration');
+      celebration.classList.add('hidden');
+      flippedCards.clear();
+      score = 0;
+      updateProgress();
+
+      const words = vocab[currentCat];
+      grid.innerHTML = words.map((w, i) => `
+        <div class="card-scene h-44 md:h-52" id="scene-${i}">
+          <div class="card-flip" id="card-${i}" role="button" tabindex="0" aria-label="${w.en} ${window.t('flashcard')}" aria-pressed="false" onclick="flipCard(${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();flipCard(${i});}">
+            <!-- Front: English -->
+            <div class="card-front ${w.bg} shadow-lg border-2 border-white">
+              <div class="text-5xl mb-3">${w.emoji}</div>
+              <div class="text-xl font-extrabold text-gray-800" lang="en">${w.en}</div>
+              <div class="text-xs text-gray-400 mt-2 font-semibold">🇺🇸 English</div>
+              <div class="absolute bottom-3 right-3 text-xs text-gray-500 font-bold">tap to flip</div>
+            </div>
+            <!-- Back: Translation -->
+            <div class="card-back shadow-lg border-2 border-white" style="background: linear-gradient(135deg, ${w.accent}22, ${w.accent}44);">
+              <div class="text-5xl mb-3">${w.emoji}</div>
+              <div class="text-xl font-extrabold" lang="${currentLang}" style="color:${w.accent}">${currentLang === 'es' ? w.es : w.fr}</div>
+              <div class="text-xs text-gray-500 mt-1 font-semibold">${currentLang === 'es' ? '🇪🇸 Español' : '🇫🇷 Français'}</div>
+              <div class="text-xs text-gray-400 mt-2 italic" lang="en">"${w.en}"</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function flipCard(i) {
+      const card = document.getElementById(`card-${i}`);
+      if (!card.classList.contains('flipped')) {
+        card.classList.add('flipped');
+        card.setAttribute('aria-pressed', 'true');
+        if (!flippedCards.has(i)) {
+          flippedCards.add(i);
+          score += 10;
+          updateProgress();
+          // Speak the word using Web Speech API
+          speakWord(i);
+          if (flippedCards.size === vocab[currentCat].length) {
+            setTimeout(() => {
+              document.getElementById('celebration').classList.remove('hidden');
+              document.getElementById('celebration').classList.add('bounce-in');
+            }, 600);
+          }
+        }
+      } else {
+        card.classList.remove('flipped');
+        card.setAttribute('aria-pressed', 'false');
+      }
+    }
+
+    function speakWord(i) {
+      if (!window.speechSynthesis) return;
+      const w = vocab[currentCat][i];
+      const translation = currentLang === 'es' ? w.es : w.fr;
+      const langCode = currentLang === 'es' ? 'es-ES' : 'fr-FR';
+      // Speak English first, then translation
+      const u1 = new SpeechSynthesisUtterance(w.en);
+      u1.lang = 'en-US'; u1.rate = 0.95;
+      const v1 = pickVoice(u1.lang);
+      if (v1) u1.voice = v1;
+      const u2 = new SpeechSynthesisUtterance(translation);
+      u2.lang = langCode; u2.rate = 0.95;
+      const v2 = pickVoice(u2.lang);
+      if (v2) u2.voice = v2;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u1);
+      window.speechSynthesis.speak(u2);
+    }
+
+    function updateProgress() {
+      const total = vocab[currentCat].length;
+      const flipped = flippedCards.size;
+      document.getElementById('progressLabel').textContent =
+        window.t('cardsFlipped').replace('{flipped}', flipped).replace('{total}', total);
+      document.getElementById('scoreLabel').textContent =
+        window.t('scoreLabel').replace('{score}', score);
+      document.getElementById('progressBar').style.width = `${(flipped / total) * 100}%`;
+    }
+
+    // ─── CATEGORY BUTTONS ───────────────────────────────────────────────────────
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-btn').forEach(b => {
+          b.classList.remove('active');
+          b.classList.add('text-gray-600');
+        });
+        btn.classList.add('active');
+        btn.classList.remove('text-gray-600');
+        currentCat = btn.dataset.cat;
+        renderCards();
+      });
+    });
+
+    // ─── LANGUAGE TOGGLE ────────────────────────────────────────────────────────
+    document.getElementById('langES').addEventListener('click', () => {
+      currentLang = 'es';
+      document.getElementById('langES').classList.add('active');
+      document.getElementById('langFR').classList.remove('active');
+      document.getElementById('langFR').classList.add('text-gray-600');
+      renderCards();
+    });
+    document.getElementById('langFR').addEventListener('click', () => {
+      currentLang = 'fr';
+      document.getElementById('langFR').classList.add('active');
+      document.getElementById('langES').classList.remove('active');
+      document.getElementById('langES').classList.add('text-gray-600');
+      renderCards();
+    });
+
+    // ─── PLAY AGAIN ─────────────────────────────────────────────────────────────
+    document.getElementById('playAgain').addEventListener('click', renderCards);
+
+    // ─── MARK COMPLETED ─────────────────────────────────────────────────────────
+    document.getElementById('markCompleted').addEventListener('click', function() {
+      this.textContent = window.t('completed');
+      this.classList.add('bg-green-100', 'border-green-400', 'text-green-700');
+    });
+
+    // ─── INIT ───────────────────────────────────────────────────────────────────
+    renderCards();
+  </script>
+
+  <!-- Footer (matches site) -->
+  <footer class="bg-gray-800 text-white py-10 mt-10">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="font-extrabold text-lg mb-1">🐾 Griot Moon</p>
+      <p data-i18n="footerTagline" class="text-gray-400 text-sm mb-4">Where stories come to life! Magical books and activities for curious minds, ages 3–9.</p>
+      <div class="flex justify-center gap-4 text-sm text-gray-400">
+        <a href="/" class="hover:text-white">Home</a>
+        <a href="/books" class="hover:text-white">Books</a>
+        <a href="/activities" class="hover:text-white">Activities</a>
+        <a href="/about" class="hover:text-white">About Pawa Seyni</a>
+      </div>
+      <p class="text-gray-500 text-xs mt-4">© 2026 Griot Moon. <span data-i18n="rights">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+
+<!-- STE_PROGRESS_SYNC: injected by scripts/patch-games.mjs -->
+<script>
+(function () {
+  var SLUG = "bilingual-flashcards";
+  var KEY = 'readingProgress';
+  function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+  function isDone() { var p = load(); return Array.isArray(p.activitiesCompleted) && p.activitiesCompleted.indexOf(SLUG) > -1; }
+  function track() {
+    // Fire the same "Activity Complete" Plausible event the React app sends,
+    // via the script-less events API so games stay zero-external on load (this
+    // request only fires on the completion click, not on page load).
+    try {
+      fetch('https://plausible.io/api/event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          name: 'Activity Complete',
+          url: location.href,
+          domain: 'griotmoon.com',
+          props: { activity: SLUG }
+        })
+      });
+    } catch (e) {}
+  }
+  function markDone() {
+    var p = load();
+    p.booksRead = Array.isArray(p.booksRead) ? p.booksRead : [];
+    p.booksWantToRead = Array.isArray(p.booksWantToRead) ? p.booksWantToRead : [];
+    p.activitiesCompleted = Array.isArray(p.activitiesCompleted) ? p.activitiesCompleted : [];
+    var already = p.activitiesCompleted.indexOf(SLUG) > -1;
+    if (!already) p.activitiesCompleted.push(SLUG);
+    localStorage.setItem(KEY, JSON.stringify(p));
+    try { window.dispatchEvent(new CustomEvent('progresschange')); } catch (e) {}
+    if (!already) track();
+  }
+  var btn = document.getElementById('markCompleted');
+  if (btn) {
+    btn.addEventListener('click', markDone);
+    if (isDone()) {
+      btn.textContent = window.t('completed');
+      btn.classList.add('bg-green-100', 'border-green-400', 'text-green-700');
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lexend Variable', 'Segoe UI', system-ui, -apple-system, sans-serif; margin: 0; }
+
+  /* Visible keyboard-focus indicator (WCAG 2.4.7). Mouse clicks don't trigger
+     :focus-visible, so this only shows for keyboard/AT users. */
+  :focus-visible {
+    outline: 3px solid #d9a441;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+/* Honor reduced-motion: kill the floating decorations, smooth scroll, and any
+   transition/animation for users who ask for less motion (WCAG 2.3.3). */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .star-float { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-purple-600 transition-all duration-200;
+  }
+  .btn-amazon {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-bold rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 text-sm;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden;
+  }
+}
+
+/* Griot Moon night sky: deep indigo fading toward the fire-lit horizon. */
+.hero-bg {
+  background: linear-gradient(180deg, #0d0d28 0%, #1b1b48 45%, #2a2456 75%, #3d2b63 100%);
+}
+
+.star-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}

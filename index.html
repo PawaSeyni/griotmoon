@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2a2456" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Preload Lexend to break the HTML→CSS→font depth-3 critical chain -->
+    <link rel="preload" as="font" type="font/woff2"
+      href="/assets/lexend-latin-wght-normal-ci0D1wrL.woff2"
+      crossorigin />
+
+    <!--
+      Defaults below are only used when JavaScript is disabled. Every route
+      sets its own <title>, description, OG, and Twitter card via the Seo
+      component (src/components/Seo.tsx → src/lib/head.ts). Anything that
+      would vary per route is INTENTIONALLY OMITTED here — duplicates would
+      shadow useHead's updates because most non-JS scrapers pick the first
+      matching tag.
+    -->
+    <title>Griot Moon: African Heritage Picture Books for Curious Minds</title>
+    <meta
+      name="description"
+      content="The Pawa Seyni Collection: African heritage picture books for children ages 3–9. Folktales, courage, and Ubuntu, told fireside under the moon."
+    />
+    <meta name="author" content="Pawa Seyni" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Griot Moon" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Analytics: create a Plausible site for griotmoon.com and paste its
+         script tag here (the Eva site's ID was removed on purpose). -->
+  </head>
+  <body>
+    <!--
+      Static placeholder for Netlify Forms. Netlify's build-time HTML scanner
+      detects this hidden form and registers the "contact" submission target.
+      The actual user-facing form is a React component in src/pages/Contact.tsx
+      that POSTs (URL-encoded) to "/" with `form-name=contact`. The two must
+      share the same field names — keep them in sync.
+    -->
+    <form name="contact" netlify netlify-honeypot="website" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+      <input type="text" name="website" />
+    </form>
+
+    <!--
+      Static placeholder for the on-site feedback widget (src/components/
+      FeedbackWidget.tsx). Same Netlify Forms pattern as "contact": the React
+      widget POSTs (URL-encoded) to "/" with `form-name=feedback`. Field names
+      must stay in sync with the widget.
+    -->
+    <form name="feedback" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="rating" />
+      <textarea name="comment"></textarea>
+      <input type="text" name="page" />
+      <input type="text" name="language" />
+    </form>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

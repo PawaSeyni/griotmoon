@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emotion & Feelings Wheel | Griot Moon</title>
+  <link rel="canonical" href="https://griotmoon.com/games/emotion-wheel.html" />
+  <meta name="description" content="Explore emotions: how do you feel today? A free interactive activity from Griot Moon." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Emotion &amp; Feelings Wheel | Griot Moon" />
+  <meta property="og:description" content="Explore emotions: how do you feel today? A free interactive activity from Griot Moon." />
+  <meta property="og:url" content="https://griotmoon.com/games/emotion-wheel.html" />
+  <meta property="og:image" content="https://griotmoon.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Emotion &amp; Feelings Wheel | Griot Moon" />
+  <meta name="twitter:description" content="Explore emotions: how do you feel today? A free interactive activity from Griot Moon." />
+  <meta name="twitter:image" content="https://griotmoon.com/og-image.jpg" />
+  <link rel="stylesheet" href="/games/games.css">
+  <script>
+    window.GAME_I18N = {
+      en: {
+        title: "Pawa Seyni's Feelings Wheel",
+        subtitle: 'Explore emotions: how do you feel today?',
+        howto1: 'Tap an emotion on the wheel to learn about it',
+        howto2: "Read Pawa Seyni's story moment about that feeling",
+        howto3: 'Answer: "Have you ever felt this way?"',
+        howto4: 'Explore all 8 emotions to fill your Feelings Journal!',
+        howto5: 'Print your journal page when you are done 🖨️',
+        tapPrompt: '👇 Tap an emotion to explore it!',
+        tapLabel: 'Tap an emotion!',
+        readyTitle: 'Ready to explore feelings?',
+        readyText: 'Tap any emotion on the wheel to discover how Pawa Seyni felt in her stories, and share how YOU feel too!',
+        storyMoment: "📖 Pawa Seyni's Story Moment:",
+        freeResponsePlaceholder: 'Or write your own answer...',
+        saveToJournal: '📓 Save to My Journal',
+        saved: '✅ Saved!',
+        journalTitle: '📓 My Feelings Journal',
+        journalIntro: 'Your answers will appear here as you explore each emotion.',
+        journalEmpty: 'No entries yet... start exploring the wheel! 💛',
+        defaultResponse: 'I explored this feeling!',
+      },
+      es: {
+        title: 'La rueda de emociones de Pawa Seyni',
+        subtitle: 'Explora las emociones: ¿cómo te sientes hoy?',
+        howto1: 'Toca una emoción en la rueda para conocerla',
+        howto2: 'Lee el momento de la historia de Pawa Seyni sobre ese sentimiento',
+        howto3: 'Responde: "¿Alguna vez te has sentido así?"',
+        howto4: '¡Explora las 8 emociones para llenar tu diario de sentimientos!',
+        howto5: 'Imprime tu página del diario cuando termines 🖨️',
+        tapPrompt: '👇 ¡Toca una emoción para explorarla!',
+        tapLabel: '¡Toca una emoción!',
+        readyTitle: '¿List@ para explorar los sentimientos?',
+        readyText: 'Toca cualquier emoción en la rueda para descubrir cómo se sintió Pawa Seyni en sus cuentos, ¡y comparte cómo te sientes TÚ también!',
+        storyMoment: '📖 El momento de la historia de Pawa Seyni:',
+        freeResponsePlaceholder: 'O escribe tu propia respuesta...',
+        saveToJournal: '📓 Guardar en mi diario',
+        saved: '✅ ¡Guardado!',
+        journalTitle: '📓 Mi diario de sentimientos',
+        journalIntro: 'Tus respuestas aparecerán aquí a medida que explores cada emoción.',
+        journalEmpty: 'Aún no hay anotaciones... ¡empieza a explorar la rueda! 💛',
+        defaultResponse: '¡Exploré este sentimiento!',
+      },
+      fr: {
+        title: "La roue des émotions de Pawa Seyni",
+        subtitle: "Explore les émotions : comment te sens-tu aujourd'hui ?",
+        howto1: 'Touche une émotion sur la roue pour la découvrir',
+        howto2: "Lis le moment de l'histoire de Pawa Seyni sur ce sentiment",
+        howto3: 'Réponds : « T\'es-tu déjà senti ainsi ? »',
+        howto4: 'Explore les 8 émotions pour remplir ton journal des sentiments !',
+        howto5: 'Imprime ta page de journal quand tu as terminé 🖨️',
+        tapPrompt: '👇 Touche une émotion pour l\'explorer !',
+        tapLabel: 'Touche une émotion !',
+        readyTitle: 'Prêt à explorer les sentiments ?',
+        readyText: "Touche n'importe quelle émotion sur la roue pour découvrir comment Pawa Seyni s'est sentie dans ses histoires, et partage comment TOI tu te sens aussi !",
+        storyMoment: "📖 Le moment de l'histoire de Pawa Seyni :",
+        freeResponsePlaceholder: 'Ou écris ta propre réponse...',
+        saveToJournal: '📓 Enregistrer dans mon journal',
+        saved: '✅ Enregistré !',
+        journalTitle: '📓 Mon journal des sentiments',
+        journalIntro: 'Tes réponses apparaîtront ici au fur et à mesure que tu explores chaque émotion.',
+        journalEmpty: 'Aucune entrée pour le moment... commence à explorer la roue ! 💛',
+        defaultResponse: "J'ai exploré ce sentiment !",
+      },
+    };
+  </script>
+  <script src="/games/i18n.js"></script>
+  <style>
+    @font-face{font-family:'Lexend';src:url('/games/lexend.woff2') format('woff2');font-weight:100 900;font-display:swap;}
+    * { font-family: 'Lexend', 'Segoe UI', system-ui, sans-serif; }
+
+    /* Wheel spin */
+    @keyframes spin-in {
+      0% { transform: rotate(-30deg) scale(0.9); opacity: 0; }
+      100% { transform: rotate(0deg) scale(1); opacity: 1; }
+    }
+    .spin-in { animation: spin-in 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+    /* Emotion segment hover */
+    .emotion-seg {
+      cursor: pointer;
+      transition: transform 0.2s, filter 0.2s;
+      transform-origin: center;
+    }
+    .emotion-seg:hover { filter: brightness(1.15); transform: scale(1.05); }
+    .emotion-seg.active { filter: brightness(1.2) drop-shadow(0 0 8px rgba(0,0,0,0.3)); transform: scale(1.08); }
+    /* Keyboard focus indicator for the SVG wheel segments (no other focus style exists) */
+    [role="button"]:focus-visible { outline: 3px solid #7c3aed; outline-offset: 2px; }
+
+    /* Slide up for response panel */
+    @keyframes slide-up {
+      0% { transform: translateY(30px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .slide-up { animation: slide-up 0.4s ease forwards; }
+
+    /* Bounce for selection */
+    @keyframes bounce-select {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.12); }
+      70% { transform: scale(0.96); }
+      100% { transform: scale(1); }
+    }
+    .bounce-select { animation: bounce-select 0.4s ease; }
+
+    /* Pulse for active emotion card */
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 4px 20px rgba(168,85,247,0.2); }
+      50% { box-shadow: 0 4px 30px rgba(168,85,247,0.5); }
+    }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+    /* Response option hover */
+    .response-opt {
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .response-opt:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(168,85,247,0.25); }
+    .response-opt.selected { border-color: #a855f7; background: #f3e8ff; }
+    .response-opt.correct { border-color: #22c55e; background: #dcfce7; }
+
+    /* Star pop */
+    @keyframes star-pop {
+      0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+      60% { transform: scale(1.3) rotate(5deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+    .star-pop { animation: star-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+    /* Wheel container */
+    .wheel-wrap { position: relative; width: 320px; height: 320px; margin: 0 auto; }
+    .wheel-svg { width: 100%; height: 100%; }
+
+    /* Center circle */
+    .center-circle {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      z-index: 10;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    /* Journal page */
+    .journal-line {
+      border-bottom: 2px dashed #e9d5ff;
+      padding: 6px 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #374151;
+      min-height: 36px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-purple-50 to-white">
+
+  <!-- Nav (standardized across all game pages — matches the site nav) -->
+  <nav class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="/" class="flex items-center gap-2 font-extrabold text-purple-700 text-lg">🐾 Griot Moon</a>
+        <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-gray-600">
+          <a href="/" class="hover:text-purple-600 transition-colors">Home</a>
+          <a href="/books" class="hover:text-purple-600 transition-colors">Books</a>
+          <a href="/activities" class="hover:text-purple-600 transition-colors">Activities</a>
+          <a href="/resources" class="hover:text-purple-600 transition-colors">Resources</a>
+          <a href="/about" class="hover:text-purple-600 transition-colors">About</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="max-w-4xl mx-auto px-4 pt-6">
+    <a href="/activities" data-i18n="backToActivities" class="inline-flex items-center gap-1 text-purple-600 font-semibold hover:underline text-sm">← Back to Activities</a>
+    <button id="markCompleted" data-i18n="markCompleted" class="float-right px-4 py-2 border-2 border-purple-300 text-purple-600 rounded-full text-sm font-bold hover:bg-purple-50 transition-all">✓ Mark Completed</button>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 pb-16 pt-4">
+
+    <!-- Header -->
+    <div class="text-center mb-6">
+      <div class="text-5xl mb-2">💛</div>
+      <h1 data-i18n="title" class="text-3xl md:text-4xl font-extrabold text-gray-800 mb-2">Pawa Seyni's Feelings Wheel</h1>
+      <p data-i18n="subtitle" class="text-gray-500 text-base">Explore emotions: how do you feel today?</p>
+      <div class="w-20 h-1 bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-400 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <!-- How to Play -->
+    <div class="bg-gradient-to-r from-yellow-400 via-pink-400 to-purple-500 rounded-2xl p-5 mb-6 text-white shadow-lg">
+      <h2 data-i18n="howToPlay" class="font-extrabold text-lg mb-2">✨ How to Play ✨</h2>
+      <ol class="list-decimal list-inside space-y-1 text-sm font-semibold">
+        <li data-i18n="howto1">Tap an emotion on the wheel to learn about it</li>
+        <li data-i18n="howto2">Read Pawa Seyni's story moment about that feeling</li>
+        <li data-i18n="howto3">Answer: "Have you ever felt this way?"</li>
+        <li data-i18n="howto4">Explore all 8 emotions to fill your Feelings Journal!</li>
+        <li data-i18n="howto5">Print your journal page when you are done 🖨️</li>
+      </ol>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+
+      <!-- LEFT: Wheel -->
+      <div class="flex flex-col items-center">
+        <p data-i18n="tapPrompt" class="text-sm font-bold text-gray-500 mb-3">👇 Tap an emotion to explore it!</p>
+
+        <div class="wheel-wrap spin-in">
+          <!-- SVG Wheel -->
+          <svg class="wheel-svg" viewBox="0 0 320 320" id="wheelSvg">
+            <!-- 8 segments, each 45 degrees -->
+          </svg>
+          <!-- Center emoji -->
+          <div class="center-circle" id="centerEmoji">💛</div>
+        </div>
+
+        <!-- Emotion label below wheel -->
+        <div class="mt-4 text-center">
+          <div data-i18n="tapLabel" class="text-xl font-extrabold text-gray-700" id="wheelLabel">Tap an emotion!</div>
+          <div class="text-sm text-gray-400 font-semibold" id="wheelLabelEs"></div>
+        </div>
+
+        <!-- Score -->
+        <div class="mt-4 flex gap-2 flex-wrap justify-center" id="exploredBadges"></div>
+      </div>
+
+      <!-- RIGHT: Response Panel -->
+      <div id="responsePanel" class="flex flex-col justify-center">
+
+        <!-- Default state -->
+        <div id="defaultPanel" class="bg-purple-50 rounded-3xl p-6 text-center border-2 border-purple-100">
+          <div class="text-5xl mb-3">🌟</div>
+          <h3 data-i18n="readyTitle" class="text-lg font-extrabold text-purple-700 mb-2">Ready to explore feelings?</h3>
+          <p data-i18n="readyText" class="text-gray-500 text-sm">Tap any emotion on the wheel to discover how Pawa Seyni felt in her stories, and share how YOU feel too!</p>
+        </div>
+
+        <!-- Active emotion panel (hidden initially) -->
+        <div id="activePanel" class="hidden slide-up">
+          <div class="rounded-3xl p-5 border-2 mb-4 pulse-glow" id="emotionCard">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="text-4xl" id="activeEmoji"></div>
+              <div>
+                <div class="text-xl font-extrabold text-gray-800" id="activeName"></div>
+                <div class="text-sm font-bold text-gray-400" id="activeNameEs"></div>
+              </div>
+            </div>
+            <div class="bg-white/70 rounded-2xl p-3 mb-3">
+              <p data-i18n="storyMoment" class="text-xs font-bold text-purple-600 mb-1">📖 Pawa Seyni's Story Moment:</p>
+              <p class="text-sm text-gray-700 font-semibold italic" id="activeStory"></p>
+            </div>
+            <p class="text-sm font-bold text-gray-600 mb-3" id="activeQuestion"></p>
+            <!-- Response options -->
+            <div class="grid grid-cols-2 gap-2" id="responseOptions"></div>
+            <!-- Free response -->
+            <div class="mt-3">
+              <input type="text" id="freeResponse" placeholder="Or write your own answer..." aria-label="Write your own answer"
+                class="w-full px-3 py-2 rounded-xl border-2 border-purple-200 text-sm font-semibold focus:outline-none focus:border-purple-400 bg-white"/>
+            </div>
+            <button id="saveToJournal" data-i18n="saveToJournal" class="mt-3 w-full py-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-extrabold rounded-full shadow hover:shadow-lg transition-all text-sm">
+              📓 Save to My Journal
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Journal Section -->
+    <div class="mt-8 bg-white rounded-3xl shadow-xl border-2 border-purple-100 p-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 data-i18n="journalTitle" class="text-xl font-extrabold text-purple-700">📓 My Feelings Journal</h2>
+        <button id="printJournal" data-i18n="print" class="px-4 py-2 bg-purple-100 hover:bg-purple-200 text-purple-700 font-bold rounded-full text-sm transition-all">🖨️ Print</button>
+      </div>
+      <p data-i18n="journalIntro" class="text-sm text-gray-400 font-semibold mb-4">Your answers will appear here as you explore each emotion.</p>
+      <div id="journalEntries" class="space-y-2">
+        <p data-i18n="journalEmpty" class="text-gray-500 text-sm font-semibold text-center py-4">No entries yet... start exploring the wheel! 💛</p>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Escape user-supplied text before it goes into innerHTML (journal free-text).
+    const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (c) => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+    ));
+    // Shared voice picker, aligned with the site's src/lib/speech.ts:
+    // prefer an exact BCP-47 match (en-US / es-ES / fr-FR), else the 2-letter
+    // language prefix, else the browser default. getVoices() can be empty on
+    // first call, so we refresh and also listen for 'voiceschanged'.
+    let _voices = [];
+    function _refreshVoices() {
+      if (window.speechSynthesis) _voices = window.speechSynthesis.getVoices() || [];
+    }
+    _refreshVoices();
+    if (window.speechSynthesis && window.speechSynthesis.addEventListener) {
+      window.speechSynthesis.addEventListener('voiceschanged', _refreshVoices);
+    }
+    function pickVoice(langCode) {
+      if (!_voices.length) _refreshVoices();
+      const exact = _voices.find(v => v.lang === langCode);
+      if (exact) return exact;
+      const prefix = langCode.slice(0, 2).toLowerCase();
+      return _voices.find(v => v.lang && v.lang.toLowerCase().startsWith(prefix)) || null;
+    }
+
+    const emotions = [
+      {
+        id: 'happy', emoji: '😊', name: 'Happy', nameEs: 'Feliz', nameFr: 'Heureux',
+        color: '#fde68a', darkColor: '#f59e0b',
+        story: 'Pawa Seyni felt happy when she found a rainbow after the rain. Her heart felt like it was full of sunshine!',
+        question: 'What makes YOU feel happy?',
+        options: ['Playing with friends', 'Reading a good book', 'Getting a hug', 'Eating my favorite food'],
+        bg: 'bg-yellow-50', border: 'border-yellow-200', textColor: 'text-yellow-700',
+      },
+      {
+        id: 'sad', emoji: '😢', name: 'Sad', nameEs: 'Triste', nameFr: 'Triste',
+        color: '#bfdbfe', darkColor: '#3b82f6',
+        story: 'Pawa Seyni felt sad when her best friend moved away. She missed playing together every afternoon.',
+        question: 'What do you do when you feel sad?',
+        options: ['Talk to someone I trust', 'Hug my stuffed animal', 'Draw my feelings', 'Read a book'],
+        bg: 'bg-blue-50', border: 'border-blue-200', textColor: 'text-blue-700',
+      },
+      {
+        id: 'brave', emoji: '💪', name: 'Brave', nameEs: 'Valiente', nameFr: 'Courageux',
+        color: '#bbf7d0', darkColor: '#22c55e',
+        story: 'Pawa Seyni felt brave when she stood up for her friend who was being teased. Her hands shook, but she did it anyway!',
+        question: 'When have you been brave?',
+        options: ['Tried something new', 'Spoke up for a friend', 'Went somewhere new', 'Tried a new food'],
+        bg: 'bg-green-50', border: 'border-green-200', textColor: 'text-green-700',
+      },
+      {
+        id: 'scared', emoji: '😨', name: 'Scared', nameEs: 'Asustado', nameFr: 'Effrayé',
+        color: '#e9d5ff', darkColor: '#a855f7',
+        story: 'Pawa Seyni felt scared on her first day at a new school. Her tummy had butterflies, and she held her backpack tight.',
+        question: 'What helps you feel better when scared?',
+        options: ['Deep breaths', 'Holding someone\'s hand', 'Thinking of something happy', 'Counting to 10'],
+        bg: 'bg-purple-50', border: 'border-purple-200', textColor: 'text-purple-700',
+      },
+      {
+        id: 'angry', emoji: '😠', name: 'Angry', nameEs: 'Enojado', nameFr: 'En colère',
+        color: '#fecaca', darkColor: '#ef4444',
+        story: 'Pawa Seyni felt angry when someone broke her favorite toy. She wanted to yell, but took a deep breath instead.',
+        question: 'How do you calm down when angry?',
+        options: ['Take deep breaths', 'Walk away for a moment', 'Count to 10', 'Talk about my feelings'],
+        bg: 'bg-red-50', border: 'border-red-200', textColor: 'text-red-700',
+      },
+      {
+        id: 'proud', emoji: '🌟', name: 'Proud', nameEs: 'Orgulloso', nameFr: 'Fier',
+        color: '#fed7aa', darkColor: '#f97316',
+        story: 'Pawa Seyni felt proud when she finished reading her very first chapter book all by herself. She stood tall and smiled!',
+        question: 'What makes you feel proud?',
+        options: ['Learning something new', 'Helping someone', 'Finishing a hard task', 'Being kind'],
+        bg: 'bg-orange-50', border: 'border-orange-200', textColor: 'text-orange-700',
+      },
+      {
+        id: 'surprised', emoji: '😲', name: 'Surprised', nameEs: 'Sorprendido', nameFr: 'Surpris',
+        color: '#a5f3fc', darkColor: '#06b6d4',
+        story: 'Pawa Seyni felt surprised when her family threw her a birthday party she did not expect. Her eyes went wide and she laughed!',
+        question: 'What was the best surprise you ever had?',
+        options: ['A surprise party', 'An unexpected gift', 'A fun trip', 'A visit from someone special'],
+        bg: 'bg-cyan-50', border: 'border-cyan-200', textColor: 'text-cyan-700',
+      },
+      {
+        id: 'loved', emoji: '🥰', name: 'Loved', nameEs: 'Amado', nameFr: 'Aimé',
+        color: '#fbcfe8', darkColor: '#ec4899',
+        story: 'Pawa Seyni felt loved when her grandmother held her hand and said: "You are the most wonderful you in the whole world."',
+        question: 'Who makes you feel loved?',
+        options: ['My family', 'My friends', 'My pet', 'My teacher'],
+        bg: 'bg-pink-50', border: 'border-pink-200', textColor: 'text-pink-700',
+      },
+    ];
+
+    let explored = new Set();
+    let journalEntries = {};
+    let currentEmotion = null;
+
+    // ─── BUILD SVG WHEEL ────────────────────────────────────────────────────────
+    function buildWheel() {
+      const svg = document.getElementById('wheelSvg');
+      const cx = 160, cy = 160, r = 150, innerR = 45;
+      const total = emotions.length;
+      const angleStep = (2 * Math.PI) / total;
+
+      emotions.forEach((em, i) => {
+        const startAngle = i * angleStep - Math.PI / 2;
+        const endAngle = startAngle + angleStep;
+        const midAngle = startAngle + angleStep / 2;
+
+        // Segment path
+        const x1 = cx + r * Math.cos(startAngle);
+        const y1 = cy + r * Math.sin(startAngle);
+        const x2 = cx + r * Math.cos(endAngle);
+        const y2 = cy + r * Math.sin(endAngle);
+        const ix1 = cx + innerR * Math.cos(startAngle);
+        const iy1 = cy + innerR * Math.sin(startAngle);
+        const ix2 = cx + innerR * Math.cos(endAngle);
+        const iy2 = cy + innerR * Math.sin(endAngle);
+
+        const d = [
+          `M ${ix1} ${iy1}`,
+          `L ${x1} ${y1}`,
+          `A ${r} ${r} 0 0 1 ${x2} ${y2}`,
+          `L ${ix2} ${iy2}`,
+          `A ${innerR} ${innerR} 0 0 0 ${ix1} ${iy1}`,
+          'Z'
+        ].join(' ');
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', em.color);
+        path.setAttribute('stroke', 'white');
+        path.setAttribute('stroke-width', '3');
+        path.setAttribute('class', 'emotion-seg');
+        path.setAttribute('id', `seg-${em.id}`);
+        // Keyboard accessibility: make each SVG segment focusable and operable.
+        // SVG elements require tabindex/role/aria-label set as attributes.
+        const segName = (window.GAME_LANG === 'es' ? em.nameEs : window.GAME_LANG === 'fr' ? em.nameFr : em.name);
+        path.setAttribute('tabindex', '0');
+        path.setAttribute('role', 'button');
+        path.setAttribute('aria-label', segName);
+        path.addEventListener('click', () => selectEmotion(em));
+        path.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectEmotion(em); }
+        });
+        svg.appendChild(path);
+
+        // Emoji label
+        const emojiR = (r + innerR) / 2;
+        const ex = cx + emojiR * Math.cos(midAngle);
+        const ey = cy + emojiR * Math.sin(midAngle);
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', ex);
+        text.setAttribute('y', ey + 8);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('font-size', '22');
+        text.setAttribute('style', 'pointer-events:none; user-select:none;');
+        text.textContent = em.emoji;
+        svg.appendChild(text);
+      });
+    }
+
+    // ─── SELECT EMOTION ─────────────────────────────────────────────────────────
+    function selectEmotion(em) {
+      currentEmotion = em;
+
+      // Update wheel visuals
+      document.querySelectorAll('.emotion-seg').forEach(s => s.classList.remove('active'));
+      document.getElementById(`seg-${em.id}`).classList.add('active');
+
+      // Update center
+      const center = document.getElementById('centerEmoji');
+      center.textContent = em.emoji;
+      center.classList.add('bounce-select');
+      setTimeout(() => center.classList.remove('bounce-select'), 400);
+
+      // Update label
+      document.getElementById('wheelLabel').textContent = em.name;
+      document.getElementById('wheelLabelEs').textContent = `${em.nameEs} · ${em.nameFr}`;
+
+      // Show active panel
+      document.getElementById('defaultPanel').classList.add('hidden');
+      const activePanel = document.getElementById('activePanel');
+      activePanel.classList.remove('hidden');
+      activePanel.classList.add('slide-up');
+
+      // Fill emotion card
+      const card = document.getElementById('emotionCard');
+      card.className = `rounded-3xl p-5 border-2 mb-4 pulse-glow ${em.bg} ${em.border}`;
+      document.getElementById('activeEmoji').textContent = em.emoji;
+      document.getElementById('activeName').textContent = em.name;
+      document.getElementById('activeName').className = `text-xl font-extrabold ${em.textColor}`;
+      document.getElementById('activeNameEs').textContent = `${em.nameEs} · ${em.nameFr}`;
+      document.getElementById('activeStory').textContent = em.story;
+      document.getElementById('activeQuestion').textContent = em.question;
+      document.getElementById('freeResponse').value = journalEntries[em.id]?.response || '';
+
+      // Response options
+      const opts = document.getElementById('responseOptions');
+      opts.innerHTML = em.options.map((opt, i) => `
+        <button class="response-opt px-3 py-2 rounded-xl border-2 border-gray-200 bg-white text-xs font-bold text-gray-700 text-left ${journalEntries[em.id]?.option === i ? 'selected' : ''}"
+          onclick="selectOption(${i}, '${opt.replace(/'/g,"\\'")}')">
+          ${opt}
+        </button>
+      `).join('');
+
+      // Speak
+      speak(`${em.name}. ${em.story}`);
+    }
+
+    function selectOption(idx, text) {
+      document.querySelectorAll('.response-opt').forEach((b, i) => {
+        b.classList.toggle('selected', i === idx);
+      });
+      document.getElementById('freeResponse').value = text;
+    }
+
+    function saveToJournal() {
+      if (!currentEmotion) return;
+      const response = document.getElementById('freeResponse').value.trim() || window.t('defaultResponse');
+      journalEntries[currentEmotion.id] = { response, emoji: currentEmotion.emoji, name: currentEmotion.name };
+      explored.add(currentEmotion.id);
+      updateBadges();
+      renderJournal();
+
+      // Flash save button
+      const btn = document.getElementById('saveToJournal');
+      btn.textContent = window.t('saved');
+      btn.classList.add('bg-green-500');
+      setTimeout(() => {
+        btn.textContent = window.t('saveToJournal');
+        btn.classList.remove('bg-green-500');
+      }, 1500);
+    }
+
+    function updateBadges() {
+      const container = document.getElementById('exploredBadges');
+      container.innerHTML = emotions.map(em => `
+        <span class="text-2xl ${explored.has(em.id) ? 'star-pop' : 'opacity-30'}" title="${em.name}">${em.emoji}</span>
+      `).join('');
+    }
+
+    function renderJournal() {
+      const container = document.getElementById('journalEntries');
+      if (Object.keys(journalEntries).length === 0) {
+        container.innerHTML = '<p class="text-gray-500 text-sm font-semibold text-center py-4">' + escapeHtml(window.t('journalEmpty')) + '</p>';
+        return;
+      }
+      container.innerHTML = Object.values(journalEntries).map(entry => `
+        <div class="journal-line flex items-center gap-2">
+          <span class="text-xl">${entry.emoji}</span>
+          <span class="font-extrabold text-purple-700 w-24 shrink-0">${escapeHtml(entry.name)}:</span>
+          <span class="text-gray-600">${escapeHtml(entry.response)}</span>
+        </div>
+      `).join('');
+    }
+
+    function speak(text) {
+      if (!window.speechSynthesis) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US'; u.rate = 0.95; u.pitch = 1.1;
+      const voice = pickVoice(u.lang);
+      if (voice) u.voice = voice;
+      window.speechSynthesis.speak(u);
+    }
+
+    document.getElementById('saveToJournal').addEventListener('click', saveToJournal);
+    document.getElementById('markCompleted').addEventListener('click', function() {
+      this.textContent = window.t('completed');
+      this.classList.add('bg-green-100', 'border-green-400', 'text-green-700');
+    });
+    document.getElementById('printJournal').addEventListener('click', () => window.print());
+
+    // Localize the free-response input placeholder (the i18n helper only sets
+    // textContent, so attributes are handled here).
+    (function () {
+      var input = document.getElementById('freeResponse');
+      if (input) input.setAttribute('placeholder', window.t('freeResponsePlaceholder'));
+    })();
+
+    buildWheel();
+    updateBadges();
+  </script>
+
+  <footer class="bg-gray-800 text-white py-10 mt-10">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="font-extrabold text-lg mb-1">🐾 Griot Moon</p>
+      <p data-i18n="footerTagline" class="text-gray-400 text-sm mb-4">Where stories come to life! Magical books and activities for curious minds, ages 3–9.</p>
+      <div class="flex justify-center gap-4 text-sm text-gray-400">
+        <a href="/" class="hover:text-white">Home</a>
+        <a href="/books" class="hover:text-white">Books</a>
+        <a href="/activities" class="hover:text-white">Activities</a>
+        <a href="/about" class="hover:text-white">About Pawa Seyni</a>
+      </div>
+      <p class="text-gray-500 text-xs mt-4">© 2026 Griot Moon. <span data-i18n="rights">All rights reserved.</span></p>
+    </div>
+  </footer>
+
+
+<!-- STE_PROGRESS_SYNC: injected by scripts/patch-games.mjs -->
+<script>
+(function () {
+  var SLUG = "emotion-wheel";
+  var KEY = 'readingProgress';
+  function load() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
+  function isDone() { var p = load(); return Array.isArray(p.activitiesCompleted) && p.activitiesCompleted.indexOf(SLUG) > -1; }
+  function track() {
+    // Fire the same "Activity Complete" Plausible event the React app sends,
+    // via the script-less events API so games stay zero-external on load (this
+    // request only fires on the completion click, not on page load).
+    try {
+      fetch('https://plausible.io/api/event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          name: 'Activity Complete',
+          url: location.href,
+          domain: 'griotmoon.com',
+          props: { activity: SLUG }
+        })
+      });
+    } catch (e) {}
+  }
+  function markDone() {
+    var p = load();
+    p.booksRead = Array.isArray(p.booksRead) ? p.booksRead : [];
+    p.booksWantToRead = Array.isArray(p.booksWantToRead) ? p.booksWantToRead : [];
+    p.activitiesCompleted = Array.isArray(p.activitiesCompleted) ? p.activitiesCompleted : [];
+    var already = p.activitiesCompleted.indexOf(SLUG) > -1;
+    if (!already) p.activitiesCompleted.push(SLUG);
+    localStorage.setItem(KEY, JSON.stringify(p));
+    try { window.dispatchEvent(new CustomEvent('progresschange')); } catch (e) {}
+    if (!already) track();
+  }
+  var btn = document.getElementById('markCompleted');
+  if (btn) {
+    btn.addEventListener('click', markDone);
+    if (isDone()) {
+      btn.textContent = window.t('completed');
+      btn.classList.add('bg-green-100', 'border-green-400', 'text-green-700');
+    }
+  }
+})();
+</script>
+</body>
+</html>
