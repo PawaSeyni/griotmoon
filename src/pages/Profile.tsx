@@ -62,7 +62,7 @@ const TRANSLATIONS = {
   },
   es: {
     seoTitle: 'Mi perfil',
-    seoDesc: 'Tu progreso de lectura en Griot Moon — libros leídos, lista por leer y actividades completadas. Se guarda en este dispositivo.',
+    seoDesc: 'Tu progreso de lectura en Griot Moon, libros leídos, lista por leer y actividades completadas. Se guarda en este dispositivo.',
     heading: 'Mi perfil de lectura',
     blurb: 'Tu progreso se guarda en este dispositivo.',
     achievement: 'logro',
@@ -105,7 +105,7 @@ const TRANSLATIONS = {
   },
   fr: {
     seoTitle: 'Mon profil',
-    seoDesc: 'Votre progression de lecture sur Griot Moon — livres lus, liste à lire et activités terminées. Sauvegardé localement sur cet appareil.',
+    seoDesc: 'Votre progression de lecture sur Griot Moon, livres lus, liste à lire et activités terminées. Sauvegardé localement sur cet appareil.',
     heading: 'Mon profil de lecture',
     blurb: 'Votre progression est sauvegardée sur cet appareil.',
     achievement: 'succès',

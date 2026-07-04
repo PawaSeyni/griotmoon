@@ -4,7 +4,7 @@ import { useEffect } from 'react';
  * Tiny SPA-friendly replacement for react-helmet-async.
  *
  * Why this exists: react-helmet-async stopped injecting per-route meta tags on
- * our production Vite build — title, og:*, twitter:*, and canonical all fell
+ * our production Vite build, title, og:*, twitter:*, and canonical all fell
  * back to the static defaults in index.html. The root cause was Helmet's
  * children not propagating reliably under React 18 StrictMode + Vite's prod
  * minification.
@@ -67,7 +67,7 @@ function upsertLink(rel: string, href: string) {
 }
 
 function setAlternates(alternates: { hreflang: string; href: string }[]) {
-  // Remove the ones we manage, then re-add — keeps them correct across SPA
+  // Remove the ones we manage, then re-add, keeps them correct across SPA
   // route changes without accumulating stale tags.
   document.head
     .querySelectorAll('link[rel="alternate"][hreflang]')
@@ -103,7 +103,7 @@ export function useHead({ title, description, image, imageWidth, imageHeight, ur
           ? 'image/webp'
           : 'image/jpeg';
       upsertMeta('property', 'og:image:type', type);
-      // Dimensions only when known (varies per page) — remove stale ones on SPA nav otherwise.
+      // Dimensions only when known (varies per page), remove stale ones on SPA nav otherwise.
       if (imageWidth && imageHeight) {
         upsertMeta('property', 'og:image:width', String(imageWidth));
         upsertMeta('property', 'og:image:height', String(imageHeight));

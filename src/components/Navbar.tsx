@@ -50,7 +50,7 @@ export default function Navbar() {
   const currentPath = splitLangFromPath(location.pathname).rest;
 
   // Close the mobile menu on any navigation, including a language switch (which
-  // changes the path prefix) — the in-menu language switcher doesn't close it itself.
+  // changes the path prefix), the in-menu language switcher doesn't close it itself.
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
@@ -75,7 +75,7 @@ export default function Navbar() {
             <span>Griot Moon</span>
           </Link>
 
-          {/* Desktop Nav — full nav appears at lg; tablets/phones use the menu
+          {/* Desktop Nav, full nav appears at lg; tablets/phones use the menu
               button so the logo + 7 links + 3 language pills never crowd. */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map(link => (

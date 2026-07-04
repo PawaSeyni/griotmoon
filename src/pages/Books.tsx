@@ -17,7 +17,7 @@ const TRANSLATIONS = {
     seoTitle: 'Stories from the Fire',
     seoDesc: 'Browse all {n} books in the Pawa Seyni Collection: multicultural picture books for children ages 3–9 about quiet wonder, kindness, and curiosity.',
     heading: 'Stories from the Fire',
-    subheading: 'The Pawa Seyni Collection — folktales, courage, and Ubuntu for young readers',
+    subheading: 'The Pawa Seyni Collection, folktales, courage, and Ubuntu for young readers',
     searchPlaceholder: 'Search books by title or theme...',
     ageAll: 'All',
     age3to5: '3-5 years',
@@ -40,9 +40,9 @@ const TRANSLATIONS = {
   },
   es: {
     seoTitle: 'Historias del fuego',
-    seoDesc: 'Explora los {n} libros de la Colección Pawa Seyni — álbumes multiculturales para niños de 3 a 9 años sobre asombro tranquilo, bondad y curiosidad.',
+    seoDesc: 'Explora los {n} libros de la Colección Pawa Seyni, álbumes multiculturales para niños de 3 a 9 años sobre asombro tranquilo, bondad y curiosidad.',
     heading: 'Historias del fuego',
-    subheading: 'La Colección Pawa Seyni — cuentos, valentía y Ubuntu para lectores jóvenes',
+    subheading: 'La Colección Pawa Seyni, cuentos, valentía y Ubuntu para lectores jóvenes',
     searchPlaceholder: 'Buscar libros por título o tema...',
     ageAll: 'Todos',
     age3to5: '3-5 años',
@@ -65,9 +65,9 @@ const TRANSLATIONS = {
   },
   fr: {
     seoTitle: 'Histoires du feu',
-    seoDesc: 'Parcourez les {n} livres de la Collection Pawa Seyni — albums multiculturels pour enfants de 3 à 9 ans sur l\'émerveillement tranquille, la bonté et la curiosité.',
+    seoDesc: 'Parcourez les {n} livres de la Collection Pawa Seyni, albums multiculturels pour enfants de 3 à 9 ans sur l\'émerveillement tranquille, la bonté et la curiosité.',
     heading: 'Histoires du feu',
-    subheading: 'La Collection Pawa Seyni — contes, courage et Ubuntu pour les jeunes lecteurs',
+    subheading: 'La Collection Pawa Seyni, contes, courage et Ubuntu pour les jeunes lecteurs',
     searchPlaceholder: 'Rechercher un livre par titre ou thème...',
     ageAll: 'Tous',
     age3to5: '3-5 ans',
@@ -97,7 +97,7 @@ export default function Books() {
   const { language } = useLanguage();
   const books = useBooks();
 
-  // ItemList of Book schema for the full catalog — each entry links to its
+  // ItemList of Book schema for the full catalog, each entry links to its
   // on-site book page (localized), with Amazon kept under sameAs.
   const booksSchema = useMemo(
     () => ({

@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage, useTranslation, type Language } from '../lib/language';
 import { track } from '../lib/analytics';
 
-// MailerLite embedded form action — group "griotmoon-signups", form
-// "Griot Moon — Starter Kit site signup" (created 2026-07-04, duplicated from
+// MailerLite embedded form action, group "griotmoon-signups", form
+// "Griot Moon, Starter Kit site signup" (created 2026-07-04, duplicated from
 // the Eva site's form so the account-level `language` and `lead_magnet` custom
 // fields attach on submit). Double opt-in is ON, so MailerLite sends the
 // confirmation email.
@@ -12,7 +12,7 @@ const MAILERLITE_FORM_ACTION =
 
 // Lead-magnet registry. Pins/FB posts deep-link to the form with `?lm=<slug>`
 // so the right freebie is both tagged on the subscriber AND delivered instantly
-// on the success screen — closing the funnel leak where pins used to point
+// on the success screen, closing the funnel leak where pins used to point
 // straight at the ungated PDF and captured no email. Each magnet maps to its
 // per-language PDF (single-file bilingual magnets repeat the same path).
 type Magnet = { tag: string; title: Record<Language, string>; pdf: Record<Language, string> };
@@ -170,7 +170,7 @@ export default function EmailSignup() {
     const formData = new FormData();
     formData.append('fields[email]', email);
     // MailerLite's default "Name" field has key `name` (id 1). Keep this
-    // submission optional — empty names just leave the field blank, which
+    // submission optional, empty names just leave the field blank, which
     // the welcome email handles with a `{$name|default:'…'}` fallback.
     if (trimmedName) formData.append('fields[name]', trimmedName);
     formData.append('fields[language]', language);
@@ -180,7 +180,7 @@ export default function EmailSignup() {
 
     try {
       // MailerLite's JSONP endpoint doesn't return CORS headers, so we
-      // can't read the response. `no-cors` lets the POST go through —
+      // can't read the response. `no-cors` lets the POST go through, and
       // double opt-in means MailerLite will email the user the
       // confirmation link regardless of what we surface in the UI.
       await fetch(MAILERLITE_FORM_ACTION, {

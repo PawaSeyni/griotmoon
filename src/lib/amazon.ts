@@ -1,4 +1,4 @@
-// Amazon Associates affiliate config — single source of truth for the tracking
+// Amazon Associates affiliate config, single source of truth for the tracking
 // tag so every user-facing Amazon link earns commission and is easy to rotate.
 // Add the Griot Moon Associates tracking ID here once created.
 export const AMAZON_ASSOCIATE_TAG = '';

@@ -23,7 +23,7 @@ interface BookCardProps {
 export default function BookCard({ book, priority = false }: BookCardProps) {
   const t = useTranslation(TRANSLATIONS);
 
-  // Narration text for the read-aloud button — title, subtitle, and blurb.
+  // Narration text for the read-aloud button, title, subtitle, and blurb.
   const narration = [book.title, book.subtitle, book.description].filter(Boolean).join('. ');
 
   const amazonCover = isAmazonCover(book.coverImage);

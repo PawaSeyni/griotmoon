@@ -10,7 +10,7 @@ type StoryItem = { name: string; emoji: string };
 type ElementKey = 'character' | 'setting' | 'goal' | 'problem' | 'solution' | 'twist';
 type Story = Partial<Record<ElementKey, StoryItem>>;
 
-// Story element pools are localized — each language has its own phrasings.
+// Story element pools are localized, each language has its own phrasings.
 const STORY_ELEMENTS: Record<Language, Record<ElementKey, StoryItem[]>> = {
   en: {
     character: [
@@ -333,7 +333,7 @@ export default function StoryBuilderDemo() {
 
   const copyStory = async () => {
     // clipboard API is undefined on insecure origins and rejects without
-    // permission — only claim success when the write actually resolves.
+    // permission, only claim success when the write actually resolves.
     try {
       await navigator.clipboard.writeText(generateStoryText());
       toast.success(t.copied);

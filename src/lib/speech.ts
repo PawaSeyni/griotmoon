@@ -1,5 +1,5 @@
 // Read-aloud via the Web Speech API (speechSynthesis). No backend, no audio
-// files — the browser's built-in en/es/fr voices narrate on demand. Fits the
+// files, the browser's built-in en/es/fr voices narrate on demand. Fits the
 // static-site model and gives pre-readers + language learners a "Listen"
 // option with correct per-language pronunciation.
 //

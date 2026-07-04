@@ -123,7 +123,7 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encodeFormData({
           'form-name': 'contact',
-          website: '', // honeypot — bots fill it, humans leave it blank
+          website: '', // honeypot, bots fill it, humans leave it blank
           ...form,
         }),
       });

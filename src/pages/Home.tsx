@@ -44,10 +44,10 @@ const ORG_SCHEMA = [
 const TRANSLATIONS = {
   en: {
     seoTitle: 'Griot Moon: African Heritage Picture Books for Curious Minds',
-    seoDesc: 'The Pawa Seyni Collection: African heritage picture books for children ages 3–9 — folktales, courage, and Ubuntu, told fireside. Read with us and explore free activities.',
+    seoDesc: 'African bedtime stories, heritage tales, and wisdom for growing hearts. The Pawa Seyni Collection: picture books for ages 3–9 with free activities in English, Spanish, and French.',
     heroLine1: 'When the Moon Rises,',
     heroLine2: 'the Village Gathers.',
-    heroSubtitle: 'African heritage picture books by Pawa Seyni — folktales, courage, and Ubuntu, told fireside for curious minds ages 3–9',
+    heroSubtitle: 'African bedtime stories, heritage tales, and wisdom for growing hearts.',
     heroImageAlt: 'An elderly griot telling stories to children from many backgrounds around a village fire under the full moon',
     ctaBooksPrefix: '✨ Browse',
     ctaBooksSuffix: 'Magical Books',
@@ -67,7 +67,7 @@ const TRANSLATIONS = {
       { emoji: '🎉', title: 'Enjoy!', desc: 'Start reading, playing, and learning together' },
     ],
     benefitsTitle: 'Why Griot Moon',
-    benefitsSubtitle: 'Thoughtful stories and free tools families can count on',
+    benefitsSubtitle: 'School teaches knowledge. Stories cement the values that keep a community together.',
     benefits: [
       { emoji: '🌍', title: 'Read in three languages', desc: 'Switch between English, Spanish, and French anytime, made for bilingual families and language learners.' },
       { emoji: '🔊', title: 'Hear every story', desc: 'Tap Listen on any book to hear it read aloud with natural pronunciation in each language.' },
@@ -87,11 +87,11 @@ const TRANSLATIONS = {
     ],
   },
   es: {
-    seoTitle: 'Griot Moon — Libros ilustrados multiculturales para mentes curiosas',
-    seoDesc: 'La Colección Pawa Seyni — libros ilustrados para niños de 3 a 9 años sobre asombro tranquilo, magia nocturna y el regreso a casa. Lee con nosotros y descubre actividades gratuitas.',
+    seoTitle: 'Griot Moon, Libros ilustrados multiculturales para mentes curiosas',
+    seoDesc: 'La Colección Pawa Seyni, libros ilustrados para niños de 3 a 9 años sobre asombro tranquilo, magia nocturna y el regreso a casa. Lee con nosotros y descubre actividades gratuitas.',
     heroLine1: 'Cuando sale la luna,',
     heroLine2: 'el pueblo se reúne.',
-    heroSubtitle: 'Libros ilustrados de herencia africana de Pawa Seyni: cuentos populares, valentía y Ubuntu, contados junto al fuego para mentes curiosas de 3 a 9 años',
+    heroSubtitle: 'Cuentos africanos para dormir, relatos de herencia y sabiduría para corazones que crecen.',
     heroImageAlt: 'Un anciano griot contando historias a niños de muchos orígenes alrededor de una fogata bajo la luna llena',
     ctaBooksPrefix: '✨ Explora',
     ctaBooksSuffix: 'libros mágicos',
@@ -111,11 +111,11 @@ const TRANSLATIONS = {
       { emoji: '🎉', title: '¡Disfruta!', desc: 'Empieza a leer, jugar y aprender juntos' },
     ],
     benefitsTitle: 'Por qué Griot Moon',
-    benefitsSubtitle: 'Historias con cariño y recursos gratuitos en los que las familias pueden confiar',
+    benefitsSubtitle: 'La escuela enseña conocimientos. Las historias cimentan los valores que mantienen unida a una comunidad.',
     benefits: [
-      { emoji: '🌍', title: 'Lee en tres idiomas', desc: 'Cambia entre inglés, español y francés cuando quieras — ideal para familias bilingües y para aprender idiomas.' },
+      { emoji: '🌍', title: 'Lee en tres idiomas', desc: 'Cambia entre inglés, español y francés cuando quieras, ideal para familias bilingües y para aprender idiomas.' },
       { emoji: '🔊', title: 'Escucha cada historia', desc: 'Pulsa Escuchar en cualquier libro para oírlo en voz alta con pronunciación natural en cada idioma.' },
-      { emoji: '🎨', title: 'Actividades y descargables gratis', desc: 'Dados de historias, páginas para colorear, un diario de lectura y un kit de inicio trilingüe — todo gratis.' },
+      { emoji: '🎨', title: 'Actividades y descargables gratis', desc: 'Dados de historias, páginas para colorear, un diario de lectura y un kit de inicio trilingüe, todo gratis.' },
       { emoji: '💜', title: 'Historias tiernas con valores', desc: 'Libros ilustrados serenos sobre la bondad, la valentía y el asombro, para edades de 3 a 9 años.' },
     ],
     activitiesTitle: 'Actividades divertidas con Pawa Seyni',
@@ -126,16 +126,16 @@ const TRANSLATIONS = {
     seeAll: 'Ver todas las actividades →',
     activityPreview: [
       { emoji: '✍️', slug: 'story-builder', title: 'Creador de dados de historia', desc: 'Lanza los dados para mezclar personajes, escenarios y giros en una nueva historia.', ages: '6-9' },
-      { emoji: '🎭', slug: 'character-workshop', title: 'Taller de personajes', desc: 'Constructor paso a paso — tipo, nombre, apariencia, personalidad, poderes e historia.', ages: '6-9' },
+      { emoji: '🎭', slug: 'character-workshop', title: 'Taller de personajes', desc: 'Constructor paso a paso, tipo, nombre, apariencia, personalidad, poderes e historia.', ages: '6-9' },
       { emoji: '📓', slug: 'adventure-journal', title: 'Diario de lectura', desc: 'Registra los libros leídos, personajes favoritos y tus pensamientos. Se guarda en tu dispositivo.', ages: '6-9' },
     ],
   },
   fr: {
-    seoTitle: 'Griot Moon — Albums illustrés multiculturels pour les esprits curieux',
-    seoDesc: 'La Collection Pawa Seyni — des albums pour enfants de 3 à 9 ans sur l\'émerveillement tranquille, la magie nocturne et le retour à la maison. Lisez avec nous et explorez des activités gratuites.',
+    seoTitle: 'Griot Moon, Albums illustrés multiculturels pour les esprits curieux',
+    seoDesc: 'La Collection Pawa Seyni, des albums pour enfants de 3 à 9 ans sur l\'émerveillement tranquille, la magie nocturne et le retour à la maison. Lisez avec nous et explorez des activités gratuites.',
     heroLine1: 'Quand la lune se lève,',
     heroLine2: 'le village se rassemble.',
-    heroSubtitle: "Des albums d'héritage africain par Pawa Seyni — contes, courage et Ubuntu, racontés au coin du feu pour les esprits curieux de 3 à 9 ans",
+    heroSubtitle: "Histoires africaines du soir, contes du patrimoine et sagesse pour les cœurs qui grandissent.",
     heroImageAlt: 'Un vieux griot racontant des histoires à des enfants de tous horizons autour d’un feu de village sous la pleine lune',
     ctaBooksPrefix: '✨ Parcourir',
     ctaBooksSuffix: 'livres magiques',
@@ -155,11 +155,11 @@ const TRANSLATIONS = {
       { emoji: '🎉', title: 'Profiter !', desc: 'Commencez à lire, jouer et apprendre ensemble' },
     ],
     benefitsTitle: 'Pourquoi Griot Moon',
-    benefitsSubtitle: 'Des histoires attentionnées et des ressources gratuites sur lesquelles les familles peuvent compter',
+    benefitsSubtitle: "L'école transmet le savoir. Les histoires scellent les valeurs qui tiennent une communauté unie.",
     benefits: [
-      { emoji: '🌍', title: 'Lisez en trois langues', desc: 'Passez de l\'anglais à l\'espagnol et au français à tout moment — parfait pour les familles bilingues et l\'apprentissage des langues.' },
+      { emoji: '🌍', title: 'Lisez en trois langues', desc: 'Passez de l\'anglais à l\'espagnol et au français à tout moment, parfait pour les familles bilingues et l\'apprentissage des langues.' },
       { emoji: '🔊', title: 'Écoutez chaque histoire', desc: 'Appuyez sur Écouter sur n\'importe quel livre pour l\'entendre lu à voix haute avec une prononciation naturelle dans chaque langue.' },
-      { emoji: '🎨', title: 'Activités et imprimables gratuits', desc: 'Dés à histoires, coloriages, un journal de lecture et un kit de démarrage trilingue — tout gratuit.' },
+      { emoji: '🎨', title: 'Activités et imprimables gratuits', desc: 'Dés à histoires, coloriages, un journal de lecture et un kit de démarrage trilingue, tout gratuit.' },
       { emoji: '💜', title: 'Des histoires douces et porteuses de sens', desc: 'Des albums paisibles sur la gentillesse, le courage et l\'émerveillement, pour les 3 à 9 ans.' },
     ],
     activitiesTitle: 'Activités amusantes avec Pawa Seyni',
@@ -170,7 +170,7 @@ const TRANSLATIONS = {
     seeAll: 'Voir toutes les activités →',
     activityPreview: [
       { emoji: '✍️', slug: 'story-builder', title: 'Créateur de dés à histoire', desc: 'Lancez les dés pour mélanger personnages, décors et rebondissements en une toute nouvelle histoire.', ages: '6-9' },
-      { emoji: '🎭', slug: 'character-workshop', title: 'Atelier de personnages', desc: 'Constructeur pas à pas — type, nom, apparence, personnalité, pouvoirs et histoire.', ages: '6-9' },
+      { emoji: '🎭', slug: 'character-workshop', title: 'Atelier de personnages', desc: 'Constructeur pas à pas, type, nom, apparence, personnalité, pouvoirs et histoire.', ages: '6-9' },
       { emoji: '📓', slug: 'adventure-journal', title: 'Journal de lecture', desc: 'Enregistrez les livres lus, vos personnages préférés et vos pensées. Sauvegardé sur votre appareil.', ages: '6-9' },
     ],
   },
@@ -227,7 +227,7 @@ export default function Home() {
                 {t.ctaActivities}
               </Link>
             </div>
-            {/* High-contrast lead-magnet CTA — scrolls to email signup form below the fold. */}
+            {/* High-contrast lead-magnet CTA, scrolls to email signup form below the fold. */}
             <div className="mt-5 flex justify-center lg:justify-start">
               <a
                 href="#email-signup"
@@ -297,7 +297,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Griot Moon — honest benefit cards (no fabricated quotes) */}
+      {/* Why Griot Moon, honest benefit cards (no fabricated quotes) */}
       <section className="py-20 px-4 bg-gradient-to-b from-purple-50 to-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">

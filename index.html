@@ -16,14 +16,14 @@
       Defaults below are only used when JavaScript is disabled. Every route
       sets its own <title>, description, OG, and Twitter card via the Seo
       component (src/components/Seo.tsx → src/lib/head.ts). Anything that
-      would vary per route is INTENTIONALLY OMITTED here — duplicates would
+      would vary per route is INTENTIONALLY OMITTED here, duplicates would
       shadow useHead's updates because most non-JS scrapers pick the first
       matching tag.
     -->
     <title>Griot Moon: African Heritage Picture Books for Curious Minds</title>
     <meta
       name="description"
-      content="The Pawa Seyni Collection: African heritage picture books for children ages 3–9. Folktales, courage, and Ubuntu, told fireside under the moon."
+      content="African bedtime stories, heritage tales, and wisdom for growing hearts. The Pawa Seyni Collection: picture books for ages 3–9 in English, Spanish, and French."
     />
     <meta name="author" content="Pawa Seyni" />
 
@@ -41,7 +41,7 @@
       detects this hidden form and registers the "contact" submission target.
       The actual user-facing form is a React component in src/pages/Contact.tsx
       that POSTs (URL-encoded) to "/" with `form-name=contact`. The two must
-      share the same field names — keep them in sync.
+      share the same field names, keep them in sync.
     -->
     <form name="contact" netlify netlify-honeypot="website" hidden>
       <input type="text" name="name" />

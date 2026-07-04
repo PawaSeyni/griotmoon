@@ -65,8 +65,8 @@ export const activities: Activity[] = [
     },
     desc: {
       en: 'Step-by-step character builder, type, name, look, personality, powers, and backstory.',
-      es: 'Constructor de personajes paso a paso — tipo, nombre, apariencia, personalidad, poderes e historia.',
-      fr: 'Constructeur de personnages pas à pas — type, nom, apparence, personnalité, pouvoirs et histoire.',
+      es: 'Constructor de personajes paso a paso, tipo, nombre, apariencia, personalidad, poderes e historia.',
+      fr: 'Constructeur de personnages pas à pas, type, nom, apparence, personnalité, pouvoirs et histoire.',
     },
     category: {
       en: 'Creative Writing',
@@ -105,8 +105,8 @@ export const activities: Activity[] = [
     },
     desc: {
       en: 'In-browser coloring book, pick a scene, pick your palette, color it in. Saves what you make.',
-      es: 'Libro de colorear en el navegador — elige una escena, elige tu paleta, coloréalo. Guarda lo que creas.',
-      fr: 'Livre de coloriage dans le navigateur — choisissez une scène, choisissez votre palette, coloriez. Garde vos créations.',
+      es: 'Libro de colorear en el navegador, elige una escena, elige tu paleta, coloréalo. Guarda lo que creas.',
+      fr: 'Livre de coloriage dans le navigateur, choisissez une scène, choisissez votre palette, coloriez. Garde vos créations.',
     },
     category: {
       en: 'Art & Creativity',
@@ -125,8 +125,8 @@ export const activities: Activity[] = [
     },
     desc: {
       en: 'Step-by-step craft instructions, bookmarks, masks, story dioramas built from common materials.',
-      es: 'Instrucciones de manualidades paso a paso — marcapáginas, máscaras y dioramas con materiales comunes.',
-      fr: 'Instructions de bricolage pas à pas — marque-pages, masques et dioramas avec des matériaux du quotidien.',
+      es: 'Instrucciones de manualidades paso a paso, marcapáginas, máscaras y dioramas con materiales comunes.',
+      fr: 'Instructions de bricolage pas à pas, marque-pages, masques et dioramas avec des matériaux du quotidien.',
     },
     category: {
       en: 'Crafts',
@@ -165,8 +165,8 @@ export const activities: Activity[] = [
     },
     desc: {
       en: 'Complete reading challenges across a bingo board, five in a row earns a celebration.',
-      es: 'Completa retos de lectura en un cartón de bingo — cinco en fila te dan una celebración.',
-      fr: 'Relevez des défis de lecture sur un carton de bingo — cinq d\'affilée et c\'est la fête.',
+      es: 'Completa retos de lectura en un cartón de bingo, cinco en fila te dan una celebración.',
+      fr: 'Relevez des défis de lecture sur un carton de bingo, cinq d\'affilée et c\'est la fête.',
     },
     category: {
       en: 'Reading',
@@ -185,8 +185,8 @@ export const activities: Activity[] = [
     },
     desc: {
       en: 'Word puzzles and riddles based on the stories, a thinking workout that builds vocabulary.',
-      es: 'Acertijos y rompecabezas de palabras inspirados en las historias — un entrenamiento mental que amplía el vocabulario.',
-      fr: 'Énigmes et jeux de mots inspirés des histoires — un entraînement mental qui enrichit le vocabulaire.',
+      es: 'Acertijos y rompecabezas de palabras inspirados en las historias, un entrenamiento mental que amplía el vocabulario.',
+      fr: 'Énigmes et jeux de mots inspirés des histoires, un entraînement mental qui enrichit le vocabulaire.',
     },
     category: {
       en: 'Games',
@@ -229,8 +229,8 @@ export const activities: Activity[] = [
     title: { en: "Pawa Seyni's Matching Adventure", es: 'La aventura de parejas de Pawa Seyni', fr: 'Le jeu de paires de Pawa Seyni' },
     desc: {
       en: 'Flip two cards to find the matching pairs, perfect for little ones.',
-      es: 'Voltea dos cartas para encontrar las parejas — perfecto para los más pequeños.',
-      fr: 'Retournez deux cartes pour trouver les paires — parfait pour les tout-petits.',
+      es: 'Voltea dos cartas para encontrar las parejas, perfecto para los más pequeños.',
+      fr: 'Retournez deux cartes pour trouver les paires, parfait pour les tout-petits.',
     },
     category: { en: 'Games', es: 'Juegos', fr: 'Jeux' },
   },
@@ -320,8 +320,8 @@ export const activities: Activity[] = [
     title: { en: 'Finish the Story', es: 'Termina la historia', fr: 'Termine l\'histoire' },
     desc: {
       en: 'Pawa Seyni starts the story, you write the ending. A fresh prompt every time.',
-      es: 'Pawa Seyni empieza la historia — tú escribes el final. Una nueva propuesta cada vez.',
-      fr: 'Pawa Seyni commence l\'histoire — vous écrivez la fin. Une nouvelle amorce à chaque fois.',
+      es: 'Pawa Seyni empieza la historia, tú escribes el final. Una nueva propuesta cada vez.',
+      fr: 'Pawa Seyni commence l\'histoire, vous écrivez la fin. Une nouvelle amorce à chaque fois.',
     },
     category: { en: 'Creative Writing', es: 'Escritura creativa', fr: 'Écriture créative' },
   },

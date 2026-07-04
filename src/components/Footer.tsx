@@ -3,7 +3,7 @@ import { useTranslation } from '../lib/language';
 
 const TRANSLATIONS = {
   en: {
-    tagline: 'Stories from the fire — African heritage picture books and free activities for curious minds, ages 3–9.',
+    tagline: 'African bedtime stories, heritage tales, and wisdom for growing hearts.',
     quickLinks: 'Quick Links',
     home: 'Home',
     books: 'Books',
@@ -20,7 +20,7 @@ const TRANSLATIONS = {
     amazonAuthor: 'Amazon author page',
   },
   es: {
-    tagline: 'Historias del fuego — libros de herencia africana y actividades gratis para mentes curiosas de 3 a 9 años.',
+    tagline: 'Cuentos africanos para dormir, relatos de herencia y sabiduría para corazones que crecen.',
     quickLinks: 'Enlaces rápidos',
     home: 'Inicio',
     books: 'Libros',
@@ -37,7 +37,7 @@ const TRANSLATIONS = {
     amazonAuthor: 'Página de autora en Amazon',
   },
   fr: {
-    tagline: "Des histoires du feu — albums d'héritage africain et activités gratuites pour les esprits curieux de 3 à 9 ans.",
+    tagline: "Histoires africaines du soir, contes du patrimoine et sagesse pour les cœurs qui grandissent.",
     quickLinks: 'Liens rapides',
     home: 'Accueil',
     books: 'Livres',
@@ -99,7 +99,7 @@ export default function Footer() {
           <div>
             <p className="text-white font-semibold mb-4">{t.connect}</p>
             <p className="text-sm text-gray-400 mb-4">{t.connectBlurb}</p>
-            {/* Social icons removed until the Griot Moon accounts exist — re-add
+            {/* Social icons removed until the Griot Moon accounts exist, re-add
                 each as it goes live (see git history for the icon-row markup). */}
             <div className="mt-4">
               <a

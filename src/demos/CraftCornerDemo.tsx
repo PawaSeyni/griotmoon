@@ -372,7 +372,7 @@ const CRAFTS_BY_LANG: Record<Language, Record<CraftKey, LocalizedCraft>> = {
         { title: 'Touches finales', desc: 'Enroule le manche avec du ruban ou de la laine pour mieux le tenir. Ajoute encore des paillettes, des autocollants ou de la peinture. Maintenant, lance tes sorts !' },
       ],
       tips: [
-        'Fabrique des formes différentes — cœurs, lunes ou fleurs au lieu d\'étoiles',
+        'Fabrique des formes différentes, cœurs, lunes ou fleurs au lieu d\'étoiles',
         'Ajoute des grelots aux rubans pour des effets sonores',
         'Utilise de la peinture phosphorescente pour la magie nocturne',
         'Crée un grimoire assorti en papier cartonné',
@@ -387,10 +387,10 @@ const CRAFTS_BY_LANG: Record<Language, Record<CraftKey, LocalizedCraft>> = {
         { title: 'Coupe et donne la forme', desc: 'Avec une taie d\'oreiller, ouvre l\'extrémité fermée. Arrondis les coins du bas pour une cape classique, ou découpe un bord en zigzag pour le drame !' },
         { title: 'Ajoute les attaches', desc: 'Fixe deux rubans aux coins supérieurs (l\'aide d\'un adulte peut être nécessaire). Assez longs pour s\'attacher confortablement au cou.' },
         { title: 'Décore ta cape', desc: 'Utilise des feutres pour tissu pour dessiner ton logo, ton initiale ou ton symbole préféré. Ajoute des écussons thermocollants avec l\'aide d\'un adulte.' },
-        { title: 'Vérification sécurité', desc: 'Assure-toi que la cape n\'est pas trop longue — elle doit s\'arrêter au-dessus des genoux pour ne pas trébucher. Utilise des attaches qui se détachent facilement ou du velcro.' },
+        { title: 'Vérification sécurité', desc: 'Assure-toi que la cape n\'est pas trop longue, elle doit s\'arrêter au-dessus des genoux pour ne pas trébucher. Utilise des attaches qui se détachent facilement ou du velcro.' },
       ],
       tips: [
-        'Rends-la réversible — décore les deux côtés !',
+        'Rends-la réversible, décore les deux côtés !',
         'Ajoute des paillettes pour une cape de magicien étincelante',
         'Utilise de la peinture phosphorescente pour les héros de la nuit',
         'Crée un col en feutrine pour plus de style',
@@ -398,7 +398,7 @@ const CRAFTS_BY_LANG: Record<Language, Record<CraftKey, LocalizedCraft>> = {
       safetyRules: [
         'Ne porte jamais de cape près d\'escaliers ou en grimpant',
         'Retire la cape avant de jouer sur les jeux d\'extérieur',
-        'Assure-toi que les attaches se détachent facilement — jamais de fixations permanentes',
+        'Assure-toi que les attaches se détachent facilement, jamais de fixations permanentes',
         'Toujours avec la supervision d\'un adulte quand tu portes une cape',
       ],
     },

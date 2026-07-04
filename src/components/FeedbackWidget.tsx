@@ -109,7 +109,7 @@ export default function FeedbackWidget() {
     };
     const onClick = (e: MouseEvent) => {
       const target = e.target as Node;
-      // Ignore clicks on the toggle button — its own onClick handles open/close,
+      // Ignore clicks on the toggle button, its own onClick handles open/close,
       // otherwise this would close-then-reopen and the button would never close it.
       if (toggleRef.current?.contains(target)) return;
       if (panelRef.current && !panelRef.current.contains(target)) setOpen(false);

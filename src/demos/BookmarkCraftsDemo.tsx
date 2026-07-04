@@ -387,7 +387,7 @@ export default function BookmarkCraftsDemo() {
     setBookmarkText(t.quotes[Math.floor(Math.random() * t.quotes.length)]);
   };
 
-  // Canvas-based PNG download — 600×2100 px (2"×7" at 300 DPI, standard bookmark size)
+  // Canvas-based PNG download, 600×2100 px (2"×7" at 300 DPI, standard bookmark size)
   const handleDownload = () => {
     const W = 600;
     const H = 2100;
@@ -631,7 +631,7 @@ export default function BookmarkCraftsDemo() {
         <div className="space-y-4 sm:space-y-6">
           <div className="text-center">
             <h3 className="text-xl sm:text-2xl font-bold text-purple-700 mb-4">{t.previewHeading}</h3>
-            {/* Bookmark preview — scales down on smaller screens */}
+            {/* Bookmark preview, scales down on smaller screens */}
             <div
               className="w-44 h-64 sm:w-56 sm:h-80 md:w-64 md:h-[24rem] lg:w-72 lg:h-[32rem] mx-auto rounded-2xl shadow-2xl overflow-hidden relative"
               style={{ background: selectedColor }}

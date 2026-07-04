@@ -1,4 +1,4 @@
-// Lightweight i18n. No external lib — a React context + two hooks.
+// Lightweight i18n. No external lib, a React context + two hooks.
 //
 // Components co-locate their own translations and call useTranslation(),
 // which returns the slice for the current language. Pattern matches the

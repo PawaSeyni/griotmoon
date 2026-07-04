@@ -1,5 +1,5 @@
 // localStorage-backed reading and activity progress.
-// No backend, no auth — progress lives on the current device only.
+// No backend, no auth, progress lives on the current device only.
 
 export type BookStatus = 'read' | 'want_to_read' | null;
 
@@ -41,7 +41,7 @@ export function saveProgress(next: Progress): void {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   } catch {
-    /* storage unavailable — progress just won't persist this session */
+    /* storage unavailable, progress just won't persist this session */
   }
   // Custom event so any component listening can refresh without polling.
   window.dispatchEvent(new CustomEvent('progresschange'));
@@ -208,8 +208,8 @@ export function loadReadingJournal(): JournalEntry[] {
 // These activities save the user's own creations under their own keys but are
 // not surfaced on the Profile page. They are listed here only so that
 // "Clear all progress" can remove them along with everything else.
-//   - 'coloringGallery'  — saved coloring artwork (src/demos/ColoringDemo.tsx)
-//   - 'bookmarkDesign'   — saved bookmark design (src/demos/BookmarkCraftsDemo.tsx)
+//   - 'coloringGallery' , saved coloring artwork (src/demos/ColoringDemo.tsx)
+//   - 'bookmarkDesign'  , saved bookmark design (src/demos/BookmarkCraftsDemo.tsx)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const COLORING_GALLERY_KEY = 'coloringGallery';

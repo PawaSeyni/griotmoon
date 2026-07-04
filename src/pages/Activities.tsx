@@ -39,7 +39,7 @@ const TRANSLATIONS = {
     age3to5: '3-5 años',
     age6to8: '6-8 años',
     age9plus: '9+ años',
-    emptyAge: 'Aún no hay actividades en este rango de edad — prueba otro.',
+    emptyAge: 'Aún no hay actividades en este rango de edad, prueba otro.',
   },
   fr: {
     seoTitle: 'Activités amusantes avec Pawa Seyni',
@@ -55,7 +55,7 @@ const TRANSLATIONS = {
     age3to5: '3-5 ans',
     age6to8: '6-8 ans',
     age9plus: '9+ ans',
-    emptyAge: 'Pas encore d\'activités dans cette tranche d\'âge — essayez-en une autre.',
+    emptyAge: 'Pas encore d\'activités dans cette tranche d\'âge, essayez-en une autre.',
   },
 };
 
@@ -148,7 +148,7 @@ export default function Activities() {
                         {t.ages}: <strong>{act.ages}</strong>
                       </span>
                       {act.game ? (
-                        // Standalone HTML game — full-page static file in /public/games.
+                        // Standalone HTML game, full-page static file in /public/games.
                         <a
                           href={`/games/${act.slug}.html`}
                           className="text-sm font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 px-4 py-1.5 rounded-full shadow-sm transition-all"

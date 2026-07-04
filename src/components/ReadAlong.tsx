@@ -17,7 +17,7 @@ interface ReadAlongProps {
 /**
  * Read-along block: a "Read along" button plus the text rendered word-by-word,
  * highlighting each word as the Web Speech API speaks it (via `boundary`
- * events). Word highlighting is best-effort — if the browser/voice doesn't
+ * events). Word highlighting is best-effort, if the browser/voice doesn't
  * fire boundary events the audio still plays and the text still shows, just
  * without the moving highlight. Where speech is unsupported, renders plain text.
  */

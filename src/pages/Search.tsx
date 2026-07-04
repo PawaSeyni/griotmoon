@@ -21,7 +21,7 @@ const TRANSLATIONS = {
   },
   es: {
     seoTitle: 'Buscar',
-    seoDesc: 'Busca en la Colección Pawa Seyni — libros y actividades.',
+    seoDesc: 'Busca en la Colección Pawa Seyni, libros y actividades.',
     heading: 'Buscar',
     placeholder: 'Busca libros y actividades…',
     booksHeading: 'Libros',
@@ -33,7 +33,7 @@ const TRANSLATIONS = {
   },
   fr: {
     seoTitle: 'Recherche',
-    seoDesc: 'Recherchez dans la Collection Pawa Seyni — livres et activités.',
+    seoDesc: 'Recherchez dans la Collection Pawa Seyni, livres et activités.',
     heading: 'Recherche',
     placeholder: 'Rechercher livres et activités…',
     booksHeading: 'Livres',

@@ -230,7 +230,7 @@ export default function WordExplorerDemo() {
   const [quizScore, setQuizScore] = useState(0);
   const [quizAnswered, setQuizAnswered] = useState<string | null>(null);
   const [quizCorrectAnswer, setQuizCorrectAnswer] = useState<string | null>(null);
-  // Questions answered so far this run — the score denominator ("correct out of
+  // Questions answered so far this run, the score denominator ("correct out of
   // answered"), so it never reads 0/0 and never counts the current unanswered question.
   const [answeredCount, setAnsweredCount] = useState(0);
 

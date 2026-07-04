@@ -9,7 +9,7 @@ import { splitLangFromPath, localizePath } from '../lib/language';
  * ("#email-signup"), external URLs, and object `to` values pass through
  * untouched.
  *
- * Usage: import { Link } from '../components/LocalizedLink' — every existing
+ * Usage: import { Link } from '../components/LocalizedLink', every existing
  * `to="/..."` then localizes itself with no other change.
  */
 type LinkProps = ComponentProps<typeof RouterLink>;
