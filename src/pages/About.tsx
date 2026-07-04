@@ -5,8 +5,7 @@ import JsonLd from '../components/JsonLd';
 import ReadAloudButton from '../components/ReadAloudButton';
 import { useMemo } from 'react';
 import { useTranslation, useLanguage, localizePath } from '../lib/language';
-import { AMAZON_AUTHOR_URL } from '../lib/amazon';
-import evaHeadshot from '../assets/griot-fire.jpg'; // placeholder until Pawa Seyni's headshot lands
+import griotFire from '../assets/griot-fire.jpg'; // brand scene; swap for Pawa Seyni's portrait when available
 
 const SITE_URL = 'https://griotmoon.com';
 
@@ -16,96 +15,92 @@ const AUTHOR_SCHEMA = {
   name: 'Pawa Seyni',
   jobTitle: 'Children’s Author',
   description:
-    'Author of the Pawa Seyni Collection of multicultural picture books for children ages 3–9.',
-  image: `${SITE_URL}${evaHeadshot}`,
-  sameAs: [
-    'https://www.amazon.com/author/pawaseyni',
-    'https://www.instagram.com/pawaseyni.books/',
-  ],
+    'Author of the Pawa Seyni Collection of African heritage picture books for children ages 3–9, published by Pawa Press.',
+  image: `${SITE_URL}/og-image.jpg`,
 };
 
 const TRANSLATIONS = {
   en: {
     seoTitle: 'About Pawa Seyni',
-    seoDesc: 'Pawa Seyni writes multicultural picture books for children ages 3–9. Before she was an author, she spent thirty years in public health. Her stories begin in night and end in morning.',
+    seoDesc: 'Pawa Seyni writes African heritage picture books for children ages 3–9 — folktales, courage, and Ubuntu, told in the fireside tradition of the griot.',
     heading: 'About Griot Moon',
-    subheading: 'Making reading magical for every child',
-    refrain: 'Every story begins in the dark and ends in the morning.',
-    refrainAttr: 'the signature rhythm of every book in the Pawa Seyni Collection',
-    photoNote: 'Pawa Seyni, author',
+    subheading: 'Stories from the fire, kept for every child',
+    refrain: 'When the moon rises, the village gathers.',
+    refrainAttr: 'the promise of every book in the Pawa Seyni Collection',
+    photoNote: 'The griot’s fire — the scene behind every Griot Moon story',
     bioHeading: 'A Note from the Author',
     bio: [
-      "This children's book series is a lively collection of imaginative stories from my childhood, created for kids ages 3–9.",
-      'After a lifelong career in public health, I am now a full-time grandmother, caring for two young granddaughters with an endless appetite for bedtime stories.',
-      'My inspiration comes from childhood memories with my mother and aunt. This book, and the series it belongs to, is my way of passing down traditions and lessons from a time before digital media.',
+      'I grew up on stories told out loud — in the pause after supper, under a moon that seemed to lean in and listen. Long before I ever wrote a word, the elders of my childhood taught me that a story is not finished when it ends; it is finished when someone retells it.',
+      'In West Africa, that work belongs to the griot: the storyteller, praise-singer, and keeper of a village’s memory. Griot Moon is my way of carrying a small ember from that fire to your family’s bedtime — folktales of sharing and courage, stories of Ubuntu, and the quiet lessons elders pass down.',
+      'The children around the fire in these books come from everywhere, because that is who these stories are for. African heritage is the root; every curious child is the welcome guest.',
     ],
-    motivation: 'My motivation is simple: to share that magic with a new generation.',
-    viewBooks: '🛒 View Books on Amazon',
+    motivation: 'My hope is simple: that a story you read tonight becomes a story your child tells someday.',
+    viewBooks: '📚 Browse the Books',
     contactEva: '✉️ Contact Pawa Seyni',
     missionHeading: 'Our Mission & Values',
     cards: [
-      { title: 'Our Story', text: "Griot Moon began with Pawa Seyni, a grandmother and retired public-health worker who wanted to pass the bedtime stories of her own childhood on to a new generation. Every book in the collection grew from that simple wish: to make reading magical for families everywhere." },
-      { title: 'Why Books Matter', text: "Reading with Pawa Seyni isn't just about words on a page, it's about opening doorways to new worlds, building vocabulary, and creating precious memories that last forever." },
-      { title: 'Our Mission', text: 'We believe every child deserves access to stories that spark imagination, build empathy, and celebrate the joy of reading with Pawa Seyni as their guide.' },
-      { title: 'Our Values', text: 'Quality storytelling, inclusive representation, educational excellence, and making reading accessible and fun for all families around the world.' },
+      { title: 'Our Story', text: 'Griot Moon is the home of the Pawa Seyni Collection at Pawa Press — picture books rooted in the West African storytelling tradition, written to be read aloud and retold. It grew from one wish: that the fireside never goes out, no matter where a family lives.' },
+      { title: 'Why Stories Matter', text: 'Oral stories built vocabularies, memories, and whole histories long before books did. Reading these tales aloud does what the fireside always did — it gathers people, builds empathy, and hands children words worth keeping.' },
+      { title: 'Our Mission', text: 'To put African heritage stories in every child’s hands — folktales, proverbs, and everyday courage — with free activities and read-alouds in English, Spanish, and French.' },
+      { title: 'Our Values', text: 'Ubuntu — I am because we are. Inclusive representation, respect for the tradition the stories come from, and reading made joyful and accessible for families everywhere.' },
     ],
   },
   es: {
     seoTitle: 'Acerca de Pawa Seyni',
-    seoDesc: 'Pawa Seyni escribe libros ilustrados multiculturales para niños de 3 a 9 años. Antes de ser autora, trabajó treinta años en salud pública. Sus historias comienzan de noche y terminan al amanecer.',
+    seoDesc: 'Pawa Seyni escribe libros ilustrados de herencia africana para niños de 3 a 9 años: cuentos populares, valentía y Ubuntu, contados en la tradición del griot junto al fuego.',
     heading: 'Acerca de Griot Moon',
-    subheading: 'Haciendo la lectura mágica para cada peque',
-    refrain: 'Cada historia comienza en la oscuridad y termina con la mañana.',
-    refrainAttr: 'el ritmo distintivo de cada libro de la Colección Pawa Seyni',
-    photoNote: 'Pawa Seyni, autora',
-    bioHeading: 'Una nota de la autora',
+    subheading: 'Historias del fuego, guardadas para cada niño',
+    refrain: 'Cuando sale la luna, el pueblo se reúne.',
+    refrainAttr: 'la promesa de cada libro de la Colección Pawa Seyni',
+    photoNote: 'El fuego del griot: la escena detrás de cada historia de Griot Moon',
+    bioHeading: 'Una nota del autor',
     bio: [
-      'Esta serie de libros infantiles es una colección viva de historias imaginativas de mi infancia, creadas para niños de 3 a 9 años.',
-      'Tras una carrera completa en salud pública, ahora soy abuela a tiempo completo y cuido a dos nietas con un apetito infinito por los cuentos antes de dormir.',
-      'Mi inspiración viene de los recuerdos de la infancia con mi madre y mi tía. Este libro — y la serie a la que pertenece — es mi forma de transmitir tradiciones y lecciones de una época anterior a las pantallas.',
+      'Crecí con historias contadas en voz alta: en la pausa después de la cena, bajo una luna que parecía inclinarse para escuchar. Mucho antes de escribir una palabra, los mayores de mi infancia me enseñaron que una historia no termina cuando acaba, sino cuando alguien la vuelve a contar.',
+      'En África Occidental, ese trabajo pertenece al griot: el narrador, cantor y guardián de la memoria del pueblo. Griot Moon es mi manera de llevar una pequeña brasa de ese fuego a la hora de dormir de tu familia — cuentos de compartir y de valentía, historias de Ubuntu y las lecciones serenas que los mayores transmiten.',
+      'Los niños alrededor del fuego en estos libros vienen de todas partes, porque para ellos son estas historias. La herencia africana es la raíz; cada niño curioso es el invitado bienvenido.',
     ],
-    motivation: 'Mi motivación es simple: compartir esa magia con una nueva generación.',
-    viewBooks: '🛒 Ver libros en Amazon',
+    motivation: 'Mi esperanza es sencilla: que una historia que leas esta noche se convierta en una historia que tu peque cuente algún día.',
+    viewBooks: '📚 Ver los libros',
     contactEva: '✉️ Contactar a Pawa Seyni',
     missionHeading: 'Nuestra misión y valores',
     cards: [
-      { title: 'Nuestra historia', text: 'Griot Moon nació con Pawa Seyni, una abuela y trabajadora de salud pública jubilada que quería transmitir los cuentos de su propia infancia a una nueva generación. Cada libro de la colección surgió de ese deseo sencillo: hacer mágica la lectura para las familias de todo el mundo.' },
-      { title: 'Por qué importan los libros', text: 'Leer con Pawa Seyni no es solo palabras en una página: es abrir puertas a mundos nuevos, ampliar el vocabulario y crear recuerdos preciosos que duran para siempre.' },
-      { title: 'Nuestra misión', text: 'Creemos que cada niño merece acceso a historias que enciendan la imaginación, fomenten la empatía y celebren el gozo de leer con Pawa Seyni como guía.' },
-      { title: 'Nuestros valores', text: 'Buenas historias, representación inclusiva, excelencia educativa y hacer que la lectura sea accesible y divertida para familias de todo el mundo.' },
+      { title: 'Nuestra historia', text: 'Griot Moon es el hogar de la Colección Pawa Seyni en Pawa Press: libros ilustrados con raíces en la tradición narrativa de África Occidental, escritos para leerse en voz alta y volver a contarse. Nació de un deseo: que el fuego del cuento nunca se apague, viva donde viva la familia.' },
+      { title: 'Por qué importan las historias', text: 'Las historias orales construyeron vocabularios, recuerdos e historias enteras mucho antes que los libros. Leer estos cuentos en voz alta hace lo que siempre hizo el fuego: reunir a la gente, cultivar la empatía y regalar palabras que valen la pena guardar.' },
+      { title: 'Nuestra misión', text: 'Poner historias de herencia africana en las manos de cada niño — cuentos populares, proverbios y valentía cotidiana — con actividades gratuitas y lecturas en voz alta en inglés, español y francés.' },
+      { title: 'Nuestros valores', text: 'Ubuntu: soy porque somos. Representación inclusiva, respeto por la tradición de la que vienen las historias y una lectura alegre y accesible para familias de todo el mundo.' },
     ],
   },
   fr: {
-    seoTitle: 'À propos d\'Pawa Seyni',
-    seoDesc: 'Pawa Seyni écrit des albums illustrés multiculturels pour les enfants de 3 à 9 ans. Avant de devenir autrice, elle a travaillé trente ans en santé publique. Ses histoires commencent la nuit et s\'achèvent au matin.',
+    seoTitle: 'À propos de Pawa Seyni',
+    seoDesc: "Pawa Seyni écrit des albums d'héritage africain pour les enfants de 3 à 9 ans — contes, courage et Ubuntu, racontés dans la tradition du griot, au coin du feu.",
     heading: 'À propos de Griot Moon',
-    subheading: 'Rendre la lecture magique pour chaque enfant',
-    refrain: "Chaque histoire commence dans le noir et finit au matin.",
-    refrainAttr: 'le rythme signature de chaque livre de la Collection Pawa Seyni',
-    photoNote: 'Pawa Seyni, autrice',
-    bioHeading: "Mot de l'autrice",
+    subheading: 'Des histoires du feu, gardées pour chaque enfant',
+    refrain: 'Quand la lune se lève, le village se rassemble.',
+    refrainAttr: 'la promesse de chaque livre de la Collection Pawa Seyni',
+    photoNote: 'Le feu du griot — la scène derrière chaque histoire de Griot Moon',
+    bioHeading: "Mot de l'auteur",
     bio: [
-      "Cette série de livres pour enfants est une collection vivante d'histoires imaginatives de mon enfance, créée pour les 3 à 9 ans.",
-      'Après une longue carrière en santé publique, je suis aujourd\'hui grand-mère à plein temps, et je m\'occupe de deux petites-filles à l\'appétit insatiable pour les histoires du soir.',
-      'Mon inspiration vient des souvenirs d\'enfance avec ma mère et ma tante. Ce livre — et la série dont il fait partie — est ma façon de transmettre des traditions et des leçons d\'une époque d\'avant les écrans.',
+      "J'ai grandi avec des histoires racontées à voix haute — dans la pause après le dîner, sous une lune qui semblait se pencher pour écouter. Bien avant d'écrire le moindre mot, les anciens de mon enfance m'ont appris qu'une histoire n'est pas finie quand elle se termine : elle est finie quand quelqu'un la raconte à son tour.",
+      "En Afrique de l'Ouest, ce travail appartient au griot : le conteur, le chanteur et le gardien de la mémoire du village. Griot Moon est ma façon de porter une petite braise de ce feu jusqu'au coucher de votre famille — des contes de partage et de courage, des histoires d'Ubuntu et les leçons paisibles que les anciens transmettent.",
+      "Les enfants autour du feu dans ces livres viennent de partout, parce que c'est à eux que ces histoires sont destinées. L'héritage africain est la racine ; chaque enfant curieux est l'invité bienvenu.",
     ],
-    motivation: 'Ma motivation est simple : partager cette magie avec une nouvelle génération.',
-    viewBooks: '🛒 Voir les livres sur Amazon',
+    motivation: "Mon espoir est simple : qu'une histoire lue ce soir devienne un jour une histoire que votre enfant racontera.",
+    viewBooks: '📚 Parcourir les livres',
     contactEva: '✉️ Contacter Pawa Seyni',
     missionHeading: 'Notre mission et nos valeurs',
     cards: [
-      { title: 'Notre histoire', text: "Griot Moon est née avec Pawa Seyni, une grand-mère et ancienne professionnelle de la santé publique qui souhaitait transmettre les histoires du soir de sa propre enfance à une nouvelle génération. Chaque livre de la collection est né de ce souhait tout simple : rendre la lecture magique pour les familles du monde entier." },
-      { title: 'Pourquoi les livres comptent', text: 'Lire avec Pawa Seyni, ce n\'est pas seulement des mots sur une page : c\'est ouvrir des portes vers de nouveaux mondes, enrichir le vocabulaire et créer des souvenirs précieux qui durent toute une vie.' },
-      { title: 'Notre mission', text: "Nous croyons que chaque enfant mérite des histoires qui éveillent l'imagination, nourrissent l'empathie et célèbrent la joie de lire, avec Pawa Seyni comme guide." },
-      { title: 'Nos valeurs', text: 'Des histoires de qualité, une représentation inclusive, l\'excellence éducative et une lecture accessible et joyeuse pour toutes les familles du monde.' },
+      { title: 'Notre histoire', text: "Griot Moon est la maison de la Collection Pawa Seyni chez Pawa Press : des albums enracinés dans la tradition du conte d'Afrique de l'Ouest, écrits pour être lus à voix haute et racontés à nouveau. Tout est né d'un souhait : que le feu du conte ne s'éteigne jamais, où que vive la famille." },
+      { title: 'Pourquoi les histoires comptent', text: "Les histoires orales ont bâti des vocabulaires, des souvenirs et des histoires entières bien avant les livres. Lire ces contes à voix haute fait ce que le feu a toujours fait : rassembler, nourrir l'empathie et offrir aux enfants des mots qui valent d'être gardés." },
+      { title: 'Notre mission', text: "Mettre des histoires d'héritage africain entre les mains de chaque enfant — contes, proverbes et courage du quotidien — avec des activités gratuites et des lectures à voix haute en anglais, espagnol et français." },
+      { title: 'Nos valeurs', text: "Ubuntu — je suis parce que nous sommes. Une représentation inclusive, le respect de la tradition dont viennent les histoires, et une lecture joyeuse et accessible pour toutes les familles." },
     ],
   },
 };
 
 const CARD_STYLES = [
-  { emoji: '📖', color: 'from-purple-400 to-purple-600' },
-  { emoji: '💜', color: 'from-pink-400 to-pink-600' },
-  { emoji: '🎯', color: 'from-blue-400 to-blue-600' },
+  { emoji: '🔥', color: 'from-purple-400 to-purple-600' },
+  { emoji: '🥁', color: 'from-pink-400 to-pink-600' },
+  { emoji: '🌙', color: 'from-blue-400 to-blue-600' },
   { emoji: '🌍', color: 'from-green-400 to-green-600' },
 ];
 
@@ -120,7 +115,7 @@ export default function About() {
 
   return (
     <main>
-      <Seo title={t.seoTitle} description={t.seoDesc} path="/about" image={`${SITE_URL}${evaHeadshot}`} />
+      <Seo title={t.seoTitle} description={t.seoDesc} path="/about" image={`${SITE_URL}/og-image.jpg`} />
       <JsonLd id="author" data={authorSchema} />
 
       <section className="bg-gradient-to-b from-amber-50 to-white py-14 px-4">
@@ -138,7 +133,7 @@ export default function About() {
               {t.refrain}
             </p>
             <footer className="mt-3 text-sm text-gray-500 not-italic">
-              {language === 'en' ? '' : '— '}{t.refrainAttr}
+              — {t.refrainAttr}
             </footer>
           </blockquote>
         </div>
@@ -149,7 +144,7 @@ export default function About() {
           <div className="flex flex-col md:flex-row gap-10 items-center">
             <div className="flex-shrink-0 w-full md:w-72">
               <img
-                src={evaHeadshot}
+                src={griotFire}
                 alt=""
                 width={800}
                 height={800}
@@ -172,19 +167,17 @@ export default function About() {
               <div className="mt-6 flex items-center gap-3">
                 <div>
                   <p className="font-bold text-gray-800 text-lg">Pawa Seyni</p>
-                  <p className="text-purple-600 text-sm">@GriotMoon</p>
+                  <p className="text-purple-600 text-sm">Pawa Press · griotmoon.com</p>
                 </div>
-                <span className="text-2xl">📚💜✨</span>
+                <span className="text-2xl">📚🌙🔥</span>
               </div>
               <div className="mt-4 flex gap-3">
-                <a
-                  href={AMAZON_AUTHOR_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/books"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-bold rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 text-sm"
                 >
                   {t.viewBooks}
-                </a>
+                </Link>
                 <Link to="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-purple-400 text-purple-600 font-semibold rounded-full hover:bg-purple-50 transition-all duration-200 text-sm">
                   {t.contactEva}
                 </Link>

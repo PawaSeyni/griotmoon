@@ -459,7 +459,7 @@ const TRANSLATIONS = {
     difficulty: { easy: 'Fácil', medium: 'Medio', hard: 'Difícil' } as Record<Difficulty, string>,
   },
   fr: {
-    heading: 'Le coin créatif d\'Pawa Seyni',
+    heading: 'Le coin créatif de Pawa Seyni',
     subheading: 'Crée des bricolages incroyables pour donner vie à tes histoires préférées !',
     howToPlay: '✨ Comment ça marche ✨',
     howToPlaySteps: [

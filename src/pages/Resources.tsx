@@ -533,7 +533,7 @@ const TRANSLATIONS = {
     },
     teachers: {
       heading: 'Pour les enseignants et \xe9ducateurs',
-      intro: 'Les supports d’Pawa Seyni sont gratuits \xe0 utiliser \xe0 la maison ou en classe. T\xe9l\xe9chargez, imprimez et partagez – sans inscription.',
+      intro: 'Les supports de Pawa Seyni sont gratuits \xe0 utiliser \xe0 la maison ou en classe. T\xe9l\xe9chargez, imprimez et partagez – sans inscription.',
       downloadCta: 'T\xe9l\xe9charger le PDF',
       downloads: [
         { title: 'Guide parents & enseignants', desc: 'Questions de discussion et conseils de lecture \xe0 voix haute pour tirer le meilleur de chaque histoire.' },
@@ -541,7 +541,7 @@ const TRANSLATIONS = {
         { title: 'Activit\xe9s compl\xe9mentaires', desc: 'Fiches et activit\xe9s de prolongement \xe0 faire apr\xe8s la lecture.' },
         { title: 'Tableau de routine de lecture', desc: 'Un tableau \xe0 imprimer pour instaurer une habitude de lecture quotidienne.' },
       ],
-      tipsHeading: 'Utiliser les livres d’Pawa Seyni en classe',
+      tipsHeading: 'Utiliser les livres de Pawa Seyni en classe',
       tips: [
         'Lisez \xe0 voix haute en groupe – appuyez sur 🔊 \xc9couter pour mod\xe9liser la prononciation en anglais, espagnol ou fran\xe7ais.',
         'Faites des pauses pour les pr\xe9dictions et la discussion\xa0; chaque histoire porte une valeur comme la gentillesse, le courage ou la patience.',
@@ -617,7 +617,7 @@ const TRANSLATIONS = {
           'C’est l’ann\xe9e o\xf9 beaucoup d’enfants d\xe9cryptent le code. Les sons des voyelles, les mots outils, la prise de conscience que les marques noires sur la page produisent la m\xeame histoire \xe0 chaque fois\xa0: le d\xe9clic se produit. Votre enfant peut se mettre \xe0 lire les panneaux, les bo\xeetes de c\xe9r\xe9ales, tout. Nourrissez cette faim. Gardez un panier de petits livres faciles pr\xe8s de la table du petit-d\xe9jeuner. Le but n’est pas la perfection mais l’\xe9lan. Les erreurs prouvent que la lecture est en train de se produire.',
         ] },
         { title: 'De 6 \xe0 7 ans\xa0: de la lecture au plaisir de lire', body: [
-          '\xc0 pr\xe9sent, la plupart des enfants d\xe9codent formellement \xe0 l’\xe9cole. Ce que vous cultivez \xe0 la maison, c’est quelque chose que l’\xe9cole ne peut pas pleinement atteindre\xa0: l’amour d’une histoire pour elle-m\xeame. Des romans \xe0 chapitres courts, des bandes dessin\xe9es, des journaux illustr\xe9s\xa0: tout ce qui pousse un enfant \xe0 veiller apr\xe8s l’heure du coucher avec une lampe de poche. Laissez-les faire. L’habitude que vous construisez maintenant est celle qui les accompagnera au coll\xe8ge, au lyc\xe9e et au-del\xe0. Les histoires bilingues d’Pawa Seyni sont ici des livres ponts parfaits\xa0: assez familiers pour rassurer, assez riches pour faire grandir.',
+          '\xc0 pr\xe9sent, la plupart des enfants d\xe9codent formellement \xe0 l’\xe9cole. Ce que vous cultivez \xe0 la maison, c’est quelque chose que l’\xe9cole ne peut pas pleinement atteindre\xa0: l’amour d’une histoire pour elle-m\xeame. Des romans \xe0 chapitres courts, des bandes dessin\xe9es, des journaux illustr\xe9s\xa0: tout ce qui pousse un enfant \xe0 veiller apr\xe8s l’heure du coucher avec une lampe de poche. Laissez-les faire. L’habitude que vous construisez maintenant est celle qui les accompagnera au coll\xe8ge, au lyc\xe9e et au-del\xe0. Les histoires bilingues de Pawa Seyni sont ici des livres ponts parfaits\xa0: assez familiers pour rassurer, assez riches pour faire grandir.',
         ] },
         { title: 'Une note sur les d\xe9lais', body: [
           'Ces fen\xeatres sont des rep\xe8res, pas des bulletins de notes. Ce que vous pouvez toujours faire, \xe0 tout \xe2ge, c’est lire avec votre enfant. C’est la seule chose qui ne rate jamais.',
@@ -657,7 +657,7 @@ const TRANSLATIONS = {
           'Si votre enfant adore les camions, les dinosaures ou les super-h\xe9ros, il existe un livre pour \xe7a. Le contenu du livre importe bien moins que l’acte de le choisir, de le tenir et d’y revenir. Suivez ce fil vers les livres.',
         ] },
         { title: 'Rendez-le actif, pas passif', body: [
-          'Certains enfants r\xe9sistent \xe0 rester assis avec un livre, mais suivent volontiers l’histoire en dessinant ou en construisant. Les livres audio et les pistes audio bilingues comme celles des histoires d’Pawa Seyni peuvent \xeatre la porte d’entr\xe9e.',
+          'Certains enfants r\xe9sistent \xe0 rester assis avec un livre, mais suivent volontiers l’histoire en dessinant ou en construisant. Les livres audio et les pistes audio bilingues comme celles des histoires de Pawa Seyni peuvent \xeatre la porte d’entr\xe9e.',
         ] },
         { title: 'Laissez-les choisir, m\xeame si le choix vous surprend', body: [
           'Un enfant qui choisit une BD, un livre de blagues ou un roman graphique choisit de lire. L’engagement est l’apprentissage. Ces comp\xe9tences se transfèrent.',
@@ -723,7 +723,7 @@ const TRANSLATIONS = {
           'Pour beaucoup de familles, une langue h\xe9rit\xe9e n’est pas seulement de la communication – c’est un fil vers les grands-parents, la nourriture, la musique, un lieu. Quand Pawa Seyni \xe9crit une histoire bilingue, elle pense \xe0 la grand-m\xe8re qui lit en espagnol pendant que son petit-enfant suit en anglais.',
         ] },
         { title: 'Un premier pas pratique', body: [
-          'Choisissez un livre bilingue et engagez-vous \xe0 le lire dans les deux langues au moins une fois par semaine pendant un mois. Commencez avec la collection d’Pawa Seyni – chaque histoire est con\xe7ue pour que les deux langues se sentent \xe9galement chez elles sur la page.',
+          'Choisissez un livre bilingue et engagez-vous \xe0 le lire dans les deux langues au moins une fois par semaine pendant un mois. Commencez avec la collection de Pawa Seyni – chaque histoire est con\xe7ue pour que les deux langues se sentent \xe9galement chez elles sur la page.',
         ] },
       ] satisfies Section[],
     },

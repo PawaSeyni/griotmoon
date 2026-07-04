@@ -1,16 +1,15 @@
 import { Link } from '../components/LocalizedLink';
 import Seo from '../components/Seo';
 import { useTranslation } from '../lib/language';
-import { AMAZON_AUTHOR_URL } from '../lib/amazon';
 
 const TRANSLATIONS = {
   en: {
     seoTitle: 'Griot Moon: Links',
     seoDesc: 'Quick links from the Pawa Seyni Collection: the books on Amazon, free printables, and where to follow along.',
-    tagline: 'Multicultural picture books for curious minds · EN · ES · FR',
+    tagline: 'African heritage picture books for curious minds · EN · ES · FR',
     sectionBooks: 'The Books',
-    amazonCta: '📚 The Pawa Seyni Collection on Amazon',
-    amazonSub: 'Browse the full collection: multicultural picture books, ages 3–9',
+    amazonCta: '📚 The Pawa Seyni Collection',
+    amazonSub: 'Browse all the books — African heritage picture books, ages 3–9',
     sectionFreebies: 'Free Printables',
     bedtimeCta: '🌙 Bilingual Bedtime Routine Chart',
     bedtimeSub: 'Free PDF · EN · ES · FR available',
@@ -29,15 +28,15 @@ const TRANSLATIONS = {
     sectionEmail: 'Stay in touch',
     emailCta: '💌 Join the newsletter',
     emailSub: 'Bedtime stories, reading tips, free printables, weekly',
-    footer: 'Griot Moon · An Pawa Seyni Collection imprint',
+    footer: 'Griot Moon · Home of the Pawa Seyni Collection · Pawa Press',
   },
   es: {
     seoTitle: 'Griot Moon — Enlaces',
     seoDesc: 'Enlaces rápidos de la Colección Pawa Seyni: los libros en Amazon, imprimibles gratis y dónde seguirnos.',
-    tagline: 'Libros ilustrados multiculturales para mentes curiosas · EN · ES · FR',
+    tagline: 'Libros de herencia africana para mentes curiosas · EN · ES · FR',
     sectionBooks: 'Los libros',
-    amazonCta: '📚 La Colección Pawa Seyni en Amazon',
-    amazonSub: 'Explora la colección completa — libros ilustrados, 3 a 9 años',
+    amazonCta: '📚 La Colección Pawa Seyni',
+    amazonSub: 'Explora todos los libros — herencia africana, 3 a 9 años',
     sectionFreebies: 'Imprimibles gratis',
     bedtimeCta: '🌙 Rutina de la noche bilingüe (PDF)',
     bedtimeSub: 'Gratis · disponible EN · ES · FR',
@@ -56,15 +55,15 @@ const TRANSLATIONS = {
     sectionEmail: 'Sigamos en contacto',
     emailCta: '💌 Únete al boletín',
     emailSub: 'Cuentos para dormir, consejos de lectura, imprimibles — semanal',
-    footer: 'Griot Moon · Sello Pawa Seyni Collection',
+    footer: 'Griot Moon · Hogar de la Colección Pawa Seyni · Pawa Press',
   },
   fr: {
     seoTitle: 'Griot Moon — Liens',
     seoDesc: 'Liens rapides de la Collection Pawa Seyni : les livres sur Amazon, des imprimés gratuits et où nous suivre.',
-    tagline: 'Albums illustrés multiculturels pour les esprits curieux · EN · ES · FR',
+    tagline: "Albums d'héritage africain pour les esprits curieux · EN · ES · FR",
     sectionBooks: 'Les livres',
-    amazonCta: '📚 La Collection Pawa Seyni sur Amazon',
-    amazonSub: 'Parcourez la collection — albums jeunesse, 3 à 9 ans',
+    amazonCta: '📚 La Collection Pawa Seyni',
+    amazonSub: 'Tous les livres — héritage africain, 3 à 9 ans',
     sectionFreebies: 'Imprimés gratuits',
     bedtimeCta: '🌙 Routine du coucher bilingue (PDF)',
     bedtimeSub: 'Gratuit · disponible EN · ES · FR',
@@ -83,7 +82,7 @@ const TRANSLATIONS = {
     sectionEmail: 'Restons en contact',
     emailCta: '💌 Rejoignez la newsletter',
     emailSub: 'Histoires du soir, astuces de lecture, imprimés — hebdomadaire',
-    footer: 'Griot Moon · Imprint Pawa Seyni Collection',
+    footer: 'Griot Moon · Maison de la Collection Pawa Seyni · Pawa Press',
   },
 };
 
@@ -103,8 +102,8 @@ export default function Links() {
       heading: t.sectionBooks,
       rows: [
         {
-          href: AMAZON_AUTHOR_URL,
-          external: true,
+          href: '/books',
+          external: false,
           title: t.amazonCta,
           subtitle: t.amazonSub,
           variant: 'primary',
@@ -123,10 +122,8 @@ export default function Links() {
     {
       heading: t.sectionFollow,
       rows: [
-        { href: 'https://www.pinterest.com/griotmoon', external: true, title: t.pinterestCta, variant: 'tertiary' },
-        { href: 'https://www.instagram.com/pawaseyni.books', external: true, title: t.instagramCta, variant: 'tertiary' },
-        { href: 'https://www.threads.com/@pawaseyni.books', external: true, title: t.threadsCta, variant: 'tertiary' },
-        { href: 'https://www.tiktok.com/@pawaseyni', external: true, title: t.tiktokCta, variant: 'tertiary' },
+        // Social rows removed until the Griot Moon accounts exist — re-add each
+        // as it goes live (see git history for the row shape).
         { href: '/', external: false, title: t.homepageCta, variant: 'tertiary' },
       ],
     },
@@ -140,25 +137,25 @@ export default function Links() {
 
   const variantClasses: Record<NonNullable<LinkRow['variant']>, string> = {
     primary:
-      'bg-[#E8A053] hover:bg-[#d68f3f] text-white border-transparent shadow-md',
+      'bg-[#b3572e] hover:bg-[#9a4a26] text-white border-transparent shadow-md',
     secondary:
-      'bg-[#FBF6EC] hover:bg-[#F2D08A] text-[#2A2018] border-[#E8A053]/40',
+      'bg-[#fdf8ec] hover:bg-[#f2dd9e] text-[#241f1a] border-[#d9a441]/40',
     tertiary:
-      'bg-white hover:bg-[#FBF6EC] text-[#3B5E7A] border-[#3B5E7A]/30',
+      'bg-white hover:bg-[#fdf8ec] text-[#2a2456] border-[#2a2456]/30',
   };
 
   return (
     <>
       <Seo title={t.seoTitle} description={t.seoDesc} path="/links" />
-      <div className="min-h-screen bg-gradient-to-b from-[#FBF6EC] via-[#F2D08A]/40 to-[#FBF6EC] py-10 px-4">
+      <div className="min-h-screen bg-gradient-to-b from-[#f2f1fa] via-[#f9eecd]/50 to-[#f2f1fa] py-10 px-4">
         <div className="max-w-md mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
-            <div className="text-5xl mb-3" aria-hidden>🌅</div>
-            <h1 className="text-2xl font-bold text-[#2A2018] mb-1">
+            <div className="text-5xl mb-3" aria-hidden>🌙</div>
+            <h1 className="text-2xl font-bold text-[#241f1a] mb-1">
               Griot Moon
             </h1>
-            <p className="text-sm text-[#3B5E7A] leading-snug">
+            <p className="text-sm text-[#2a2456] leading-snug">
               {t.tagline}
             </p>
           </div>
@@ -166,7 +163,7 @@ export default function Links() {
           {/* Sections */}
           {sections.map((section) => (
             <section key={section.heading} className="mb-6">
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-[#3B5E7A]/70 mb-3 px-1">
+              <h2 className="text-xs font-semibold uppercase tracking-wider text-[#2a2456]/70 mb-3 px-1">
                 {section.heading}
               </h2>
               <div className="space-y-3">
@@ -203,7 +200,7 @@ export default function Links() {
           ))}
 
           {/* Footer */}
-          <p className="text-center text-xs text-[#3B5E7A]/70 mt-8">
+          <p className="text-center text-xs text-[#2a2456]/70 mt-8">
             {t.footer}
           </p>
         </div>

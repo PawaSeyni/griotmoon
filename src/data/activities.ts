@@ -101,7 +101,7 @@ export const activities: Activity[] = [
     title: {
       en: "Pawa Seyni's Coloring Adventure",
       es: 'Aventura de colorear de Pawa Seyni',
-      fr: 'Aventure de coloriage d\'Pawa Seyni',
+      fr: 'Aventure de coloriage de Pawa Seyni',
     },
     desc: {
       en: 'In-browser coloring book, pick a scene, pick your palette, color it in. Saves what you make.',
@@ -121,7 +121,7 @@ export const activities: Activity[] = [
     title: {
       en: "Pawa Seyni's Craft Corner",
       es: 'Rincón de manualidades de Pawa Seyni',
-      fr: 'Coin bricolage d\'Pawa Seyni',
+      fr: 'Coin bricolage de Pawa Seyni',
     },
     desc: {
       en: 'Step-by-step craft instructions, bookmarks, masks, story dioramas built from common materials.',
@@ -226,7 +226,7 @@ export const activities: Activity[] = [
     emoji: '🃏',
     ages: '3-5',
     game: true,
-    title: { en: "Pawa Seyni's Matching Adventure", es: 'La aventura de parejas de Pawa Seyni', fr: 'Le jeu de paires d\'Pawa Seyni' },
+    title: { en: "Pawa Seyni's Matching Adventure", es: 'La aventura de parejas de Pawa Seyni', fr: 'Le jeu de paires de Pawa Seyni' },
     desc: {
       en: 'Flip two cards to find the matching pairs, perfect for little ones.',
       es: 'Voltea dos cartas para encontrar las parejas — perfecto para los más pequeños.',
@@ -252,7 +252,7 @@ export const activities: Activity[] = [
     emoji: '🐝',
     ages: '5-9',
     game: true,
-    title: { en: "Pawa Seyni's Spelling Bee", es: 'El concurso de ortografía de Pawa Seyni', fr: 'Le concours d\'orthographe d\'Pawa Seyni' },
+    title: { en: "Pawa Seyni's Spelling Bee", es: 'El concurso de ortografía de Pawa Seyni', fr: 'Le concours d\'orthographe de Pawa Seyni' },
     desc: {
       en: 'Listen to the word, then tap the letters to spell it. Three levels to master.',
       es: 'Escucha la palabra y toca las letras para deletrearla. Tres niveles por superar.',
@@ -269,7 +269,7 @@ export const activities: Activity[] = [
     desc: {
       en: "Count along with Pawa Seyni's friends and learn numbers through playful stories.",
       es: 'Cuenta con los amigos de Pawa Seyni y aprende los números con historias divertidas.',
-      fr: 'Comptez avec les amis d\'Pawa Seyni et apprenez les chiffres grâce à des histoires ludiques.',
+      fr: 'Comptez avec les amis de Pawa Seyni et apprenez les chiffres grâce à des histoires ludiques.',
     },
     category: { en: 'Early Math', es: 'Primeras matemáticas', fr: 'Premières maths' },
   },
@@ -356,11 +356,11 @@ export const activities: Activity[] = [
     emoji: '🧭',
     ages: '5-9',
     game: true,
-    title: { en: "Pawa Seyni's Virtual Story Map", es: 'El mapa de historias de Pawa Seyni', fr: 'La carte aux histoires d\'Pawa Seyni' },
+    title: { en: "Pawa Seyni's Virtual Story Map", es: 'El mapa de historias de Pawa Seyni', fr: 'La carte aux histoires de Pawa Seyni' },
     desc: {
       en: "Travel Pawa Seyni's story map and unlock a new adventure at every stop.",
       es: 'Recorre el mapa de historias de Pawa Seyni y desbloquea una nueva aventura en cada parada.',
-      fr: 'Parcourez la carte aux histoires d\'Pawa Seyni et débloquez une aventure à chaque étape.',
+      fr: 'Parcourez la carte aux histoires de Pawa Seyni et débloquez une aventure à chaque étape.',
     },
     category: { en: 'Discovery', es: 'Descubrimiento', fr: 'Découverte' },
   },

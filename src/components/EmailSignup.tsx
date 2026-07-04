@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage, useTranslation, type Language } from '../lib/language';
 import { track } from '../lib/analytics';
 
-// MailerLite embedded form action — group "griotmoon-signups", form
-// "Bilingual Starter Kit — site signup". Custom fields `language` and
-// `lead_magnet` are pre-registered on the MailerLite account, so they get
-// attached to the subscriber on submit. Double opt-in is ON, so MailerLite
-// sends the confirmation email; the welcome automation fires once the user
-// confirms (subscriber_joins_group trigger).
+// MailerLite embedded form action.
+//
+// TODO(griotmoon): this is still the Story Time with Eva form — signups land in
+// Eva's group until a "griotmoon-signups" group + form is created in MailerLite
+// and this action URL is swapped. Custom fields `language` and `lead_magnet`
+// must exist on the new form too. Double opt-in should stay ON.
 const MAILERLITE_FORM_ACTION =
   'https://assets.mailerlite.com/jsonp/2363396/forms/187942934227715798/subscribe';
 

@@ -53,12 +53,12 @@ const TRANSLATIONS = {
   fr: {
     seoTitle: 'Foire aux questions',
     seoDesc:
-      'Réponses sur les âges, les langues, les prix, la lecture à voix haute, les activités gratuites, la confidentialité et l’achat des livres d’Pawa Seyni.',
+      'Réponses sur les âges, les langues, les prix, la lecture à voix haute, les activités gratuites, la confidentialité et l’achat des livres de Pawa Seyni.',
     heading: 'Foire aux questions',
     subheading: 'Les questions les plus posées par les parents, accompagnants et enseignants',
     faqs: [
       { q: 'À quel âge s’adressent ces livres ?', a: 'La Collection Pawa Seyni est écrite pour les enfants de 3 à 9 ans. Chaque livre de la page Livres indique sa tranche d’âge recommandée pour vous aider à bien choisir.' },
-      { q: 'Dans quelles langues peut-on lire et écouter ?', a: 'Tout le site fonctionne en anglais, espagnol et français — utilisez le sélecteur EN/ES/FR en haut. Les activités et la lecture à voix haute « Écouter » fonctionnent dans les trois langues. Les livres d’Pawa Seyni sont bilingues : l’anglais avec l’espagnol ou le français, et d’autres traductions arrivent ; chaque livre indique les langues disponibles.' },
+      { q: 'Dans quelles langues peut-on lire et écouter ?', a: 'Tout le site fonctionne en anglais, espagnol et français — utilisez le sélecteur EN/ES/FR en haut. Les activités et la lecture à voix haute « Écouter » fonctionnent dans les trois langues. Les livres de Pawa Seyni sont bilingues : l’anglais avec l’espagnol ou le français, et d’autres traductions arrivent ; chaque livre indique les langues disponibles.' },
       { q: 'Comment acheter un livre et combien coûte-t-il ?', a: 'Les livres sont vendus sur Amazon en livre broché et en livre numérique. Le prix varie selon le titre, et Amazon affiche toujours le prix actuel et la disponibilité. Appuyez sur « Acheter sur Amazon » sur n’importe quel livre ; Amazon gère le paiement, la livraison et les retours.' },
       { q: 'Mon enfant peut-il écouter une histoire ?', a: 'Oui — appuyez sur le bouton 🔊 Écouter sur n’importe quel livre pour l’entendre lu à voix haute, avec une prononciation naturelle dans la langue choisie. Parfait pour les non-lecteurs et pour entendre une seconde langue.' },
       { q: 'Les activités et téléchargements sont-ils vraiment gratuits ?', a: 'Oui. Toutes les activités, les lectures à voix haute et le kit de démarrage trilingue de 20 pages sont gratuits. Seuls les livres sont payants (sur Amazon).' },

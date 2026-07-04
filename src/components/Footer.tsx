@@ -1,10 +1,9 @@
 import { Link } from './LocalizedLink';
 import { useTranslation } from '../lib/language';
-import { AMAZON_AUTHOR_URL } from '../lib/amazon';
 
 const TRANSLATIONS = {
   en: {
-    tagline: 'Where stories come to life! Magical books and activities for curious minds, ages 3–9.',
+    tagline: 'Stories from the fire — African heritage picture books and free activities for curious minds, ages 3–9.',
     quickLinks: 'Quick Links',
     home: 'Home',
     books: 'Books',
@@ -21,7 +20,7 @@ const TRANSLATIONS = {
     amazonAuthor: 'Amazon author page',
   },
   es: {
-    tagline: '¡Donde las historias cobran vida! Libros y actividades mágicos para mentes curiosas de 3 a 9 años.',
+    tagline: 'Historias del fuego — libros de herencia africana y actividades gratis para mentes curiosas de 3 a 9 años.',
     quickLinks: 'Enlaces rápidos',
     home: 'Inicio',
     books: 'Libros',
@@ -38,13 +37,13 @@ const TRANSLATIONS = {
     amazonAuthor: 'Página de autora en Amazon',
   },
   fr: {
-    tagline: 'Où les histoires prennent vie ! Des livres et activités magiques pour les esprits curieux de 3 à 9 ans.',
+    tagline: "Des histoires du feu — albums d'héritage africain et activités gratuites pour les esprits curieux de 3 à 9 ans.",
     quickLinks: 'Liens rapides',
     home: 'Accueil',
     books: 'Livres',
     activities: 'Activités',
     resources: 'Ressources pour parents',
-    about: 'À propos d\'Pawa Seyni',
+    about: 'À propos de Pawa Seyni',
     contact: 'Contact',
     faq: 'FAQ',
     connect: 'Connectez-vous avec Pawa Seyni',
@@ -100,36 +99,8 @@ export default function Footer() {
           <div>
             <p className="text-white font-semibold mb-4">{t.connect}</p>
             <p className="text-sm text-gray-400 mb-4">{t.connectBlurb}</p>
-            <div className="flex gap-3">
-              <a href="https://www.facebook.com/griotmoon" target="_blank" rel="noopener noreferrer" aria-label="Facebook @griotmoon"
-                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors text-lg">
-                📘
-              </a>
-              <a href="https://www.instagram.com/pawaseyni.books/" target="_blank" rel="noopener noreferrer" aria-label="Instagram @pawaseyni.books"
-                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-purple-600 transition-colors text-lg">
-                📷
-              </a>
-              <a href="https://www.pinterest.com/griotmoon/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest @griotmoon"
-                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors text-lg">
-                📌
-              </a>
-              <a href="https://www.threads.com/@pawaseyni.books" target="_blank" rel="noopener noreferrer" aria-label="Threads @pawaseyni.books"
-                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors text-lg">
-                🧵
-              </a>
-              <a href={AMAZON_AUTHOR_URL} target="_blank" rel="noopener noreferrer" aria-label={t.amazonAuthor}
-                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors text-lg">
-                📚
-              </a>
-              <a href="https://www.youtube.com/@GriotMoon" target="_blank" rel="noopener noreferrer" aria-label="YouTube @GriotMoon"
-                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors text-lg">
-                ▶️
-              </a>
-              <a href="https://www.tiktok.com/@pawaseyni" target="_blank" rel="noopener noreferrer" aria-label="TikTok @pawaseyni"
-                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-600 transition-colors text-lg">
-                🎵
-              </a>
-            </div>
+            {/* Social icons removed until the Griot Moon accounts exist — re-add
+                each as it goes live (see git history for the icon-row markup). */}
             <div className="mt-4">
               <a
                 href="mailto:contact@griotmoon.com"
