@@ -13,20 +13,27 @@ Check items off as they land; each item says who can do it
 - [ ] **Plausible analytics** (You/Joint) — create a site for `griotmoon.com` at plausible.io,
   paste its script tag into `index.html` (the slot is marked with a comment), redeploy.
   The Privacy page already describes Plausible, so this also makes the policy accurate.
-- [ ] **Amazon Associates tracking ID** (You) — in your Associates account, add a tracking ID
-  for Griot Moon (e.g. `griotmoon-20`), then set it in `src/lib/amazon.ts`
-  (`AMAZON_ASSOCIATE_TAG`, currently `''`). Until then Buy links work but earn no commission.
-- [ ] **MailerLite welcome automation** (You/Joint) — the new form works and subscribers land in
-  `griotmoon-signups`, but no welcome email fires yet. In MailerLite: copy Eva's welcome
-  automation, set trigger to "subscriber joins group → griotmoon-signups", swap the PDF links.
+- [ ] **Amazon Associates tracking ID** (You) — ⚠️ ATTENTION: the Amazon account signed into
+  Chrome shows "not connected to an Associates account … may have been closed" (checked
+  2026-07-04). Sign in with the account that owns the storytimewi20-20 tag, or investigate
+  whether Associates closed it (they close accounts without qualifying sales in ~180 days —
+  if so, Eva's site links earn nothing either; re-apply). Then add a `griotmoon-20` tracking
+  ID and set it in `src/lib/amazon.ts`.
+- [x] **MailerLite welcome automation** — DONE 2026-07-04: "Griot Moon — Welcome + Trilingual
+  Starter Kit" is ACTIVE (trigger: joins griotmoon-signups → rebranded welcome email with the
+  starter-kit button pointing at griotmoon.com). Eva's 3 drip emails were Removed (restorable in
+  MailerLite) — rebuild them Griot Moon-branded when the PDFs are rebranded. Sender is still
+  contact@storytimewitheva.com for deliverability; authenticate griotmoon.com in MailerLite
+  (DKIM DNS records at IONOS) then switch the sender.
 - [ ] **Verify contact@griotmoon.com exists** (You) — the domain has IONOS mail records, but
   confirm a `contact@griotmoon.com` mailbox (or alias) is actually set up; the Footer,
   Contact page, and FAQ all point to it.
-- [ ] **MailerLite test subscriber** (You) — a double-opt-in email for
-  `pnguer+griotmoon-test@gmail.com` is in your inbox from endpoint testing.
-  Confirm it (to watch the flow) or delete the pending subscriber.
-- [ ] **Google Search Console** (You/Joint) — add and verify `griotmoon.com`, submit
-  `https://griotmoon.com/sitemap.xml` (159 URLs, regenerates on every build).
+- [x] **MailerLite test subscriber** — DONE 2026-07-04: confirmed via the opt-in link; the
+  welcome automation fired and "Welcome to Griot Moon! 🌙" arrived. End-to-end verified.
+  (Optionally delete the test subscriber from griotmoon-signups later.)
+- [x] **Google Search Console** — DONE 2026-07-04: URL-prefix property https://griotmoon.com/
+  verified via HTML file (public/google393f037d25edb628.html — keep it), sitemap.xml submitted.
+  Optional upgrade later: a Domain property (needs a DNS TXT record at IONOS).
 
 ## P2 — Content quality (worth doing soon)
 
