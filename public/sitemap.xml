@@ -514,137 +514,812 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/books/ubuntu/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/ubuntu/"/>
+    <loc>https://griotmoon.com/books/ubuntu-we-are-together/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/ubuntu-we-are-together/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/es/books/ubuntu/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/ubuntu/"/>
+    <loc>https://griotmoon.com/es/books/ubuntu-we-are-together/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/ubuntu-we-are-together/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/fr/books/ubuntu/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/ubuntu/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/ubuntu/"/>
+    <loc>https://griotmoon.com/fr/books/ubuntu-we-are-together/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/ubuntu-we-are-together/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/ubuntu-we-are-together/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/books/yam-and-egg/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yam-and-egg/"/>
+    <loc>https://griotmoon.com/books/the-mighty-fist/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-mighty-fist/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/es/books/yam-and-egg/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yam-and-egg/"/>
+    <loc>https://griotmoon.com/es/books/the-mighty-fist/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-mighty-fist/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/fr/books/yam-and-egg/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yam-and-egg/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yam-and-egg/"/>
+    <loc>https://griotmoon.com/fr/books/the-mighty-fist/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-mighty-fist/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-mighty-fist/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/books/whistling-secret/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/whistling-secret/"/>
+    <loc>https://griotmoon.com/books/the-whistling-secret/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-whistling-secret/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/es/books/whistling-secret/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/whistling-secret/"/>
+    <loc>https://griotmoon.com/es/books/the-whistling-secret/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-whistling-secret/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/fr/books/whistling-secret/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/whistling-secret/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/whistling-secret/"/>
+    <loc>https://griotmoon.com/fr/books/the-whistling-secret/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-whistling-secret/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-whistling-secret/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/books/mighty-fist/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/mighty-fist/"/>
+    <loc>https://griotmoon.com/books/the-yam-and-the-egg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-yam-and-the-egg/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/es/books/mighty-fist/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/mighty-fist/"/>
+    <loc>https://griotmoon.com/es/books/the-yam-and-the-egg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-yam-and-the-egg/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/fr/books/mighty-fist/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/mighty-fist/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/mighty-fist/"/>
+    <loc>https://griotmoon.com/fr/books/the-yam-and-the-egg/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-yam-and-the-egg/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-yam-and-the-egg/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/books/chief-green-rule/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/chief-green-rule/"/>
+    <loc>https://griotmoon.com/books/the-talking-tree/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-talking-tree/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/es/books/chief-green-rule/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/chief-green-rule/"/>
+    <loc>https://griotmoon.com/es/books/the-talking-tree/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-talking-tree/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/fr/books/chief-green-rule/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/chief-green-rule/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/chief-green-rule/"/>
+    <loc>https://griotmoon.com/fr/books/the-talking-tree/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-talking-tree/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-talking-tree/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-laughing-village/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-laughing-village/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-laughing-village/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-laughing-village/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-laughing-village/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-laughing-village/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-laughing-village/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/our-child/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/our-child/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/our-child/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/our-child/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/our-child/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/our-child/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/our-child/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-clever-pots/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-clever-pots/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-clever-pots/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-clever-pots/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-clever-pots/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-clever-pots/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-clever-pots/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-hunt-with-two-paths/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-hunt-with-two-paths/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-hunt-with-two-paths/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-hunt-with-two-paths/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-hunt-with-two-paths/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-hunt-with-two-paths/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-hunt-with-two-paths/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/kweku-and-the-wise-forest/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/kweku-and-the-wise-forest/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/kweku-and-the-wise-forest/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/kweku-and-the-wise-forest/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/kweku-and-the-wise-forest/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/kweku-and-the-wise-forest/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/kweku-and-the-wise-forest/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-spirit-that-shares/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-spirit-that-shares/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-spirit-that-shares/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-spirit-that-shares/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-spirit-that-shares/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-spirit-that-shares/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-spirit-that-shares/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/yama-and-luna/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yama-and-luna/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/yama-and-luna/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yama-and-luna/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/yama-and-luna/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yama-and-luna/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yama-and-luna/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/yamas-brave-choice/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yamas-brave-choice/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/yamas-brave-choice/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yamas-brave-choice/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/yamas-brave-choice/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/yamas-brave-choice/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/yamas-brave-choice/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/a-little-light-for-the-dark/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/a-little-light-for-the-dark/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/a-little-light-for-the-dark/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/a-little-light-for-the-dark/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/a-little-light-for-the-dark/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/a-little-light-for-the-dark/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/a-little-light-for-the-dark/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/finding-my-quiet/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/finding-my-quiet/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/finding-my-quiet/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/finding-my-quiet/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/finding-my-quiet/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/finding-my-quiet/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/finding-my-quiet/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-kindness-garden/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-kindness-garden/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-kindness-garden/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-kindness-garden/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-kindness-garden/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-kindness-garden/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-kindness-garden/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-servant-king/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-servant-king/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-servant-king/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-servant-king/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-servant-king/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-servant-king/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-servant-king/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-full-pot-and-the-empty-pot/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-full-pot-and-the-empty-pot/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-full-pot-and-the-empty-pot/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-full-pot-and-the-empty-pot/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-full-pot-and-the-empty-pot/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-full-pot-and-the-empty-pot/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-full-pot-and-the-empty-pot/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-grandmothers-trees/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-grandmothers-trees/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-grandmothers-trees/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-grandmothers-trees/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-grandmothers-trees/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-grandmothers-trees/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-grandmothers-trees/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-brothers-and-the-wise-land/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-brothers-and-the-wise-land/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-brothers-and-the-wise-land/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-brothers-and-the-wise-land/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-brothers-and-the-wise-land/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-brothers-and-the-wise-land/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-brothers-and-the-wise-land/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-chiefs-green-rule/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-chiefs-green-rule/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-chiefs-green-rule/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-chiefs-green-rule/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-chiefs-green-rule/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-chiefs-green-rule/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-chiefs-green-rule/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/chief-maels-final-gift/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/chief-maels-final-gift/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/chief-maels-final-gift/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/chief-maels-final-gift/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/chief-maels-final-gift/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/chief-maels-final-gift/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/chief-maels-final-gift/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-chiefs-3-gifts/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-chiefs-3-gifts/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-chiefs-3-gifts/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-chiefs-3-gifts/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-chiefs-3-gifts/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-chiefs-3-gifts/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-chiefs-3-gifts/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-broken-toy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-broken-toy/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-broken-toy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-broken-toy/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-broken-toy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-broken-toy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-broken-toy/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-hand-that-gives/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-hand-that-gives/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-hand-that-gives/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-hand-that-gives/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-hand-that-gives/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-hand-that-gives/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-hand-that-gives/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-thankful-farmer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-thankful-farmer/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-thankful-farmer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-thankful-farmer/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-thankful-farmer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-thankful-farmer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-thankful-farmer/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/slow-and-strong-wins-the-race/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/slow-and-strong-wins-the-race/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/slow-and-strong-wins-the-race/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/slow-and-strong-wins-the-race/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/slow-and-strong-wins-the-race/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/slow-and-strong-wins-the-race/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/slow-and-strong-wins-the-race/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-clever-scientist-professor-hawel/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-clever-scientist-professor-hawel/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-clever-scientist-professor-hawel/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-clever-scientist-professor-hawel/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-clever-scientist-professor-hawel/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-clever-scientist-professor-hawel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-clever-scientist-professor-hawel/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-garden-of-second-chances/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-garden-of-second-chances/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-garden-of-second-chances/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-garden-of-second-chances/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-garden-of-second-chances/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-garden-of-second-chances/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-garden-of-second-chances/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/books/the-trees-we-plant-for-tomorrow/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-trees-we-plant-for-tomorrow/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/books/the-trees-we-plant-for-tomorrow/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-trees-we-plant-for-tomorrow/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/books/the-trees-we-plant-for-tomorrow/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/books/the-trees-we-plant-for-tomorrow/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/books/the-trees-we-plant-for-tomorrow/"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

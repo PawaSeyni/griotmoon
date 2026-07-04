@@ -15,7 +15,7 @@ const AUTHOR_SCHEMA = {
   name: 'Pawa Seyni',
   jobTitle: 'Children’s Author',
   description:
-    'Author of the Pawa Seyni Collection of African heritage picture books for children ages 3–9, published by Pawa Press.',
+    'Anthropologist and author of African heritage picture books for children ages 3–9 — the African Heritage Tales, the Yama Stories, and the Mael Trilogy — published by Pawa Press. A portion of proceeds supports the SEN Yakaar Foundation.',
   image: `${SITE_URL}/og-image.jpg`,
 };
 
@@ -30,9 +30,9 @@ const TRANSLATIONS = {
     photoNote: 'The griot’s fire — the scene behind every Griot Moon story',
     bioHeading: 'A Note from the Author',
     bio: [
-      'I grew up on stories told out loud — in the pause after supper, under a moon that seemed to lean in and listen. Long before I ever wrote a word, the elders of my childhood taught me that a story is not finished when it ends; it is finished when someone retells it.',
-      'In West Africa, that work belongs to the griot: the storyteller, praise-singer, and keeper of a village’s memory. Griot Moon is my way of carrying a small ember from that fire to your family’s bedtime — folktales of sharing and courage, stories of Ubuntu, and the quiet lessons elders pass down.',
-      'The children around the fire in these books come from everywhere, because that is who these stories are for. African heritage is the root; every curious child is the welcome guest.',
+      'I write picture books for children who carry many homes inside them. I am an anthropologist by training — after two decades in the academy studying West African oral traditions, I came back to the villages of my ancestors to do the work that first drew me to the field: sitting at the feet of elders, listening to the stories they pass down without anyone calling them lessons.',
+      'In West Africa, keeping those stories belongs to the griot: the storyteller, praise-singer, and keeper of a village’s memory. Griot Moon is my way of carrying a small ember from that fire to your family’s bedtime — the African Heritage Tales bring beloved folktales like The Yam and the Egg, The Mighty Fist, and Ubuntu to a new generation; the Yama Stories follow a curious little girl learning her place in the world; and the Mael Trilogy tells of a young chief learning what it means to lead.',
+      'The children around the fire in these books come from everywhere, because that is who these stories are for. African heritage is the root; every curious child is the welcome guest. A portion of proceeds from every book supports the SEN Yakaar Foundation, bringing books and learning resources to children across the West African diaspora.',
     ],
     motivation: 'My hope is simple: that a story you read tonight becomes a story your child tells someday.',
     viewBooks: '📚 Browse the Books',
@@ -55,9 +55,9 @@ const TRANSLATIONS = {
     photoNote: 'El fuego del griot: la escena detrás de cada historia de Griot Moon',
     bioHeading: 'Una nota del autor',
     bio: [
-      'Crecí con historias contadas en voz alta: en la pausa después de la cena, bajo una luna que parecía inclinarse para escuchar. Mucho antes de escribir una palabra, los mayores de mi infancia me enseñaron que una historia no termina cuando acaba, sino cuando alguien la vuelve a contar.',
-      'En África Occidental, ese trabajo pertenece al griot: el narrador, cantor y guardián de la memoria del pueblo. Griot Moon es mi manera de llevar una pequeña brasa de ese fuego a la hora de dormir de tu familia — cuentos de compartir y de valentía, historias de Ubuntu y las lecciones serenas que los mayores transmiten.',
-      'Los niños alrededor del fuego en estos libros vienen de todas partes, porque para ellos son estas historias. La herencia africana es la raíz; cada niño curioso es el invitado bienvenido.',
+      'Escribo libros ilustrados para niños que llevan muchos hogares dentro de sí. Soy antropólogo de formación: tras dos décadas en la academia estudiando las tradiciones orales de África Occidental, volví a los pueblos de mis antepasados a hacer el trabajo que me llevó a este campo — sentarme a los pies de los mayores y escuchar las historias que transmiten sin que nadie las llame lecciones.',
+      'En África Occidental, guardar esas historias es tarea del griot: el narrador, cantor y guardián de la memoria del pueblo. Griot Moon es mi manera de llevar una brasa de ese fuego a la hora de dormir de tu familia: los Cuentos de Herencia Africana traen cuentos queridos como El Ñame y el Huevo, El Puño Poderoso y Ubuntu a una nueva generación; las Historias de Yama siguen a una niña curiosa descubriendo su lugar en el mundo; y la Trilogía de Mael cuenta la historia de un joven jefe aprendiendo a liderar.',
+      'Los niños alrededor del fuego en estos libros vienen de todas partes, porque para ellos son estas historias. La herencia africana es la raíz; cada niño curioso es el invitado bienvenido. Una parte de las ganancias de cada libro apoya a la Fundación SEN Yakaar, que lleva libros y recursos educativos a niños de la diáspora de África Occidental.',
     ],
     motivation: 'Mi esperanza es sencilla: que una historia que leas esta noche se convierta en una historia que tu peque cuente algún día.',
     viewBooks: '📚 Ver los libros',
@@ -80,9 +80,9 @@ const TRANSLATIONS = {
     photoNote: 'Le feu du griot — la scène derrière chaque histoire de Griot Moon',
     bioHeading: "Mot de l'auteur",
     bio: [
-      "J'ai grandi avec des histoires racontées à voix haute — dans la pause après le dîner, sous une lune qui semblait se pencher pour écouter. Bien avant d'écrire le moindre mot, les anciens de mon enfance m'ont appris qu'une histoire n'est pas finie quand elle se termine : elle est finie quand quelqu'un la raconte à son tour.",
-      "En Afrique de l'Ouest, ce travail appartient au griot : le conteur, le chanteur et le gardien de la mémoire du village. Griot Moon est ma façon de porter une petite braise de ce feu jusqu'au coucher de votre famille — des contes de partage et de courage, des histoires d'Ubuntu et les leçons paisibles que les anciens transmettent.",
-      "Les enfants autour du feu dans ces livres viennent de partout, parce que c'est à eux que ces histoires sont destinées. L'héritage africain est la racine ; chaque enfant curieux est l'invité bienvenu.",
+      "J'écris des albums pour les enfants qui portent plusieurs foyers en eux. Je suis anthropologue de formation : après deux décennies à l'université à étudier les traditions orales d'Afrique de l'Ouest, je suis revenu dans les villages de mes ancêtres pour faire le travail qui m'avait d'abord attiré — m'asseoir aux pieds des anciens et écouter les histoires qu'ils transmettent sans que personne ne les appelle des leçons.",
+      "En Afrique de l'Ouest, garder ces histoires est l'affaire du griot : le conteur, le chanteur et le gardien de la mémoire du village. Griot Moon est ma façon de porter une braise de ce feu jusqu'au coucher de votre famille : les Contes de l'Héritage Africain apportent à une nouvelle génération des contes aimés comme L'Igname et l'Œuf, Le Poing Puissant et Ubuntu ; les Histoires de Yama suivent une petite fille curieuse qui découvre sa place dans le monde ; et la Trilogie de Mael raconte un jeune chef qui apprend à diriger.",
+      "Les enfants autour du feu dans ces livres viennent de partout, parce que c'est à eux que ces histoires sont destinées. L'héritage africain est la racine ; chaque enfant curieux est l'invité bienvenu. Une partie des recettes de chaque livre soutient la Fondation SEN Yakaar, qui apporte livres et ressources éducatives aux enfants de la diaspora ouest-africaine.",
     ],
     motivation: "Mon espoir est simple : qu'une histoire lue ce soir devienne un jour une histoire que votre enfant racontera.",
     viewBooks: '📚 Parcourir les livres',
