@@ -14,10 +14,10 @@ const FLAG_TO_LANG: Record<string, string> = { '🇺🇸': 'en', '🇪🇸': 'es
 
 const TRANSLATIONS = {
   en: {
-    seoTitle: 'Stories from the Fire',
-    seoDesc: 'Browse all {n} books in the Pawa Seyni Collection: multicultural picture books for children ages 3–9 about quiet wonder, kindness, and curiosity.',
-    heading: 'Stories from the Fire',
-    subheading: 'The Pawa Seyni Collection, folktales, courage, and Ubuntu for young readers',
+    seoTitle: 'African Heritage Tales for Children and Families in the Diaspora',
+    seoDesc: 'Browse all {n} African heritage tales in the Pawa Seyni Collection: picture books for children and families in the diaspora, rooted in the griot tradition, ages 3–9.',
+    heading: 'African heritage tales for children and families in the diaspora.',
+    subheading: 'Rooted in the griot tradition, these stories reconnect young readers with the wisdom, values, and community spirit passed down around the village fire for generations.',
     searchPlaceholder: 'Search books by title or theme...',
     ageAll: 'All',
     age3to5: '3-5 years',
@@ -39,10 +39,10 @@ const TRANSLATIONS = {
     pricingNote: 'Prices in USD. Final price and availability on Amazon.',
   },
   es: {
-    seoTitle: 'Historias del fuego',
+    seoTitle: 'Cuentos de herencia africana para niños y familias de la diáspora',
     seoDesc: 'Explora los {n} libros de la Colección Pawa Seyni, álbumes multiculturales para niños de 3 a 9 años sobre asombro tranquilo, bondad y curiosidad.',
-    heading: 'Historias del fuego',
-    subheading: 'La Colección Pawa Seyni, cuentos, valentía y Ubuntu para lectores jóvenes',
+    heading: 'Cuentos de herencia africana para niños y familias de la diáspora.',
+    subheading: 'Enraizadas en la tradición del griot, estas historias reconectan a los pequeños lectores con la sabiduría, los valores y el espíritu comunitario transmitidos alrededor del fuego del pueblo durante generaciones.',
     searchPlaceholder: 'Buscar libros por título o tema...',
     ageAll: 'Todos',
     age3to5: '3-5 años',
@@ -64,10 +64,10 @@ const TRANSLATIONS = {
     pricingNote: 'Precios en USD. Precio final y disponibilidad en Amazon.',
   },
   fr: {
-    seoTitle: 'Histoires du feu',
+    seoTitle: 'Contes du patrimoine africain pour les enfants et les familles de la diaspora',
     seoDesc: 'Parcourez les {n} livres de la Collection Pawa Seyni, albums multiculturels pour enfants de 3 à 9 ans sur l\'émerveillement tranquille, la bonté et la curiosité.',
-    heading: 'Histoires du feu',
-    subheading: 'La Collection Pawa Seyni, contes, courage et Ubuntu pour les jeunes lecteurs',
+    heading: 'Contes du patrimoine africain pour les enfants et les familles de la diaspora.',
+    subheading: 'Enracinées dans la tradition du griot, ces histoires reconnectent les jeunes lecteurs à la sagesse, aux valeurs et à l\'esprit communautaire transmis autour du feu du village depuis des générations.',
     searchPlaceholder: 'Rechercher un livre par titre ou thème...',
     ageAll: 'Tous',
     age3to5: '3-5 ans',
