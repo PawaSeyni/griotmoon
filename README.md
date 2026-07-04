@@ -28,6 +28,8 @@ React + Vite + Tailwind + Netlify architecture with the "Midnight Indigo" theme.
 
 ## Launch TODOs
 
+See [BACKLOG.md](BACKLOG.md) for the full prioritized checklist. Highlights:
+
 - [x] MailerLite: griotmoon-signups group + dedicated form wired in (2026-07-04)
 - [ ] Add a Plausible site for griotmoon.com (`index.html` has the slot)
 - [ ] Amazon Associates tag in `src/lib/amazon.ts` + real ASINs in `books.ts`
