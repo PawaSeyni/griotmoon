@@ -13,21 +13,20 @@ Check items off as they land; each item says who can do it
 - [ ] **Plausible analytics** (You/Joint) — create a site for `griotmoon.com` at plausible.io,
   paste its script tag into `index.html` (the slot is marked with a comment), redeploy.
   The Privacy page already describes Plausible, so this also makes the policy accurate.
-- [ ] **Amazon Associates tracking ID** (You) — ⚠️ ATTENTION: the Amazon account signed into
-  Chrome shows "not connected to an Associates account … may have been closed" (checked
-  2026-07-04). Sign in with the account that owns the storytimewi20-20 tag, or investigate
-  whether Associates closed it (they close accounts without qualifying sales in ~180 days —
-  if so, Eva's site links earn nothing either; re-apply). Then add a `griotmoon-20` tracking
-  ID and set it in `src/lib/amazon.ts`.
+- [ ] **Amazon Associates tracking ID** (You) — ⚠️ Chrome's Amazon session is not an Associates
+  member, and pnguer@gmail.com has NO Amazon Associates emails at all (checked 2026-07-05),
+  so the storytimewi20-20 account almost certainly lives under galloeva2612@gmail.com.
+  Sign into Amazon with that account, verify Associates status, add a `griotmoon-20`
+  tracking ID, then set it in `src/lib/amazon.ts`.
 - [x] **MailerLite welcome automation** — DONE 2026-07-04: "Griot Moon — Welcome + Trilingual
   Starter Kit" is ACTIVE (trigger: joins griotmoon-signups → rebranded welcome email with the
   starter-kit button pointing at griotmoon.com). Eva's 3 drip emails were Removed (restorable in
   MailerLite) — rebuild them Griot Moon-branded when the PDFs are rebranded. Sender is still
   contact@storytimewitheva.com for deliverability; authenticate griotmoon.com in MailerLite
   (DKIM DNS records at IONOS) then switch the sender.
-- [ ] **Verify contact@griotmoon.com exists** (You) — the domain has IONOS mail records, but
-  confirm a `contact@griotmoon.com` mailbox (or alias) is actually set up; the Footer,
-  Contact page, and FAQ all point to it.
+- [ ] **Verify contact@griotmoon.com exists** (You) — port-25 probe blocked from this network;
+  a ready-to-send test email draft is in your Gmail (to contact@griotmoon.com). Hit Send:
+  no bounce within minutes = mailbox works. Or check Email in the IONOS panel.
 - [x] **MailerLite test subscriber** — DONE 2026-07-04: confirmed via the opt-in link; the
   welcome automation fired and "Welcome to Griot Moon! 🌙" arrived. End-to-end verified.
   (Optionally delete the test subscriber from griotmoon-signups later.)
@@ -74,7 +73,7 @@ Check items off as they land; each item says who can do it
 - [x] **All 30 books published** — DONE 2026-07-05: the final 5 were found live via Amazon
   search (Hand That Gives 1069628875, Chief Mael 106946287X, Broken Toy 1069628891,
   Chief's 3 Gifts 1996972928, Chief's Green Rule B0FB4B7235). Zero coming-soon left.
-- [ ] **4 more live Pawa Seyni books found on Amazon that are NOT on the site yet** — add them
+- [x] **4 more live Pawa Seyni books added** (DONE 2026-07-05: catalog is now 34 titles) — add them
   to the catalog when covers/copy are ready: Grandmère's Garden Under the Moon (1996972308) ·
   A Tale of Hope and Humor (1069628867) · The Wolf Pack's Promise (B0F9WNQS9Q) ·
   The Day We Woke Up as Dinosaurs (1996972103).
