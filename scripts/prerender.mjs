@@ -139,6 +139,13 @@ const failures = [];
 for (const route of routes) {
   const page = await browser.newPage();
   try {
+    // Block the Cloudflare Web Analytics beacon so the 165 headless page loads
+    // per build don't register as pageviews (the snapshot keeps the <script>
+    // tag, so real visitors still get counted).
+    await page.setRequestInterception(true);
+    page.on('request', req =>
+      req.url().includes('cloudflareinsights.com') ? req.abort() : req.continue()
+    );
     await page.goto(ORIGIN + route, { waitUntil: 'load', timeout: 30000 });
     await page
       .waitForFunction('window.__PRERENDER_READY__ === true', { timeout: 10000 })

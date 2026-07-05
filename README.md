@@ -38,6 +38,6 @@ See [BACKLOG.md](BACKLOG.md) for the full prioritized checklist. Highlights:
 - [x] Real covers, About-page portrait, 34-book catalog with live ASINs (2026-07-05)
 - [x] Lead-magnet PDFs rebranded for Griot Moon (2026-07-04)
 - [x] GitHub + git-connected Netlify + weekly Amazon release watch (2026-07-05)
-- [ ] Add a Plausible site for griotmoon.com (`index.html` has the slot)
+- [x] Analytics: Cloudflare Web Analytics beacon in `index.html` (2026-07-05)
 - [ ] Amazon Associates tag in `src/lib/amazon.ts`
 - [ ] Add social accounts to Footer, Links page, and Home JSON-LD `sameAs` as they go live

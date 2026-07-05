@@ -5,7 +5,7 @@ import { useTranslation } from '../lib/language';
 // practices as implemented in code:
 //   • Newsletter  -> MailerLite (email + optional first name, double opt-in)
 //   • Contact     -> Netlify Forms (name, email, subject, message)
-//   • Analytics   -> Plausible (cookieless, aggregate, no personal data)
+//   • Analytics   -> Cloudflare Web Analytics (cookieless, aggregate, no personal data)
 //   • Feedback widget -> Netlify Forms (rating, page, language, optional comment)
 //   • Reading profile -> browser localStorage only, never transmitted
 // No child accounts, no advertising trackers, no data sales.
@@ -56,7 +56,7 @@ const TRANSLATIONS = {
       {
         heading: 'Analytics',
         body: [
-          'We use Plausible Analytics to understand which pages are popular. Plausible is privacy-friendly: it uses no cookies, does not track you across sites, and collects only aggregate, anonymous statistics. It does not identify you personally.',
+          'We use Cloudflare Web Analytics to understand which pages are popular. It is privacy-friendly: it uses no cookies, does not track you across sites or fingerprint your device, and collects only aggregate, anonymous statistics. It does not identify you personally.',
         ],
       },
       {
@@ -123,7 +123,7 @@ const TRANSLATIONS = {
       {
         heading: 'Analíticas',
         body: [
-          'Usamos Plausible Analytics para saber qué páginas son populares. Plausible respeta la privacidad: no usa cookies, no te rastrea entre sitios y solo recopila estadísticas anónimas y agregadas. No te identifica personalmente.',
+          'Usamos Cloudflare Web Analytics para saber qué páginas son populares. Respeta la privacidad: no usa cookies, no te rastrea entre sitios ni identifica tu dispositivo, y solo recopila estadísticas anónimas y agregadas. No te identifica personalmente.',
         ],
       },
       {
@@ -190,7 +190,7 @@ const TRANSLATIONS = {
       {
         heading: 'Analyses',
         body: [
-          'Nous utilisons Plausible Analytics pour savoir quelles pages sont populaires. Plausible respecte la vie privée : sans cookies, sans suivi entre sites, il ne collecte que des statistiques anonymes et agrégées. Il ne vous identifie pas personnellement.',
+          'Nous utilisons Cloudflare Web Analytics pour savoir quelles pages sont populaires. Cet outil respecte la vie privée : sans cookies, sans suivi entre sites ni identification de votre appareil, il ne collecte que des statistiques anonymes et agrégées. Il ne vous identifie pas personnellement.',
         ],
       },
       {

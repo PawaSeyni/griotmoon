@@ -10,9 +10,10 @@ Check items off as they land; each item says who can do it
 
 ## P1 — Before announcing the site publicly
 
-- [ ] **Plausible analytics** (You/Joint) — create a site for `griotmoon.com` at plausible.io,
-  paste its script tag into `index.html` (the slot is marked with a comment), redeploy.
-  The Privacy page already describes Plausible, so this also makes the policy accurate.
+- [x] **Analytics** — DONE 2026-07-05: went with Cloudflare Web Analytics (free, cookieless)
+  instead of Plausible. Beacon in `index.html` (site under the pnguer@gmail.com Cloudflare
+  account, hostname griotmoon.com); Privacy page copy updated EN/ES/FR; prerender blocks the
+  beacon so builds don't inflate pageviews. Dashboard: dash.cloudflare.com > Web analytics.
 - [x] **Amazon Associates tracking ID** — DONE 2026-07-05: the Associates account (Eva Gallo
   login, StoreID storytimewi20-20) is active; created `griotmoon-20` tracking ID, added
   griotmoon.com to the account's website list (child-directed declaration: No), and set the
