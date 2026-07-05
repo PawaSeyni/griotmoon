@@ -67,8 +67,9 @@ Check items off as they land; each item says who can do it
   (scripts/check-amazon-releases.mjs) probes Amazon's product-image endpoint (bot-wall-proof)
   for every coming-soon book with an `expectedAsin`, and `--apply` publishes them in books.ts.
   First run published 5 books that were already live (Prof. Hawel, Thankful Farmer,
-  Slow and Strong, Garden of Second Chances, Trees We Plant). Fully autonomous runs need the
-  GitHub Action from the P5 item below; until then say "check releases" in any session.
+  Slow and Strong, Garden of Second Chances, Trees We Plant). Now fully autonomous:
+  the GitHub Action (.github/workflows/check-releases.yml) runs it every Monday 09:00 UTC
+  and pushes any changes, which auto-deploys via the git-connected Netlify site.
 - [x] **All 30 books published** — DONE 2026-07-05: the final 5 were found live via Amazon
   search (Hand That Gives 1069628875, Chief Mael 106946287X, Broken Toy 1069628891,
   Chief's 3 Gifts 1996972928, Chief's Green Rule B0FB4B7235). Zero coming-soon left.
@@ -113,8 +114,10 @@ Check items off as they land; each item says who can do it
   responsive srcset / AVIF / CDN image transforms.
 - [ ] 8 react-refresh lint warnings (Pixel.tsx, language.tsx, toast.tsx) — DX only.
 
-- [ ] **Push to GitHub + git-connected Netlify** — deploys are currently manual (Netlify MCP
-  upload). Create a GitHub repo, connect it in Netlify for auto-deploys on push.
+- [x] **Push to GitHub + git-connected Netlify** — DONE 2026-07-05: repo at
+  github.com/PawaSeyni/griotmoon (private, branch `main`), linked in Netlify; every push to
+  main builds (`npm run build`, CI prerender via @sparticuz/chromium, validated 165/165 routes)
+  and deploys automatically. Weekly release-watch Action validated with a manual dispatch.
 - [ ] **Review the Lighthouse report** — the `@netlify/plugin-lighthouse` audit runs on every
   deploy (see deploy summary in the Netlify dashboard); set score thresholds once baselined.
 - [ ] **Prune unused translation keys** — Links/Footer still carry unused social-CTA strings
