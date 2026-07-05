@@ -65,11 +65,17 @@ Check items off as they land; each item says who can do it
 
 ## P3 — Catalog growth (as publishing progresses)
 
-- [ ] **ASINs for the 10 coming-soon titles** — when each goes live on Amazon, add the ASIN via
-  `dp('...')` in `src/data/books.ts` and remove `status: 'coming-soon'`:
+- [x] **Release automation** — DONE 2026-07-05: `npm run check:releases`
+  (scripts/check-amazon-releases.mjs) probes Amazon's product-image endpoint (bot-wall-proof)
+  for every coming-soon book with an `expectedAsin`, and `--apply` publishes them in books.ts.
+  First run published 5 books that were already live (Prof. Hawel, Thankful Farmer,
+  Slow and Strong, Garden of Second Chances, Trees We Plant). Fully autonomous runs need the
+  GitHub Action from the P5 item below; until then say "check releases" in any session.
+- [ ] **ASINs for the 5 remaining coming-soon titles** — these have no ISBN assigned yet, so the
+  checker SKIPs them. When each gets its ISBN-13, add `expectedAsin: '<ISBN-10>'` to its entry in
+  `src/data/books.ts` (the script's isbn13→10 conversion is in scripts/check-amazon-releases.mjs):
   The Chief's Green Rule · Chief Mael's Final Gift · The Chief's 3 Gifts · The Broken Toy ·
-  The Hand That Gives · The Thankful Farmer · Slow and Strong Wins the Race ·
-  The Clever Scientist (Prof. Hawel) · The Garden of Second Chances · The Trees We Plant for Tomorrow.
+  The Hand That Gives.
 - [ ] **Kindle editions for the 2 pending batch titles** (You) — per your KDP checklist:
   Kweku and the Wise Forest and The Brothers and the Wise Land have live paperbacks but
   Kindle editions still to publish (EPUBs are ready in the archive).
