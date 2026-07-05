@@ -34,25 +34,20 @@ for (const e of entries) {
 }
 
 async function check(asin) {
-  for (let attempt = 0; attempt < 2; attempt++) {
-    try {
-      const res = await fetch(`https://www.amazon.com/dp/${asin}`, {
-        method: 'GET', redirect: 'follow',
-        headers: { 'User-Agent': UA, 'Accept-Language': 'en-US,en;q=0.9' },
-      });
-      const text = await res.text();
-      if (res.status === 404) return 'not-live';
-      if (res.status === 200) {
-        // captcha page also comes back 200 sometimes; require product markers
-        if (/captcha/i.test(text)) return 'unknown';
-        if (/id="productTitle"|id="title"|dp-container/.test(text)) return 'live';
-        return 'unknown';
-      }
-      if (res.status === 503) { await new Promise(r => setTimeout(r, 4000)); continue; }
-      return 'unknown';
-    } catch { return 'unknown'; }
+  // Primary signal: Amazon's product-image endpoint. It is not bot-walled and
+  // returns the real cover JPEG for a live listing, or a ~43-byte transparent
+  // placeholder for an unknown ASIN. Validated 2026-07-05 against live and
+  // bogus ASINs.
+  try {
+    const res = await fetch(`https://images-na.ssl-images-amazon.com/images/P/${asin}.jpg`, {
+      headers: { 'User-Agent': UA },
+    });
+    if (!res.ok) return 'unknown';
+    const buf = await res.arrayBuffer();
+    return buf.byteLength > 2000 ? 'live' : 'not-live';
+  } catch {
+    return 'unknown';
   }
-  return 'unknown';
 }
 
 let updated = src;
@@ -77,7 +72,7 @@ for (const c of candidates) {
       updated = updated.slice(0, start) + span + updated.slice(end);
     }
   }
-  await new Promise(r => setTimeout(r, 2500)); // be polite to Amazon
+  await new Promise(r => setTimeout(r, 800)); // be polite
 }
 
 if (APPLY && released.length) {
