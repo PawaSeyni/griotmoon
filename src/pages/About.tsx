@@ -5,7 +5,7 @@ import JsonLd from '../components/JsonLd';
 import ReadAloudButton from '../components/ReadAloudButton';
 import { useMemo } from 'react';
 import { useTranslation, useLanguage, localizePath } from '../lib/language';
-import griotFire from '../assets/griot-fire.jpg'; // brand scene; swap for Pawa Seyni's portrait when available
+import pawaPortrait from '../assets/pawa-seyni.jpg'; // official Amazon Author Central portrait
 
 const SITE_URL = 'https://griotmoon.com';
 
@@ -16,6 +16,7 @@ const AUTHOR_SCHEMA = {
   jobTitle: 'Children’s Author',
   description:
     'Anthropologist and author of African heritage picture books for children ages 3–9, the African Heritage Tales, the Yama Stories, and the Mael Trilogy, published by Pawa Press. A portion of proceeds supports the SEN Yakaar Foundation.',
+  sameAs: ['https://www.amazon.com/author/papanguer'],
   image: `${SITE_URL}/og-image.jpg`,
 };
 
@@ -27,7 +28,7 @@ const TRANSLATIONS = {
     subheading: 'African bedtime stories, heritage tales, and wisdom for growing hearts.',
     refrain: 'School teaches knowledge. Stories cement the values that keep a community together.',
     refrainAttr: 'the promise of every book in the Pawa Seyni Collection',
-    photoNote: 'The griot’s fire, the scene behind every Griot Moon story',
+    photoNote: 'Pawa Seyni, author',
     bioHeading: 'A Note from the Author',
     bio: [
       'I write picture books for children who carry many homes inside them. I am an anthropologist by training, after two decades in the academy studying West African oral traditions, I came back to the villages of my ancestors to do the work that first drew me to the field: sitting at the feet of elders, listening to the stories they pass down without anyone calling them lessons.',
@@ -52,7 +53,7 @@ const TRANSLATIONS = {
     subheading: 'Cuentos africanos para dormir, relatos de herencia y sabiduría para corazones que crecen.',
     refrain: 'La escuela enseña conocimientos. Las historias cimentan los valores que mantienen unida a una comunidad.',
     refrainAttr: 'la promesa de cada libro de la Colección Pawa Seyni',
-    photoNote: 'El fuego del griot: la escena detrás de cada historia de Griot Moon',
+    photoNote: 'Pawa Seyni, autor',
     bioHeading: 'Una nota del autor',
     bio: [
       'Escribo libros ilustrados para niños que llevan muchos hogares dentro de sí. Soy antropólogo de formación: tras dos décadas en la academia estudiando las tradiciones orales de África Occidental, volví a los pueblos de mis antepasados a hacer el trabajo que me llevó a este campo, sentarme a los pies de los mayores y escuchar las historias que transmiten sin que nadie las llame lecciones.',
@@ -77,7 +78,7 @@ const TRANSLATIONS = {
     subheading: 'Histoires africaines du soir, contes du patrimoine et sagesse pour les cœurs qui grandissent.',
     refrain: "L'école transmet le savoir. Les histoires scellent les valeurs qui tiennent une communauté unie.",
     refrainAttr: 'la promesse de chaque livre de la Collection Pawa Seyni',
-    photoNote: 'Le feu du griot, la scène derrière chaque histoire de Griot Moon',
+    photoNote: 'Pawa Seyni, auteur',
     bioHeading: "Mot de l'auteur",
     bio: [
       "J'écris des albums pour les enfants qui portent plusieurs foyers en eux. Je suis anthropologue de formation : après deux décennies à l'université à étudier les traditions orales d'Afrique de l'Ouest, je suis revenu dans les villages de mes ancêtres pour faire le travail qui m'avait d'abord attiré, m'asseoir aux pieds des anciens et écouter les histoires qu'ils transmettent sans que personne ne les appelle des leçons.",
@@ -144,10 +145,10 @@ export default function About() {
           <div className="flex flex-col md:flex-row gap-10 items-center">
             <div className="flex-shrink-0 w-full md:w-72">
               <img
-                src={griotFire}
-                alt=""
-                width={800}
-                height={800}
+                src={pawaPortrait}
+                alt="Pawa Seyni"
+                width={379}
+                height={379}
                 className="w-full aspect-square rounded-2xl shadow-xl border-4 border-white ring-4 ring-purple-100 object-cover"
               />
               <p className="text-center text-xs text-gray-500 mt-3 italic">{t.photoNote}</p>

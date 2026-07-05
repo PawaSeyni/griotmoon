@@ -12,4 +12,4 @@ export const amazonDp = (asin: string): string =>
   withAffiliateTag(`https://www.amazon.com/dp/${asin}`);
 
 /** Pawa Seyni's Amazon author/storefront page, with the affiliate tag. */
-export const AMAZON_AUTHOR_URL = withAffiliateTag('https://www.amazon.com/author/pawaseyni');
+export const AMAZON_AUTHOR_URL = withAffiliateTag('https://www.amazon.com/author/papanguer');
