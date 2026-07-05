@@ -24,9 +24,9 @@ Check items off as they land; each item says who can do it
   MailerLite) — rebuild them Griot Moon-branded when the PDFs are rebranded. Sender is still
   contact@storytimewitheva.com for deliverability; authenticate griotmoon.com in MailerLite
   (DKIM DNS records at IONOS) then switch the sender.
-- [ ] **Verify contact@griotmoon.com exists** (You) — port-25 probe blocked from this network;
-  a ready-to-send test email draft is in your Gmail (to contact@griotmoon.com). Hit Send:
-  no bounce within minutes = mailbox works. Or check Email in the IONOS panel.
+- [x] **Verify contact@griotmoon.com exists** — DONE 2026-07-05: test email sent from Gmail,
+  no bounce after several minutes (IONOS rejects unknown mailboxes within seconds). Mailbox works.
+  One follow-up when convenient: confirm someone actually reads that inbox regularly.
 - [x] **MailerLite test subscriber** — DONE 2026-07-04: confirmed via the opt-in link; the
   welcome automation fired and "Welcome to Griot Moon! 🌙" arrived. End-to-end verified.
   (Optionally delete the test subscriber from griotmoon-signups later.)
