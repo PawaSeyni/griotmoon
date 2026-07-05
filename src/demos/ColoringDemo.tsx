@@ -600,7 +600,7 @@ const TRANSLATIONS = {
       blue: 'Blue', purple: 'Purple', pink: 'Pink', brown: 'Brown',
       black: 'Black', white: 'White', sky: 'Sky', lime: 'Lime',
     },
-    downloadFilename: 'eva-coloring-art.png',
+    downloadFilename: 'griotmoon-coloring-art.png',
   },
   es: {
     heading: 'Aventura para colorear con Pawa Seyni',
@@ -645,7 +645,7 @@ const TRANSLATIONS = {
       blue: 'Azul', purple: 'Morado', pink: 'Rosa', brown: 'Marrón',
       black: 'Negro', white: 'Blanco', sky: 'Celeste', lime: 'Lima',
     },
-    downloadFilename: 'arte-para-colorear-eva.png',
+    downloadFilename: 'arte-para-colorear-griotmoon.png',
   },
   fr: {
     heading: "L'aventure coloriage de Pawa Seyni",
@@ -690,7 +690,7 @@ const TRANSLATIONS = {
       blue: 'Bleu', purple: 'Violet', pink: 'Rose', brown: 'Marron',
       black: 'Noir', white: 'Blanc', sky: 'Ciel', lime: 'Citron',
     },
-    downloadFilename: 'coloriage-eva.png',
+    downloadFilename: 'coloriage-griotmoon.png',
   },
 } satisfies Record<Language, unknown>;
 

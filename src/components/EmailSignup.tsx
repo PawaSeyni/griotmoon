@@ -3,9 +3,8 @@ import { useLanguage, useTranslation, type Language } from '../lib/language';
 import { track } from '../lib/analytics';
 
 // MailerLite embedded form action, group "griotmoon-signups", form
-// "Griot Moon, Starter Kit site signup" (created 2026-07-04, duplicated from
-// the Eva site's form so the account-level `language` and `lead_magnet` custom
-// fields attach on submit). Double opt-in is ON, so MailerLite sends the
+// "Griot Moon, Starter Kit site signup" (created 2026-07-04; the account-level
+// `language` and `lead_magnet` custom fields attach on submit). Double opt-in is ON, so MailerLite sends the
 // confirmation email.
 const MAILERLITE_FORM_ACTION =
   'https://assets.mailerlite.com/jsonp/2363396/forms/192076241844569863/subscribe';

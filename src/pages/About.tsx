@@ -22,7 +22,7 @@ const AUTHOR_SCHEMA = {
 const TRANSLATIONS = {
   en: {
     seoTitle: 'About Pawa Seyni',
-    seoDesc: 'Pawa Seyni writes African heritage picture books for children ages 3–9, folktales, courage, and Ubuntu, told in the fireside tradition of the griot.',
+    seoDesc: 'Pawa Seyni writes African heritage picture books for children ages 3–9: folktales, courage, and Ubuntu, told in the fireside tradition of the griot.',
     heading: 'About Griot Moon',
     subheading: 'African bedtime stories, heritage tales, and wisdom for growing hearts.',
     refrain: 'School teaches knowledge. Stories cement the values that keep a community together.',
@@ -36,7 +36,7 @@ const TRANSLATIONS = {
     ],
     motivation: 'My hope is simple: that a story you read tonight becomes a story your child tells someday.',
     viewBooks: '📚 Browse the Books',
-    contactEva: '✉️ Contact Pawa Seyni',
+    contactAuthor: '✉️ Contact Pawa Seyni',
     missionHeading: 'Our Mission & Values',
     cards: [
       { title: 'Our Story', text: 'Griot Moon celebrates the African tradition of storytelling, the kind once shared around the village fire, where stories carried courage, kindness, respect, and responsibility from one generation to the next.' },
@@ -61,7 +61,7 @@ const TRANSLATIONS = {
     ],
     motivation: 'Mi esperanza es sencilla: que una historia que leas esta noche se convierta en una historia que tu peque cuente algún día.',
     viewBooks: '📚 Ver los libros',
-    contactEva: '✉️ Contactar a Pawa Seyni',
+    contactAuthor: '✉️ Contactar a Pawa Seyni',
     missionHeading: 'Nuestra misión y valores',
     cards: [
       { title: 'Nuestra historia', text: 'Griot Moon celebra la tradición africana de contar historias, la que se compartía alrededor del fuego del pueblo, donde los cuentos llevaban valentía, bondad, respeto y responsabilidad de una generación a la siguiente.' },
@@ -72,7 +72,7 @@ const TRANSLATIONS = {
   },
   fr: {
     seoTitle: 'À propos de Pawa Seyni',
-    seoDesc: "Pawa Seyni écrit des albums d'héritage africain pour les enfants de 3 à 9 ans, contes, courage et Ubuntu, racontés dans la tradition du griot, au coin du feu.",
+    seoDesc: "Pawa Seyni écrit des albums d'héritage africain pour les enfants de 3 à 9 ans : contes, courage et Ubuntu, racontés dans la tradition du griot, au coin du feu.",
     heading: 'À propos de Griot Moon',
     subheading: 'Histoires africaines du soir, contes du patrimoine et sagesse pour les cœurs qui grandissent.',
     refrain: "L'école transmet le savoir. Les histoires scellent les valeurs qui tiennent une communauté unie.",
@@ -86,7 +86,7 @@ const TRANSLATIONS = {
     ],
     motivation: "Mon espoir est simple : qu'une histoire lue ce soir devienne un jour une histoire que votre enfant racontera.",
     viewBooks: '📚 Parcourir les livres',
-    contactEva: '✉️ Contacter Pawa Seyni',
+    contactAuthor: '✉️ Contacter Pawa Seyni',
     missionHeading: 'Notre mission et nos valeurs',
     cards: [
       { title: 'Notre histoire', text: "Griot Moon célèbre la tradition africaine du conte, celle que l'on partageait autrefois autour du feu du village, où les histoires portaient courage, bonté, respect et responsabilité d'une génération à la suivante." },
@@ -179,7 +179,7 @@ export default function About() {
                   {t.viewBooks}
                 </Link>
                 <Link to="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 border-2 border-purple-400 text-purple-600 font-semibold rounded-full hover:bg-purple-50 transition-all duration-200 text-sm">
-                  {t.contactEva}
+                  {t.contactAuthor}
                 </Link>
               </div>
             </div>

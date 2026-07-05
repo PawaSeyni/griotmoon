@@ -17,7 +17,6 @@ const TRANSLATIONS = {
     rights: '© {year} Pawa Press Inc. · Griot Moon. All rights reserved.',
     privacy: 'Privacy Policy',
     terms: 'Terms of Use',
-    amazonAuthor: 'Amazon author page',
   },
   es: {
     tagline: 'Cuentos africanos para dormir, relatos de herencia y sabiduría para corazones que crecen.',
@@ -34,7 +33,6 @@ const TRANSLATIONS = {
     rights: '© {year} Pawa Press Inc. · Griot Moon. Todos los derechos reservados.',
     privacy: 'Política de privacidad',
     terms: 'Términos de uso',
-    amazonAuthor: 'Página de autora en Amazon',
   },
   fr: {
     tagline: "Histoires africaines du soir, contes du patrimoine et sagesse pour les cœurs qui grandissent.",
@@ -51,7 +49,6 @@ const TRANSLATIONS = {
     rights: '© {year} Pawa Press Inc. · Griot Moon. Tous droits réservés.',
     privacy: 'Politique de confidentialité',
     terms: 'Conditions d\'utilisation',
-    amazonAuthor: 'Page autrice sur Amazon',
   },
 };
 
@@ -87,7 +84,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {links.map(link => (
                 <li key={link.to}>
-                  <Link to={link.to} className="hover:text-purple-400 transition-colors">
+                  <Link to={link.to} className="hover:text-purple-300 transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -104,7 +101,7 @@ export default function Footer() {
             <div className="mt-4">
               <a
                 href="mailto:contact@griotmoon.com"
-                className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                className="text-sm text-purple-300 hover:text-purple-200 transition-colors"
               >
                 contact@griotmoon.com
               </a>

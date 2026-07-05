@@ -208,8 +208,8 @@ export function loadReadingJournal(): JournalEntry[] {
 // These activities save the user's own creations under their own keys but are
 // not surfaced on the Profile page. They are listed here only so that
 // "Clear all progress" can remove them along with everything else.
-//   - 'coloringGallery' , saved coloring artwork (src/demos/ColoringDemo.tsx)
-//   - 'bookmarkDesign'  , saved bookmark design (src/demos/BookmarkCraftsDemo.tsx)
+//   - 'coloringGallery': saved coloring artwork (src/demos/ColoringDemo.tsx)
+//   - 'bookmarkDesign': saved bookmark design (src/demos/BookmarkCraftsDemo.tsx)
 // ─────────────────────────────────────────────────────────────────────────────
 
 const COLORING_GALLERY_KEY = 'coloringGallery';

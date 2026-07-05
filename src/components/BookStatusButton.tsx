@@ -75,7 +75,6 @@ export default function BookStatusButton({ bookId, compact = false }: BookStatus
           toggle('read');
         }}
         aria-pressed={readActive}
-        aria-label={readActive ? t.ariaMarkAsNotRead : t.ariaMarkAsRead}
         className={`${base} ${
           readActive
             ? 'bg-green-500 border-green-500 text-white shadow-sm'
@@ -92,7 +91,6 @@ export default function BookStatusButton({ bookId, compact = false }: BookStatus
           toggle('want_to_read');
         }}
         aria-pressed={wantActive}
-        aria-label={wantActive ? t.ariaRemoveFromWant : t.ariaAddToWant}
         className={`${base} ${
           wantActive
             ? 'bg-blue-500 border-blue-500 text-white shadow-sm'

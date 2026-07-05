@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Seo from '../components/Seo';
 import { useTranslation } from '../lib/language';
-import { AMAZON_AUTHOR_URL } from '../lib/amazon';
 
 const TRANSLATIONS = {
   en: {
@@ -292,24 +291,8 @@ export default function Contact() {
 
             <div className="bg-white rounded-2xl p-5 shadow-md border border-gray-50">
               <p className="font-semibold text-gray-800 text-sm mb-3">{t.followLabel}</p>
-              <div className="flex gap-2">
-                <a href={AMAZON_AUTHOR_URL} target="_blank" rel="noopener noreferrer"
-                  className="flex-1 py-2 bg-orange-50 border border-orange-200 rounded-xl text-center text-sm hover:bg-orange-100 transition-colors">
-                  📚 Amazon
-                </a>
-                <a href="https://www.instagram.com/pawaseyni.books/" target="_blank" rel="noopener noreferrer"
-                  className="flex-1 py-2 bg-pink-50 border border-pink-200 rounded-xl text-center text-sm hover:bg-pink-100 transition-colors">
-                  📷 Instagram
-                </a>
-                <a href="https://www.youtube.com/@GriotMoon" target="_blank" rel="noopener noreferrer"
-                  className="flex-1 py-2 bg-red-50 border border-red-200 rounded-xl text-center text-sm hover:bg-red-100 transition-colors">
-                  ▶️ YouTube
-                </a>
-                <a href="https://www.tiktok.com/@pawaseyni" target="_blank" rel="noopener noreferrer"
-                  className="flex-1 py-2 bg-gray-50 border border-gray-200 rounded-xl text-center text-sm hover:bg-gray-100 transition-colors">
-                  🎵 TikTok
-                </a>
-              </div>
+              {/* Social/Amazon buttons removed until the Griot Moon accounts exist,
+                  matching the Footer and Links pages (markup in git history). */}
             </div>
           </div>
         </div>

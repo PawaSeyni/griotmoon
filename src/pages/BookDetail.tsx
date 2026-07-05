@@ -64,7 +64,7 @@ export default function BookDetail() {
 
   return (
     <main className="py-8 px-4">
-      <Seo title={book.title} description={book.subtitle || book.description} path={`/books/${book.id}`} image={ogImage} />
+      <Seo title={book.subtitle ? `${book.title}: ${book.subtitle}` : book.title} description={book.description} path={`/books/${book.id}`} image={ogImage} />
       <JsonLd id="book" data={bookSchema} />
 
       <div className="max-w-4xl mx-auto">

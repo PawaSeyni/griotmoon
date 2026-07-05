@@ -7,6 +7,7 @@ import Seo from '../components/Seo';
 import JsonLd from '../components/JsonLd';
 import { useTranslation } from '../lib/language';
 import griotFire from '../assets/griot-fire.jpg'; // hero scene: the griot's fire under the cowrie moon
+import griotFireWebp from '../assets/griot-fire.webp'; // smaller webp for browsers that support it
 
 const SITE_URL = 'https://griotmoon.com';
 
@@ -197,16 +198,19 @@ export default function Home() {
       {/* Hero: the griot's fire under the cowrie moon. The artwork is the hero;
           copy sits in the darker left sky so the storyteller and children stay visible. */}
       <section className="hero-bg min-h-[85vh] flex items-center relative overflow-hidden px-4 py-20">
-        <img
-          src={griotFire}
-          alt={t.heroImageAlt}
-          width={1600}
-          height={1600}
-          loading="eager"
-          decoding="async"
-          {...({ fetchpriority: 'high' } as Record<string, string>)}
-          className="absolute inset-0 w-full h-full object-cover object-[center_38%]"
-        />
+        <picture>
+          <source type="image/webp" srcSet={griotFireWebp} />
+          <img
+            src={griotFire}
+            alt={t.heroImageAlt}
+            width={1280}
+            height={1280}
+            loading="eager"
+            decoding="async"
+            {...({ fetchpriority: 'high' } as Record<string, string>)}
+            className="absolute inset-0 w-full h-full object-cover object-[center_38%]"
+          />
+        </picture>
         {/* Scrim: keeps headline/CTAs readable without hiding the scene. */}
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/80 via-purple-900/25 to-purple-900/80" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-r from-purple-900/70 via-purple-900/20 to-transparent" aria-hidden />
