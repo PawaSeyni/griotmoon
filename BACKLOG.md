@@ -14,6 +14,11 @@ Check items off as they land; each item says who can do it
   instead of Plausible. Beacon in `index.html` (site under the pnguer@gmail.com Cloudflare
   account, hostname griotmoon.com); Privacy page copy updated EN/ES/FR; prerender blocks the
   beacon so builds don't inflate pageviews. Dashboard: dash.cloudflare.com > Web analytics.
+  - [ ] ⚠️ **Verify ingestion after 2026-07-06** — Cloudflare's collector was still returning
+    503 to the beacon's pageview POSTs 3.5h after site creation (install verified correct;
+    known issue for new free non-proxied sites). Re-check: load griotmoon.com, confirm the
+    POST to cloudflareinsights.com/cdn-cgi/rum returns 204 and the dashboard shows visits.
+    If still 503, switch to Umami Cloud free (script swap + Privacy copy, ~10 min).
 - [x] **Amazon Associates tracking ID** — DONE 2026-07-05: the Associates account (Eva Gallo
   login, StoreID storytimewi20-20) is active; created `griotmoon-20` tracking ID, added
   griotmoon.com to the account's website list (child-directed declaration: No), and set the
