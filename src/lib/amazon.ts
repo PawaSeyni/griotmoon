@@ -1,7 +1,6 @@
 // Amazon Associates affiliate config, single source of truth for the tracking
 // tag so every user-facing Amazon link earns commission and is easy to rotate.
-// Add the Griot Moon Associates tracking ID here once created.
-export const AMAZON_ASSOCIATE_TAG = '';
+export const AMAZON_ASSOCIATE_TAG = 'griotmoon-20';
 
 /** Append the Associates tag to an amazon.com URL (no-op if the tag is empty). */
 export const withAffiliateTag = (url: string): string =>
