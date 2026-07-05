@@ -10,6 +10,9 @@ React + Vite + Tailwind + Netlify architecture with the "Midnight Indigo" theme.
 - Tailwind CSS — brand palette lives in `tailwind.config.js` (the raw `purple`/`pink`/
   `yellow`/`orange` scales are re-pointed at night indigo / terracotta / moon gold / fire amber)
 - Netlify: hosting, Forms (contact), prerendering via `scripts/prerender.mjs`
+- CI/CD: git-connected Netlify — every push to `main` (GitHub `PawaSeyni/griotmoon`)
+  builds and deploys. A weekly GitHub Action (`.github/workflows/check-releases.yml`)
+  probes Amazon for coming-soon books and auto-publishes any that go live.
 
 ## Commands
 
@@ -20,10 +23,11 @@ React + Vite + Tailwind + Netlify architecture with the "Midnight Indigo" theme.
 
 ## Content
 
-- **Books**: `src/data/books.ts` — the Pawa Seyni Collection (Ubuntu, Yam and Egg,
-  The Whistling Secret, The Mighty Fist, Chief Green Rule). All are `coming-soon`;
-  add the Amazon ASIN via `dp('...')` and remove the flag as each goes live.
-- **Covers**: `src/assets/covers/*.svg` are designed placeholders — replace with final art.
+- **Books**: `src/data/books.ts` — the Pawa Seyni Collection, 34 published titles with
+  real Amazon ASINs. For future titles: add the book as `status: 'coming-soon'` with an
+  `expectedAsin` (the paperback ISBN-10); the weekly release check publishes it automatically
+  once the Amazon listing goes live (`npm run check:releases -- --apply` to run it manually).
+- **Covers**: `src/assets/covers/*.jpg` — real cover art from the production archive.
 - **Hero art**: `src/assets/griot-fire.jpg` (the griot's fire scene), also `public/og-image.jpg`.
 
 ## Launch TODOs
@@ -31,8 +35,9 @@ React + Vite + Tailwind + Netlify architecture with the "Midnight Indigo" theme.
 See [BACKLOG.md](BACKLOG.md) for the full prioritized checklist. Highlights:
 
 - [x] MailerLite: griotmoon-signups group + dedicated form wired in (2026-07-04)
+- [x] Real covers, About-page portrait, 34-book catalog with live ASINs (2026-07-05)
+- [x] Lead-magnet PDFs rebranded for Griot Moon (2026-07-04)
+- [x] GitHub + git-connected Netlify + weekly Amazon release watch (2026-07-05)
 - [ ] Add a Plausible site for griotmoon.com (`index.html` has the slot)
-- [ ] Amazon Associates tag in `src/lib/amazon.ts` + real ASINs in `books.ts`
-- [ ] Replace placeholder covers and the About-page image
-- [ ] Regenerate the lead-magnet PDFs with Griot Moon branding (`public/*.pdf` are Eva-branded)
+- [ ] Amazon Associates tag in `src/lib/amazon.ts`
 - [ ] Add social accounts to Footer, Links page, and Home JSON-LD `sameAs` as they go live
