@@ -13,11 +13,12 @@ Check items off as they land; each item says who can do it
 - [ ] **Plausible analytics** (You/Joint) — create a site for `griotmoon.com` at plausible.io,
   paste its script tag into `index.html` (the slot is marked with a comment), redeploy.
   The Privacy page already describes Plausible, so this also makes the policy accurate.
-- [ ] **Amazon Associates tracking ID** (You) — ⚠️ Chrome's Amazon session is not an Associates
-  member, and pnguer@gmail.com has NO Amazon Associates emails at all (checked 2026-07-05),
-  so the storytimewi20-20 account almost certainly lives under galloeva2612@gmail.com.
-  Sign into Amazon with that account, verify Associates status, add a `griotmoon-20`
-  tracking ID, then set it in `src/lib/amazon.ts`.
+- [x] **Amazon Associates tracking ID** — DONE 2026-07-05: the Associates account (Eva Gallo
+  login, StoreID storytimewi20-20) is active; created `griotmoon-20` tracking ID, added
+  griotmoon.com to the account's website list (child-directed declaration: No), and set the
+  tag in `src/lib/amazon.ts`. ⚠️ Follow-up (You): Associates Central shows a red banner
+  "The primary account holder needs to finish filling out tax information" — payments are
+  blocked until the tax interview is completed (Associates Central > Submit tax information).
 - [x] **MailerLite welcome automation** — DONE 2026-07-04: "Griot Moon — Welcome + Trilingual
   Starter Kit" is ACTIVE (trigger: joins griotmoon-signups → rebranded welcome email with the
   starter-kit button pointing at griotmoon.com). Eva's 3 drip emails were Removed (restorable in
