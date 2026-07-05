@@ -1,0 +1,48 @@
+# Weekly Amazon release watch.
+#
+# Probes Amazon's product-image endpoint for every coming-soon book that has an
+# expectedAsin in src/data/books.ts (see scripts/check-amazon-releases.mjs).
+# When a listing goes live the script flips the book to published; this job
+# then regenerates the sitemap and pushes the commit, and the git-connected
+# Netlify site deploys it automatically. No-op while the catalog has no
+# coming-soon entries. Both scripts use only Node built-ins, so no npm install.
+name: Check Amazon releases
+
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Mondays 09:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check releases and publish any that are live
+        run: node scripts/check-amazon-releases.mjs --apply
+
+      - name: Regenerate sitemap if the catalog changed
+        run: |
+          if ! git diff --quiet src/data/books.ts; then
+            node scripts/gen-sitemap.mjs
+          fi
+
+      - name: Commit and push
+        run: |
+          if git diff --quiet; then
+            echo "No newly released books."
+            exit 0
+          fi
+          git config user.name "griotmoon release bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/books.ts public/sitemap.xml
+          git commit -m "Auto-publish: Amazon release check found new live listings"
+          git push
