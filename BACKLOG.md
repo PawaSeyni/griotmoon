@@ -71,11 +71,13 @@ Check items off as they land; each item says who can do it
   First run published 5 books that were already live (Prof. Hawel, Thankful Farmer,
   Slow and Strong, Garden of Second Chances, Trees We Plant). Fully autonomous runs need the
   GitHub Action from the P5 item below; until then say "check releases" in any session.
-- [ ] **ASINs for the 5 remaining coming-soon titles** — these have no ISBN assigned yet, so the
-  checker SKIPs them. When each gets its ISBN-13, add `expectedAsin: '<ISBN-10>'` to its entry in
-  `src/data/books.ts` (the script's isbn13→10 conversion is in scripts/check-amazon-releases.mjs):
-  The Chief's Green Rule · Chief Mael's Final Gift · The Chief's 3 Gifts · The Broken Toy ·
-  The Hand That Gives.
+- [x] **All 30 books published** — DONE 2026-07-05: the final 5 were found live via Amazon
+  search (Hand That Gives 1069628875, Chief Mael 106946287X, Broken Toy 1069628891,
+  Chief's 3 Gifts 1996972928, Chief's Green Rule B0FB4B7235). Zero coming-soon left.
+- [ ] **4 more live Pawa Seyni books found on Amazon that are NOT on the site yet** — add them
+  to the catalog when covers/copy are ready: Grandmère's Garden Under the Moon (1996972308) ·
+  A Tale of Hope and Humor (1069628867) · The Wolf Pack's Promise (B0F9WNQS9Q) ·
+  The Day We Woke Up as Dinosaurs (1996972103).
 - [ ] **Kindle editions for the 2 pending batch titles** (You) — per your KDP checklist:
   Kweku and the Wise Forest and The Brothers and the Wise Land have live paperbacks but
   Kindle editions still to publish (EPUBs are ready in the archive).
