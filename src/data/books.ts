@@ -40,6 +40,10 @@ import slowAndStrongWinsTheRace from '../assets/covers/slow-and-strong-wins-the-
 import theCleverScientist from '../assets/covers/the-clever-scientist-professor-hawel.jpg';
 import theGardenOfSecondChances from '../assets/covers/the-garden-of-second-chances.jpg';
 import theTreesWePlantForTomorrow from '../assets/covers/the-trees-we-plant-for-tomorrow.jpg';
+import aTaleOfHopeAndHumor from '../assets/covers/a-tale-of-hope-and-humor.jpg';
+import grandmeresGardenUnderTheMoon from '../assets/covers/grandmeres-garden-under-the-moon.jpg';
+import theDayWeWokeUpAsDinosaurs from '../assets/covers/the-day-we-woke-up-as-dinosaurs.jpg';
+import theWolfPacksPromise from '../assets/covers/the-wolf-packs-promise.jpg';
 
 type LocalizedString = Record<Language, string>;
 
@@ -777,6 +781,97 @@ export const books: Book[] = [
       en: 'Patience and stewardship',
       es: 'Paciencia y cuidado de la tierra',
       fr: 'Patience et soin de la terre',
+    },
+  },
+  {
+    id: 'a-tale-of-hope-and-humor',
+    coverImage: aTaleOfHopeAndHumor,
+    ageRange: '3-8',
+    languages: TRI,
+    amazonUrl: dp('1069628867'),
+    title: { en: 'A Tale of Hope and Humor', es: 'A Tale of Hope and Humor', fr: 'A Tale of Hope and Humor' },
+    subtitle: {
+      en: 'A West African Tale of Resilience and Joy',
+      es: 'Un cuento de África Occidental sobre la resiliencia y la alegría',
+      fr: 'Un conte ouest-africain de résilience et de joie',
+    },
+    description: {
+      en: 'When a plague of locusts destroys the harvest and hope seems lost, Elder Kwesi gathers the children under the great baobab and begins to tell his most ridiculous stories. Laughter spreads through the hungry village, and with it the strength to rebuild: laughter cannot fill empty bellies, but it feeds hungry hearts.',
+      es: 'Cuando una plaga de langostas destruye la cosecha y la esperanza parece perdida, el anciano Kwesi reúne a los niños bajo el gran baobab y empieza a contar sus historias más disparatadas. La risa se extiende por el pueblo hambriento, y con ella la fuerza para reconstruir: la risa no llena estómagos vacíos, pero alimenta corazones hambrientos.',
+      fr: "Quand une nuée de criquets détruit la récolte et que l'espoir semble perdu, le vieux Kwesi rassemble les enfants sous le grand baobab et se met à raconter ses histoires les plus loufoques. Le rire gagne le village affamé, et avec lui la force de reconstruire : le rire ne remplit pas les ventres vides, mais il nourrit les cœurs affamés.",
+    },
+    theme: {
+      en: 'Resilience and joy',
+      es: 'Resiliencia y alegría',
+      fr: 'Résilience et joie',
+    },
+  },
+  {
+    id: 'grandmeres-garden-under-the-moon',
+    coverImage: grandmeresGardenUnderTheMoon,
+    ageRange: '3-8',
+    languages: EN,
+    amazonUrl: dp('1996972308'),
+    title: { en: "Grandmère's Garden Under the Moon", es: "Grandmère's Garden Under the Moon", fr: "Grandmère's Garden Under the Moon" },
+    subtitle: {
+      en: 'A Story of Patience, Magic, and What We Grow Together',
+      es: 'Una historia de paciencia, magia y lo que cultivamos juntos',
+      fr: 'Une histoire de patience, de magie et de ce que nous cultivons ensemble',
+    },
+    description: {
+      en: "Under the moon, Grandmère's garden keeps its own time. As Yama helps her grandmother plant, wait, and tend, she learns that the best things grow slowly and are grown together: gardens, stories, and love. A luminous Yama Series bedtime story about patience and the wisdom grandmothers pass down.",
+      es: 'Bajo la luna, el jardín de Grandmère sigue su propio ritmo. Mientras Yama ayuda a su abuela a sembrar, esperar y cuidar, aprende que las mejores cosas crecen despacio y se cultivan juntos: los jardines, las historias y el amor. Un luminoso cuento de la serie Yama sobre la paciencia y la sabiduría de las abuelas.',
+      fr: "Sous la lune, le jardin de Grandmère suit son propre rythme. En aidant sa grand-mère à planter, attendre et soigner, Yama découvre que les plus belles choses poussent lentement et se cultivent ensemble : les jardins, les histoires et l'amour. Une lumineuse histoire du soir de la série Yama sur la patience et la sagesse des grands-mères.",
+    },
+    theme: {
+      en: 'Patience and intergenerational wisdom',
+      es: 'Paciencia y sabiduría entre generaciones',
+      fr: 'Patience et sagesse des générations',
+    },
+  },
+  {
+    id: 'the-day-we-woke-up-as-dinosaurs',
+    coverImage: theDayWeWokeUpAsDinosaurs,
+    ageRange: '3-7',
+    languages: TRI,
+    amazonUrl: dp('1996972103'),
+    title: {
+      en: 'The Day We Woke Up as Dinosaurs',
+      es: 'El Día que nos Despertamos como Dinosaurios',
+      fr: "Le Jour où on s'est Réveillés en Dinosaures",
+    },
+    description: {
+      en: 'One morning, everything is different: tails, claws, and very big footsteps. A playful romp about imagination and friendship, where waking up as dinosaurs turns an ordinary day into the best adventure of all.',
+      es: 'Una mañana, todo es diferente: colas, garras y pasos muy, muy grandes. Una divertida aventura sobre la imaginación y la amistad, donde despertar convertidos en dinosaurios transforma un día cualquiera en la mejor aventura de todas.',
+      fr: "Un matin, tout est différent : des queues, des griffes et de très grands pas. Une joyeuse cavalcade sur l'imagination et l'amitié, où se réveiller en dinosaures transforme une journée ordinaire en la plus belle des aventures.",
+    },
+    theme: {
+      en: 'Imagination and friendship',
+      es: 'Imaginación y amistad',
+      fr: 'Imagination et amitié',
+    },
+  },
+  {
+    id: 'the-wolf-packs-promise',
+    coverImage: theWolfPacksPromise,
+    ageRange: '3-9',
+    languages: EN,
+    amazonUrl: dp('1069462829'),
+    title: { en: "The Wolf Pack's Promise", es: "The Wolf Pack's Promise", fr: "The Wolf Pack's Promise" },
+    subtitle: {
+      en: 'A Tale of Family, Tradition, and Courage',
+      es: 'Un cuento de familia, tradición y valentía',
+      fr: 'Un conte de famille, de tradition et de courage',
+    },
+    description: {
+      en: 'In the snowy forests of Silvertip Mountain, a young wolf pack must choose between tradition and love. When tragedy strikes, will they stand together as family or let the past divide them? A heartwarming tale of resilience, kindness, and the strength of chosen family.',
+      es: 'En los bosques nevados de la montaña Silvertip, una joven manada de lobos debe elegir entre la tradición y el amor. Cuando golpea la tragedia, ¿permanecerán unidos como familia o dejarán que el pasado los separe? Un cálido cuento sobre la resiliencia, la bondad y la fuerza de la familia que elegimos.',
+      fr: "Dans les forêts enneigées du mont Silvertip, une jeune meute de loups doit choisir entre la tradition et l'amour. Quand le malheur frappe, resteront-ils unis comme une famille ou laisseront-ils le passé les diviser ? Un conte chaleureux sur la résilience, la bonté et la force de la famille que l'on choisit.",
+    },
+    theme: {
+      en: 'Family and courage',
+      es: 'Familia y valentía',
+      fr: 'Famille et courage',
     },
   },
 ];
