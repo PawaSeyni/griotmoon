@@ -48,8 +48,7 @@ Check items off as they land; each item says who can do it
 - [ ] **Resources page content pass** (Claude, with your direction) — `src/pages/Resources.tsx`
   (~1,000 lines) still carries Eva-era articles with names swapped. The reading-milestone
   guides are generic, but the framing should be re-grounded in Griot Moon's heritage angle.
-- [ ] **Author photo** (You) — the About page uses the fire artwork as a placeholder portrait.
-  Drop a real photo (or a chosen illustration) into `src/assets/` and swap the import.
+- [x] **Author photo** (DONE 2026-07-05: official Amazon Author Central portrait installed on About, EN/ES/FR captions).
 - [ ] **Clean emblem file** (You) — nav/favicon use Claude's simplified vector recreation of the
   cowrie emblem. Send the original SVG/high-res PNG to replace `public/favicon.svg` and to
   produce the gold-line dark variant properly.
