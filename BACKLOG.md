@@ -37,7 +37,7 @@ Check items off as they land; each item says who can do it
 
 ## P2 — Content quality (worth doing soon)
 
-- [ ] **Rebrand the lead-magnet PDFs** (Claude, with your review) — all downloads in `public/`
+- [x] **Rebrand the lead-magnet PDFs** (DONE 2026-07-04) (Claude, with your review) — all downloads in `public/`
   are still Story Time with Eva-branded inside: `bedtime-routine` (EN/ES/FR),
   `bilingual-starter-kit`, `bilingual-flashcards`, `parents-guide` (EN/ES/FR),
   `follow-up-activities` (EN/ES/FR). Regenerate with Griot Moon branding.
@@ -54,7 +54,7 @@ Check items off as they land; each item says who can do it
 - [ ] **Clean emblem file** (You) — nav/favicon use Claude's simplified vector recreation of the
   cowrie emblem. Send the original SVG/high-res PNG to replace `public/favicon.svg` and to
   produce the gold-line dark variant properly.
-- [ ] **16:9 hero crop for social cards** (You/Claude) — `public/og-image.jpg` is a square-ish
+- [x] **16:9 hero crop for social cards** (DONE 2026-07-04) (You/Claude) — `public/og-image.jpg` is a square-ish
   crop of the fire scene; a purpose-made 1200×630 crop would frame the griot and moon better.
 - [ ] **Games content review** (Claude) — the 12 games in `public/games/` were string-rebranded;
   play through them once to catch Eva-era wording or book references in the game content.
@@ -81,7 +81,7 @@ Check items off as they land; each item says who can do it
 - [ ] **Kindle editions for the 2 pending batch titles** (You) — per your KDP checklist:
   Kweku and the Wise Forest and The Brothers and the Wise Land have live paperbacks but
   Kindle editions still to publish (EPUBs are ready in the archive).
-- [ ] **"The Day We Woke Up as Dinosaurs"** — live on Amazon (`dp/1996972103`, Bedtime & Wisdom)
+- [x] **"The Day We Woke Up as Dinosaurs"** (folded into the "4 more live books" item above) — live on Amazon (`dp/1996972103`, Bedtime & Wisdom)
   but not on the site because no local cover/metadata was found. Add it once assets exist.
 - [ ] **"The Bridge of Unity"** — finished covers exist (nested inside The Kindness Garden folder);
   decide whether it joins the catalog.
