@@ -5,7 +5,7 @@ import JsonLd from '../components/JsonLd';
 import ReadAloudButton from '../components/ReadAloudButton';
 import { useMemo } from 'react';
 import { useTranslation, useLanguage, localizePath } from '../lib/language';
-import pawaPortrait from '../assets/pawa-seyni.jpg'; // official Amazon Author Central portrait
+import pawaPortrait from '../assets/pawa-seyni.jpg'; // official brand portrait (painted, baobab background)
 
 const SITE_URL = 'https://griotmoon.com';
 
@@ -147,8 +147,8 @@ export default function About() {
               <img
                 src={pawaPortrait}
                 alt="Pawa Seyni"
-                width={379}
-                height={379}
+                width={758}
+                height={758}
                 className="w-full aspect-square rounded-2xl shadow-xl border-4 border-white ring-4 ring-purple-100 object-cover"
               />
               <p className="text-center text-xs text-gray-500 mt-3 italic">{t.photoNote}</p>
