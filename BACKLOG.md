@@ -96,6 +96,17 @@ Check items off as they land; each item says who can do it
 
 ## P5 — Technical housekeeping (low urgency)
 
+**From the 2026-07-05 full audit** (everything HIGH/MED was fixed same-day; these remain):
+- [ ] Add JSON-LD structured data to the 57 pages missing it (activities x30, resources,
+  contact, links, privacy, terms x3 langs, 12 games). Home/books/about/faq already have it.
+- [ ] Localize book ES/FR `alt`/title suffixes further if wanted; titles now differ per lang
+  via localized subtitles (done), but game pages have no hreflang (single-URL trilingual, LOW).
+- [ ] localStorage key `eva_reading_tracker_v1` (progress.ts + reading-tracker game) — internal
+  only; renaming needs a one-time migration in both files or users lose history.
+- [ ] Performance: LCP 5.5s on throttled mobile (was 8.1s before webp/1280px hero). Next lever:
+  responsive srcset / AVIF / CDN image transforms.
+- [ ] 8 react-refresh lint warnings (Pixel.tsx, language.tsx, toast.tsx) — DX only.
+
 - [ ] **Push to GitHub + git-connected Netlify** — deploys are currently manual (Netlify MCP
   upload). Create a GitHub repo, connect it in Netlify for auto-deploys on push.
 - [ ] **Review the Lighthouse report** — the `@netlify/plugin-lighthouse` audit runs on every
