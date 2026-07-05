@@ -52,6 +52,9 @@ export interface Book {
   featured?: boolean;
   /** Publication state. Absent/'published' = live with a Buy CTA; 'coming-soon' shows a placeholder. */
   status?: 'published' | 'coming-soon';
+  /** ISBN-10 the paperback will have once printed. Not used by the UI; read by
+   *  scripts/check-amazon-releases.mjs to auto-publish when the listing goes live. */
+  expectedAsin?: string;
   title: LocalizedString;
   subtitle?: LocalizedString;
   description: LocalizedString;
@@ -671,8 +674,7 @@ export const books: Book[] = [
     coverImage: theThankfulFarmer,
     ageRange: '4-8',
     languages: EN,
-    amazonUrl: dp(''),
-    status: 'coming-soon',
+    amazonUrl: dp('1069628824'),
     title: { en: 'The Thankful Farmer', es: 'The Thankful Farmer', fr: 'The Thankful Farmer' },
     subtitle: {
       en: 'A Tale of Gratitude and Opening Your Eyes to Blessings',
@@ -695,8 +697,7 @@ export const books: Book[] = [
     coverImage: slowAndStrongWinsTheRace,
     ageRange: '6-10',
     languages: EN,
-    amazonUrl: dp(''),
-    status: 'coming-soon',
+    amazonUrl: dp('1996972464'),
     title: { en: 'Slow and Strong Wins the Race', es: 'Slow and Strong Wins the Race', fr: 'Slow and Strong Wins the Race' },
     subtitle: {
       en: 'A Story About the Power of the Steady Plan',
@@ -719,8 +720,7 @@ export const books: Book[] = [
     coverImage: theCleverScientist,
     ageRange: '5-8',
     languages: EN,
-    amazonUrl: dp(''),
-    status: 'coming-soon',
+    amazonUrl: dp('1996972529'),
     title: { en: 'The Clever Scientist, Professor Hawel', es: 'The Clever Scientist, Professor Hawel', fr: 'The Clever Scientist, Professor Hawel' },
     subtitle: {
       en: 'Roots of Tomorrow: A Journey to the Past',
@@ -743,8 +743,7 @@ export const books: Book[] = [
     coverImage: theGardenOfSecondChances,
     ageRange: '5-9',
     languages: EN,
-    amazonUrl: dp(''),
-    status: 'coming-soon',
+    amazonUrl: dp('1996972588'),
     title: { en: 'The Garden of Second Chances', es: 'The Garden of Second Chances', fr: 'The Garden of Second Chances' },
     subtitle: {
       en: 'A Story About Repair, Trust, and Growing Again',
@@ -767,8 +766,7 @@ export const books: Book[] = [
     coverImage: theTreesWePlantForTomorrow,
     ageRange: '3-8',
     languages: TRI,
-    amazonUrl: dp(''),
-    status: 'coming-soon',
+    amazonUrl: dp('1996972049'),
     title: { en: 'The Trees We Plant for Tomorrow', es: 'The Trees We Plant for Tomorrow', fr: 'The Trees We Plant for Tomorrow' },
     subtitle: {
       en: 'A Fulani Tale of Patience and Strength',

@@ -9,6 +9,7 @@
     "build:spa": "tsc && vite build && node scripts/fix-font-preload.mjs",
     "prerender": "node scripts/prerender.mjs",
     "gen:sitemap": "node scripts/gen-sitemap.mjs",
+    "check:releases": "node scripts/check-amazon-releases.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
     "build:games-css": "tailwindcss -c scripts/games.tailwind.config.cjs -i scripts/games-tw-input.css -o public/games/games.css --minify",
