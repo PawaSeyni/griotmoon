@@ -37,7 +37,7 @@ Single source of truth for operating, monitoring, and troubleshooting every serv
 | Netlify | app.netlify.com | galloeva2612@gmail.com (Google SSO) | Free (`nf_team_dev`) | site_id `4dad1660-e50b-4fa6-ad71-309b87569282` |
 | IONOS | login.ionos.com | Pawa Seyni's IONOS account | Annual renewal (~$15/yr typical) | domain `griotmoon.com` |
 | MailerLite | dashboard.mailerlite.com | galloeva2612@gmail.com | Trial → Free or $9/mo | account `2363396` |
-| Plausible | plausible.io | galloeva2612@gmail.com | 30-day trial → $9/mo (or migrate to GoatCounter free) | script `pa-gzJ4DP5LRQ39ZXessq04G` |
+| Plausible | plausible.io | galloeva2612@gmail.com | 30-day trial → $9/mo (or migrate to GoatCounter free) | script `pa-XNEfN50ABtDJcf6klL0ua` |
 | Facebook | facebook.com | profile id `61590158550516` | Free | Page `facebook.com/griotmoon` |
 | Instagram | instagram.com | `@galloeva2612` | Free | — |
 | Amazon KDP | kdp.amazon.com | Pawa Seyni's KDP account | Per-book royalties | author URL `amazon.com/author/pawaseyni` |
@@ -254,7 +254,7 @@ After any deploy, navigate to:
 
 **Dashboard:** https://plausible.io
 **Site:** `griotmoon.com`
-**Script ID:** `pa-gzJ4DP5LRQ39ZXessq04G`
+**Script ID:** `pa-XNEfN50ABtDJcf6klL0ua`
 **Trial:** 30 days from signup; then ~$9/mo (Growth plan, ≤10K monthly pageviews)
 
 ### Goals enabled (already configured)
@@ -277,7 +277,7 @@ After any deploy, navigate to:
 
 | Symptom | Fix |
 |---|---|
-| No pageviews showing | Open site in browser, view DevTools → Network → confirm `pa-gzJ4DP5LRQ39ZXessq04G.js` loads (status 200). Then DevTools → Console → type `window.plausible` — should be a function. |
+| No pageviews showing | Open site in browser, view DevTools → Network → confirm `pa-XNEfN50ABtDJcf6klL0ua.js` loads (status 200). Then DevTools → Console → type `window.plausible` — should be a function. |
 | Specific goal not firing | In Plausible: Site settings → Goals → check the goal exists. For outbound clicks: ensure links have `target="_blank"` (most do, check `<a>` tags). |
 | Plausible dashboard offline | Plausible occasionally has outages — check status.plausible.io. Stats backfill once they're back. |
 

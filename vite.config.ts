@@ -11,6 +11,8 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
-    allowedHosts: ['all', '.manus.computer'],
+    // Dev server only (never runs in production). Kept to the one remote
+    // preview host we actually use, rather than 'all'.
+    allowedHosts: ['.manus.computer'],
   },
 })

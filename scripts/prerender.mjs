@@ -133,38 +133,89 @@ try {
 }
 console.log('Chrome launched OK');
 
+// Analytics beacons to abort during prerender. Every build loads ~165 pages in
+// headless Chromium; without this they'd land in the dashboard as real traffic.
+// The snapshot keeps the <script> tags, so actual visitors are still counted.
+// Keep in sync with the analytics scripts in index.html.
+const ANALYTICS_HOSTS = ['plausible.io', 'cloudflareinsights.com'];
+
+async function blockAnalytics(page) {
+  await page.setRequestInterception(true);
+  page.on('request', req =>
+    ANALYTICS_HOSTS.some(h => req.url().includes(h)) ? req.abort() : req.continue()
+  );
+}
+
+// Wait for the route to actually finish rendering, and THROW if it doesn't.
+//
+// These used to be `.catch(() => {})`, which snapshotted whatever was on screen
+// after the timeout and still counted the route as a success. That silently
+// defeats the whole point of a required prerender: this app writes its <title>,
+// canonical, hreflang and JSON-LD from a useEffect, so a route that never sets
+// __PRERENDER_READY__ ships with the shell's default homepage metadata, and a
+// lazy route that never resolves ships a spinner. Both must fail the build so
+// the last good deploy stays live.
+// polling: waitForFunction defaults to requestAnimationFrame, which starves on
+// paint-heavy routes — Word Explorer renders ~200 emoji glyphs and its predicate
+// went unevaluated for >15s even though the DOM had already updated (it looked
+// exactly like a hung chunk). A plain interval is immune to that.
+const POLL = { polling: 500, timeout: 15000 };
+
+async function waitUntilRendered(page, route) {
+  try {
+    await page.waitForFunction('window.__PRERENDER_READY__ === true', POLL);
+  } catch {
+    throw new Error(`__PRERENDER_READY__ never fired (route ${route} did not finish rendering)`);
+  }
+  // Lazy-loaded routes (the demos) render a Suspense fallback tagged
+  // data-prerender-loading until their chunk resolves.
+  try {
+    await page.waitForFunction("!document.querySelector('[data-prerender-loading]')", POLL);
+  } catch {
+    throw new Error(`lazy chunk never resolved (route ${route} snapshotted as a spinner)`);
+  }
+}
+
+// Snapshot one route in a fresh page. Throws if the route never finished
+// rendering, so the caller decides whether to retry or fail the build.
+async function snapshot(route) {
+  const page = await browser.newPage();
+  try {
+    await blockAnalytics(page);
+    await page.goto(ORIGIN + route, { waitUntil: 'load', timeout: 30000 });
+    await waitUntilRendered(page, route);
+    return await page.content();
+  } finally {
+    await page.close();
+  }
+}
+
+// One retry per route before failing the build. Observed in practice: on a cold
+// run a lazy demo chunk occasionally missed the wait window (2 of 165 routes,
+// clean on the next run), so a single strike would block real deploys for a
+// transient. A route that is genuinely broken fails both attempts, which is the
+// case we want to stop. Retries are logged, if one route keeps showing up here
+// across builds, treat that as the bug rather than noise.
 let ok = 0;
+let retried = 0;
 const failures = [];
 
 for (const route of routes) {
-  const page = await browser.newPage();
   try {
-    // Block the Cloudflare Web Analytics beacon so the 165 headless page loads
-    // per build don't register as pageviews (the snapshot keeps the <script>
-    // tag, so real visitors still get counted).
-    await page.setRequestInterception(true);
-    page.on('request', req =>
-      req.url().includes('cloudflareinsights.com') ? req.abort() : req.continue()
-    );
-    await page.goto(ORIGIN + route, { waitUntil: 'load', timeout: 30000 });
-    await page
-      .waitForFunction('window.__PRERENDER_READY__ === true', { timeout: 10000 })
-      .catch(() => {}); // fall back to the networkidle snapshot if the flag never fires
-    // Lazy-loaded routes (the demos) render a Suspense fallback tagged
-    // data-prerender-loading until their chunk resolves — wait it out so we
-    // snapshot the real demo, not the spinner.
-    await page
-      .waitForFunction("!document.querySelector('[data-prerender-loading]')", { timeout: 10000 })
-      .catch(() => {});
-    const html = await page.content();
+    let html;
+    try {
+      html = await snapshot(route);
+    } catch (first) {
+      retried++;
+      console.warn(`↻ retrying ${route} — ${first.message}`);
+      html = await snapshot(route);
+    }
     const outDir = route === '/' ? DIST : path.join(DIST, route);
     await mkdir(outDir, { recursive: true });
     await writeFile(path.join(outDir, 'index.html'), html);
     ok++;
   } catch (e) {
     failures.push(`${route} — ${e.message}`);
-  } finally {
-    await page.close();
   }
 }
 
@@ -172,14 +223,15 @@ for (const route of routes) {
 // write it to dist/404.html. With the SPA catch-all removed, Netlify serves this
 // with a proper HTTP 404 for any unmatched URL — no more soft-404 home fallback.
 try {
-  const page = await browser.newPage();
-  await page.goto(ORIGIN + '/__prerender_not_found__', { waitUntil: 'load', timeout: 30000 });
-  await page.waitForFunction('window.__PRERENDER_READY__ === true', { timeout: 10000 }).catch(() => {});
-  await page
-    .waitForFunction("!document.querySelector('[data-prerender-loading]')", { timeout: 10000 })
-    .catch(() => {});
-  await writeFile(path.join(DIST, '404.html'), await page.content());
-  await page.close();
+  let html;
+  try {
+    html = await snapshot('/__prerender_not_found__');
+  } catch (first) {
+    retried++;
+    console.warn(`↻ retrying 404.html — ${first.message}`);
+    html = await snapshot('/__prerender_not_found__');
+  }
+  await writeFile(path.join(DIST, '404.html'), html);
   console.log('Wrote dist/404.html (NotFound snapshot, noindex).');
 } catch (e) {
   failures.push(`404.html — ${e.message}`);
@@ -188,7 +240,7 @@ try {
 await browser.close();
 server.close();
 
-console.log(`Prerendered ${ok}/${routes.length} routes.`);
+console.log(`Prerendered ${ok}/${routes.length} routes${retried ? ` (${retried} needed a retry)` : ''}.`);
 if (failures.length) {
   // Prerender is required (the SPA fallback was removed). Fail the build so the
   // last good deploy stays live rather than shipping soft-404s / missing routes.

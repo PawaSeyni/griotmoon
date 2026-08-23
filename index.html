@@ -32,16 +32,20 @@
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Analytics: Cloudflare Web Analytics (free, cookieless, no personal
-         data). Dashboard: dash.cloudflare.com > Analytics > Web analytics
-         (pnguer@gmail.com account, hostname griotmoon.com). -->
-    <script
-      defer
-      src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token": "41f923238c534a6b8f8a17c2aa02e52b"}'
-    ></script>
+    <!--
+      Analytics: Plausible only (cookieless, aggregate, no personal data).
+      Dashboard: plausible.io (galloeva2612@gmail.com). Custom events are fired
+      through src/lib/analytics.ts; set them up as Goals there.
 
-    <!-- Privacy-friendly analytics by Plausible -->
+      Cloudflare Web Analytics was removed on 2026-08-23: two beacons meant two
+      disagreeing definitions of a pageview, and Plausible is the one wired to
+      goals. Whatever ships here must stay in sync with THREE other places:
+      the Analytics section of src/pages/Privacy.tsx (EN/ES/FR), the CSP in
+      netlify.toml, and ANALYTICS_HOSTS in scripts/prerender.mjs (which blocks
+      the beacon so build-time headless loads don't register as pageviews).
+
+      The inline stub below is why the CSP keeps 'unsafe-inline' on script-src.
+    -->
     <script async src="https://plausible.io/js/pa-XNEfN50ABtDJcf6klL0ua.js"></script>
     <script>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};

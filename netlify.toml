@@ -29,6 +29,24 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # Content-Security-Policy. The allowlist is the site's ACTUAL external
+    # resource graph, nothing more:
+    #   plausible.io            analytics script + its event beacon (index.html)
+    #   assets.mailerlite.com   newsletter signup POST (src/components/EmailSignup.tsx)
+    # Everything else (covers, Pixel art, Lexend, games) is same-origin. Amazon
+    # is plain <a href> links, which no directive covers. Netlify Forms and the
+    # feedback widget POST to "/", hence form-action 'self'.
+    #
+    # 'unsafe-inline' on script-src is required by the Plausible queue stub in
+    # index.html (and the per-route JSON-LD blocks the prerender bakes into every
+    # snapshot). It is a deliberate trade: external script origins are still
+    # blocked, which is the injection path that matters here. Move to hashes only
+    # alongside a check that the stub still runs, a stale hash kills analytics
+    # silently.
+    #
+    # Adding any third-party script, font, image host, or API endpoint means
+    # adding it HERE too, or it fails closed in production.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; connect-src 'self' https://plausible.io https://assets.mailerlite.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests"
 
 # Long-cache for hashed static assets emitted by Vite
 [[headers]]
@@ -36,20 +54,12 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-[[headers]]
-  for = "/*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.webp"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.svg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# Deliberately NO immutable rule for loose /*.png, /*.webp, /*.svg. Every image
+# the app imports (book covers, Pixel the butterfly) goes through Vite and lands
+# in /assets with a content hash, so it is already covered above. The only files
+# those patterns actually matched were hand-placed ones like /favicon.svg, which
+# keep their filename when their content changes, so a year of `immutable` would
+# have pinned stale art in browsers and at the CDN edge with no way to bust it.
 
 # Lighthouse audit runs after every successful deploy.
 # Reports go to the deploy summary in the Netlify dashboard.

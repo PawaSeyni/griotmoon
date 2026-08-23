@@ -10,15 +10,14 @@ Check items off as they land; each item says who can do it
 
 ## P1 — Before announcing the site publicly
 
-- [x] **Analytics** — DONE 2026-07-05: went with Cloudflare Web Analytics (free, cookieless)
-  instead of Plausible. Beacon in `index.html` (site under the pnguer@gmail.com Cloudflare
-  account, hostname griotmoon.com); Privacy page copy updated EN/ES/FR; prerender blocks the
-  beacon so builds don't inflate pageviews. Dashboard: dash.cloudflare.com > Web analytics.
-  - [ ] ⚠️ **Verify ingestion after 2026-07-06** — Cloudflare's collector was still returning
-    503 to the beacon's pageview POSTs 3.5h after site creation (install verified correct;
-    known issue for new free non-proxied sites). Re-check: load griotmoon.com, confirm the
-    POST to cloudflareinsights.com/cdn-cgi/rum returns 204 and the dashboard shows visits.
-    If still 503, switch to Umami Cloud free (script swap + Privacy copy, ~10 min).
+- [x] **Analytics** — SETTLED 2026-08-23: **Plausible only**. Cloudflare Web Analytics ran
+  from 2026-07-05 alongside it and has now been removed from `index.html` — two beacons meant
+  two disagreeing pageview definitions, and only Plausible has the custom goals wired up in
+  `src/lib/analytics.ts`. That also retires the open Cloudflare 503-ingestion follow-up.
+  Privacy copy (EN/ES/FR), the CSP in `netlify.toml`, and `ANALYTICS_HOSTS` in
+  `scripts/prerender.mjs` all name Plausible now; keep those four in sync.
+  Dashboard: plausible.io (galloeva2612@gmail.com), script `pa-XNEfN50ABtDJcf6klL0ua`.
+  - [ ] Plausible trial ends → decide pay ($9/mo) vs migrate (see RUNBOOK §5).
 - [x] **Amazon Associates tracking ID** — DONE 2026-07-05: the Associates account (Eva Gallo
   login, StoreID storytimewi20-20) is active; created `griotmoon-20` tracking ID, added
   griotmoon.com to the account's website list (child-directed declaration: No), and set the
