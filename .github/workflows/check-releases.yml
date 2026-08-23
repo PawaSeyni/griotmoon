@@ -4,7 +4,8 @@
 # expectedAsin in src/data/books.ts (see scripts/check-amazon-releases.mjs).
 # When a listing goes live the script flips that book to published.
 #
-# This job OPENS A PULL REQUEST rather than pushing to main. Two reasons:
+# This job PUSHES A BRANCH AND OPENS AN ISSUE rather than pushing to main. Two
+# reasons:
 #   1. The "is it live?" signal is a heuristic (cover image over 2000 bytes).
 #      Amazon can change that endpoint's behaviour at any time, and the failure
 #      mode is announcing a book that isn't purchasable yet. A human should see
@@ -12,9 +13,14 @@
 #   2. It puts the catalog on the same path as every other change to the site.
 #
 # The job still proves the change builds (`npm run build` = tsc + vite +
-# prerender of every route) BEFORE opening the PR. That check runs here rather
-# than on the PR because pull requests opened with GITHUB_TOKEN deliberately do
-# not trigger other workflows, so ci.yml would never fire for this PR.
+# prerender of every route) BEFORE it asks for review.
+#
+# Why an issue and not a pull request: GitHub blocks Actions from creating PRs
+# unless "Allow GitHub Actions to create and approve pull requests" is on, and
+# that same switch also lets any workflow approve PRs. Opening the PR by hand
+# from the link in the issue is one click, and it is strictly better anyway:
+# ci.yml runs on a human-opened PR, while a PR created with GITHUB_TOKEN
+# deliberately triggers no other workflows.
 name: Check Amazon releases
 
 on:
@@ -24,7 +30,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
+  issues: write
 
 jobs:
   check:
@@ -63,7 +69,7 @@ jobs:
         if: steps.changed.outputs.changed == 'true'
         run: npm run build
 
-      - name: Open a pull request
+      - name: Push the branch and open a review issue
         if: steps.changed.outputs.changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -76,25 +82,29 @@ jobs:
           git add src/data/books.ts public/sitemap.xml
           git commit -m "Amazon release check: newly live listings"
           git push origin "$BRANCH"
+          COMPARE="${{ github.server_url }}/${{ github.repository }}/compare/main...$BRANCH?expand=1"
           {
             echo "The weekly Amazon release watch found at least one coming-soon book"
             echo "whose listing is now live, and flipped it to published in"
-            echo "\`src/data/books.ts\`."
+            echo "\`src/data/books.ts\` on branch \`$BRANCH\`."
+            echo
+            echo "**Open the PR:** $COMPARE"
             echo
             echo "**Confirm before merging:** open each ASIN below on Amazon and check the"
             echo "listing is actually purchasable. Detection is a heuristic (the product"
             echo "image endpoint returning a real cover rather than a placeholder), so a"
-            echo "change on Amazon's side can produce a false positive."
+            echo "change on Amazon's side can produce a false positive. Nothing reaches"
+            echo "griotmoon.com until that PR is merged."
             echo
             echo '```'
             cat release-check.log
             echo '```'
             echo
-            echo "\`npm run build\` (tsc + vite + prerender of every route) passed on this"
-            echo "branch before the PR was opened."
-          } > pr-body.md
-          gh pr create \
-            --title "Amazon release check: newly live listings" \
-            --body-file pr-body.md \
-            --base main \
-            --head "$BRANCH"
+            echo "\`npm run build\` (tsc + vite + prerender of every route) already passed"
+            echo "on this branch. Opening the PR runs it again through ci.yml."
+            echo
+            echo "If this is a false positive: delete the branch and close this issue."
+          } > issue-body.md
+          gh issue create \
+            --title "Release watch: a book went live on Amazon ($BRANCH)" \
+            --body-file issue-body.md
