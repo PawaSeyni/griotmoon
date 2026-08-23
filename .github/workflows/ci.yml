@@ -1,0 +1,56 @@
+# Build gate.
+#
+# Runs the SAME command Netlify runs (`npm run build` = tsc + vite build +
+# prerender of all 165 routes), so a change is proven buildable before it can be
+# merged, not just after it lands on main. The prerender step is the real test:
+# it fails the build if any route doesn't finish rendering, which is how a page
+# would otherwise ship with the shell's default metadata or a Suspense spinner.
+#
+# Node version comes from .nvmrc, the same file Netlify reads. Keep it that way,
+# a CI/production version split makes this gate lie.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Read-only: this workflow must never be able to write to the repo.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # CI=true is set by GitHub Actions, so prerender.mjs takes the same
+      # @sparticuz/chromium path Netlify uses. That is deliberate: it exercises
+      # the production rendering path, not a local-only one.
+      - name: Build (tsc + vite + prerender all routes)
+        run: npm run build
+
+      - name: Sanity-check the output
+        run: |
+          set -e
+          test -f dist/index.html
+          test -f dist/404.html
+          # A spinner in any snapshot means prerender shipped a Suspense
+          # fallback instead of the page.
+          ! grep -rl "data-prerender-loading" dist --include='*.html'
+          # Every language's home route must have been written.
+          for p in dist/index.html dist/es/index.html dist/fr/index.html; do
+            test -f "$p" || { echo "missing $p"; exit 1; }
+          done
+          echo "dist looks sane: $(find dist -name index.html | wc -l) route snapshots"

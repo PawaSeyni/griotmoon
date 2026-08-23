@@ -2,8 +2,10 @@
   command = "npm run build"
   publish = "dist"
 
-[build.environment]
-  NODE_VERSION = "20"
+# Node version deliberately NOT set here. It comes from .nvmrc, which GitHub
+# Actions reads too (setup-node's node-version-file), so CI and production can't
+# drift onto different majors — a build gate that runs on a different Node than
+# production is a gate that can pass for the wrong reasons.
 
 # Force the legacy netlify.app subdomain to redirect to the custom domain.
 # (Netlify's automatic "primary domain" redirect doesn't always engage; this

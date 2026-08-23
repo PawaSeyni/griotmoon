@@ -2,10 +2,19 @@
 #
 # Probes Amazon's product-image endpoint for every coming-soon book that has an
 # expectedAsin in src/data/books.ts (see scripts/check-amazon-releases.mjs).
-# When a listing goes live the script flips the book to published; this job
-# then regenerates the sitemap and pushes the commit, and the git-connected
-# Netlify site deploys it automatically. No-op while the catalog has no
-# coming-soon entries. Both scripts use only Node built-ins, so no npm install.
+# When a listing goes live the script flips that book to published.
+#
+# This job OPENS A PULL REQUEST rather than pushing to main. Two reasons:
+#   1. The "is it live?" signal is a heuristic (cover image over 2000 bytes).
+#      Amazon can change that endpoint's behaviour at any time, and the failure
+#      mode is announcing a book that isn't purchasable yet. A human should see
+#      the diff before it reaches griotmoon.com.
+#   2. It puts the catalog on the same path as every other change to the site.
+#
+# The job still proves the change builds (`npm run build` = tsc + vite +
+# prerender of every route) BEFORE opening the PR. That check runs here rather
+# than on the PR because pull requests opened with GITHUB_TOKEN deliberately do
+# not trigger other workflows, so ci.yml would never fire for this PR.
 name: Check Amazon releases
 
 on:
@@ -15,6 +24,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   check:
@@ -24,25 +34,67 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: .nvmrc
+          cache: npm
 
-      - name: Check releases and publish any that are live
-        run: node scripts/check-amazon-releases.mjs --apply
-
-      - name: Regenerate sitemap if the catalog changed
+      - name: Check releases and stage any that are live
         run: |
-          if ! git diff --quiet src/data/books.ts; then
-            node scripts/gen-sitemap.mjs
-          fi
+          node scripts/check-amazon-releases.mjs --apply | tee release-check.log
 
-      - name: Commit and push
+      - name: Stop here if nothing changed
+        id: changed
         run: |
-          if git diff --quiet; then
+          if git diff --quiet src/data/books.ts; then
             echo "No newly released books."
-            exit 0
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Regenerate sitemap
+        if: steps.changed.outputs.changed == 'true'
+        run: node scripts/gen-sitemap.mjs
+
+      - run: npm ci
+        if: steps.changed.outputs.changed == 'true'
+
+      # Same gate as ci.yml. If the catalog change can't build, no PR is opened.
+      - name: Build (tsc + vite + prerender all routes)
+        if: steps.changed.outputs.changed == 'true'
+        run: npm run build
+
+      - name: Open a pull request
+        if: steps.changed.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          BRANCH="release-watch/$(date -u +%Y-%m-%d)-${{ github.run_number }}"
           git config user.name "griotmoon release bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
           git add src/data/books.ts public/sitemap.xml
-          git commit -m "Auto-publish: Amazon release check found new live listings"
-          git push
+          git commit -m "Amazon release check: newly live listings"
+          git push origin "$BRANCH"
+          {
+            echo "The weekly Amazon release watch found at least one coming-soon book"
+            echo "whose listing is now live, and flipped it to published in"
+            echo "\`src/data/books.ts\`."
+            echo
+            echo "**Confirm before merging:** open each ASIN below on Amazon and check the"
+            echo "listing is actually purchasable. Detection is a heuristic (the product"
+            echo "image endpoint returning a real cover rather than a placeholder), so a"
+            echo "change on Amazon's side can produce a false positive."
+            echo
+            echo '```'
+            cat release-check.log
+            echo '```'
+            echo
+            echo "\`npm run build\` (tsc + vite + prerender of every route) passed on this"
+            echo "branch before the PR was opened."
+          } > pr-body.md
+          gh pr create \
+            --title "Amazon release check: newly live listings" \
+            --body-file pr-body.md \
+            --base main \
+            --head "$BRANCH"
