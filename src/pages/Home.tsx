@@ -45,7 +45,7 @@ const ORG_SCHEMA = [
 const TRANSLATIONS = {
   en: {
     seoTitle: 'Griot Moon: African Heritage Picture Books for Curious Minds',
-    seoDesc: 'African bedtime stories, heritage tales, and wisdom for growing hearts. The Pawa Seyni Collection: picture books for ages 3–9 with free activities in English, Spanish, and French.',
+    seoDesc: 'African bedtime stories and heritage tales for ages 3-9. The Pawa Seyni Collection, with free activities in English, Spanish, and French.',
     heroLine1: 'When the Moon Rises,',
     heroLine2: 'the Village Gathers.',
     heroSubtitle: 'African bedtime stories, heritage tales, and wisdom for growing hearts.',
@@ -89,7 +89,7 @@ const TRANSLATIONS = {
   },
   es: {
     seoTitle: 'Griot Moon, Libros ilustrados multiculturales para mentes curiosas',
-    seoDesc: 'La Colección Pawa Seyni, libros ilustrados para niños de 3 a 9 años sobre asombro tranquilo, magia nocturna y el regreso a casa. Lee con nosotros y descubre actividades gratuitas.',
+    seoDesc: 'La Colección Pawa Seyni: libros para niños de 3 a 9 años sobre asombro tranquilo, magia nocturna y el regreso a casa. Actividades gratuitas incluidas.',
     heroLine1: 'Cuando sale la luna,',
     heroLine2: 'el pueblo se reúne.',
     heroSubtitle: 'Cuentos africanos para dormir, relatos de herencia y sabiduría para corazones que crecen.',
@@ -133,7 +133,7 @@ const TRANSLATIONS = {
   },
   fr: {
     seoTitle: 'Griot Moon, Albums illustrés multiculturels pour les esprits curieux',
-    seoDesc: 'La Collection Pawa Seyni, des albums pour enfants de 3 à 9 ans sur l\'émerveillement tranquille, la magie nocturne et le retour à la maison. Lisez avec nous et explorez des activités gratuites.',
+    seoDesc: 'La Collection Pawa Seyni : albums pour enfants de 3 à 9 ans sur l\'émerveillement tranquille, la magie nocturne et le retour à la maison. Activités gratuites.',
     heroLine1: 'Quand la lune se lève,',
     heroLine2: 'le village se rassemble.',
     heroSubtitle: "Histoires africaines du soir, contes du patrimoine et sagesse pour les cœurs qui grandissent.",
