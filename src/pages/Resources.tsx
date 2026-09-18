@@ -2,7 +2,7 @@ import { useState } from 'react';
 import EmailSignup from '../components/EmailSignup';
 import Seo from '../components/Seo';
 import ReadAloudButton from '../components/ReadAloudButton';
-import { useLanguage, useTranslation } from '../lib/language';
+import { localizePath, useLanguage, useTranslation } from '../lib/language';
 import { amazonDp } from '../lib/amazon';
 
 // Free classroom/home printables (PDFs in /public). `localized` files ship an
@@ -150,7 +150,7 @@ const TRANSLATIONS = {
           'Even if you’re not fluent, swap a single word per page. “Look at the perro.” Then “The perro is sleeping.” Children absorb the second language as part of the story, not as a lesson.',
         ] },
         { title: '8. Pause for predictions', body: [
-          'Halfway through, ask: “What do you think will happen?” Then go back to reading. Comprehension goes up by roughly 30% on the next read-through when kids have already guessed once.',
+          'Halfway through, ask: “What do you think will happen?” Then go back to reading. Making a prediction encourages active thinking about the story and creates a natural opportunity to discuss characters, clues, and what might happen next.',
         ] },
         { title: '9. Build the nook', body: [
           'A reading nook is a vote of confidence – a small space that says “this matters here.” Start with a ',
@@ -730,6 +730,8 @@ const TRANSLATIONS = {
   },
 };
 
+export const RESOURCE_SLUGS = ['make-reading-time-magical', 'reading-milestones-by-age', 'activities-after-reading', 'reluctant-readers', 'reading-environment', 'bilingual-reading-benefits'] as const;
+
 const RESOURCE_META = [
   { emoji: '✨', categoryKey: 'readingTips', categoryColor: 'bg-blue-100 text-blue-700', popular: true },
   { emoji: '📊', categoryKey: 'childDev', categoryColor: 'bg-green-100 text-green-700', popular: true },
@@ -845,6 +847,7 @@ export default function Resources() {
   const merged = t.resources.map((r, i) => ({
     ...RESOURCE_META[i],
     ...r,
+    slug: RESOURCE_SLUGS[i],
   }));
 
   const filtered = merged.filter(r => {
@@ -941,7 +944,7 @@ export default function Resources() {
               );
 
               return 'anchor' in r && r.anchor ? (
-                <a key={i} href={`#${r.anchor}`} className="block">
+                <a key={i} href={localizePath(`/resources/${r.slug}`, language) + '/'} className="block">
                   {card}
                 </a>
               ) : (
@@ -957,14 +960,6 @@ export default function Resources() {
           )}
         </div>
       </section>
-
-      {/* Full articles -- data-driven from per-language (EN/ES/FR) translations. */}
-      <ArticleMakingReadingMagical t={t.article1} />
-      <ArticleAgeAppropriate t={t.article3} />
-      <ArticleFollowUp t={t.article4} />
-      <ArticleReluctantReaders t={t.article5} />
-      <ArticlePerfectReadingEnvironment t={t.article2} />
-      <ArticleBilingualReading t={t.article6} />
 
       {/* For Teachers & Educators -- free, classroom-friendly printables (PDFs in /public). */}
       <section id="teachers" className="scroll-mt-24 py-12 px-4 bg-gradient-to-b from-white to-purple-50 border-t border-gray-100">
