@@ -70,7 +70,7 @@ function renderBody(parts: BodyPart[]) {
 // Translations are adapted (not literal) so each language reads as if Pawa Seyni
 // wrote it in that language directly.
 // ---------------------------------------------------------------------------
-const TRANSLATIONS = {
+export const RESOURCE_TRANSLATIONS = {
   en: {
     seoTitle: 'Parent Resources',
     seoDesc: 'Reading tips, child-development milestones, and activity ideas for parents and teachers. Helping you make every reading session magical.',
@@ -746,12 +746,12 @@ type CategoryKey = 'all' | 'readingTips' | 'activityIdeas' | 'childDev' | 'engag
 // ---------------------------------------------------------------------------
 // Article components -- data-driven from translations.
 // ---------------------------------------------------------------------------
-type Article1T = (typeof TRANSLATIONS)['en']['article1'];
-type Article2T = (typeof TRANSLATIONS)['en']['article2'];
-type Article3T = (typeof TRANSLATIONS)['en']['article3'];
-type Article4T = (typeof TRANSLATIONS)['en']['article4'];
-type Article5T = (typeof TRANSLATIONS)['en']['article5'];
-type Article6T = (typeof TRANSLATIONS)['en']['article6'];
+type Article1T = (typeof RESOURCE_TRANSLATIONS)['en']['article1'];
+type Article2T = (typeof RESOURCE_TRANSLATIONS)['en']['article2'];
+type Article3T = (typeof RESOURCE_TRANSLATIONS)['en']['article3'];
+type Article4T = (typeof RESOURCE_TRANSLATIONS)['en']['article4'];
+type Article5T = (typeof RESOURCE_TRANSLATIONS)['en']['article5'];
+type Article6T = (typeof RESOURCE_TRANSLATIONS)['en']['article6'];
 
 function ArticleSimple({ id, t }: { id: string; t: { eyebrow: string; title: string; intro: string; sections: Section[] } }) {
   return (
@@ -776,23 +776,23 @@ function ArticleSimple({ id, t }: { id: string; t: { eyebrow: string; title: str
   );
 }
 
-function ArticleMakingReadingMagical({ t }: { t: Article1T }) {
+export function ArticleMakingReadingMagical({ t }: { t: Article1T }) {
   return <ArticleSimple id="making-reading-magical" t={t} />;
 }
 
-function ArticleAgeAppropriate({ t }: { t: Article3T }) {
+export function ArticleAgeAppropriate({ t }: { t: Article3T }) {
   return <ArticleSimple id="age-appropriate-reading" t={t} />;
 }
 
-function ArticleFollowUp({ t }: { t: Article4T }) {
+export function ArticleFollowUp({ t }: { t: Article4T }) {
   return <ArticleSimple id="follow-up-activities" t={t} />;
 }
 
-function ArticleReluctantReaders({ t }: { t: Article5T }) {
+export function ArticleReluctantReaders({ t }: { t: Article5T }) {
   return <ArticleSimple id="reluctant-readers" t={t} />;
 }
 
-function ArticlePerfectReadingEnvironment({ t }: { t: Article2T }) {
+export function ArticlePerfectReadingEnvironment({ t }: { t: Article2T }) {
   return (
     <article id="perfect-reading-environment" className="scroll-mt-24 max-w-3xl mx-auto px-4 py-12 border-t border-gray-100">
       <header className="mb-8">
@@ -825,14 +825,14 @@ function ArticlePerfectReadingEnvironment({ t }: { t: Article2T }) {
   );
 }
 
-function ArticleBilingualReading({ t }: { t: Article6T }) {
+export function ArticleBilingualReading({ t }: { t: Article6T }) {
   return <ArticleSimple id="bilingual-reading" t={t} />;
 }
 
 export default function Resources() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>('all');
   const [search, setSearch] = useState('');
-  const t = useTranslation(TRANSLATIONS);
+  const t = useTranslation(RESOURCE_TRANSLATIONS);
   const { language } = useLanguage();
 
   const categoryButtons: { key: CategoryKey; label: string }[] = [
