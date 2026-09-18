@@ -46,6 +46,7 @@ const TRANSLATIONS = {
     themeCourage: 'Courage & resilience',
     themeKindness: 'Kindness & generosity',
     themeWisdom: 'Wisdom & perspective',
+    themeQueries: ['community', 'courage', 'kindness', 'wisdom'],
     multilingualBlurb: 'Look for the language flags on each book to see which published editions are available in English, Spanish, and French.',
     learnHeading: 'Keep the story going',
     learnBlurb: 'Pair a book with practical reading guides and activities designed for families and educators.',
@@ -85,6 +86,7 @@ const TRANSLATIONS = {
     themeCourage: 'Valentía y resiliencia',
     themeKindness: 'Bondad y generosidad',
     themeWisdom: 'Sabiduría y perspectiva',
+    themeQueries: ['comunidad', 'valentía', 'bondad', 'sabiduría'],
     multilingualBlurb: 'Consulta las banderas de cada libro para ver qué ediciones publicadas están disponibles en inglés, español y francés.',
     learnHeading: 'Continúa la historia',
     learnBlurb: 'Combina un libro con guías de lectura y actividades prácticas para familias y educadores.',
@@ -124,6 +126,7 @@ const TRANSLATIONS = {
     themeCourage: 'Courage et résilience',
     themeKindness: 'Gentillesse et générosité',
     themeWisdom: 'Sagesse et perspective',
+    themeQueries: ['communauté', 'courage', 'gentillesse', 'sagesse'],
     multilingualBlurb: 'Consultez les drapeaux de chaque livre pour savoir quelles éditions publiées sont disponibles en anglais, espagnol et français.',
     learnHeading: 'Prolongez l’histoire',
     learnBlurb: 'Associez un livre à des guides de lecture et des activités pratiques pour les familles et les éducateurs.',
@@ -242,7 +245,7 @@ export default function Books() {
             <div className="rounded-2xl bg-orange-50 p-5">
               <h3 className="font-bold text-gray-800 mb-3">{t.themeBrowse}</h3>
               <div className="flex flex-wrap gap-2">
-                {[t.themeCommunity,t.themeCourage,t.themeKindness,t.themeWisdom].map(label => <button key={label} onClick={() => setSearch(label.split(/\s|&/)[0])} className="text-sm bg-white border border-orange-100 rounded-full px-3 py-2 hover:border-orange-300">{label}</button>)}
+                {[t.themeCommunity,t.themeCourage,t.themeKindness,t.themeWisdom].map((label, i) => <button key={label} onClick={() => setSearch(t.themeQueries[i])} className="text-sm bg-white border border-orange-100 rounded-full px-3 py-2 hover:border-orange-300">{label}</button>)}
               </div>
             </div>
             <div className="rounded-2xl bg-blue-50 p-5">
@@ -254,7 +257,7 @@ export default function Books() {
         </div>
       </section>
 
-            <BookRecommendations />
+      <BookRecommendations />
 
       <section className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
