@@ -37,6 +37,20 @@ const TRANSLATIONS = {
     freeLabel: 'Always free',
     freeItems: 'Activities, read-alongs & the starter kit',
     pricingNote: 'Prices in USD. Final price and availability on Amazon.',
+    browseHeading: 'Find the right African story for your child',
+    browseIntro: 'Explore the collection by age, theme, or language. These picture books draw on African storytelling traditions while giving families practical ways to talk about community, courage, kindness, wisdom, and belonging.',
+    ageBrowse: 'Browse by age',
+    themeBrowse: 'Explore common themes',
+    languageBrowse: 'Bilingual & multilingual reading',
+    themeCommunity: 'Community & belonging',
+    themeCourage: 'Courage & resilience',
+    themeKindness: 'Kindness & generosity',
+    themeWisdom: 'Wisdom & perspective',
+    multilingualBlurb: 'Look for the language flags on each book to see which published editions are available in English, Spanish, and French.',
+    learnHeading: 'Keep the story going',
+    learnBlurb: 'Pair a book with practical reading guides and activities designed for families and educators.',
+    resourcesCta: 'Explore parent reading resources →',
+    activitiesCta: 'Explore free story activities →',
   },
   es: {
     seoTitle: 'Cuentos de herencia africana para niños y familias de la diáspora',
@@ -62,6 +76,20 @@ const TRANSLATIONS = {
     freeLabel: 'Siempre gratis',
     freeItems: 'Actividades, lecturas en voz alta y el kit de inicio',
     pricingNote: 'Precios en USD. Precio final y disponibilidad en Amazon.',
+    browseHeading: 'Encuentra la historia africana adecuada para tu peque',
+    browseIntro: 'Explora la colección por edad, tema o idioma. Estos álbumes se inspiran en tradiciones narrativas africanas y ayudan a conversar sobre comunidad, valentía, bondad, sabiduría y pertenencia.',
+    ageBrowse: 'Explorar por edad',
+    themeBrowse: 'Temas para explorar',
+    languageBrowse: 'Lectura bilingüe y multilingüe',
+    themeCommunity: 'Comunidad y pertenencia',
+    themeCourage: 'Valentía y resiliencia',
+    themeKindness: 'Bondad y generosidad',
+    themeWisdom: 'Sabiduría y perspectiva',
+    multilingualBlurb: 'Consulta las banderas de cada libro para ver qué ediciones publicadas están disponibles en inglés, español y francés.',
+    learnHeading: 'Continúa la historia',
+    learnBlurb: 'Combina un libro con guías de lectura y actividades prácticas para familias y educadores.',
+    resourcesCta: 'Explorar recursos de lectura →',
+    activitiesCta: 'Explorar actividades gratuitas →',
   },
   fr: {
     seoTitle: 'Contes du patrimoine africain pour les enfants et les familles de la diaspora',
@@ -87,6 +115,20 @@ const TRANSLATIONS = {
     freeLabel: 'Toujours gratuit',
     freeItems: 'Activités, lectures à voix haute et le kit de démarrage',
     pricingNote: 'Prix en USD. Prix final et disponibilité sur Amazon.',
+    browseHeading: 'Trouvez le conte africain adapté à votre enfant',
+    browseIntro: 'Explorez la collection par âge, thème ou langue. Ces albums s’inspirent des traditions narratives africaines et ouvrent des conversations sur la communauté, le courage, la gentillesse, la sagesse et l’appartenance.',
+    ageBrowse: 'Explorer par âge',
+    themeBrowse: 'Thèmes à explorer',
+    languageBrowse: 'Lecture bilingue et multilingue',
+    themeCommunity: 'Communauté et appartenance',
+    themeCourage: 'Courage et résilience',
+    themeKindness: 'Gentillesse et générosité',
+    themeWisdom: 'Sagesse et perspective',
+    multilingualBlurb: 'Consultez les drapeaux de chaque livre pour savoir quelles éditions publiées sont disponibles en anglais, espagnol et français.',
+    learnHeading: 'Prolongez l’histoire',
+    learnBlurb: 'Associez un livre à des guides de lecture et des activités pratiques pour les familles et les éducateurs.',
+    resourcesCta: 'Explorer les ressources de lecture →',
+    activitiesCta: 'Explorer les activités gratuites →',
   },
 };
 
@@ -184,7 +226,35 @@ export default function Books() {
         </div>
       </section>
 
-      <BookRecommendations />
+      <section className="py-10 px-4 bg-white border-y border-gray-100">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">{t.browseHeading}</h2>
+            <p className="text-gray-600 leading-relaxed">{t.browseIntro}</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            <div className="rounded-2xl bg-purple-50 p-5">
+              <h3 className="font-bold text-gray-800 mb-3">{t.ageBrowse}</h3>
+              <div className="flex flex-wrap gap-2">
+                {ageFilters.slice(1).map(f => <button key={f.key} onClick={() => setAgeFilter(f.key)} className="text-sm bg-white border border-purple-100 rounded-full px-3 py-2 hover:border-purple-300">{f.label}</button>)}
+              </div>
+            </div>
+            <div className="rounded-2xl bg-orange-50 p-5">
+              <h3 className="font-bold text-gray-800 mb-3">{t.themeBrowse}</h3>
+              <div className="flex flex-wrap gap-2">
+                {[t.themeCommunity,t.themeCourage,t.themeKindness,t.themeWisdom].map(label => <button key={label} onClick={() => setSearch(label.split(/\s|&/)[0])} className="text-sm bg-white border border-orange-100 rounded-full px-3 py-2 hover:border-orange-300">{label}</button>)}
+              </div>
+            </div>
+            <div className="rounded-2xl bg-blue-50 p-5">
+              <h3 className="font-bold text-gray-800 mb-3">{t.languageBrowse}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed">{t.multilingualBlurb}</p>
+              <p className="mt-3 text-xl" aria-label="English, Spanish and French">🇺🇸 🇪🇸 🇫🇷</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+            <BookRecommendations />
 
       <section className="py-12 px-4">
         <div className="max-w-7xl mx-auto">
@@ -243,6 +313,17 @@ export default function Books() {
           >
             {t.amazonCta}
           </a>
+        </div>
+      </section>
+
+      <section className="py-12 px-4 bg-purple-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">{t.learnHeading}</h2>
+          <p className="text-gray-600 mb-6">{t.learnBlurb}</p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href={localizePath('/resources', language) + '/'} className="font-semibold text-purple-700 hover:text-purple-900">{t.resourcesCta}</a>
+            <a href={localizePath('/activities', language) + '/'} className="font-semibold text-purple-700 hover:text-purple-900">{t.activitiesCta}</a>
+          </div>
         </div>
       </section>
 
