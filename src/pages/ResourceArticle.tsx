@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import Seo from '../components/Seo';
 import JsonLd from '../components/JsonLd';
@@ -32,7 +31,7 @@ export default function ResourceArticle() {
   const Article = COMPONENTS[index];
   const path = `/resources/${slug}`;
   const canonical = `${SITE}${language === 'en' ? '' : '/' + language}${path}/`;
-  const schema = useMemo(() => ({
+  const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: resource.title,
@@ -41,8 +40,8 @@ export default function ResourceArticle() {
     publisher: { '@type': 'Organization', name: 'Griot Moon', url: SITE },
     mainEntityOfPage: canonical,
     inLanguage: language,
-  }), [resource.title, resource.desc, canonical, language]);
-  const breadcrumbSchema = useMemo(() => ({
+  };
+  const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
@@ -50,7 +49,7 @@ export default function ResourceArticle() {
       { '@type': 'ListItem', position: 2, name: language === 'fr' ? 'Ressources' : language === 'es' ? 'Recursos' : 'Resources', item: `${SITE}${language === 'en' ? '' : '/' + language}/resources/` },
       { '@type': 'ListItem', position: 3, name: resource.title, item: canonical },
     ],
-  }), [resource.title, canonical, language]);
+  };
 
   return (
     <main>
