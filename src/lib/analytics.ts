@@ -10,6 +10,8 @@
 //   - "Signup"           props: { language }            newsletter submit
 //   - "Amazon Click"     props: { book }                outbound buy click
 //   - "Activity Complete" props: { activity }           a demo marked complete
+//   - "Read Along Start"  props: { language }            book narration engagement
+//   - "Lead Magnet Download" props: { language, lead_magnet } post-signup download
 
 type Props = Record<string, string | number | boolean>;
 
