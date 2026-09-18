@@ -17,7 +17,7 @@ for (const id of ids) {
       continue;
     }
     for (const lang of ['en', 'es', 'fr']) {
-      if (!new RegExp('\\b' + lang + ':\\s*[\\'"]').test(m[1])) {
+      if (!new RegExp(`\\b${lang}:\\s*['\"]`).test(m[1])) {
         failures.push(`${id}: ${field} missing ${lang}`);
       }
     }
