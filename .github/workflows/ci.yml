@@ -38,7 +38,10 @@ jobs:
       # CI=true is set by GitHub Actions, so prerender.mjs takes the same
       # @sparticuz/chromium path Netlify uses. That is deliberate: it exercises
       # the production rendering path, not a local-only one.
-      - name: Validate multilingual catalog\n        run: npm run check:i18n\n\n      - name: Build (tsc + vite + prerender all routes)
+      - name: Validate multilingual catalog
+        run: npm run check:i18n
+
+      - name: Build (tsc + vite + prerender all routes)
         run: npm run build
 
       - name: Validate SEO output
