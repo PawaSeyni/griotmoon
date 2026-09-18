@@ -15,7 +15,8 @@
     "check:seo": "node scripts/check-seo-output.mjs",
     "check:i18n": "node scripts/check-i18n-catalog.mjs",
     "build:games-css": "tailwindcss -c scripts/games.tailwind.config.cjs -i scripts/games-tw-input.css -o public/games/games.css --minify",
-    "patch:games": "node scripts/patch-games.mjs"
+    "patch:games": "node scripts/patch-games.mjs",
+    "verify": "npm run check:i18n && npm run build && npm run check:seo"
   },
   "dependencies": {
     "@fontsource-variable/lexend": "^5.2.11",

@@ -1,5 +1,10 @@
 [build]
-  command = "npm run build"
+  # `verify`, not `build`: the catalog check runs before the build and the SEO
+  # output check (canonicals, hreflang, dead internal links) runs after it,
+  # and a failure in either fails the deploy. These checks also run in CI, but
+  # CI runs in parallel with this deploy and cannot stop it, so they must be
+  # in the deploy's own command to actually gate production.
+  command = "npm run verify"
   publish = "dist"
 
 # Node version deliberately NOT set here. It comes from .nvmrc, which GitHub

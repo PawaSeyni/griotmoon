@@ -1,7 +1,7 @@
 # Build gate.
 #
-# Runs the SAME command Netlify runs (`npm run build` = tsc + vite build +
-# prerender of all 165 routes), so a change is proven buildable before it can be
+# Runs the SAME command Netlify runs (`npm run verify` = catalog check, tsc + vite build +
+# prerender of every route, SEO output check), so a change is proven buildable before it can be
 # merged, not just after it lands on main. The prerender step is the real test:
 # it fails the build if any route doesn't finish rendering, which is how a page
 # would otherwise ship with the shell's default metadata or a Suspense spinner.
@@ -38,14 +38,11 @@ jobs:
       # CI=true is set by GitHub Actions, so prerender.mjs takes the same
       # @sparticuz/chromium path Netlify uses. That is deliberate: it exercises
       # the production rendering path, not a local-only one.
-      - name: Validate multilingual catalog
-        run: npm run check:i18n
-
-      - name: Build (tsc + vite + prerender all routes)
-        run: npm run build
-
-      - name: Validate SEO output
-        run: npm run check:seo
+      # One command, shared with netlify.toml, so CI and the deploy can never
+      # disagree about what "passes": catalog check, build (tsc + vite +
+      # prerender all routes), then the SEO/dead-link check on the output.
+      - name: Verify (check:i18n, build, check:seo)
+        run: npm run verify
 
       - name: Sanity-check the output
         run: |
