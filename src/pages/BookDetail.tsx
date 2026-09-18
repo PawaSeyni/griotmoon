@@ -11,7 +11,6 @@ import { books, useBook, useBooks, isComingSoon } from '../data/books';
 import BookCard from '../components/BookCard';
 import { LANGUAGE_LABELS, SUPPORTED_LANGUAGES, localizePath, useLanguage, useTranslation } from '../lib/language';
 import type { Language } from '../lib/language';
-import { isAmazonCover, sizedCover } from '../lib/covers';
 import { track } from '../lib/analytics';
 
 const SITE_URL = 'https://griotmoon.com';
@@ -33,8 +32,9 @@ export default function BookDetail() {
   const [tapMode, setTapMode] = useState(false);
 
   const cover = book?.coverImage ?? '';
-  const amazon = isAmazonCover(cover);
-  const ogImage = amazon ? sizedCover(cover, 600) : `${SITE_URL}${cover}`;
+  // og:image stays the 1000px JPEG: social crawlers want a plain absolute
+  // JPEG/PNG, not a srcset or WebP.
+  const ogImage = `${SITE_URL}${cover}`;
 
   // Memoized so toggling bilingual / tap mode doesn't tear down and re-inject
   // the JSON-LD <script>. book is derived from slug+language, so those (plus
@@ -86,8 +86,8 @@ export default function BookDetail() {
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <div className="rounded-3xl overflow-hidden shadow-xl bg-gray-100 aspect-square">
             <img
-              src={amazon ? sizedCover(cover, 600) : cover}
-              srcSet={amazon ? `${sizedCover(cover, 500)} 500w, ${sizedCover(cover, 900)} 900w` : undefined}
+              src={cover}
+              srcSet={book?.coverSrcSet || undefined}
               sizes="(min-width: 768px) 448px, 90vw"
               alt={`${book.title} – ${t.coverAlt}`}
               className="w-full h-full object-cover"

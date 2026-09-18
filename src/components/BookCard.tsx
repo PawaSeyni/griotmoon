@@ -3,7 +3,6 @@ import { isComingSoon } from '../data/books';
 import { Link } from './LocalizedLink';
 import BookStatusButton from './BookStatusButton';
 import ReadAloudButton from './ReadAloudButton';
-import { isAmazonCover, sizedCover } from '../lib/covers';
 import { useTranslation } from '../lib/language';
 import { track } from '../lib/analytics';
 
@@ -26,19 +25,17 @@ export default function BookCard({ book, priority = false }: BookCardProps) {
   // Narration text for the read-aloud button, title, subtitle, and blurb.
   const narration = [book.title, book.subtitle, book.description].filter(Boolean).join('. ');
 
-  const amazonCover = isAmazonCover(book.coverImage);
-  const cardSrcSet = amazonCover
-    ? `${sizedCover(book.coverImage, 330)} 330w, ${sizedCover(book.coverImage, 660)} 660w`
-    : undefined;
   const href = `/books/${book.id}`;
 
   return (
     <div className="card group flex flex-col">
       <Link to={href} className="block relative bg-gray-100 aspect-square overflow-hidden">
         <img
-          src={amazonCover ? sizedCover(book.coverImage, 400) : book.coverImage}
-          srcSet={cardSrcSet}
+          src={book.coverImage}
+          srcSet={book.coverSrcSet || undefined}
           sizes="(min-width: 1024px) 300px, (min-width: 640px) 45vw, 90vw"
+          width={1000}
+          height={1000}
           alt={`${book.title}, ${t.coverAlt}`}
           loading={priority ? 'eager' : 'lazy'}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
