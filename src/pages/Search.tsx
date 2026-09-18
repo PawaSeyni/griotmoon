@@ -3,7 +3,6 @@ import { Link } from '../components/LocalizedLink';
 import Seo from '../components/Seo';
 import { useBooks } from '../data/books';
 import { useActivities } from '../data/activities';
-import { isAmazonCover, sizedCover } from '../lib/covers';
 import { useTranslation } from '../lib/language';
 
 const TRANSLATIONS = {
@@ -107,7 +106,11 @@ export default function Search() {
                   <Link key={b.id} to={`/books/${b.id}`} className="card group flex flex-col">
                     <div className="bg-gray-100 aspect-square overflow-hidden">
                       <img
-                        src={isAmazonCover(b.coverImage) ? sizedCover(b.coverImage, 300) : b.coverImage}
+                        src={b.coverImage}
+                        srcSet={b.coverSrcSet || undefined}
+                        sizes="(min-width: 1024px) 220px, (min-width: 640px) 30vw, 45vw"
+                        width={1000}
+                        height={1000}
                         alt={b.title}
                         loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform"

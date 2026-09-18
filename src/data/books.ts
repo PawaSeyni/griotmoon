@@ -46,6 +46,19 @@ import theDayWeWokeUpAsDinosaurs from '../assets/covers/the-day-we-woke-up-as-di
 
 type LocalizedString = Record<Language, string>;
 
+// Responsive variants of every cover, keyed by the import path. Built by
+// vite-imagetools: 330/660/1000 px WebP, returned as a ready srcset string.
+// Cards render at ~300 CSS px and the detail page at 448, so the 1000px JPEG
+// each entry imports above is only right for og:image and JSON-LD; served to
+// a card it was ~150 KB where ~15 KB would do. Cover files are named by book
+// id, which is what makes the lookup in localize() possible.
+const COVER_SRCSET = import.meta.glob<string>('../assets/covers/*.jpg', {
+  eager: true,
+  import: 'default',
+  query: '?w=330;660;1000&format=webp&as=srcset',
+});
+const coverSrcSet = (id: string): string => COVER_SRCSET[`../assets/covers/${id}.jpg`] ?? '';
+
 export interface Book {
   id: string;
   coverImage: string;
@@ -67,6 +80,8 @@ export interface Book {
 export interface LocalizedBook {
   id: string;
   coverImage: string;
+  /** WebP srcset (330w/660w/1000w) for <img srcSet>; coverImage stays the JPEG fallback. */
+  coverSrcSet: string;
   ageRange: string;
   languages: string[];
   amazonUrl: string;
@@ -856,6 +871,7 @@ function localize(book: Book, lang: Language): LocalizedBook {
   return {
     id: book.id,
     coverImage: book.coverImage,
+    coverSrcSet: coverSrcSet(book.id),
     ageRange: book.ageRange,
     languages: book.languages,
     amazonUrl: book.amazonUrl,
