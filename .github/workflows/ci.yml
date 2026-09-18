@@ -41,6 +41,9 @@ jobs:
       - name: Build (tsc + vite + prerender all routes)
         run: npm run build
 
+      - name: Validate SEO output
+        run: npm run check:seo
+
       - name: Sanity-check the output
         run: |
           set -e

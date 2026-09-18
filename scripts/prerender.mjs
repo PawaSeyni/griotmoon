@@ -136,8 +136,8 @@ console.log('Chrome launched OK');
 // Analytics beacons to abort during prerender. Every build loads ~165 pages in
 // headless Chromium; without this they'd land in the dashboard as real traffic.
 // The snapshot keeps the <script> tags, so actual visitors are still counted.
-// Keep in sync with the analytics scripts in index.html.
-const ANALYTICS_HOSTS = ['plausible.io', 'cloudflareinsights.com'];
+// Keep in sync with the active analytics scripts in index.html. Cloudflare Web Analytics was removed; keeping stale hosts here can hide accidental regressions during build QA.
+const ANALYTICS_HOSTS = ['plausible.io'];
 
 async function blockAnalytics(page) {
   await page.setRequestInterception(true);

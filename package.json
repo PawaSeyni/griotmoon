@@ -12,6 +12,7 @@
     "check:releases": "node scripts/check-amazon-releases.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
+    "check:seo": "node scripts/check-seo-output.mjs",
     "build:games-css": "tailwindcss -c scripts/games.tailwind.config.cjs -i scripts/games-tw-input.css -o public/games/games.css --minify",
     "patch:games": "node scripts/patch-games.mjs"
   },
