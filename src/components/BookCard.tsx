@@ -43,20 +43,23 @@ export default function BookCard({ book, priority = false }: BookCardProps) {
           loading={priority ? 'eager' : 'lazy'}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        {book.featured && (
-          <span className="absolute top-3 right-3 z-10 bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
-            <span className="text-sm leading-none">⭐</span>
-            {t.featured}
-          </span>
-        )}
       </Link>
 
       <div className="p-5 flex flex-col flex-1">
+        {/* The Featured pill lives in the meta row, not over the artwork: the
+            redesigned covers carry display-size titles across the top, and an
+            overlay in the top-right corner sat on the title letters. */}
         <div className="flex items-center gap-2 mb-2">
           <span className="text-xs bg-purple-100 text-purple-700 font-medium px-2 py-0.5 rounded-full">
             {book.ageRange.replace('-', '–')}
           </span>
           <span className="text-sm">{book.languages.join('')}</span>
+          {book.featured && (
+            <span className="ml-auto bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow flex items-center gap-1">
+              <span className="text-sm leading-none">⭐</span>
+              {t.featured}
+            </span>
+          )}
         </div>
         <h3 className="font-bold text-gray-800 text-lg mb-1">
           <Link to={href} className="hover:text-purple-700 transition-colors">
