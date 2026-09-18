@@ -23,7 +23,7 @@ const TRANSLATIONS = {
     seoDesc:
       'How Griot Moon handles your information. We are directed to parents and guardians, use privacy-friendly analytics, and never knowingly collect personal information from children.',
     title: 'Privacy Policy',
-    updated: 'Last updated: June 2026',
+    updated: 'Last updated: September 2026',
     intro:
       'Griot Moon is operated by Pawa Press Inc. ("we", "us") and publishes the Pawa Seyni Collection of picture books. This site is intended for parents, guardians, caregivers, and educators. This page explains, in plain language, what we collect and what we do not.',
     sections: [
@@ -90,7 +90,7 @@ const TRANSLATIONS = {
     seoDesc:
       'Cómo Griot Moon trata tu información. Está dirigido a padres y tutores, usa analíticas respetuosas con la privacidad y nunca recopila datos personales de niños a sabiendas.',
     title: 'Política de privacidad',
-    updated: 'Última actualización: junio de 2026',
+    updated: 'Última actualización: septiembre de 2026',
     intro:
       'Griot Moon es operado por Pawa Press Inc. ("nosotros") y publica la Colección Pawa Seyni de libros ilustrados. Este sitio está dirigido a padres, tutores, cuidadores y educadores. Esta página explica, en lenguaje sencillo, qué recopilamos y qué no.',
     sections: [
@@ -157,7 +157,7 @@ const TRANSLATIONS = {
     seoDesc:
       'Comment Griot Moon traite vos informations. Le site s\'adresse aux parents et tuteurs, utilise des analyses respectueuses de la vie privée et ne collecte jamais sciemment de données personnelles d\'enfants.',
     title: 'Politique de confidentialité',
-    updated: 'Dernière mise à jour : juin 2026',
+    updated: 'Dernière mise à jour : septembre 2026',
     intro:
       'Griot Moon est exploité par Pawa Press Inc. (« nous ») et publie la Collection Pawa Seyni d\'albums illustrés. Ce site s\'adresse aux parents, tuteurs, accompagnants et enseignants. Cette page explique, en langage clair, ce que nous collectons et ce que nous ne collectons pas.',
     sections: [
