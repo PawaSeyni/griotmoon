@@ -188,7 +188,7 @@ export default function EmailSignup() {
         mode: 'no-cors',
       });
       setStatus('submitted');
-      track('Signup', { language });
+      track('Signup', { language, lead_magnet: magnet.tag });
       setEmail('');
       setFirstName('');
     } catch (err) {
@@ -220,6 +220,7 @@ export default function EmailSignup() {
             <p className="text-purple-100 text-sm mt-1 mb-4">{t.successDetail}</p>
             <a
               href={magnet.pdf[language]}
+              onClick={() => track('Lead Magnet Download', { language, lead_magnet: magnet.tag })}
               download
               target="_blank"
               rel="noopener"
