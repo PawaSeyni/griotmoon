@@ -22,6 +22,22 @@
   status = 301
   force = true
 
+# The Wolf Pack's Promise was removed from the catalog on 2026-09-19 (it is
+# not an African heritage tale). Its pages were indexed, so send them to the
+# catalog rather than a 404.
+[[redirects]]
+  from = "/books/the-wolf-packs-promise/*"
+  to = "/books/"
+  status = 301
+[[redirects]]
+  from = "/es/books/the-wolf-packs-promise/*"
+  to = "/es/books/"
+  status = 301
+[[redirects]]
+  from = "/fr/books/the-wolf-packs-promise/*"
+  to = "/fr/books/"
+  status = 301
+
 # No SPA catch-all on purpose. Every real route (incl. /es,/fr variants, all book
 # pages, and the noindex /profile,/search) is prerendered to its own static
 # index.html by scripts/prerender.mjs, so unmatched URLs fall through to Netlify's

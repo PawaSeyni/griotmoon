@@ -43,7 +43,6 @@ import theTreesWePlantForTomorrow from '../assets/covers/the-trees-we-plant-for-
 import aTaleOfHopeAndHumor from '../assets/covers/a-tale-of-hope-and-humor.jpg';
 import grandmeresGardenUnderTheMoon from '../assets/covers/grandmeres-garden-under-the-moon.jpg';
 import theDayWeWokeUpAsDinosaurs from '../assets/covers/the-day-we-woke-up-as-dinosaurs.jpg';
-import theWolfPacksPromise from '../assets/covers/the-wolf-packs-promise.jpg';
 
 type LocalizedString = Record<Language, string>;
 
@@ -849,29 +848,6 @@ export const books: Book[] = [
       en: 'Imagination and friendship',
       es: 'Imaginación y amistad',
       fr: 'Imagination et amitié',
-    },
-  },
-  {
-    id: 'the-wolf-packs-promise',
-    coverImage: theWolfPacksPromise,
-    ageRange: '3-9',
-    languages: EN,
-    amazonUrl: dp('1069462829'),
-    title: { en: "The Wolf Pack's Promise", es: "The Wolf Pack's Promise", fr: "The Wolf Pack's Promise" },
-    subtitle: {
-      en: 'A Tale of Family, Tradition, and Courage',
-      es: 'Un cuento de familia, tradición y valentía',
-      fr: 'Un conte de famille, de tradition et de courage',
-    },
-    description: {
-      en: 'In the snowy forests of Silvertip Mountain, a young wolf pack must choose between tradition and love. When tragedy strikes, will they stand together as family or let the past divide them? A heartwarming tale of resilience, kindness, and the strength of chosen family.',
-      es: 'En los bosques nevados de la montaña Silvertip, una joven manada de lobos debe elegir entre la tradición y el amor. Cuando golpea la tragedia, ¿permanecerán unidos como familia o dejarán que el pasado los separe? Un cálido cuento sobre la resiliencia, la bondad y la fuerza de la familia que elegimos.',
-      fr: "Dans les forêts enneigées du mont Silvertip, une jeune meute de loups doit choisir entre la tradition et l'amour. Quand le malheur frappe, resteront-ils unis comme une famille ou laisseront-ils le passé les diviser ? Un conte chaleureux sur la résilience, la bonté et la force de la famille que l'on choisit.",
-    },
-    theme: {
-      en: 'Family and courage',
-      es: 'Familia y valentía',
-      fr: 'Famille et courage',
     },
   },
 ];
