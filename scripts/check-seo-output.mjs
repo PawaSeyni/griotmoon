@@ -72,6 +72,10 @@ async function* walk(dir) {
 const seenLinks = new Set();
 for await (const file of walk(DIST)) {
   const html = await readFile(file, 'utf8');
+  // The prerender serves dist/ from localhost:5099; that origin must never
+  // survive into a snapshot (absolute modulepreload hrefs did, on Vite 8).
+  const leak = html.match(/https?:\/\/localhost(:\d+)?[^"'\s<]*/);
+  if (leak) failures.push(`prerender origin leaked into ${path.relative(DIST, file)}: ${leak[0]}`);
   for (const [, href] of html.matchAll(/href="(\/[^"#?]*)/g)) {
     if (seenLinks.has(href)) continue;
     seenLinks.add(href);

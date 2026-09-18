@@ -184,7 +184,14 @@ async function snapshot(route) {
     await blockAnalytics(page);
     await page.goto(ORIGIN + route, { waitUntil: 'load', timeout: 30000 });
     await waitUntilRendered(page, route);
-    return await page.content();
+    // The snapshot is taken from a page served at ORIGIN, so anything the app
+    // wrote as an absolute URL carries http://localhost:5099. Vite 8's preload
+    // helper does exactly that for the <link rel="modulepreload"> hints it
+    // injects for lazy chunks (Vite 5 wrote them root-relative), and 181 of 183
+    // snapshots shipped with localhost hrefs that production CSP then blocked.
+    // Rewrite every occurrence to root-relative; check-seo-output.mjs fails the
+    // build if any snapshot still mentions localhost.
+    return (await page.content()).replaceAll(ORIGIN + '/', '/').replaceAll(ORIGIN, '/');
   } finally {
     await page.close();
   }
