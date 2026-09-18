@@ -66,7 +66,11 @@ async function* walk(dir) {
   for (const e of await readdir(dir, { withFileTypes: true })) {
     const full = path.join(dir, e.name);
     if (e.isDirectory()) yield* walk(full);
-    else if (e.name.endsWith('.html')) yield full;
+    // "index 2.html" style names are iCloud/Finder conflict copies that the
+    // synced Desktop checkout leaves in dist/ (vite's emptyOutDir does not win
+    // against the sync agent). They are never deployed; skip them so a stale
+    // copy's old asset hashes don't read as dead links.
+    else if (e.name.endsWith('.html') && !/ \d+\.html$/.test(e.name)) yield full;
   }
 }
 const seenLinks = new Set();
