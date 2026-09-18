@@ -6,7 +6,7 @@ Single source of truth for operating, monitoring, and troubleshooting every serv
 **Repo:** https://github.com/PawaSeyni/griotmoon
 **Local path:** `/Users/papasnguer/Desktop/Organized/17_Completed_Books_Archive/Completed Books/Pawa Seyni/griotmoon`
 **Owner:** Pawa Seyni (`galloeva2612@gmail.com`)
-**Last updated:** 2026-05-21
+**Last updated:** 2026-09-18
 
 ---
 
@@ -50,13 +50,13 @@ Single source of truth for operating, monitoring, and troubleshooting every serv
 **Purpose:** Stores all site source, deploys auto-trigger to Netlify on push to `main`.
 
 **Repo:** https://github.com/PawaSeyni/griotmoon
-**Branch model:** Push directly to `main`. No PR/review workflow yet. (Add one if collaborators join.)
+**Branch model:** Branch → pull request → CI → merge to `main`. Do not push application changes directly to `main`.
 
 ### Routine
 
 | Frequency | Task |
 |---|---|
-| On every change | Local edit → `git add` → `git commit -m "feat/fix(scope): summary"` → `git push origin main` |
+| On every change | Create a branch → make/commit changes → push branch → open PR → require CI to pass → merge to `main` |
 | Weekly | Glance at commit history to confirm no stray commits |
 | Quarterly | Bump npm dependencies (`npm outdated`, then `npm update` with care) |
 
@@ -67,7 +67,7 @@ cd "/Users/papasnguer/Desktop/Organized/17_Completed_Books_Archive/Completed Boo
 rm -f .git/index.lock .git/HEAD.lock   # Cowork-sandbox quirk; harmless on Mac
 git add <files>
 git commit -m "feat(scope): one-line summary"
-git push origin main
+git push -u origin <branch-name>
 ```
 
 ### Troubleshooting
@@ -182,14 +182,16 @@ After any deploy, navigate to:
 
 **Dashboard:** https://dashboard.mailerlite.com
 **Account ID:** `2363396`
-**Workspace:** `Storytimewitheva` (currently on 14-day trial — must convert or downgrade before expiry)
+**Workspace:** `Storytimewitheva`
+
+> **Verify in MailerLite before relying on this section:** plan/billing state, automation state, sender authentication and IDs can change outside the repository. The integration endpoint below is verified from current source code; dashboard/account state is operational data and should be checked live.
 
 ### Key resources
 
 | Resource | ID | URL fragment |
 |---|---|---|
 | Group | `187942568670005101` | `griotmoon-signups` |
-| Embed form | `187942934227715798` | `jsonp/2363396/forms/187942934227715798/subscribe` |
+| Embed form | `192076241844569863` | `jsonp/2363396/forms/192076241844569863/subscribe` |
 | Welcome automation | `187944859858895989` | `/automations/187944859858895989` |
 | Custom field | (system) | `language` (text: en/es/fr) |
 | Custom field | (system) | `lead_magnet` (text: starter-kit + others as added) |
@@ -255,21 +257,26 @@ After any deploy, navigate to:
 **Dashboard:** https://plausible.io
 **Site:** `griotmoon.com`
 **Script ID:** `pa-XNEfN50ABtDJcf6klL0ua`
-**Trial:** 30 days from signup; then ~$9/mo (Growth plan, ≤10K monthly pageviews)
+**Plan/billing:** Verify current status in Plausible before making billing decisions; the old trial/pricing note is intentionally not treated as current operational truth.
 
-### Goals enabled (already configured)
+### Events to verify in the Plausible dashboard
 
-- File Download — fires on any PDF download (starter kit, nurture PDFs, etc.)
-- Outbound Link Click — fires on every external link click (Amazon, Instagram, Facebook)
-- Form Submission — fires on contact form submissions
-- 404 — fires on broken page errors
+The application currently emits these custom events. Code presence does **not** prove the corresponding Plausible goal/event is configured or receiving data, so verify them in the dashboard after deployment:
+
+- `Signup` — newsletter/lead-magnet form submitted; properties: `language`, `lead_magnet`
+- `Amazon Click` — Amazon purchase-link click; property: `book`
+- `Activity Complete` — activity/demo marked complete; property: `activity`
+- `Read Along Start` — narration/read-along engagement; property: `language`
+- `Lead Magnet Download` — post-signup free-resource download; properties: `language`, `lead_magnet`
+
+Plausible may also collect enhanced-measurement events such as file downloads/outbound links depending on the site configuration. Verify dashboard configuration rather than assuming these are enabled.
 
 ### Routine
 
 | Frequency | Task |
 |---|---|
 | Daily (launch phase) | Check pageview trend + top pages + top sources |
-| Weekly | Review conversion goals: PDF downloads, Amazon clicks, signups |
+| Weekly | Review `Signup`, `Amazon Click`, `Activity Complete`, `Read Along Start`, and `Lead Magnet Download`; confirm expected properties are arriving |
 | Monthly | Export raw stats CSV for archival. Note any unusual traffic patterns. |
 | When trial ends | Decide: pay for Plausible OR migrate to GoatCounter (free up to 100K pageviews) |
 
@@ -281,13 +288,9 @@ After any deploy, navigate to:
 | Specific goal not firing | In Plausible: Site settings → Goals → check the goal exists. For outbound clicks: ensure links have `target="_blank"` (most do, check `<a>` tags). |
 | Plausible dashboard offline | Plausible occasionally has outages — check status.plausible.io. Stats backfill once they're back. |
 
-### Migration path to GoatCounter (free alternative)
+### Analytics-provider changes
 
-If trial ends and you'd rather not pay:
-1. Sign up at goatcounter.com (free for personal, up to 100K pageviews/mo)
-2. Get the script tag from GoatCounter
-3. Replace the Plausible script in `index.html` with the GoatCounter one
-4. Push, deploy. Goals migrate manually.
+Do not switch analytics providers as an incidental maintenance task. Plausible is the current production analytics source. Any future migration should first preserve the event taxonomy above, update privacy/CSP/prerender configuration together, and establish a measurement baseline before cutover.
 
 ---
 
