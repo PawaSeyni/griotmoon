@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && node scripts/fix-font-preload.mjs && npm run prerender",
-    "build:spa": "tsc && vite build && node scripts/fix-font-preload.mjs",
+    "build": "tsc && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs && npm run prerender",
+    "build:spa": "tsc && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs",
     "prerender": "node scripts/prerender.mjs",
     "gen:sitemap": "node scripts/gen-sitemap.mjs",
     "check:releases": "node scripts/check-amazon-releases.mjs",

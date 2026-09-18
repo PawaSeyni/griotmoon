@@ -55,6 +55,38 @@ for (const absolute of locs) {
   }
 }
 
+// Every internal link in every snapshot must resolve to a real file in dist.
+// There is no SPA fallback on this site, so a link to a route that was not
+// prerendered is a hard 404 in production. This is exactly how the six
+// /resources/<slug>/ article pages shipped dead on 2026-09-18: the route
+// existed in React, the sitemap generator knew the slugs, but the committed
+// sitemap was stale, so prerender never wrote them.
+const { readdir } = await import('node:fs/promises');
+async function* walk(dir) {
+  for (const e of await readdir(dir, { withFileTypes: true })) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) yield* walk(full);
+    else if (e.name.endsWith('.html')) yield full;
+  }
+}
+const seenLinks = new Set();
+for await (const file of walk(DIST)) {
+  const html = await readFile(file, 'utf8');
+  for (const [, href] of html.matchAll(/href="(\/[^"#?]*)/g)) {
+    if (seenLinks.has(href)) continue;
+    seenLinks.add(href);
+    const rel = href.slice(1);
+    const candidates = path.extname(rel)
+      ? [rel]
+      : [path.join(rel, 'index.html'), rel + '.html'];
+    let found = false;
+    for (const c of candidates) {
+      try { await stat(path.join(DIST, c)); found = true; break; } catch { /* next */ }
+    }
+    if (!found) failures.push(`dead internal link ${href} (first seen in ${path.relative(DIST, file)})`);
+  }
+}
+
 const shell = await readFile(path.join(DIST, 'index.html'), 'utf8');
 if (!shell.includes('https://plausible.io/js/pa-XNEfN50ABtDJcf6klL0ua.js')) {
   failures.push('Plausible production script missing from dist/index.html');
@@ -64,4 +96,4 @@ if (failures.length) {
   console.error('SEO output validation failed:\n' + failures.map(x => '  - ' + x).join('\n'));
   process.exit(1);
 }
-console.log(`SEO output validation passed for ${locs.length} sitemap URLs.`);
+console.log(`SEO output validation passed for ${locs.length} sitemap URLs and ${seenLinks.size} distinct internal links.`);
