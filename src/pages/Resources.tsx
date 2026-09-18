@@ -2,7 +2,7 @@ import { useState } from 'react';
 import EmailSignup from '../components/EmailSignup';
 import Seo from '../components/Seo';
 import ReadAloudButton from '../components/ReadAloudButton';
-import { useLanguage, useTranslation } from '../lib/language';
+import { localizePath, useLanguage, useTranslation } from '../lib/language';
 import { amazonDp } from '../lib/amazon';
 
 // Free classroom/home printables (PDFs in /public). `localized` files ship an
@@ -70,7 +70,7 @@ function renderBody(parts: BodyPart[]) {
 // Translations are adapted (not literal) so each language reads as if Pawa Seyni
 // wrote it in that language directly.
 // ---------------------------------------------------------------------------
-const TRANSLATIONS = {
+export const RESOURCE_TRANSLATIONS = {
   en: {
     seoTitle: 'Parent Resources',
     seoDesc: 'Reading tips, child-development milestones, and activity ideas for parents and teachers. Helping you make every reading session magical.',
@@ -150,7 +150,7 @@ const TRANSLATIONS = {
           'Even if you’re not fluent, swap a single word per page. “Look at the perro.” Then “The perro is sleeping.” Children absorb the second language as part of the story, not as a lesson.',
         ] },
         { title: '8. Pause for predictions', body: [
-          'Halfway through, ask: “What do you think will happen?” Then go back to reading. Comprehension goes up by roughly 30% on the next read-through when kids have already guessed once.',
+          'Halfway through, ask: “What do you think will happen?” Then go back to reading. Making a prediction encourages active thinking about the story and creates a natural opportunity to discuss characters, clues, and what might happen next.',
         ] },
         { title: '9. Build the nook', body: [
           'A reading nook is a vote of confidence – a small space that says “this matters here.” Start with a ',
@@ -730,6 +730,8 @@ const TRANSLATIONS = {
   },
 };
 
+export const RESOURCE_SLUGS = ['make-reading-time-magical', 'reading-milestones-by-age', 'activities-after-reading', 'reluctant-readers', 'reading-environment', 'bilingual-reading-benefits'] as const;
+
 const RESOURCE_META = [
   { emoji: '✨', categoryKey: 'readingTips', categoryColor: 'bg-blue-100 text-blue-700', popular: true },
   { emoji: '📊', categoryKey: 'childDev', categoryColor: 'bg-green-100 text-green-700', popular: true },
@@ -744,12 +746,12 @@ type CategoryKey = 'all' | 'readingTips' | 'activityIdeas' | 'childDev' | 'engag
 // ---------------------------------------------------------------------------
 // Article components -- data-driven from translations.
 // ---------------------------------------------------------------------------
-type Article1T = (typeof TRANSLATIONS)['en']['article1'];
-type Article2T = (typeof TRANSLATIONS)['en']['article2'];
-type Article3T = (typeof TRANSLATIONS)['en']['article3'];
-type Article4T = (typeof TRANSLATIONS)['en']['article4'];
-type Article5T = (typeof TRANSLATIONS)['en']['article5'];
-type Article6T = (typeof TRANSLATIONS)['en']['article6'];
+type Article1T = (typeof RESOURCE_TRANSLATIONS)['en']['article1'];
+type Article2T = (typeof RESOURCE_TRANSLATIONS)['en']['article2'];
+type Article3T = (typeof RESOURCE_TRANSLATIONS)['en']['article3'];
+type Article4T = (typeof RESOURCE_TRANSLATIONS)['en']['article4'];
+type Article5T = (typeof RESOURCE_TRANSLATIONS)['en']['article5'];
+type Article6T = (typeof RESOURCE_TRANSLATIONS)['en']['article6'];
 
 function ArticleSimple({ id, t }: { id: string; t: { eyebrow: string; title: string; intro: string; sections: Section[] } }) {
   return (
@@ -774,23 +776,23 @@ function ArticleSimple({ id, t }: { id: string; t: { eyebrow: string; title: str
   );
 }
 
-function ArticleMakingReadingMagical({ t }: { t: Article1T }) {
+export function ArticleMakingReadingMagical({ t }: { t: Article1T }) {
   return <ArticleSimple id="making-reading-magical" t={t} />;
 }
 
-function ArticleAgeAppropriate({ t }: { t: Article3T }) {
+export function ArticleAgeAppropriate({ t }: { t: Article3T }) {
   return <ArticleSimple id="age-appropriate-reading" t={t} />;
 }
 
-function ArticleFollowUp({ t }: { t: Article4T }) {
+export function ArticleFollowUp({ t }: { t: Article4T }) {
   return <ArticleSimple id="follow-up-activities" t={t} />;
 }
 
-function ArticleReluctantReaders({ t }: { t: Article5T }) {
+export function ArticleReluctantReaders({ t }: { t: Article5T }) {
   return <ArticleSimple id="reluctant-readers" t={t} />;
 }
 
-function ArticlePerfectReadingEnvironment({ t }: { t: Article2T }) {
+export function ArticlePerfectReadingEnvironment({ t }: { t: Article2T }) {
   return (
     <article id="perfect-reading-environment" className="scroll-mt-24 max-w-3xl mx-auto px-4 py-12 border-t border-gray-100">
       <header className="mb-8">
@@ -823,14 +825,14 @@ function ArticlePerfectReadingEnvironment({ t }: { t: Article2T }) {
   );
 }
 
-function ArticleBilingualReading({ t }: { t: Article6T }) {
+export function ArticleBilingualReading({ t }: { t: Article6T }) {
   return <ArticleSimple id="bilingual-reading" t={t} />;
 }
 
 export default function Resources() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>('all');
   const [search, setSearch] = useState('');
-  const t = useTranslation(TRANSLATIONS);
+  const t = useTranslation(RESOURCE_TRANSLATIONS);
   const { language } = useLanguage();
 
   const categoryButtons: { key: CategoryKey; label: string }[] = [
@@ -845,6 +847,7 @@ export default function Resources() {
   const merged = t.resources.map((r, i) => ({
     ...RESOURCE_META[i],
     ...r,
+    slug: RESOURCE_SLUGS[i],
   }));
 
   const filtered = merged.filter(r => {
@@ -941,7 +944,7 @@ export default function Resources() {
               );
 
               return 'anchor' in r && r.anchor ? (
-                <a key={i} href={`#${r.anchor}`} className="block">
+                <a key={i} href={localizePath(`/resources/${r.slug}`, language) + '/'} className="block">
                   {card}
                 </a>
               ) : (
@@ -957,14 +960,6 @@ export default function Resources() {
           )}
         </div>
       </section>
-
-      {/* Full articles -- data-driven from per-language (EN/ES/FR) translations. */}
-      <ArticleMakingReadingMagical t={t.article1} />
-      <ArticleAgeAppropriate t={t.article3} />
-      <ArticleFollowUp t={t.article4} />
-      <ArticleReluctantReaders t={t.article5} />
-      <ArticlePerfectReadingEnvironment t={t.article2} />
-      <ArticleBilingualReading t={t.article6} />
 
       {/* For Teachers & Educators -- free, classroom-friendly printables (PDFs in /public). */}
       <section id="teachers" className="scroll-mt-24 py-12 px-4 bg-gradient-to-b from-white to-purple-50 border-t border-gray-100">

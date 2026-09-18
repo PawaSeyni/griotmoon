@@ -40,6 +40,7 @@ const Books               = lazy(() => import('./pages/Books'));
 const BookDetail          = lazy(() => import('./pages/BookDetail'));
 const Activities          = lazy(() => import('./pages/Activities'));
 const Resources           = lazy(() => import('./pages/Resources'));
+const ResourceArticle     = lazy(() => import('./pages/ResourceArticle'));
 const About               = lazy(() => import('./pages/About'));
 const Contact             = lazy(() => import('./pages/Contact'));
 const Profile             = lazy(() => import('./pages/Profile'));
@@ -83,6 +84,7 @@ const routeDefs = [
   { path: '/activities/puzzles', element: <DemoPage><PuzzleAdventuresDemo /></DemoPage> },
   { path: '/activities/word-explorer', element: <DemoPage><WordExplorerDemo /></DemoPage> },
   { path: '/resources', element: <Resources /> },
+  { path: '/resources/:slug', element: <ResourceArticle /> },
   { path: '/about', element: <About /> },
   { path: '/contact', element: <Contact /> },
   { path: '/faq', element: <FAQ /> },
