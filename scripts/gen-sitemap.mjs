@@ -47,7 +47,10 @@ const booksSrc = await readFile(path.join(ROOT, 'src/data/books.ts'), 'utf8');
 const bookIds = [...booksSrc.matchAll(/^ {4}id: '([^']+)',/gm)].map(m => m[1]);
 const bookPages = bookIds.map(id => [`/books/${id}`, 'monthly', '0.8']);
 
-const pages = [...staticPages, ...bookPages];
+const resourceSlugs = ['make-reading-time-magical','reading-milestones-by-age','activities-after-reading','reluctant-readers','reading-environment','bilingual-reading-benefits'];
+const resourcePages = resourceSlugs.map(slug => [`/resources/${slug}`, 'monthly', '0.7']);
+
+const pages = [...staticPages, ...bookPages, ...resourcePages];
 
 // Standalone games: single static URL each (self-contained pages with their
 // own internal EN/ES/FR toggles), so no per-language hreflang.
