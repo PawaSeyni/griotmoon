@@ -325,6 +325,19 @@ confirmed one.
 **Acceptance:** an explicit decision recorded here, not a default inherited from
 form setup.
 
+**Decided 22 September 2026: single opt-in,** by the owner, the same mode as Eva.
+
+- Forced by P2-1 in practice: on the shared MailerLite account, API-created
+  subscribers are active immediately with no confirmation email. The only API
+  route to double opt-in is an account-wide setting that would also change Eva
+  mid-experiment, so it was not an option.
+- `Lead Created` now means an active subscriber MailerLite created, with no
+  pending confirmation.
+- The Privacy page (EN/ES/FR) and the signup success message (EN/ES/FR) no
+  longer promise a confirmation email. Wording matches Eva's.
+- Takes effect when P2-1 merges; until then the live site still runs double
+  opt-in through the old form.
+
 ### P2-3 Gated landing pages
 
 Eva serves 27 prerendered `/free/<magnet>` pages, noindex, one per magnet per
