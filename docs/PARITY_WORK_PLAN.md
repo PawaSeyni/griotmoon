@@ -213,11 +213,15 @@ exists.
 - Left in place, a decision for the owner: goals under the retired names
   (`Signup`, `Amazon Click`, `Lead Magnet Download`, `Read Along Start`).
   They keep their history and receive nothing new.
-- **Double count, confirmed:** form auto-tracking is on (the served script has
-  `formSubmissions` enabled), so every signup is counted twice: once as Plausible's
-  built-in `Form: Submission` and once as `Lead Created`. That is the double count
-  Eva removed in DA-01. Turn form submissions off in the property's
-  installation settings, or report on `Lead Created` only.
+- **Double count removed:** Plausible's form auto-tracking was on, so every signup
+  was counted twice, as the built-in `Form: Submission` and as `Lead Created` (the
+  double count Eva removed in DA-01). Turned off on 22 September 2026 (Site
+  settings, General, Tracking); the served script no longer carries
+  `formSubmissions`. The `Form: Submission` goal keeps its history.
+- **Still on, by design:** outbound-link and file-download auto-tracking. They also
+  fire on an Amazon click and a magnet PDF download, next to `Purchase Click` and
+  `Magnet Download`. Those are separate goals, not outcomes, so the funnel report
+  must use the schema-1 events only.
 
 ### P1-3 Funnel report script
 
