@@ -203,6 +203,21 @@ bulk-add where it offers one.
 
 **Acceptance:** the report script runs with zero `HTTP` error lines.
 
+**Configured 22 September 2026;** the acceptance above can only be checked once P1-3
+exists.
+
+- Goals: all 11 events in schema 1. `Activity Complete` already existed; the
+  other 10 were added.
+- Custom properties: `activity`, `book`, `lead_magnet` and `language` already
+  existed; `destination`, `placement`, `asset` and `results` were added.
+- Left in place, a decision for the owner: goals under the retired names
+  (`Signup`, `Amazon Click`, `Lead Magnet Download`, `Read Along Start`).
+  They keep their history and receive nothing new.
+- **Watch:** the property also has Plausible's built-in `Form: Submission` goal.
+  If form auto-tracking is on, every signup counts twice, once as
+  `Form: Submission` and once as `Lead Created`, which is the double count Eva
+  removed in DA-01. Report on `Lead Created` only, or turn form tracking off.
+
 ### P1-3 Funnel report script
 
 **Port:** `scripts/report-funnels.mjs` and `scripts/lib/catalog.mjs` from Eva.
