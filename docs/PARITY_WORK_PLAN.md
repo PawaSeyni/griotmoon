@@ -239,8 +239,10 @@ Eva's version loads the Stats API key from a git-ignored `.env` itself.
   the sitemap and i18n scripts use. Eva's version compiles a browser-free
   `books.data.ts`, which Griot Moon does not have; Eva's theme and age-band
   segments are replaced by the raw `ageRange`.
-- Two fixes against Eva's copy: the default range is Plausible's `'30d'` literal
-  (Eva sends `['30d', 'now']`, which is not a valid custom range), and any failed
+- Two changes from Eva's copy: the default range is Plausible's `'30d'` literal
+  (Eva sends `['30d', 'now']`; Plausible's API documents custom ranges as two
+  ISO dates, so Eva's default likely fails, not yet confirmed against a live
+  call; worth checking in Eva after its freeze), and any failed
   call prints an `HTTP` line and exits non-zero, so P1-2's acceptance can be
   checked by the exit code.
 - The report states that its step rates divide event totals, not the same
