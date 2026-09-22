@@ -364,9 +364,13 @@ languages, and the build fails if one is missing.
   `landing` placement for the form, and a `landing-entrances` funnel. Plausible
   needs a `Landing View` goal and a `landing_page` custom property before the
   report can break it down.
-- Eva's per-magnet copy (blurb, bullets, preview image) is not ported: Griot
-  Moon's magnets have a title and a PDF, and every page shares the kit blurb.
-  Worth writing before paid traffic points at a magnet other than the starter kit.
+- **Copy mismatch, blocks campaigns on any magnet but the starter kit:** Griot
+  Moon's magnets have only a title and a PDF, so every landing page shares the
+  starter kit's blurb, bullets ("20-page activity pack…") and button ("Get my free
+  kit"). Seen on `/fr/free/parents-guide/`: the headline offers the parents'
+  guide, the body promises the activity pack. Each magnet needs its own blurb,
+  bullets and button in EN/ES/FR (Eva's `magnet.copy` shape) before a pin or ad
+  points at it.
 
 ### P2-4 Pinterest server-side conversions
 
