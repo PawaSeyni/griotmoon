@@ -139,7 +139,7 @@ export async function handler(event) {
   }
 
   if (!process.env.MAILERLITE_API_KEY) {
-    console.error('MAILERLITE_API_KEY is not set');
+    console.error('MAILERLITE_API_KEY is not set in this deploy');
     return json(500, { ok: false, error: 'not_configured' });
   }
 
