@@ -1,0 +1,145 @@
+// Remediation coverage for netlify/functions/subscribe.mjs:
+//   #2 group is mandatory — a group-resolution failure must NOT create an
+//      ungrouped subscriber (who would never enter the welcome automation).
+//   #1 anti-abuse — honeypot + origin check reject/short-circuit before any
+//      MailerLite write.
+// Drives the real handler with a stubbed global fetch; nothing real is called.
+//
+// Test ORDER matters: subscribe.mjs caches the resolved group id in module
+// scope, so the group-FAILURE case must run before any case that resolves it.
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+
+process.env.MAILERLITE_API_KEY = 'test-key';
+
+const { handler, config, safeReturn } = await import('../../netlify/functions/subscribe.mjs');
+
+function stubFetch(routes) {
+  const calls = [];
+  globalThis.fetch = async (url, opts = {}) => {
+    const method = (opts.method || 'GET').toUpperCase();
+    calls.push({ url, method, body: opts.body });
+    for (const r of routes) {
+      if (r.match(url, method)) return { ok: r.ok, status: r.status, json: async () => r.data ?? {} };
+    }
+    throw new Error(`unexpected fetch: ${method} ${url}`);
+  };
+  return calls;
+}
+const jsonEvent = (body, headers = {}) => ({
+  httpMethod: 'POST',
+  headers: { 'content-type': 'application/json', ...headers },
+  body: JSON.stringify(body),
+});
+const formEvent = (params, headers = {}) => ({
+  httpMethod: 'POST',
+  headers: { 'content-type': 'application/x-www-form-urlencoded', ...headers },
+  body: new URLSearchParams(params).toString(),
+});
+const GROUPS_OK = { match: (u, m) => u.includes('/groups') && m === 'GET', ok: true, status: 200, data: { data: [{ id: 'G1', name: 'griotmoon-signups' }] } };
+const SUBS_OK = { match: (u, m) => u.endsWith('/subscribers') && m === 'POST', ok: true, status: 201, data: { data: { id: 's1' } } };
+
+test('#1 honeypot: a filled `company` field returns success but writes nothing', async () => {
+  const calls = stubFetch([]); // any fetch would throw
+  const res = await handler(jsonEvent({ email: 'bot@example.com', company: 'Acme Bots Inc' }));
+  assert.equal(res.statusCode, 200);
+  assert.equal(JSON.parse(res.body).ok, true);
+  assert.equal(calls.length, 0, 'MailerLite must not be called for a honeypot hit');
+});
+
+test('#1 origin: a foreign Origin is rejected with 403 before any write', async () => {
+  const calls = stubFetch([]);
+  const res = await handler(jsonEvent({ email: 'x@example.com' }, { origin: 'https://evil.example' }));
+  assert.equal(res.statusCode, 403);
+  assert.equal(calls.length, 0);
+});
+
+// Runs while the group cache is still empty.
+test('#2 group lookup failure → 503 and NO subscriber is created', async () => {
+  const calls = stubFetch([{ match: (u, m) => u.includes('/groups') && m === 'GET', ok: false, status: 500, data: {} }]);
+  const res = await handler(jsonEvent({ email: 'nogroup@example.com' }));
+  assert.equal(res.statusCode, 503);
+  assert.equal(JSON.parse(res.body).error, 'group_unavailable');
+  assert.ok(!calls.some((c) => c.url.endsWith('/subscribers') && c.method === 'POST'), 'must NOT create a subscriber when the group is unresolved');
+});
+
+test('#1 origin: our own Origin is allowed and the signup proceeds', async () => {
+  const calls = stubFetch([GROUPS_OK, SUBS_OK]);
+  const res = await handler(jsonEvent({ email: 'ok@example.com' }, { origin: 'https://griotmoon.com' }));
+  assert.equal(res.statusCode, 200);
+  assert.ok(calls.some((c) => c.url.endsWith('/subscribers') && c.method === 'POST'));
+});
+
+test('#2 happy path: subscriber is created WITH the resolved group', async () => {
+  let postBody = null;
+  stubFetch([GROUPS_OK, SUBS_OK]);
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url, opts) => {
+    if (url.endsWith('/subscribers') && (opts?.method || '').toUpperCase() === 'POST') postBody = JSON.parse(opts.body);
+    return realFetch(url, opts);
+  };
+  const res = await handler(jsonEvent({ email: 'real@example.com', lead_magnet: 'parents-guide' }));
+  const out = JSON.parse(res.body);
+  assert.equal(res.statusCode, 200);
+  assert.equal(out.ok, true);
+  assert.equal(out.grouped, true);
+  assert.deepEqual(postBody.groups, ['G1'], 'subscriber must carry the group');
+});
+
+// #3 anti-abuse — the platform rate limit must be BOUND TO THE PATH THE BROWSER
+// ACTUALLY POSTS TO. This guards the precise failure that shipped before:
+// netlify/edge-functions/rate-limit-subscribe.mjs declared a 10/60s limit that
+// enforced nothing, and production served 13 rapid POSTs with 13x 200. A limit
+// pointed at the wrong path fails exactly that way — silently, looking correct
+// in review, provable only by hitting the live endpoint.
+test('#3 rate limit is declared on the endpoint the frontend actually calls', () => {
+  assert.ok(config, 'subscribe.mjs must export `config` — Netlify reads function rate limits only from there');
+  assert.equal(config.rateLimit?.action, 'rate_limit');
+  assert.ok(config.rateLimit?.windowLimit > 0, 'windowLimit must be set');
+  assert.ok(
+    config.rateLimit?.windowSize > 0 && config.rateLimit.windowSize <= 180,
+    'windowSize must be 1-180s (Netlify limit)'
+  );
+
+  // Parse the endpoint constant out of the component rather than duplicating it,
+  // so moving the endpoint breaks this test instead of silently unbinding the limit.
+  const ui = readFileSync('src/components/EmailSignup.tsx', 'utf8');
+  const m = ui.match(/SUBSCRIBE_ENDPOINT\s*=\s*['"`]([^'"`]+)['"`]/);
+  assert.ok(m, 'could not find SUBSCRIBE_ENDPOINT in EmailSignup.tsx');
+  assert.equal(
+    config.path,
+    m[1],
+    `rate limit is bound to ${config.path} but the browser POSTs to ${m?.[1]} — the limit would not apply`
+  );
+});
+
+// #4 native-form fallback — a submit before React hydrates posts form-encoded and
+// is answered with a redirect BACK TO THE SAME localized landing page, not the
+// English root. Before this, every native-fallback signup (French/Spanish, or any
+// non-default magnet) landed on the wrong offer's success screen. `return_to` is
+// hard-validated to a same-site path so it can never become an open redirect.
+test('#4 safeReturn: same-site paths pass; scheme/protocol-relative/query/fragment fall back to /', () => {
+  for (const ok of ['/', '/fr/free/leo-and-the-wolf', '/es/free/parents-guide', '/books/emperors-true-treasure']) {
+    assert.equal(safeReturn(ok), ok, `must preserve ${ok}`);
+  }
+  for (const bad of ['//evil.example', 'https://evil.example/x', 'javascript:alert(1)', '/x?a=1', '/x#y', '/a b', '', null, undefined]) {
+    assert.equal(safeReturn(bad), '/', `must neutralize ${JSON.stringify(bad)}`);
+  }
+});
+
+test('#4 native form: success redirects back to the submitted localized landing path', async () => {
+  stubFetch([GROUPS_OK, SUBS_OK]);
+  const res = await handler(
+    formEvent({ email: 'fr@example.com', language: 'fr', lead_magnet: 'leo-and-the-wolf', return_to: '/fr/free/leo-and-the-wolf' })
+  );
+  assert.equal(res.statusCode, 303);
+  assert.equal(res.headers.Location, '/fr/free/leo-and-the-wolf?signup=ok#email-signup');
+});
+
+test('#4 native form: an off-site return_to is neutralized to the root', async () => {
+  stubFetch([GROUPS_OK, SUBS_OK]);
+  const res = await handler(formEvent({ email: 'fr2@example.com', return_to: '//evil.example/phish' }));
+  assert.equal(res.statusCode, 303);
+  assert.equal(res.headers.Location, '/?signup=ok#email-signup');
+});

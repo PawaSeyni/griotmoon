@@ -55,10 +55,12 @@
     # Content-Security-Policy. The allowlist is the site's ACTUAL external
     # resource graph, nothing more:
     #   plausible.io            analytics script + its event beacon (index.html)
-    #   assets.mailerlite.com   newsletter signup POST (src/components/EmailSignup.tsx)
     # Everything else (covers, Pixel art, Lexend, games) is same-origin. Amazon
     # is plain <a href> links, which no directive covers. Netlify Forms and the
-    # feedback widget POST to "/", hence form-action 'self'.
+    # feedback widget POST to "/", and the newsletter form posts to the
+    # same-origin subscribe function (netlify/functions/subscribe.mjs), hence
+    # form-action 'self' and no MailerLite origin anywhere: the browser never
+    # talks to MailerLite since parity plan P2-1.
     #
     # 'unsafe-inline' on script-src is required by the Plausible queue stub in
     # index.html (and the per-route JSON-LD blocks the prerender bakes into every
@@ -69,7 +71,7 @@
     #
     # Adding any third-party script, font, image host, or API endpoint means
     # adding it HERE too, or it fails closed in production.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; connect-src 'self' https://plausible.io https://assets.mailerlite.com; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://plausible.io; connect-src 'self' https://plausible.io; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests"
 
 # Long-cache for hashed static assets emitted by Vite
 [[headers]]

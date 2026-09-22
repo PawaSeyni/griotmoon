@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage, useTranslation, type Language } from '../lib/language';
 import { track } from '../lib/analytics';
 
-// MailerLite embedded form action, group "griotmoon-signups", form
-// "Griot Moon, Starter Kit site signup" (created 2026-07-04; the account-level
-// `language` and `lead_magnet` custom fields attach on submit). Double opt-in is ON, so MailerLite sends the
-// confirmation email.
-const MAILERLITE_FORM_ACTION =
-  'https://assets.mailerlite.com/jsonp/2363396/forms/192076241844569863/subscribe';
+// Server-side subscribe (netlify/functions/subscribe.mjs, parity plan P2-1). It calls
+// MailerLite's API with the account token and returns a real result, so the form can
+// tell success from failure and `Lead Created` means a subscriber MailerLite created.
+// Adds to the group "griotmoon-signups", which triggers the welcome automation. The
+// function's rate limit is bound to this exact path (tests/funnel/subscribe.test.mjs).
+const SUBSCRIBE_ENDPOINT = '/.netlify/functions/subscribe';
 
 // Lead-magnet registry. Pins/FB posts deep-link to the form with `?lm=<slug>`
 // so the right freebie is both tagged on the subscriber AND delivered instantly
@@ -67,6 +67,21 @@ const DEFAULT_MAGNET = 'bilingual-starter-kit';
 function readParam(name: string): string | null {
   if (typeof window === 'undefined') return null;
   return new URLSearchParams(window.location.search).get(name);
+}
+
+/**
+ * Campaign attribution from the URL's `utm_*` params, captured at mount so it survives
+ * the `?signup=` redirect of the native fallback. The subscribe function stores them on
+ * the subscriber and drops them gracefully if MailerLite rejects the fields.
+ */
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
+function readUtm(): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const k of UTM_KEYS) {
+    const v = readParam(k);
+    if (v) out[k] = v.slice(0, 120);
+  }
+  return out;
 }
 
 function resolveMagnet(): Magnet {
@@ -140,7 +155,14 @@ export type SignupPlacement = 'home' | 'books' | 'about' | 'activities' | 'resou
 export default function EmailSignup({ placement }: { placement: SignupPlacement }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>('idle');
+  // A submit before React hydrates posts natively to the function, which 303-redirects
+  // back with ?signup=<result>; start in that state so the visitor sees the outcome.
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>(() => {
+    const r = (readParam('signup') || '').toLowerCase();
+    return r === 'ok' ? 'submitted' : r === 'invalid' || r === 'error' ? 'error' : 'idle';
+  });
+  const [utm] = useState(readUtm);
+  const hpRef = useRef<HTMLInputElement>(null); // honeypot; real users never fill it
   const { language, setLanguage } = useLanguage();
   const t = useTranslation(TRANSLATIONS);
   const [magnet] = useState<Magnet>(() => resolveMagnet());
@@ -194,36 +216,26 @@ export default function EmailSignup({ placement }: { placement: SignupPlacement 
 
     const trimmedName = firstName.trim();
 
-    const formData = new FormData();
-    formData.append('fields[email]', email);
-    // MailerLite's default "Name" field has key `name` (id 1). Keep this
-    // submission optional, empty names just leave the field blank, which
-    // the welcome email handles with a `{$name|default:'…'}` fallback.
-    if (trimmedName) formData.append('fields[name]', trimmedName);
-    formData.append('fields[language]', language);
-    formData.append('fields[lead_magnet]', magnet.tag);
-    formData.append('ml-submit', '1');
-    formData.append('anticsrf', 'true');
-
     try {
-      // MailerLite's JSONP endpoint doesn't return CORS headers, so we
-      // can't read the response. `no-cors` lets the POST go through, and
-      // double opt-in means MailerLite will email the user the
-      // confirmation link regardless of what we surface in the UI.
-      await fetch(MAILERLITE_FORM_ACTION, {
+      const res = await fetch(SUBSCRIBE_ENDPOINT, {
         method: 'POST',
-        body: formData,
-        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, name: trimmedName, language, lead_magnet: magnet.tag, company: hpRef.current?.value || '', ...utm }),
       });
-      setStatus('submitted');
-      track('Lead Created', { language, lead_magnet: magnet.tag, placement });
-      setEmail('');
-      setFirstName('');
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        setStatus('submitted');
+        // Fired only on a backend-confirmed subscriber, never on submit.
+        track('Lead Created', { language, lead_magnet: magnet.tag, placement });
+        setEmail('');
+        setFirstName('');
+      } else {
+        // A real failure now reaches the visitor instead of a silent "success".
+        console.error('Signup rejected:', res.status, data);
+        setStatus('error');
+      }
     } catch (err) {
-      // `no-cors` fetch only throws on hard network failure (offline,
-      // DNS, request aborted). Show the inline error so the user can
-      // retry or fall back to email.
-      console.error('MailerLite signup failed:', err);
+      console.error('Signup request failed:', err);
       setStatus('error');
     }
   };
@@ -258,9 +270,30 @@ export default function EmailSignup({ placement }: { placement: SignupPlacement 
             </a>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} action={SUBSCRIBE_ENDPOINT} method="post" className="flex flex-col gap-3 max-w-md mx-auto">
+            {/* Native fallback: a submit before React hydrates posts these straight to the
+                function, which redirects back to this page with ?signup=<result>. Such a
+                signup is not counted as Lead Created (no script ran). */}
+            <input type="hidden" name="language" value={language} />
+            <input type="hidden" name="lead_magnet" value={magnet.tag} />
+            <input type="hidden" name="return_to" value={typeof window !== 'undefined' ? window.location.pathname : ''} />
+            {/* Honeypot: off-screen and hidden from assistive tech; bots fill it and the
+                function drops the submission. A text input, not type=hidden, on purpose. */}
             <input
               type="text"
+              name="company"
+              ref={hpRef}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute left-[-9999px] top-0 h-px w-px opacity-0"
+            />
+            {Object.entries(utm).map(([k, v]) => (
+              <input key={k} type="hidden" name={k} value={v} />
+            ))}
+            <input
+              type="text"
+              name="name"
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
               onFocus={handleFocus}
@@ -273,6 +306,7 @@ export default function EmailSignup({ placement }: { placement: SignupPlacement 
             <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
+                name="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 onFocus={handleFocus}
