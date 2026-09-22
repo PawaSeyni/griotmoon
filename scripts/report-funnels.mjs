@@ -1,6 +1,6 @@
 // Funnel and performance report (parity plan P1-3), ported from Story Time with Eva.
 //
-//   npm run report:funnels                                    last 30 days, from Plausible
+//   npm run report:funnels                                    30 days ending today, from Plausible
 //   npm run report:funnels -- --from 2026-09-01 --to 2026-09-30
 //   npm run report:funnels -- --fixture scripts/fixtures/funnel-events.json [--out file.md]
 //
@@ -24,6 +24,10 @@ try { process.loadEnvFile('.env'); } catch { /* no .env: fall through to process
 
 const args = Object.fromEntries(process.argv.slice(2).map((a, i, all) => (a.startsWith('--') ? [a.slice(2), all[i + 1] && !all[i + 1].startsWith('--') ? all[i + 1] : true] : [])).filter((x) => x.length));
 if (Boolean(args.from) !== Boolean(args.to)) { console.error('Pass both --from and --to (YYYY-MM-DD), or neither for the last 30 days.'); process.exit(2); }
+// Default: the 30 days ending today, inclusive (UTC dates).
+const isoDay = (d) => d.toISOString().slice(0, 10);
+const to = args.to ?? isoDay(new Date());
+const from = args.from ?? isoDay(new Date(Date.parse(to) - 29 * 86400000));
 const books = loadBooks();
 let httpErrors = 0;
 
@@ -31,8 +35,9 @@ async function fetchPlausible() {
   const key = process.env.PLAUSIBLE_API_KEY;
   if (!key) return null;
   const site = process.env.PLAUSIBLE_SITE_ID || 'griotmoon.com';
-  // A custom range is [from, to]; Plausible's relative ranges are a bare string.
-  const dateRange = args.from ? [args.from, args.to] : '30d';
+  // Always an explicit [from, to]. Plausible's relative '30d' ends YESTERDAY, so it hides
+  // today's events, which matters most right after a schema change.
+  const dateRange = [from, to];
   const rows = [];
   for (const e of EVENTS) {
     const dims = [...e.required, ...e.optional].map((p) => `event:props:${p}`);
@@ -69,7 +74,7 @@ const count = (event, where = {}, by = null) => {
 };
 const pct = (a, b) => (b ? `${((100 * a) / b).toFixed(1)}%` : 'n/a');
 const warn = (n) => (n < MIN_SAMPLE ? ' ⚠︎ below minimum sample' : '');
-const range = args.from ? `${args.from} to ${args.to}` : args.fixture ? 'fixture' : 'last 30 days';
+const range = args.fixture ? 'fixture' : `${from} to ${to}`;
 
 let md = `# Griot Moon funnel report\n\n`;
 md += `Source: ${source}. Range: ${range}. Event schema version ${SCHEMA_VERSION}. Minimum sample ${MIN_SAMPLE} events per segment. Rates are INTENT unless the funnel says outcome.\n\n**How to read the rates:** Plausible returns totals per event, not the same visitors followed step to step. A step rate is one total divided by the previous one, so it can exceed 100% (a Book View can come from search, a pin or a shared link, not only the step before). Read it as a ratio of volumes, not a conversion rate.\n\n`;

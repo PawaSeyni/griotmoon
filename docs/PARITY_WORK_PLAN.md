@@ -253,9 +253,21 @@ Eva's version loads the Stats API key from a git-ignored `.env` itself.
   ("No data", exit 0), with an invalid key (11 `HTTP 401` lines, exit 1), and with
   a one-sided date range (rejected, exit 2).
 
-**To finish:** create a Plausible Stats API key, put it in `.env` as
-`PLAUSIBLE_API_KEY`, run `npm run report:funnels`, and confirm zero `HTTP`
-lines. That also closes P1-2.
+**Acceptance met 22 September 2026, and P1-2 with it:** `npm run report:funnels`
+ran against the live property with zero `HTTP` lines and exit 0. The query shape
+is proven on real data: the same call returns the old `Amazon Click` goal broken
+down by `book`.
+
+- **Fixed on the first real run:** Plausible's relative `'30d'` range ends
+  yesterday, so it hid everything from the day schema 1 shipped. The default is
+  now an explicit range of the 30 days ending today.
+- **Every schema-1 count is zero** because no one has visited since the deploy,
+  not because a query is wrong.
+- **Traffic, measured:** 18 visitors and 26 pageviews in the 30 days to
+  22 September, and one Amazon click. That settles P0-1: the empty list is a
+  traffic problem. It also means P1-4's baseline will be close to zero on every
+  funnel. That is still worth freezing, as the "before" of any campaign, but no
+  rate in it will clear the 50-event minimum.
 
 ### P1-4 Freeze a pre-campaign baseline
 
