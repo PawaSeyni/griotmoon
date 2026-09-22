@@ -13,7 +13,7 @@
 //
 // Any failed API call prints a line starting "HTTP" and makes the script exit non-zero,
 // so "zero HTTP lines" (P1-2's acceptance) is checkable.
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { EVENTS, SCHEMA_VERSION } from '../src/analytics/events.ts';
 import { FUNNELS, MIN_SAMPLE } from '../src/analytics/funnels.ts';
 import { loadBooks } from './lib/catalog.mjs';
@@ -111,6 +111,11 @@ if (!rows) {
   const unknown = [...new Set(rows.filter((r) => r.props?.book && !bookById[r.props.book]).map((r) => r.props.book))];
   if (unknown.length) md += `⚠︎ ${unknown.length} book id(s) in the data are not in the catalog: ${unknown.join(', ')}. Usually retired or renamed books; they appear as "(not in catalog)" in the age breakdown.\n\n`;
   md += `## Known gaps\n\n- Amazon purchases are not observable; every purchase figure is an outbound click (intent).\n- Until parity plan P2-1, \`Lead Created\` fires when the browser's request did not throw, not on a confirmed subscriber. Double opt-in: created is not confirmed.\n- Each book has one Amazon listing, so \`language\` on a purchase is the site language, not an edition.\n`;
+}
+// A frozen snapshot is a record, not an output: refuse to overwrite one (P1-4).
+if (args.out && existsSync(args.out) && readFileSync(args.out, 'utf8').includes('FROZEN SNAPSHOT')) {
+  console.error(`${args.out} is a frozen snapshot and will not be overwritten. Write this window to a new file.`);
+  process.exit(3);
 }
 if (args.out) { writeFileSync(args.out, md); console.log(`report written: ${args.out}`); } else console.log(md);
 if (httpErrors) { console.error(`${httpErrors} Plausible request(s) failed; see the HTTP lines above.`); process.exit(1); }
