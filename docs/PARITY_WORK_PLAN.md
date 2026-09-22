@@ -51,9 +51,9 @@ Griot Moon is not far behind on the **site**. It is a long way behind on
 
 ## P0. Answer one question before building anything
 
-### P0-0 Move this clone out of iCloud first
+### P0-0 Move this clone out of iCloud first — DONE 22 September 2026
 
-**Do this before anything else, including P0-1.**
+**Completed. The clone now lives at `~/Developer/griotmoon`, beside Eva.**
 
 This clone sits at `~/Desktop/griotmoon`, and iCloud Desktop sync is switched on.
 Found here on 22 September 2026:
@@ -72,8 +72,22 @@ exactly this reason (`bc94403`, "clone moved out of iCloud sync to ~/Developer")
 delete the stray conflict copies. Do not simply delete the " 2" files and carry
 on; iCloud will make more.
 
-**Acceptance:** the repository resolves to `~/Developer/griotmoon`, `git status`
-is clean, and no " 2" files reappear after a build.
+**Acceptance:** met and verified on 22 September 2026.
+
+| Check | Result |
+|---|---|
+| Location | `~/Developer/griotmoon` |
+| `git status` | clean, on `main`, in sync with origin |
+| `git fsck` | no errors |
+| History | intact, including this plan's own commits |
+| Stray " 2" files | none anywhere in the tree |
+| Left behind on Desktop | nothing |
+| `npm run lint` from the new path | passes, 0 errors |
+
+**Still worth knowing:** iCloud Desktop sync remains switched on, and the same
+conflict copies exist in other repositories still on the Desktop, including
+`Optionstutor/.git/index 2` and `papanguer/.git/index 2`. Those are outside this
+plan's scope but they carry the same risk this item was written to remove.
 
 
 ### P0-1 Does the signup actually work?
@@ -319,7 +333,7 @@ per-article resource pages, which Eva only gained on 19 September 2026.
 
 | Phase | Items | Blocks what |
 |---|---|---|
-| P0 | Move off iCloud, then prove the signup works | Everything. A move and one test. |
+| P0 | ~~Move off iCloud~~ done; prove the signup works | Everything. One test remains. |
 | P1 | Events, Plausible config, report, frozen baseline | All measurement |
 | P2 | Server-side subscribe, opt-in decision, landing pages, Pinterest, email | All conversion |
 | P3 | Version stamping, tests, typecheck | Trusting any of it |
