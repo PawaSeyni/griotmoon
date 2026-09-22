@@ -138,12 +138,14 @@ export async function handler(event) {
     if (!(isOwnHost || isDevHost)) return json(403, { ok: false, error: 'bad_origin' });
   }
 
-  // Netlify reuses a deployed function whose code is unchanged, environment included,
-  // so after adding or changing MAILERLITE_API_KEY a redeploy with no change to this
-  // file can keep answering not_configured. Change the function (or clear the build
-  // cache) to pick the new value up. Seen on griotmoon, 22 September 2026.
+  // Netlify reuses a deployed function whose BUNDLED code is unchanged (same digest),
+  // environment included. After adding or changing MAILERLITE_API_KEY, a redeploy that
+  // does not change this function's bundle (an empty commit, or a comment-only edit,
+  // which the bundler strips) keeps the old environment and keeps answering
+  // not_configured. Seen on griotmoon, 22 September 2026: the function stayed pinned to
+  // its first, pre-key deploy through six rebuilds. A real code change deploys it fresh.
   if (!process.env.MAILERLITE_API_KEY) {
-    console.error('MAILERLITE_API_KEY is not set');
+    console.error('MAILERLITE_API_KEY is not set for this function. If it is set in Netlify, this function may be a reused deploy from before it was added: redeploy with a change to the function code.');
     return json(500, { ok: false, error: 'not_configured' });
   }
 
