@@ -113,7 +113,7 @@ export default function BookRecommendations() {
           <div className="flex gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
             {recommendations.map(book => (
               <div key={book.id} className="min-w-[260px] md:min-w-0">
-                <BookCard book={book} priority={false} />
+                <BookCard book={book} priority={false} placement="recommended" />
               </div>
             ))}
           </div>

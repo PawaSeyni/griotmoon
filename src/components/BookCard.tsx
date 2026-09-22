@@ -3,7 +3,7 @@ import { isComingSoon } from '../data/books';
 import { Link } from './LocalizedLink';
 import BookStatusButton from './BookStatusButton';
 import ReadAloudButton from './ReadAloudButton';
-import { useTranslation } from '../lib/language';
+import { useLanguage, useTranslation } from '../lib/language';
 import { track } from '../lib/analytics';
 
 const TRANSLATIONS = {
@@ -17,10 +17,13 @@ interface BookCardProps {
   /** Above-the-fold cards (featured row, first books page row) load eagerly to
    *  improve LCP; everything else stays lazy. */
   priority?: boolean;
+  /** Which surface the card is on; the `placement` property on its Purchase Click. */
+  placement: 'home' | 'books' | 'related' | 'recommended';
 }
 
-export default function BookCard({ book, priority = false }: BookCardProps) {
+export default function BookCard({ book, priority = false, placement }: BookCardProps) {
   const t = useTranslation(TRANSLATIONS);
+  const { language } = useLanguage();
 
   // Narration text for the read-aloud button, title, subtitle, and blurb.
   const narration = [book.title, book.subtitle, book.description].filter(Boolean).join('. ');
@@ -97,7 +100,7 @@ export default function BookCard({ book, priority = false }: BookCardProps) {
               href={book.amazonUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => track('Amazon Click', { book: book.id })}
+              onClick={() => track('Purchase Click', { book: book.id, placement, language })}
               className="btn-amazon text-xs px-3 py-2"
             >
               {t.buy}

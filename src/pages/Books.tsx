@@ -267,7 +267,7 @@ export default function Books() {
           {filtered.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((book, i) => (
-                <BookCard key={book.id} book={book} priority={i < 3} />
+                <BookCard key={book.id} book={book} priority={i < 3} placement="books" />
               ))}
             </div>
           ) : (
@@ -330,7 +330,7 @@ export default function Books() {
         </div>
       </section>
 
-      <EmailSignup />
+      <EmailSignup placement="books" />
     </main>
   );
 }

@@ -134,7 +134,10 @@ const TRANSLATIONS = {
   },
 };
 
-export default function EmailSignup() {
+/** Which page the form sits on; the `placement` property on every newsletter event. */
+export type SignupPlacement = 'home' | 'books' | 'about' | 'activities' | 'resources';
+
+export default function EmailSignup({ placement }: { placement: SignupPlacement }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'submitted' | 'error'>('idle');
@@ -142,6 +145,31 @@ export default function EmailSignup() {
   const t = useTranslation(TRANSLATIONS);
   const [magnet] = useState<Magnet>(() => resolveMagnet());
   const successRef = useRef<HTMLParagraphElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const startedRef = useRef(false);
+
+  // Form View: once per mount, when half the section is on screen.
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        track('Form View', { language, lead_magnet: magnet.tag, placement });
+        io.disconnect();
+      }
+    }, { threshold: 0.5 });
+    io.observe(el);
+    return () => io.disconnect();
+    // Fire once per mount; a later language switch is not a new view.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Form Start: the first focus on either field. Never the typed value.
+  const handleFocus = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    track('Form Start', { language, lead_magnet: magnet.tag, placement });
+  };
 
   // Move focus to the success message so screen-reader users learn the signup
   // worked and the download link is available (the form they were on is gone).
@@ -188,7 +216,7 @@ export default function EmailSignup() {
         mode: 'no-cors',
       });
       setStatus('submitted');
-      track('Signup', { language, lead_magnet: magnet.tag });
+      track('Lead Created', { language, lead_magnet: magnet.tag, placement });
       setEmail('');
       setFirstName('');
     } catch (err) {
@@ -201,7 +229,7 @@ export default function EmailSignup() {
   };
 
   return (
-    <section id="email-signup" className="scroll-mt-24 bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 py-16 px-4">
+    <section ref={sectionRef} id="email-signup" className="scroll-mt-24 bg-gradient-to-r from-purple-600 via-purple-700 to-pink-600 py-16 px-4">
       <div className="max-w-2xl mx-auto text-center">
         <div className="text-5xl mb-4">🎁</div>
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">{magnet.title[language]}</h2>
@@ -220,7 +248,7 @@ export default function EmailSignup() {
             <p className="text-purple-100 text-sm mt-1 mb-4">{t.successDetail}</p>
             <a
               href={magnet.pdf[language]}
-              onClick={() => track('Lead Magnet Download', { language, lead_magnet: magnet.tag })}
+              onClick={() => track('Magnet Download', { language, lead_magnet: magnet.tag, asset: magnet.pdf[language], placement })}
               download
               target="_blank"
               rel="noopener"
@@ -235,6 +263,7 @@ export default function EmailSignup() {
               type="text"
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
+              onFocus={handleFocus}
               placeholder={t.firstNamePlaceholder}
               aria-label={t.firstNamePlaceholder}
               autoComplete="given-name"
@@ -246,6 +275,7 @@ export default function EmailSignup() {
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
+                onFocus={handleFocus}
                 placeholder={t.emailPlaceholder}
                 aria-label={t.emailPlaceholder}
                 required
