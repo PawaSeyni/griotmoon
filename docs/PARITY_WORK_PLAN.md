@@ -51,6 +51,31 @@ Griot Moon is not far behind on the **site**. It is a long way behind on
 
 ## P0. Answer one question before building anything
 
+### P0-0 Move this clone out of iCloud first
+
+**Do this before anything else, including P0-1.**
+
+This clone sits at `~/Desktop/griotmoon`, and iCloud Desktop sync is switched on.
+Found here on 22 September 2026:
+
+```
+~/Desktop/griotmoon/.npmrc 2
+~/Desktop/griotmoon/.git/index 2
+```
+
+Those " 2" files are iCloud conflict copies. The second one is inside `.git`,
+which means iCloud is duplicating git's own index. That can corrupt repository
+state, and it is not theoretical: Eva's clone was moved off the Desktop for
+exactly this reason (`bc94403`, "clone moved out of iCloud sync to ~/Developer").
+
+**Do:** move the clone to `~/Developer/griotmoon`, the same place Eva lives, then
+delete the stray conflict copies. Do not simply delete the " 2" files and carry
+on; iCloud will make more.
+
+**Acceptance:** the repository resolves to `~/Developer/griotmoon`, `git status`
+is clean, and no " 2" files reappear after a build.
+
+
 ### P0-1 Does the signup actually work?
 
 `griotmoon-signups` holds zero subscribers, on a site that has been live for
@@ -294,7 +319,7 @@ per-article resource pages, which Eva only gained on 19 September 2026.
 
 | Phase | Items | Blocks what |
 |---|---|---|
-| P0 | Prove the signup works | Everything. One test. |
+| P0 | Move off iCloud, then prove the signup works | Everything. A move and one test. |
 | P1 | Events, Plausible config, report, frozen baseline | All measurement |
 | P2 | Server-side subscribe, opt-in decision, landing pages, Pinterest, email | All conversion |
 | P3 | Version stamping, tests, typecheck | Trusting any of it |
