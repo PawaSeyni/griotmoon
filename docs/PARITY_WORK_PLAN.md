@@ -129,10 +129,11 @@ Zero subscribers means no traffic, not a broken funnel.
 
 **Defects found, none of them blocking:**
 
-- **The welcome email is sent from `contact@storytimewitheva.com`.** Subject and
-  body are Griot Moon; the sender is Eva's. Fix the sender on the
-  "Griot Moon, Welcome + Trilingual Starter Kit" automation. Belongs to P2-5, but
-  it is a one-field change worth doing now.
+- **The welcome email's sender address is `contact@storytimewitheva.com`.** The
+  display name is correct ("Pawa Seyni · Griot Moon", Reply-To the same), so a
+  reader sees Griot Moon unless they expand the sender details. Switch the address
+  to `contact@griotmoon.com` on the "Griot Moon, Welcome + Trilingual Starter Kit"
+  automation so the sending domain matches the brand. Belongs to P2-5; low urgency.
 - **The confirmation greeting renders as "Thanks ."** when no first name is given.
   The name merge tag has no fallback. The welcome email already uses
   `{$name|default:'…'}`; the confirmation needs the same.
