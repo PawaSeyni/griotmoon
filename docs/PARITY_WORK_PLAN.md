@@ -280,6 +280,19 @@ straddled a schema change and had to be redone. See
 
 **Acceptance:** a committed baseline file with a do-not-regenerate banner.
 
+**Acceptance met 22 September 2026:** `docs/analytics/REPORT_PRECAMPAIGN.md`,
+window 24 August to 22 September 2026, frozen before P2-1 by the owner's choice.
+
+- The funnel tables are all zero by construction: schema 1 went live on the
+  window's last day. The baseline that matters is the traffic section: 19
+  visitors, 27 pageviews, sources Direct 13 and Google 6.
+- Our own traffic is separated: 22 September is the P0-1 test (certain), and
+  18 September is probably internal QA through a VPN. Without both days, about
+  11 visitors in 30 days, no leads and no Amazon clicks.
+- `scripts/report-funnels.mjs` now refuses to overwrite any file containing
+  `FROZEN SNAPSHOT` (exit 3), so the do-not-regenerate banner is enforced, not
+  just stated.
+
 ---
 
 ## P2. Conversion infrastructure
