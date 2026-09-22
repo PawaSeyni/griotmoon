@@ -213,10 +213,11 @@ exists.
 - Left in place, a decision for the owner: goals under the retired names
   (`Signup`, `Amazon Click`, `Lead Magnet Download`, `Read Along Start`).
   They keep their history and receive nothing new.
-- **Watch:** the property also has Plausible's built-in `Form: Submission` goal.
-  If form auto-tracking is on, every signup counts twice, once as
-  `Form: Submission` and once as `Lead Created`, which is the double count Eva
-  removed in DA-01. Report on `Lead Created` only, or turn form tracking off.
+- **Double count, confirmed:** form auto-tracking is on (the served script has
+  `formSubmissions` enabled), so every signup is counted twice: once as Plausible's
+  built-in `Form: Submission` and once as `Lead Created`. That is the double count
+  Eva removed in DA-01. Turn form submissions off in the property's
+  installation settings, or report on `Lead Created` only.
 
 ### P1-3 Funnel report script
 
