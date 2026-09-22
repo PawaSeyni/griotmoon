@@ -138,6 +138,10 @@ export async function handler(event) {
     if (!(isOwnHost || isDevHost)) return json(403, { ok: false, error: 'bad_origin' });
   }
 
+  // Netlify reuses a deployed function whose code is unchanged, environment included,
+  // so after adding or changing MAILERLITE_API_KEY a redeploy with no change to this
+  // file can keep answering not_configured. Change the function (or clear the build
+  // cache) to pick the new value up. Seen on griotmoon, 22 September 2026.
   if (!process.env.MAILERLITE_API_KEY) {
     console.error('MAILERLITE_API_KEY is not set');
     return json(500, { ok: false, error: 'not_configured' });
