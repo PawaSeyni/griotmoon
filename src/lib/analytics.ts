@@ -5,26 +5,37 @@
 // Plausible is blocked (ad blocker, no-JS) this is a silent no-op. Analytics
 // must never throw into the app.
 //
-// Events fired (set these up as Goals in the Plausible dashboard to see
-// conversion rates / funnels):
-//   - "Signup"           props: { language }            newsletter submit
-//   - "Amazon Click"     props: { book }                outbound buy click
-//   - "Activity Complete" props: { activity }           a demo marked complete
-//   - "Read Along Start"  props: { language }            book narration engagement
-//   - "Lead Magnet Download" props: { language, lead_magnet } post-signup download
+// The event list lives in src/analytics/events.ts. Event names and property keys
+// are checked at compile time against it, and property keys are filtered again at
+// runtime (default-deny), so nothing outside the dictionary, such as an email,
+// can reach Plausible. Funnels built from these events: src/analytics/funnels.ts.
 
-type Props = Record<string, string | number | boolean>;
+import { EVENT_BY_NAME, validateEvent, type EVENTS, type EventName } from '../analytics/events';
+
+type Def<E extends EventName> = Extract<(typeof EVENTS)[number], { name: E }>;
+export type PropsFor<E extends EventName> =
+  { [K in Def<E>['required'][number]]: string } & { [K in Def<E>['optional'][number]]?: string };
 
 declare global {
   interface Window {
-    plausible?: (event: string, options?: { props?: Props; callback?: () => void }) => void;
+    plausible?: (event: string, options?: { props?: Record<string, string> }) => void;
   }
 }
 
-export function track(event: string, props?: Props): void {
+export function track<E extends EventName>(event: E, props: PropsFor<E>): void {
   if (typeof window === 'undefined') return;
   try {
-    window.plausible?.(event, props ? { props } : undefined);
+    const def = EVENT_BY_NAME[event];
+    const allowed = new Set([...def.required, ...def.optional]);
+    const clean: Record<string, string> = {};
+    for (const [k, v] of Object.entries(props as Record<string, unknown>)) {
+      if (allowed.has(k) && typeof v === 'string' && v !== '') clean[k] = v;
+    }
+    if (import.meta.env.DEV) {
+      const problems = validateEvent(event, props as Record<string, unknown>);
+      if (problems.length) console.warn('[analytics]', ...problems);
+    }
+    window.plausible?.(event, { props: clean });
   } catch {
     // never let analytics break the page
   }

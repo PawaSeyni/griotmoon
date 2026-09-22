@@ -12,6 +12,8 @@ const TRANSLATIONS = {
 interface ReadAlongProps {
   /** Text to narrate and display, with the current word highlighted as it's spoken. */
   text: string;
+  /** Stable book id, when the text belongs to a book; sent on Read Aloud. */
+  book?: string;
   className?: string;
 }
 
@@ -22,7 +24,7 @@ interface ReadAlongProps {
  * fire boundary events the audio still plays and the text still shows, just
  * without the moving highlight. Where speech is unsupported, renders plain text.
  */
-export default function ReadAlong({ text, className = '' }: ReadAlongProps) {
+export default function ReadAlong({ text, book, className = '' }: ReadAlongProps) {
   const id = useId();
   const { language } = useLanguage();
   const t = useTranslation(TRANSLATIONS);
@@ -60,7 +62,7 @@ export default function ReadAlong({ text, className = '' }: ReadAlongProps) {
       return;
     }
     setActiveWord(-1);
-    track('Read Along Start', { language });
+    track('Read Aloud', book ? { language, book } : { language });
     play(id, text, language, {
       onBoundary: (charIndex) => {
         const toks = tokensRef.current;

@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from '../components/LocalizedLink';
 import Seo from '../components/Seo';
 import { useBooks } from '../data/books';
 import { useActivities } from '../data/activities';
-import { useTranslation } from '../lib/language';
+import { useLanguage, useTranslation } from '../lib/language';
+import { track } from '../lib/analytics';
 
 const TRANSLATIONS = {
   en: {
@@ -65,6 +67,18 @@ export default function Search() {
       )
     : [];
   const total = bookHits.length + activityHits.length;
+  const { language } = useLanguage();
+
+  // Search: once the query has been still for a second, so typing a word is one search, not
+  // one per keystroke. Only a result-count bucket travels, never the query text.
+  useEffect(() => {
+    if (!q) return;
+    const timer = setTimeout(() => {
+      track('Search', { language, results: total === 0 ? '0' : total <= 5 ? '1-5' : '6+' });
+    }, 1000);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [q]);
 
   return (
     <main>

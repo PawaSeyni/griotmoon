@@ -261,13 +261,11 @@ After any deploy, navigate to:
 
 ### Events to verify in the Plausible dashboard
 
-The application currently emits these custom events. Code presence does **not** prove the corresponding Plausible goal/event is configured or receiving data, so verify them in the dashboard after deployment:
+The event dictionary is `src/analytics/events.ts` (schema 1, 22 September 2026) and the funnels built from it are `src/analytics/funnels.ts`. `npm run check:analytics` (part of `npm run verify`) fails the build if a `track()` call uses an undeclared event or property, if a declared event is never fired, or if a funnel names an event that is not fired. Read the dictionary for the current list and properties rather than copying it here.
 
-- `Signup` — newsletter/lead-magnet form submitted; properties: `language`, `lead_magnet`
-- `Amazon Click` — Amazon purchase-link click; property: `book`
-- `Activity Complete` — activity/demo marked complete; property: `activity`
-- `Read Along Start` — narration/read-along engagement; property: `language`
-- `Lead Magnet Download` — post-signup free-resource download; properties: `language`, `lead_magnet`
+Code presence does **not** prove the corresponding Plausible goal is configured or receiving data. Every event needs a goal and every property a custom property in the dashboard (parity plan P1-2).
+
+Schema 1 renamed the pre-parity events: `Signup` → `Lead Created`, `Amazon Click` → `Purchase Click`, `Lead Magnet Download` → `Magnet Download`, `Read Along Start` → `Read Aloud`. Plausible keeps the old names' history.
 
 Plausible may also collect enhanced-measurement events such as file downloads/outbound links depending on the site configuration. Verify dashboard configuration rather than assuming these are enabled.
 
@@ -276,7 +274,7 @@ Plausible may also collect enhanced-measurement events such as file downloads/ou
 | Frequency | Task |
 |---|---|
 | Daily (launch phase) | Check pageview trend + top pages + top sources |
-| Weekly | Review `Signup`, `Amazon Click`, `Activity Complete`, `Read Along Start`, and `Lead Magnet Download`; confirm expected properties are arriving |
+| Weekly | Review the funnels in `src/analytics/funnels.ts` (P1-3 adds `npm run report:funnels`); confirm expected properties are arriving |
 | Monthly | Export raw stats CSV for archival. Note any unusual traffic patterns. |
 | When trial ends | Decide: pay for Plausible OR migrate to GoatCounter (free up to 100K pageviews) |
 

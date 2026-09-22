@@ -165,6 +165,31 @@ exactly one event. Start without it rather than adding it and retiring it later.
 **Acceptance:** `track()` calls exist on every funnel step, and the funnel
 definitions name only events the site actually fires.
 
+**Acceptance:** met on 22 September 2026, and enforced by the build.
+
+- `src/analytics/events.ts`: 11 events, schema 1. Eva's personalization, journey
+  and experiment events are left out because Griot Moon has none of those
+  surfaces. `Purchase Click` carries `language`, not `edition`: each book has one
+  Amazon listing.
+- `src/analytics/funnels.ts`: 6 funnels.
+- `track()` is typed against the dictionary and filters property keys at runtime,
+  so an undeclared key such as an email cannot reach Plausible.
+- `npm run check:analytics`, part of `npm run verify`, fails the build on an
+  undeclared event, property or value, on a declared event with no call site, and
+  on a funnel step that is never fired. Negative-tested.
+- Each event was checked firing with the right properties in a running build.
+  `Search` sends a result-count bucket once typing settles, never the query.
+- Renamed: `Signup` → `Lead Created`, `Amazon Click` → `Purchase Click`,
+  `Lead Magnet Download` → `Magnet Download`, `Read Along Start` → `Read Aloud`.
+  P1-2 creates goals for the new names only.
+
+**Consequence for P1-4:** until P2-1, `Lead Created` fires when the browser's
+`no-cors` request did not throw, not on confirmed creation. After P2-1 it will
+mean backend-confirmed. That is a change in meaning inside the baseline's key
+outcome, which is the exact trap Eva's first baseline fell into. Either freeze the
+baseline after P2-1, or freeze it before and state in its banner that
+`Lead Created` is browser-assumed.
+
 ### P1-2 Configure the Plausible property
 
 Griot Moon has its own Plausible property, key `pa-XNEfN50ABtDJcf6klL0ua`, separate

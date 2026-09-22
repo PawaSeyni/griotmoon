@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from '../components/LocalizedLink';
 import Seo from '../components/Seo';
@@ -30,6 +30,13 @@ export default function BookDetail() {
   const localizedBooks = useBooks();
   const [bilingual, setBilingual] = useState(false);
   const [tapMode, setTapMode] = useState(false);
+
+  // Book View: once per book page. A language switch changes the URL but is not a new view.
+  const bookId = book?.id;
+  useEffect(() => {
+    if (bookId) track('Book View', { book: bookId, language });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [bookId]);
 
   const cover = book?.coverImage ?? '';
   // og:image stays the 1000px JPEG: social crawlers want a plain absolute
@@ -110,7 +117,7 @@ export default function BookDetail() {
             {tapMode ? (
               <TapToTranslate text={book.description} language={language} className="text-gray-600 leading-relaxed mb-4" />
             ) : (
-              <ReadAlong text={book.description} className="text-gray-600 leading-relaxed mb-4" />
+              <ReadAlong text={book.description} book={book.id} className="text-gray-600 leading-relaxed mb-4" />
             )}
 
             <div className="flex flex-wrap gap-2 mb-3">
@@ -180,7 +187,7 @@ export default function BookDetail() {
                   href={book.amazonUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => track('Amazon Click', { book: book.id })}
+                  onClick={() => track('Purchase Click', { book: book.id, placement: 'detail', language })}
                   className="inline-block w-full sm:w-auto text-center py-3 px-8 bg-gradient-to-r from-orange-400 to-orange-500 text-white font-bold rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200 text-lg"
                 >
                   {t.buy}
@@ -198,7 +205,7 @@ export default function BookDetail() {
               <h2 className="text-2xl font-bold text-gray-800 mb-2">{t.related}</h2>
               <p className="text-gray-600 mb-6">{t.relatedIntro}</p>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-                {relatedBooks.map((relatedBook) => <BookCard key={relatedBook.id} book={relatedBook} priority={false} />)}
+                {relatedBooks.map((relatedBook) => <BookCard key={relatedBook.id} book={relatedBook} priority={false} placement="related" />)}
               </div>
             </>
           )}

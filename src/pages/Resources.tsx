@@ -1001,7 +1001,7 @@ export default function Resources() {
         </div>
       </section>
 
-      <EmailSignup />
+      <EmailSignup placement="resources" />
     </main>
   );
 }

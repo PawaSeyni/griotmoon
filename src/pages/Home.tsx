@@ -6,6 +6,7 @@ import EmailSignup from '../components/EmailSignup';
 import Seo from '../components/Seo';
 import JsonLd from '../components/JsonLd';
 import { useTranslation } from '../lib/language';
+import { track } from '../lib/analytics';
 import griotFire from '../assets/griot-fire.jpg'; // hero scene: the griot's fire under the cowrie moon
 import griotFireWebp from '../assets/griot-fire.webp'; // smaller webp for browsers that support it
 
@@ -224,10 +225,10 @@ export default function Home() {
               {t.heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link to="/books" className="btn-primary text-lg px-8 py-4 shadow-2xl">
+              <Link to="/books" onClick={() => track('Homepage CTA', { destination: 'books' })} className="btn-primary text-lg px-8 py-4 shadow-2xl">
                 {t.ctaBooksPrefix} {books.length} {t.ctaBooksSuffix}
               </Link>
-              <Link to="/activities" className="btn-secondary text-lg px-8 py-4">
+              <Link to="/activities" onClick={() => track('Homepage CTA', { destination: 'activities' })} className="btn-secondary text-lg px-8 py-4">
                 {t.ctaActivities}
               </Link>
             </div>
@@ -235,6 +236,7 @@ export default function Home() {
             <div className="mt-5 flex justify-center lg:justify-start">
               <a
                 href="#email-signup"
+                onClick={() => track('Homepage CTA', { destination: 'signup' })}
                 className="inline-flex items-center justify-center text-lg px-8 py-4 bg-yellow-400 hover:bg-yellow-500 active:bg-yellow-600 text-purple-900 font-extrabold rounded-full shadow-2xl ring-2 ring-yellow-200/60 hover:ring-yellow-100 transition-all duration-200 hover:scale-105"
               >
                 {t.ctaActivityKit}
@@ -267,11 +269,11 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
             {featuredBooks.map(book => (
-              <BookCard key={book.id} book={book} priority />
+              <BookCard key={book.id} book={book} priority placement="home" />
             ))}
           </div>
           <div className="text-center">
-            <Link to="/books" className="btn-primary text-lg px-8 py-4">
+            <Link to="/books" onClick={() => track('Homepage CTA', { destination: 'books' })} className="btn-primary text-lg px-8 py-4">
               {t.browseAll}
             </Link>
           </div>
@@ -351,7 +353,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center">
-            <Link to="/activities" className="btn-primary text-lg px-8 py-4">
+            <Link to="/activities" onClick={() => track('Homepage CTA', { destination: 'activities' })} className="btn-primary text-lg px-8 py-4">
               {t.seeAll}
             </Link>
           </div>
@@ -359,7 +361,7 @@ export default function Home() {
       </section>
 
       {/* Email Signup */}
-      <EmailSignup />
+      <EmailSignup placement="home" />
     </main>
   );
 }
