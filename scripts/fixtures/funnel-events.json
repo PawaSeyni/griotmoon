@@ -1,0 +1,16 @@
+[
+  { "event": "Homepage CTA", "props": { "destination": "books" }, "count": 120 },
+  { "event": "Homepage CTA", "props": { "destination": "signup" }, "count": 60 },
+  { "event": "Book View", "props": { "book": "ubuntu-we-are-together", "language": "en" }, "count": 80 },
+  { "event": "Book View", "props": { "book": "the-mighty-fist", "language": "fr" }, "count": 55 },
+  { "event": "Book View", "props": { "book": "retired-book", "language": "en" }, "count": 3 },
+  { "event": "Purchase Click", "props": { "book": "ubuntu-we-are-together", "placement": "detail", "language": "en" }, "count": 12 },
+  { "event": "Purchase Click", "props": { "book": "the-mighty-fist", "placement": "detail", "language": "fr" }, "count": 4 },
+  { "event": "Purchase Click", "props": { "book": "the-mighty-fist", "placement": "books", "language": "en" }, "count": 7 },
+  { "event": "Form View", "props": { "language": "en", "lead_magnet": "bilingual-starter-kit", "placement": "home" }, "count": 200 },
+  { "event": "Form View", "props": { "language": "fr", "lead_magnet": "bilingual-starter-kit", "placement": "home" }, "count": 40 },
+  { "event": "Form Start", "props": { "language": "en", "lead_magnet": "bilingual-starter-kit", "placement": "home" }, "count": 30 },
+  { "event": "Lead Created", "props": { "language": "en", "lead_magnet": "bilingual-starter-kit", "placement": "home" }, "count": 18 },
+  { "event": "Lead Created", "props": { "language": "fr", "lead_magnet": "bilingual-starter-kit", "placement": "home" }, "count": 2 },
+  { "event": "Magnet Download", "props": { "language": "en", "lead_magnet": "bilingual-starter-kit", "asset": "/bilingual-starter-kit.pdf", "placement": "home" }, "count": 15 }
+]

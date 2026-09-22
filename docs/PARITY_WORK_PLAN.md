@@ -230,6 +230,31 @@ Eva's version loads the Stats API key from a git-ignored `.env` itself.
 
 **Acceptance:** `npm run report:funnels` produces a report against real data.
 
+**Ported 22 September 2026; acceptance pending the API key.**
+
+- `scripts/report-funnels.mjs`: every funnel, its dimensions, Amazon clicks per
+  book-page view, locale parity and book views by age range, with the
+  minimum-sample warning. It reads only schema-1 events.
+- `scripts/lib/catalog.mjs` reads book ids and age ranges with the same pattern
+  the sitemap and i18n scripts use. Eva's version compiles a browser-free
+  `books.data.ts`, which Griot Moon does not have; Eva's theme and age-band
+  segments are replaced by the raw `ageRange`.
+- Two fixes against Eva's copy: the default range is Plausible's `'30d'` literal
+  (Eva sends `['30d', 'now']`, which is not a valid custom range), and any failed
+  call prints an `HTTP` line and exits non-zero, so P1-2's acceptance can be
+  checked by the exit code.
+- The report states that its step rates divide event totals, not the same
+  visitors, so a step can exceed 100%.
+- `.env` was **not** git-ignored before this change. It now is, with
+  `.env.example` as the template.
+- Tested with `scripts/fixtures/funnel-events.json` (synthetic), with no key
+  ("No data", exit 0), with an invalid key (11 `HTTP 401` lines, exit 1), and with
+  a one-sided date range (rejected, exit 2).
+
+**To finish:** create a Plausible Stats API key, put it in `.env` as
+`PLAUSIBLE_API_KEY`, run `npm run report:funnels`, and confirm zero `HTTP`
+lines. That also closes P1-2.
+
 ### P1-4 Freeze a pre-campaign baseline
 
 Once P1-1 to P1-3 are done and the taxonomy has stopped changing, capture a

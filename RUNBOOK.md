@@ -274,7 +274,7 @@ Plausible may also collect enhanced-measurement events such as file downloads/ou
 | Frequency | Task |
 |---|---|
 | Daily (launch phase) | Check pageview trend + top pages + top sources |
-| Weekly | Review the funnels in `src/analytics/funnels.ts` (P1-3 adds `npm run report:funnels`); confirm expected properties are arriving |
+| Weekly | Run `npm run report:funnels` (needs `PLAUSIBLE_API_KEY` in `.env`, see `.env.example`); any line starting `HTTP` means a goal or property is missing in Plausible |
 | Monthly | Export raw stats CSV for archival. Note any unusual traffic patterns. |
 | When trial ends | Decide: pay for Plausible OR migrate to GoatCounter (free up to 100K pageviews) |
 
