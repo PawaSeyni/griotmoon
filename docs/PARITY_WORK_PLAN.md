@@ -51,7 +51,7 @@ Griot Moon is not far behind on the **site**. It is a long way behind on
 
 ## P0. Answer one question before building anything
 
-### P0-0 Move this clone out of iCloud first — DONE 22 September 2026
+### P0-0 Move this clone out of iCloud first (DONE 22 September 2026)
 
 **Completed. The clone now lives at `~/Developer/griotmoon`, beside Eva.**
 
