@@ -32,8 +32,8 @@ export interface EventDefinition {
 }
 
 const LANGUAGES = ['en', 'es', 'fr'] as const;
-/** Pages that render <EmailSignup>. */
-const FORM_PLACEMENTS = ['home', 'books', 'about', 'activities', 'resources'] as const;
+/** Pages that render <EmailSignup>; 'landing' is a /free/<magnet> page (P2-3). */
+const FORM_PLACEMENTS = ['home', 'books', 'about', 'activities', 'resources', 'landing'] as const;
 /** Where a buy button sits: the book page, or a BookCard on one of these surfaces. */
 const PURCHASE_PLACEMENTS = ['detail', 'home', 'books', 'related', 'recommended'] as const;
 
@@ -48,6 +48,9 @@ export const EVENTS = [
     privacy: 'stable book id; no retailer purchase data exists',
     notes: 'Outbound Amazon click, the conversion proxy. One listing per book, so language is the site language, not an edition.' },
   // ---- newsletter ----
+  { name: 'Landing View', kind: 'exposure', required: ['language', 'lead_magnet', 'landing_page'], optional: [],
+    values: { language: LANGUAGES }, privacy: 'magnet slug and route pattern only',
+    notes: 'Once per /free/<magnet> page load (P2-3): the top of the paid and social funnel.' },
   { name: 'Form View', kind: 'exposure', required: ['language', 'lead_magnet', 'placement'], optional: [],
     values: { language: LANGUAGES, placement: FORM_PLACEMENTS }, privacy: 'once per form when half visible' },
   { name: 'Form Start', kind: 'intent', required: ['language', 'lead_magnet', 'placement'], optional: [],

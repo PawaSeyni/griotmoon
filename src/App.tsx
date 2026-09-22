@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useTranslation } from './lib/language';
+import { splitLangFromPath, useTranslation } from './lib/language';
 
 /**
  * Scroll to a #hash target after navigation. React Router doesn't do this for
@@ -51,6 +51,7 @@ const Search              = lazy(() => import('./pages/Search'));
 const NotFound            = lazy(() => import('./pages/NotFound'));
 const Links               = lazy(() => import('./pages/Links'));
 const DemoPage            = lazy(() => import('./pages/DemoPage'));
+const LandingPage         = lazy(() => import('./pages/LandingPage'));
 
 // The 8 interactive demos are also code-split.
 // A Suspense boundary (below) renders a fallback while a demo chunk loads; the
@@ -93,6 +94,9 @@ const routeDefs = [
   { path: '/privacy', element: <Privacy /> },
   { path: '/terms', element: <Terms /> },
   { path: '/links', element: <Links /> },
+  // One-offer campaign landing pages (P2-3). No site chrome (see isLanding below),
+  // noindex, and kept out of the sitemap.
+  { path: '/free/:magnet', element: <LandingPage /> },
 ];
 
 const LANG_PREFIXES = ['', '/es', '/fr'];
@@ -105,6 +109,10 @@ const SKIP_LINK = {
 
 export default function App() {
   const t = useTranslation(SKIP_LINK);
+  const { pathname } = useLocation();
+  // /free/… landing pages render without navbar, footer, feedback widget or skip link,
+  // so the whole viewport is the offer. Everything else gets the full shell.
+  const isLanding = /^\/free\//.test(splitLangFromPath(pathname).rest);
 
   // Signal to the build-time prerender crawler that the first render + all
   // child effects (Seo/JsonLd inject the head here) have completed. Child
@@ -112,6 +120,29 @@ export default function App() {
   useEffect(() => {
     (window as unknown as { __PRERENDER_READY__?: boolean }).__PRERENDER_READY__ = true;
   }, []);
+
+  const routes = (
+    <Suspense
+      fallback={
+        <div data-prerender-loading className="py-24 text-center text-gray-400">
+          …
+        </div>
+      }
+    >
+      <Routes>
+        {LANG_PREFIXES.flatMap(prefix =>
+          routeDefs.map(r => {
+            const full = r.path === '/' ? prefix || '/' : `${prefix}${r.path}`;
+            return <Route key={full} path={full} element={r.element} />;
+          }),
+        )}
+        <Route path="/home" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+  );
+
+  if (isLanding) return routes;
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -124,24 +155,7 @@ export default function App() {
       </a>
       <Navbar />
       <div className="flex-1 outline-none" id="main-content" tabIndex={-1}>
-        <Suspense
-          fallback={
-            <div data-prerender-loading className="py-24 text-center text-gray-400">
-              …
-            </div>
-          }
-        >
-          <Routes>
-            {LANG_PREFIXES.flatMap(prefix =>
-              routeDefs.map(r => {
-                const full = r.path === '/' ? prefix || '/' : `${prefix}${r.path}`;
-                return <Route key={full} path={full} element={r.element} />;
-              }),
-            )}
-            <Route path="/home" element={<Navigate to="/" replace />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        {routes}
       </div>
       <Footer />
       <FeedbackWidget />

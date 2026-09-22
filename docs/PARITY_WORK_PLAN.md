@@ -354,6 +354,20 @@ converts worse than one that lands on the offer, and cannot be measured per offe
 **Acceptance:** every registered magnet has a prerendered page in all three
 languages, and the build fails if one is missing.
 
+**Built 22 September 2026 (PR stacked on P2-1, so it ships after it):**
+
+- `/free/<magnet>` in EN/ES/FR for all 5 magnets: 15 prerendered pages, noindex,
+  out of the sitemap, no navbar or footer. An unknown slug renders the 404 page.
+- `scripts/prerender.mjs` fails the build when `LANDING_SLUGS` and the magnet
+  registry disagree in either direction. Negative-tested.
+- New event `Landing View` (`language`, `lead_magnet`, `landing_page`), a
+  `landing` placement for the form, and a `landing-entrances` funnel. Plausible
+  needs a `Landing View` goal and a `landing_page` custom property before the
+  report can break it down.
+- Eva's per-magnet copy (blurb, bullets, preview image) is not ported: Griot
+  Moon's magnets have a title and a PDF, and every page shares the kit blurb.
+  Worth writing before paid traffic points at a magnet other than the starter kit.
+
 ### P2-4 Pinterest server-side conversions
 
 **Port:** `netlify/functions/_pinterest.mjs` from Eva, called from the subscribe

@@ -84,9 +84,20 @@ function readUtm(): Record<string, string> {
   return out;
 }
 
-function resolveMagnet(): Magnet {
-  const slug = (readParam('lm') || '').toLowerCase();
+/** The route's magnet (a /free/<slug> landing page) wins over `?lm=`; unknown falls back. */
+function resolveMagnet(routeSlug?: string): Magnet {
+  const slug = (routeSlug ?? readParam('lm') ?? '').toLowerCase();
   return LEAD_MAGNETS[slug] ?? LEAD_MAGNETS[DEFAULT_MAGNET];
+}
+
+/** True for a registered lead-magnet slug; /free/<unknown> must 404, never show a default offer. */
+export function isKnownMagnet(slug: string | undefined): boolean {
+  return Boolean(slug && Object.hasOwn(LEAD_MAGNETS, slug));
+}
+
+/** A registered magnet's headline in one language (landing-page <title> and <h1>). */
+export function magnetTitle(slug: string, language: Language): string {
+  return LEAD_MAGNETS[slug]?.title[language] ?? LEAD_MAGNETS[DEFAULT_MAGNET].title[language];
 }
 
 const TRANSLATIONS = {
@@ -150,9 +161,9 @@ const TRANSLATIONS = {
 };
 
 /** Which page the form sits on; the `placement` property on every newsletter event. */
-export type SignupPlacement = 'home' | 'books' | 'about' | 'activities' | 'resources';
+export type SignupPlacement = 'home' | 'books' | 'about' | 'activities' | 'resources' | 'landing';
 
-export default function EmailSignup({ placement }: { placement: SignupPlacement }) {
+export default function EmailSignup({ placement, magnet: magnetSlug }: { placement: SignupPlacement; magnet?: string }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   // A submit before React hydrates posts natively to the function, which 303-redirects
@@ -165,7 +176,7 @@ export default function EmailSignup({ placement }: { placement: SignupPlacement 
   const hpRef = useRef<HTMLInputElement>(null); // honeypot; real users never fill it
   const { language, setLanguage } = useLanguage();
   const t = useTranslation(TRANSLATIONS);
-  const [magnet] = useState<Magnet>(() => resolveMagnet());
+  const [magnet] = useState<Magnet>(() => resolveMagnet(magnetSlug));
   const successRef = useRef<HTMLParagraphElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const startedRef = useRef(false);
