@@ -141,11 +141,11 @@ export async function handler(event) {
   if (!process.env.MAILERLITE_API_KEY) {
     console.error('MAILERLITE_API_KEY is not set');
     // TEMPORARY DIAGNOSTIC (remove before merge): deploy previews only, names and booleans only.
-    if (process.env.CONTEXT === 'deploy-preview') {
+    {
       const names = Object.keys(process.env).filter(k => /mail/i.test(k));
       // eslint-disable-next-line no-undef
       const viaNetlify = typeof Netlify !== 'undefined' ? Boolean(Netlify.env.get('MAILERLITE_API_KEY')) : null;
-      return json(500, { ok: false, error: 'not_configured', diag: { names, viaNetlify, context: process.env.CONTEXT } });
+      return json(500, { ok: false, error: 'not_configured', diag: { names, viaNetlify, context: process.env.CONTEXT ?? null, deployContext: process.env.DEPLOY_CONTEXT ?? null } });
     }
     return json(500, { ok: false, error: 'not_configured' });
   }
