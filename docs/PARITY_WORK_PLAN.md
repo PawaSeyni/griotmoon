@@ -117,6 +117,34 @@ confirmation email in your inbox.
 
 **If it fails,** P2-1 stops being an improvement and becomes an outage fix.
 
+**Acceptance:** met on 22 September 2026, with `pnguer+griotmoon@gmail.com`.
+Zero subscribers means no traffic, not a broken funnel.
+
+| Check | Result |
+|---|---|
+| Subscriber in `griotmoon-signups` | yes, `language=en`, `lead_magnet=bilingual-starter-kit` |
+| Confirmation email | arrived, sender `contact@griotmoon.com`, subject "Confirm your email to get the Starter Kit" |
+| Confirm link | clicked, subscriber `active`, `opted_in_at` 20:19:42 UTC |
+| Endpoint, read server-side | HTTP 200, `{"success":true}` |
+
+**Defects found, none of them blocking:**
+
+- **The welcome email is sent from `contact@storytimewitheva.com`.** Subject and
+  body are Griot Moon; the sender is Eva's. Fix the sender on the
+  "Griot Moon, Welcome + Trilingual Starter Kit" automation. Belongs to P2-5, but
+  it is a one-field change worth doing now.
+- **The confirmation greeting renders as "Thanks ."** when no first name is given.
+  The name merge tag has no fallback. The welcome email already uses
+  `{$name|default:'…'}`; the confirmation needs the same.
+- **The first browser signup could not be confirmed from the browser.** The page
+  showed its success screen, but the subscriber was absent 30 seconds later. Two
+  confirmation emails did arrive (20:17:47 and 20:18:17) for the submissions made
+  before 20:19, so it most likely landed late rather than being lost. The page
+  cannot tell either way, which is P2-1's whole argument.
+- **MailerLite reports the form as `"active": false`.** Submissions are still
+  accepted today. Reactivate it, or retire it in P2-1 when the server-side
+  function replaces the browser-direct call.
+
 ---
 
 ## P1. Measurement layer
