@@ -27,11 +27,13 @@ export default function LandingPage() {
   const t = useTranslation(TRANSLATIONS);
   const known = isKnownMagnet(magnet);
 
-  // Top of the funnel: one Landing View per page load, not re-fired on a language switch.
+  // Top of the funnel: one Landing View per magnet shown. Keyed on the magnet, not on
+  // mount, because the router reuses this component when only :magnet changes; a
+  // language switch is not a new view.
   useEffect(() => {
     if (known) track('Landing View', { language, lead_magnet: String(magnet), landing_page: `/free/${magnet}` });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [magnet]);
 
   // An edited or mistyped pin URL gets a real 404, never a default offer.
   if (!known) return <NotFound />;
