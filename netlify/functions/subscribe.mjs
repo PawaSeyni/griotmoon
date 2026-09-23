@@ -75,7 +75,13 @@ async function ml(path, opts = {}) {
 async function resolveGroupId() {
   if (cachedGroupId) return cachedGroupId;
   const r = await ml(`/groups?filter[name]=${encodeURIComponent(GROUP_NAME)}&limit=50`);
-  if (!r.ok) return null;
+  if (!r.ok) {
+    // Log MailerLite's status (never the token): 401 = bad or mistyped token, 403 = token
+    // without groups access, 429/5xx = transient. Without this the 503 is undiagnosable.
+    console.error(`Group lookup failed: MailerLite HTTP ${r.status}`);
+    return null;
+  }
+  if (!(r.data?.data || []).length) console.error(`Group lookup: no group named "${GROUP_NAME}"`);
   const match = (r.data?.data || []).find(g => g.name === GROUP_NAME) || (r.data?.data || [])[0];
   cachedGroupId = match?.id || null;
   return cachedGroupId;
