@@ -433,33 +433,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://griotmoon.com/links/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/links/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/links/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/links/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/links/"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://griotmoon.com/es/links/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/links/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/links/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/links/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/links/"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://griotmoon.com/fr/links/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/links/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/links/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/links/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/links/"/>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://griotmoon.com/privacy/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/privacy/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/privacy/"/>

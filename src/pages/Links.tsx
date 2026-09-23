@@ -146,8 +146,10 @@ export default function Links() {
 
   return (
     <>
-      <Seo title={t.seoTitle} description={t.seoDesc} path="/links" />
-      <div className="min-h-screen bg-gradient-to-b from-[#f2f1fa] via-[#f9eecd]/50 to-[#f2f1fa] py-10 px-4">
+      {/* Link-in-bio page for social profiles: reached from those profiles, not from the site
+          or search. noindex and out of the sitemap, as on Eva (linking suite orphan rule). */}
+      <Seo title={t.seoTitle} description={t.seoDesc} path="/links" noindex />
+      <main className="min-h-screen bg-gradient-to-b from-[#f2f1fa] via-[#f9eecd]/50 to-[#f2f1fa] py-10 px-4">
         <div className="max-w-md mx-auto">
           {/* Header */}
           <div className="text-center mb-8">
@@ -204,7 +206,7 @@ export default function Links() {
             {t.footer}
           </p>
         </div>
-      </div>
+      </main>
     </>
   );
 }

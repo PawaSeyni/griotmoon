@@ -522,6 +522,12 @@ Griot Moon has no tests. Port Eva's in this order, highest value first:
    lacked the self-referencing `hreflang="en"` / `x-default` that Eva's carry; added.
    Negative-tested (a duplicate title and a stray noindex both fail it).
 2. **Linking** (`tests/seo/linking.test.mjs`): no orphan routes, no thin pages.
+   **Done 23 September 2026:** orphans, thin pages, and every same-site URL inside any
+   page's JSON-LD must be a real route (Eva checks that only for collections and
+   journeys, which Griot Moon lacks). It found one real issue: `/links`, the
+   link-in-bio page for social profiles, was indexable, in the sitemap, linked from
+   nowhere and had no `<main>`. Now noindex, out of the sitemap (186 → 183 URLs),
+   still prerendered, and wrapped in `<main>`, exactly as on Eva.
 3. **Monetization** (`tests/seo/monetization.test.mjs`): every Amazon link carries
    the Associates tag, opens in a new tab, has `rel="noopener"`, and points at the
    right language edition.
