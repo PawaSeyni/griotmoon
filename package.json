@@ -19,6 +19,7 @@
     "typecheck": "tsc -b",
     "test": "node --test tests/funnel/*.test.mjs",
     "test:seo": "node --test tests/seo/*.test.mjs",
+    "test:e2e": "playwright test",
     "gen:version": "node scripts/gen-version.mjs",
     "verify:deploy": "node scripts/verify-deploy.mjs",
     "build:games-css": "tailwindcss -c scripts/games.tailwind.config.cjs -i scripts/games-tw-input.css -o public/games/games.css --minify",
@@ -35,7 +36,9 @@
     "react-router-dom": "^6.22.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.63.0",
     "@sparticuz/chromium": "^149.0.0",
     "@types/node": "^22.20.4",
     "@types/react": "^18.2.0",

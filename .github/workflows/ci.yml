@@ -44,6 +44,15 @@ jobs:
       - name: Verify (check:i18n, build, check:seo)
         run: npm run verify
 
+      # End-to-end suite (parity plan P3-2): accessibility (axe), signup, search, run in a
+      # real browser against the dist/ that `verify` just built, served by `vite preview`.
+      # The subscribe function is stubbed in the specs; nothing real is written.
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end (a11y, signup, search)
+        run: npm run test:e2e
+
       - name: Sanity-check the output
         run: |
           set -e
