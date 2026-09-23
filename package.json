@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs && node scripts/gen-download-redirects.mjs && npm run prerender",
+    "build": "tsc && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs && npm run gen:version && node scripts/gen-download-redirects.mjs && npm run prerender",
     "build:spa": "tsc && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs",
     "prerender": "node scripts/prerender.mjs",
     "gen:sitemap": "node scripts/gen-sitemap.mjs",
@@ -17,6 +17,8 @@
     "check:analytics": "node scripts/check-analytics.mjs",
     "report:funnels": "node scripts/report-funnels.mjs",
     "test": "node --test tests/funnel/*.test.mjs",
+    "gen:version": "node scripts/gen-version.mjs",
+    "verify:deploy": "node scripts/verify-deploy.mjs",
     "build:games-css": "tailwindcss -c scripts/games.tailwind.config.cjs -i scripts/games-tw-input.css -o public/games/games.css --minify",
     "patch:games": "node scripts/patch-games.mjs",
     "verify": "npm run check:i18n && npm run check:analytics && npm test && npm run build && npm run check:seo"

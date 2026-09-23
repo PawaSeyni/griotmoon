@@ -505,6 +505,12 @@ checks `version.json` first for this reason.
 
 **Acceptance:** `/version.json` reports the deployed commit and is not cached.
 
+**Built 23 September 2026:** `scripts/gen-version.mjs` (runs in `build` after `vite
+build`; fails the build without a valid SHA), `scripts/verify-deploy.mjs` (`npm run
+verify:deploy [sha]`, exits non-zero on any mismatch, including a preview context or a
+non-`main` branch), the `no-store` header rule, and `tests/funnel/version.test.mjs`.
+**Use it after every merge:** a green CI run does not prove production shipped.
+
 ### P3-2 Test suites
 
 Griot Moon has no tests. Port Eva's in this order, highest value first:
