@@ -444,6 +444,38 @@ mistake. Each magnet's first email should deliver what was promised.
 **Acceptance:** a test signup in each language receives the correct file and a
 first email that matches the magnet.
 
+**Live 23 September 2026.** One welcome email per language, each delivering the file
+the subscriber chose.
+
+- **Site:** `/dl/<lang>/<magnet>` redirects to that PDF (302), generated at build time
+  from the `LEAD_MAGNETS` pdf map, with starter-kit fallbacks; the build fails on a
+  missing language or file (PR #35).
+- **MailerLite:** segments `Griot Moon — EN/ES/FR signups (language=xx)` (group
+  `griotmoon-signups` AND `language`), each triggering `Griot Moon — Welcome EN/ES/FR
+  (delivers chosen printable)`. Sender `Pawa Seyni · Griot Moon <contact@griotmoon.com>`,
+  reply-to the same. Button `https://griotmoon.com/dl/<lang>/{$lead_magnet}`. The old
+  single English starter-kit automation is **paused** (kept, not deleted).
+- **Verified:** a new Spanish signup (`pnguer+griotmoon3`, flashcards) got its email
+  in 72 s from `contact@griotmoon.com`, button resolving to `bilingual-flashcards.pdf`,
+  DKIM/SPF/DMARC pass for griotmoon.com. Field-change tests on existing subscribers
+  also delivered English (bedtime chart) and Spanish (flashcards), about 14 minutes
+  late.
+- **Not yet verified:** French with a real signup; the English plain-text part after
+  its fix (below).
+
+**Gotchas learned here:**
+
+- The API cannot write email HTML on this plan (Premium only) and cannot activate or
+  pause automations. Design and activation are dashboard steps. **Activate opens a
+  confirmation dialog; nothing saves until it is confirmed.**
+- The API cannot edit an **active** automation: pause, edit, reactivate.
+- `{$name|default:'…'}` in an automation's **plain-text** part made MailerLite blank
+  every merge tag in that part, including `{$lead_magnet}` and `{$unsubscribe}`. The
+  English plain text now says "Hi there," with no filter. Do not use that filter in
+  plain text.
+- "Joins segment" triggers on a field change lag about 14 minutes (segment
+  recalculation); a new subscriber triggers within seconds.
+
 ---
 
 ## P3. Quality gates
