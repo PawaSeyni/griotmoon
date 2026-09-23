@@ -19,6 +19,7 @@
 import { withLambda } from '@netlify/aws-lambda-compat';
 import { checkRate, clientIp } from './_ratelimit.mjs';
 import { verifyHuman } from './_verify.mjs';
+import { sendSignupConversion } from './_pinterest.mjs';
 
 const API = 'https://connect.mailerlite.com/api';
 const GROUP_NAME = process.env.MAILERLITE_GROUP || 'griotmoon-signups';
@@ -254,8 +255,16 @@ export async function handler(event) {
   // 200/201 = created/updated. 422 with an email error is a real validation
   // failure; other non-2xx are upstream problems we surface as a retryable error.
   if (r.ok) {
-    // Pinterest server-side conversion (parity plan P2-4) goes here: confirmed
-    // success only, hashed email only, and a failure must never affect the result.
+    // Best-effort Pinterest conversion (P2-4): confirmed success only, a SHA-256 hashed
+    // email only (no IP, no user agent, no browser pixel), and skipped unless both
+    // PINTEREST_CONVERSIONS_TOKEN and PINTEREST_AD_ACCOUNT_ID are set. A failure here
+    // must never affect the signup result, so it is fully swallowed.
+    try {
+      const pin = await sendSignupConversion({ email, leadMagnet });
+      if (!pin.skipped && !pin.ok) console.error(`Pinterest conversion rejected: HTTP ${pin.status}`);
+    } catch (err) {
+      console.error('Pinterest conversion send failed', err);
+    }
     return isForm ? dest('ok') : json(200, { ok: true, grouped: true });
   }
   if (r.status === 422 && r.data?.errors?.email) {

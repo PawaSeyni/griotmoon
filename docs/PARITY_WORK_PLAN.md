@@ -414,6 +414,22 @@ the existing one. Eva uses ad account `549770651316`, named for Eva.
 **Acceptance:** a real signup produces a Signup conversion in the Pinterest
 conversions dashboard.
 
+**Built 23 September 2026, dormant until configured:**
+
+- `netlify/functions/_pinterest.mjs` ported, called from the subscribe function
+  only after MailerLite confirms, best-effort (a Pinterest failure, even a thrown
+  network error, never changes the signup result; tested, and the test fails
+  without the guard).
+- **No default ad account.** Eva's module falls back to Eva's account
+  (`549770651316`), which would have posted Griot signups into Eva's campaign data.
+  Griot's sends nothing unless `PINTEREST_CONVERSIONS_TOKEN` **and**
+  `PINTEREST_AD_ACCOUNT_ID` are both set.
+- **Privacy page (EN/ES/FR) now discloses it.** Griot's page never mentioned
+  Pinterest; Eva's reviewed wording is reused with contact@griotmoon.com.
+- **Still needed:** the owner's decision on the ad account (a Griot Moon account,
+  recommended, or an explicit choice to use another), and a conversions token for
+  it, both set in Netlify on **griotmoon** through the web UI.
+
 ### P2-5 Welcome sequence
 
 Griot Moon has one automation, one step, English only. Eva has three sequences:
