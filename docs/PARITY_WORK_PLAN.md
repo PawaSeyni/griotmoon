@@ -426,9 +426,11 @@ conversions dashboard.
   `PINTEREST_AD_ACCOUNT_ID` are both set.
 - **Privacy page (EN/ES/FR) now discloses it.** Griot's page never mentioned
   Pinterest; Eva's reviewed wording is reused with contact@griotmoon.com.
-- **Still needed:** the owner's decision on the ad account (a Griot Moon account,
-  recommended, or an explicit choice to use another), and a conversions token for
-  it, both set in Netlify on **griotmoon** through the web UI.
+- **Configured 23 September 2026:** a separate Griot Moon ad account and its
+  conversions token, set in Netlify on griotmoon through the web UI. Preview test
+  (04:10 UTC): signup 200, MailerLite write confirmed, and no Pinterest line in the
+  function log, which only logs failures, so Pinterest accepted the event. Privacy
+  wording approved by the owner.
 
 ### P2-5 Welcome sequence
 
