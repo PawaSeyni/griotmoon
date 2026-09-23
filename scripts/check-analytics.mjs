@@ -44,7 +44,10 @@ for (const file of sourceFiles(join(root, 'src'))) {
     fired.set(name, [...(fired.get(name) ?? []), where]);
     const args = argsAt(src, m.index + m[0].length);
     const allowed = new Set([...def.required, ...def.optional]);
-    for (const k of args.matchAll(/[{,]\s*([A-Za-z_]\w*)\s*(?=[:,}])/g)) {
+    // Keys are read with string and template-literal contents blanked out, so `${x}`
+    // inside a template string is not mistaken for an object key.
+    const keySrc = args.replace(/`(?:\\.|[^`])*`/g, '``').replace(/'(?:\\.|[^'])*'/g, "''");
+    for (const k of keySrc.matchAll(/[{,]\s*([A-Za-z_]\w*)\s*(?=[:,}])/g)) {
       if (!allowed.has(k[1])) errors.push(`${where}: '${name}' has undeclared property "${k[1]}"`);
     }
     for (const [, k, v] of args.matchAll(/([A-Za-z_]\w*)\s*:\s*'([^']*)'/g)) {

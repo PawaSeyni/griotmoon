@@ -92,7 +92,35 @@ const sitemapRoutes = routesFromSitemap(await readFile(path.join(DIST, 'sitemap.
 // Mounted at every language prefix, exactly like App.tsx routeDefs × LANG_PREFIXES.
 const NOINDEX_SPA_ROUTES = ['/profile', '/search'];
 const LANG_PREFIXES = ['', '/es', '/fr'];
-const extraRoutes = NOINDEX_SPA_ROUTES.flatMap(p => LANG_PREFIXES.map(pre => `${pre}${p}`));
+
+// Campaign landing pages (parity plan P2-3): one /free/<slug> per lead magnet, noindex
+// and out of the sitemap, so they are listed here. The guard below fails the build if a
+// magnet registered in EmailSignup.tsx has no page here, which would otherwise ship as
+// a silent production 404 on every pin or ad that points at it.
+const LANDING_SLUGS = ['bedtime-routine', 'bilingual-starter-kit', 'bilingual-flashcards', 'parents-guide', 'follow-up-activities'];
+{
+  const registry = await readFile(path.resolve(__dirname, '..', 'src/components/EmailSignup.tsx'), 'utf8');
+  const block = registry.slice(registry.indexOf('const LEAD_MAGNETS'), registry.indexOf('const DEFAULT_MAGNET'));
+  const registered = [...block.matchAll(/^ {2}'([a-z0-9-]+)': \{/gm)].map(m => m[1]);
+  if (!registered.length) {
+    console.error('\nPrerender aborted: no LEAD_MAGNETS found in src/components/EmailSignup.tsx; the landing-page guard cannot run.\n');
+    process.exit(1);
+  }
+  const missing = registered.filter(slug => !LANDING_SLUGS.includes(slug));
+  const orphan = LANDING_SLUGS.filter(slug => !registered.includes(slug));
+  if (missing.length || orphan.length) {
+    console.error(
+      `\nPrerender aborted: LANDING_SLUGS and LEAD_MAGNETS disagree.\n` +
+      (missing.length ? `  Registered magnets with no /free/ page (production 404): ${missing.join(', ')}\n` : '') +
+      (orphan.length ? `  /free/ pages for magnets that are not registered (would render a 404): ${orphan.join(', ')}\n` : '') +
+      `Update LANDING_SLUGS in scripts/prerender.mjs.\n`,
+    );
+    process.exit(1);
+  }
+  console.log(`Landing-page guard OK: ${registered.length} magnets, each with a /free/ page in ${LANG_PREFIXES.length} languages.`);
+}
+
+const extraRoutes = [...NOINDEX_SPA_ROUTES, ...LANDING_SLUGS.map(s => `/free/${s}`)].flatMap(p => LANG_PREFIXES.map(pre => `${pre}${p}`));
 
 const routes = [...new Set([...sitemapRoutes, ...extraRoutes])];
 console.log(`Prerendering ${routes.length} routes (${extraRoutes.length} noindex SPA routes)…`);
