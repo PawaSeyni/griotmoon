@@ -45,6 +45,17 @@
 # The prerender step is REQUIRED: if it fails, the build fails and the last good
 # deploy stays live, so removing this fallback never leaves real routes unserved.
 
+# Deploy provenance (parity plan P3-1). dist/version.json names the commit, branch and
+# deploy context of the build that produced this site (scripts/gen-version.mjs). It must
+# never be cached, or a check after a deploy would read the PREVIOUS deploy's commit and
+# pass. The shared Netlify team silently skips production deploys when its credits run
+# out, and the live site keeps serving the old commit; `npm run verify:deploy` reads this
+# file to catch exactly that.
+[[headers]]
+  for = "/version.json"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+
 [[headers]]
   for = "/*"
   [headers.values]
