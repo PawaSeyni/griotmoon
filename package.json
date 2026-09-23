@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs && npm run gen:version && node scripts/gen-download-redirects.mjs && npm run prerender",
-    "build:spa": "tsc && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs",
+    "build": "tsc -b && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs && npm run gen:version && node scripts/gen-download-redirects.mjs && npm run prerender",
+    "build:spa": "tsc -b && node scripts/gen-sitemap.mjs && vite build && node scripts/fix-font-preload.mjs",
     "prerender": "node scripts/prerender.mjs",
     "gen:sitemap": "node scripts/gen-sitemap.mjs",
     "check:releases": "node scripts/check-amazon-releases.mjs",
@@ -16,6 +16,7 @@
     "check:i18n": "node scripts/check-i18n-catalog.mjs",
     "check:analytics": "node scripts/check-analytics.mjs",
     "report:funnels": "node scripts/report-funnels.mjs",
+    "typecheck": "tsc -b",
     "test": "node --test tests/funnel/*.test.mjs",
     "gen:version": "node scripts/gen-version.mjs",
     "verify:deploy": "node scripts/verify-deploy.mjs",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@sparticuz/chromium": "^149.0.0",
+    "@types/node": "^22.20.4",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^6.1.1",

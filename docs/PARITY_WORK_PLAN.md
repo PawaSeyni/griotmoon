@@ -530,6 +530,18 @@ Griot Moon has no tests. Port Eva's in this order, highest value first:
 
 Eva runs `tsc -b` as `npm run typecheck`. Griot Moon has no such script.
 
+**Done 23 September 2026, and it fixed a silent gap.** `tsconfig.json` is a solution
+file (`"files": []` plus references), so the build's plain `tsc` compiled nothing:
+a file assigning a string to a `number` passed it. No type error had ever been able to
+fail a Griot Moon deploy. The build now runs `tsc -b`, `npm run typecheck` is `tsc -b`,
+and `tests/funnel/typecheck-gate.test.mjs` fails if any script goes back to a bare
+`tsc`. The first real run found one hidden problem: `tsconfig.node.json` needs
+`@types/node`, which the project never declared. Builds on this laptop resolved it from
+a stray `~/node_modules/@types/node` in the home folder (TypeScript searches parent
+folders), so only CI's clean machine failed. `@types/node@^22` (matching `.nvmrc`) is
+now a declared dev dependency. Lesson: a pass on this laptop can lean on files outside
+the repo; CI is the check that counts.
+
 ---
 
 ## P4. Content and campaign readiness
