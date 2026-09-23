@@ -51,7 +51,7 @@ function AffiliateLink({ href, children }: { href: string; children: React.React
       className="text-amber-700 hover:text-amber-900 underline decoration-amber-300 hover:decoration-amber-700 underline-offset-2 font-medium"
     >
       {children}
-      <span className="ml-1 text-xs text-amber-600/70">{badge}</span>
+      <span className="ml-1 text-xs text-amber-800">{badge}</span>
     </a>
   );
 }
@@ -735,7 +735,7 @@ export const RESOURCE_SLUGS = ['make-reading-time-magical', 'reading-milestones-
 const RESOURCE_META = [
   { emoji: '✨', categoryKey: 'readingTips', categoryColor: 'bg-blue-100 text-blue-700', popular: true },
   { emoji: '📊', categoryKey: 'childDev', categoryColor: 'bg-green-100 text-green-700', popular: true },
-  { emoji: '🎨', categoryKey: 'activityIdeas', categoryColor: 'bg-orange-100 text-orange-700', popular: false },
+  { emoji: '🎨', categoryKey: 'activityIdeas', categoryColor: 'bg-orange-100 text-orange-800', popular: false },
   { emoji: '💪', categoryKey: 'engagement', categoryColor: 'bg-pink-100 text-pink-700', popular: false },
   { emoji: '🏠', categoryKey: 'readingTips', categoryColor: 'bg-blue-100 text-blue-700', popular: false },
   { emoji: '🧠', categoryKey: 'childDev', categoryColor: 'bg-green-100 text-green-700', popular: false },
@@ -758,7 +758,7 @@ function ArticleSimple({ id, t }: { id: string; t: { eyebrow: string; title: str
     <article id={id} className="scroll-mt-24 max-w-3xl mx-auto px-4 py-12 border-t border-gray-100">
       <header className="mb-8">
         <p className="text-xs uppercase tracking-wider text-amber-700 font-semibold mb-2">{t.eyebrow}</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 leading-tight">{t.title}</h2>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 leading-tight">{t.title}</h1>
         <p className="text-gray-600 text-lg leading-relaxed">{t.intro}</p>
         <div className="mt-3">
           <ReadAloudButton text={t.intro} compact />
@@ -767,7 +767,7 @@ function ArticleSimple({ id, t }: { id: string; t: { eyebrow: string; title: str
       <div className="space-y-6 text-gray-700 leading-relaxed">
         {t.sections.map((s, i) => (
           <section key={i}>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">{s.title}</h3>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">{s.title}</h2>
             <p>{renderBody(s.body)}</p>
           </section>
         ))}
@@ -797,7 +797,7 @@ export function ArticlePerfectReadingEnvironment({ t }: { t: Article2T }) {
     <article id="perfect-reading-environment" className="scroll-mt-24 max-w-3xl mx-auto px-4 py-12 border-t border-gray-100">
       <header className="mb-8">
         <p className="text-xs uppercase tracking-wider text-amber-700 font-semibold mb-2">{t.eyebrow}</p>
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 leading-tight">{t.title}</h2>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 leading-tight">{t.title}</h1>
         <p className="text-gray-600 text-lg leading-relaxed">{t.intro}</p>
         <div className="mt-3">
           <ReadAloudButton text={t.intro} compact />
@@ -807,13 +807,13 @@ export function ArticlePerfectReadingEnvironment({ t }: { t: Article2T }) {
       <div className="space-y-6 text-gray-700 leading-relaxed">
         {t.choices.map((s, i) => (
           <section key={i}>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">{s.title}</h3>
+            <h2 className="text-xl font-bold text-gray-800 mb-2">{s.title}</h2>
             <p>{renderBody(s.body)}</p>
           </section>
         ))}
 
         <section>
-          <h3 className="text-xl font-bold text-gray-800 mb-2">{t.skip.title}</h3>
+          <h2 className="text-xl font-bold text-gray-800 mb-2">{t.skip.title}</h2>
           <ul className="list-disc pl-6 space-y-2">
             {t.skip.items.map((item, i) => (
               <li key={i}><strong>{item.lead}</strong> {item.rest}</li>
@@ -920,7 +920,7 @@ export default function Resources() {
                   <div className="flex items-start justify-between mb-3">
                     <span className="text-4xl">{r.emoji}</span>
                     {r.popular && (
-                      <span className="text-xs font-bold bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full">{t.popular}</span>
+                      <span className="text-xs font-bold bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">{t.popular}</span>
                     )}
                   </div>
                   <span className={`text-xs font-medium px-2 py-1 rounded-full mb-3 inline-block ${r.categoryColor}`}>

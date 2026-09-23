@@ -368,7 +368,7 @@ export default function Profile() {
 
               <div className="bg-white rounded-xl p-4 text-center shadow-sm">
                 <div className="text-3xl mb-1">🔥</div>
-                <div className="text-base font-bold text-orange-600 leading-snug">{t.statStreak}</div>
+                <div className="text-base font-bold text-orange-700 leading-snug">{t.statStreak}</div>
                 <div className="text-xs text-gray-500 mt-1 font-medium">{t.statStreakLabel}</div>
               </div>
             </div>
@@ -393,7 +393,7 @@ export default function Profile() {
               icon={Star}
               count={activitiesDone.length}
               label={t.activitiesDoneLabel}
-              color="text-orange-600"
+              color="text-orange-700"
               bgColor="bg-orange-50"
             />
           </div>

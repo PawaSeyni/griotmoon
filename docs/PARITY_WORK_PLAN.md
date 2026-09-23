@@ -540,6 +540,12 @@ Griot Moon has no tests. Port Eva's in this order, highest value first:
    button, in EN/ES/FR. Negative-tested (an untagged link and an empty disclosure fail).
 4. **Funnel** (`tests/funnel/*`): the analytics contract.
 5. **End to end** (`tests/e2e/*`): a11y via axe, signup, search.
+   **Done 23 September 2026:** Playwright + axe, 32 tests against the built site
+   (`npm run test:e2e`, in CI after `verify`): axe on 11 routes in EN and FR (fails on
+   serious/critical), the signup contract (body, UTMs, visible errors on 500 / ok:false /
+   abort, `Lead Created` only on success), and search. **It fixed real defects before
+   merge:** all resource articles had no `<h1>` (title was an `<h2>`; sections now `<h2>`),
+   and four WCAG AA contrast failures, including the "(affiliate)" label on product links.
 
 **Acceptance:** the suites run in CI and fail the build.
 
