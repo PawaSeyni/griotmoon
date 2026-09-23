@@ -530,6 +530,13 @@ Griot Moon has no tests. Port Eva's in this order, highest value first:
 
 Eva runs `tsc -b` as `npm run typecheck`. Griot Moon has no such script.
 
+**Done 23 September 2026, and it fixed a silent gap.** `tsconfig.json` is a solution
+file (`"files": []` plus references), so the build's plain `tsc` compiled nothing:
+a file assigning a string to a `number` passed it. No type error had ever been able to
+fail a Griot Moon deploy. The build now runs `tsc -b`, `npm run typecheck` is `tsc -b`,
+and `tests/funnel/typecheck-gate.test.mjs` fails if any script goes back to a bare
+`tsc`. The real tree already passed `tsc -b`, so nothing was broken, only unguarded.
+
 ---
 
 ## P4. Content and campaign readiness
