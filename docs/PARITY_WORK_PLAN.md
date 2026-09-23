@@ -460,21 +460,33 @@ the subscriber chose.
   DKIM/SPF/DMARC pass for griotmoon.com. Field-change tests on existing subscribers
   also delivered English (bedtime chart) and Spanish (flashcards), about 14 minutes
   late.
-- **Not yet verified:** French with a real signup; the English plain-text part after
-  its fix (below).
+- **Acceptance met for all three languages** with real signups on 23 September:
+
+  | Signup | Email | Button / plain-text link |
+  |---|---|---|
+  | `+griotmoon3`, es, flashcards | Spanish | `/dl/es/bilingual-flashcards` |
+  | `+griotmoon4`, fr, parents' guide | French | `/dl/fr/parents-guide` |
+  | `+griotmoon6`, en, starter kit | English, plain text fixed | `/dl/en/bilingual-starter-kit` |
+
+- **Delivery time is 0 to about 15 minutes, not instant.** "Joins segment" triggers run
+  in batches (observed 05:33, 05:47, 06:04 UTC). The success screen on the site already
+  hands over the PDF, so nobody waits for the file.
 
 **Gotchas learned here:**
 
 - The API cannot write email HTML on this plan (Premium only) and cannot activate or
   pause automations. Design and activation are dashboard steps. **Activate opens a
   confirmation dialog; nothing saves until it is confirmed.**
-- The API cannot edit an **active** automation: pause, edit, reactivate.
+- The API cannot edit an **active** automation. And on a *designed* email, its edit call
+  reported success without keeping the plain-text change, wiped the preheader and
+  flipped a tracking flag. Make email edits in the dashboard editor only.
 - `{$name|default:'…'}` in an automation's **plain-text** part made MailerLite blank
   every merge tag in that part, including `{$lead_magnet}` and `{$unsubscribe}`. The
   English plain text now says "Hi there," with no filter. Do not use that filter in
   plain text.
-- "Joins segment" triggers on a field change lag about 14 minutes (segment
-  recalculation); a new subscriber triggers within seconds.
+- "Joins segment" triggers run in batches roughly every 15 minutes, for new
+  subscribers and field changes alike. An earlier note here said new signups trigger
+  within seconds; that was one signup that happened to land next to a batch.
 
 ---
 
