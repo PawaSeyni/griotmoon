@@ -471,6 +471,14 @@ the subscriber chose.
 - **Delivery time is 0 to about 15 minutes, not instant.** "Joins segment" triggers run
   in batches (observed 05:33, 05:47, 06:04 UTC). The success screen on the site already
   hands over the PDF, so nobody waits for the file.
+- **Cleanup, 23 September.** The six test subscribers (`pnguer+griotmoon` to
+  `+griotmoon6`) were deleted; the account total went from 42 to 36, so nothing else was
+  removed, and `griotmoon-signups` is empty. **Known clutter, left on purpose:** an
+  inactive `Copy of Griot Moon — Welcome + Trilingual Starter Kit` (id
+  199375499194009133), never sent, 0 in progress. Several dashboard deletes did not take
+  and it is harmless, so it stays. It sends nothing unless someone activates it; delete
+  it whenever convenient. Do not confuse it with the paused original (id
+  192084924865447252).
 
 **Gotchas learned here:**
 
