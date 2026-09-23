@@ -316,6 +316,30 @@ after the migration widens the CSP for no reason.
 **Acceptance:** GET returns 405, an invalid address returns 422, a valid one
 returns 200 and creates a real subscriber.
 
+**Acceptance met on the deploy preview, 23 September 2026 (UTC):**
+
+| Check | Result |
+|---|---|
+| GET | 405 `method_not_allowed` |
+| Invalid address | 422 `invalid_email` |
+| Foreign origin | 403 `bad_origin` |
+| Existing address, new field values | 200, fields written (`updated_at` moved) |
+| New address through the real form | 200, **active** immediately, welcome email 8 s later, no confirmation email |
+| Events | `Form View` → `Form Start` → `Lead Created` once, after success |
+
+**Lessons from getting the key in place (took most of an evening):**
+
+- The Griot Moon folder's local Netlify link (`.netlify/state.json`) pointed at
+  **storytimewitheva**. Every `netlify env:*` from that folder hit Eva's project,
+  and griotmoon had **no environment variables at all**. Set Griot's variables in
+  the web UI on `app.netlify.com/projects/griotmoon/configuration/env`, and check
+  the link before trusting any CLI result.
+- The first token failed MailerLite's group lookup (the function answered
+  `group_unavailable` and, correctly, wrote nothing). A new token fixed it. The
+  function now logs MailerLite's status on that path.
+- Never delete a MailerLite token to "reset" it: the account is shared, and one of
+  them is Eva's.
+
 ### P2-2 Decide opt-in mode
 
 Griot Moon is on double opt-in; Eva moved to single. Double opt-in depresses list
