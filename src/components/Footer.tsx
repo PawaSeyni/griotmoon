@@ -15,6 +15,7 @@ const TRANSLATIONS = {
     connect: 'Connect with Pawa Seyni',
     connectBlurb: 'Join our community for weekly tips, new stories, and exclusive activities!',
     rights: '© {year} Pawa Press Inc. · Griot Moon. All rights reserved.',
+    affiliate: 'As an Amazon Associate, Pawa Press earns from qualifying purchases.',
     privacy: 'Privacy Policy',
     terms: 'Terms of Use',
   },
@@ -31,6 +32,7 @@ const TRANSLATIONS = {
     connect: 'Conecta con Pawa Seyni',
     connectBlurb: '¡Únete a nuestra comunidad para consejos semanales, historias nuevas y actividades exclusivas!',
     rights: '© {year} Pawa Press Inc. · Griot Moon. Todos los derechos reservados.',
+    affiliate: 'Como Asociado de Amazon, Pawa Press recibe ingresos por las compras que cumplen los requisitos.',
     privacy: 'Política de privacidad',
     terms: 'Términos de uso',
   },
@@ -47,6 +49,7 @@ const TRANSLATIONS = {
     connect: 'Connectez-vous avec Pawa Seyni',
     connectBlurb: 'Rejoignez notre communauté pour des conseils hebdomadaires, de nouvelles histoires et des activités exclusives !',
     rights: '© {year} Pawa Press Inc. · Griot Moon. Tous droits réservés.',
+    affiliate: 'En tant que Partenaire Amazon, Pawa Press réalise un bénéfice sur les achats remplissant les conditions requises.',
     privacy: 'Politique de confidentialité',
     terms: 'Conditions d\'utilisation',
   },
@@ -111,6 +114,8 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-400">
           <p>{t.rights.replace('{year}', String(new Date().getFullYear()))}</p>
+          {/* Amazon Associates disclosure, required wherever affiliate links appear (tests/seo/monetization.test.mjs). */}
+          <p className="text-xs text-gray-400 mt-1" data-affiliate-disclosure="footer">{t.affiliate}</p>
           <div className="flex gap-4">
             <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">{t.privacy}</Link>
             <Link to="/terms" className="text-gray-400 hover:text-white transition-colors">{t.terms}</Link>

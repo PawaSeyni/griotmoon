@@ -531,6 +531,13 @@ Griot Moon has no tests. Port Eva's in this order, highest value first:
 3. **Monetization** (`tests/seo/monetization.test.mjs`): every Amazon link carries
    the Associates tag, opens in a new tab, has `rel="noopener"`, and points at the
    right language edition.
+   **Done 23 September 2026**, adapted to one Amazon listing per book (no edition
+   mapping): every Amazon link on every built page is tagged `griotmoon-20`, opens in a
+   new tab with `noopener`; each book page links its own ASIN in all three languages;
+   coming-soon books never sell. **It found a compliance gap:** the Amazon Associates
+   disclosure appeared only on Terms and one Resources page, not on the pages carrying
+   the links. Eva's wording is now in the footer of every page and under every Buy
+   button, in EN/ES/FR. Negative-tested (an untagged link and an empty disclosure fail).
 4. **Funnel** (`tests/funnel/*`): the analytics contract.
 5. **End to end** (`tests/e2e/*`): a11y via axe, signup, search.
 
