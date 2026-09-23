@@ -18,11 +18,12 @@
     "report:funnels": "node scripts/report-funnels.mjs",
     "typecheck": "tsc -b",
     "test": "node --test tests/funnel/*.test.mjs",
+    "test:seo": "node --test tests/seo/*.test.mjs",
     "gen:version": "node scripts/gen-version.mjs",
     "verify:deploy": "node scripts/verify-deploy.mjs",
     "build:games-css": "tailwindcss -c scripts/games.tailwind.config.cjs -i scripts/games-tw-input.css -o public/games/games.css --minify",
     "patch:games": "node scripts/patch-games.mjs",
-    "verify": "npm run check:i18n && npm run check:analytics && npm test && npm run build && npm run check:seo"
+    "verify": "npm run check:i18n && npm run check:analytics && npm test && npm run build && npm run check:seo && npm run test:seo"
   },
   "dependencies": {
     "@fontsource-variable/lexend": "^5.2.11",
