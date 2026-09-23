@@ -54,17 +54,17 @@ const LEAD_MAGNETS: Record<string, Magnet> = {
     copy: {
       en: {
         blurb: 'Twenty trilingual pages to start your family’s reading adventure, with a mini story, first words and playful activities in English, Spanish and French. For ages 3 to 8.',
-        bullets: ['✓ 20-page activity pack in English, Spanish & French', '✓ Mini story, Pawa’s Big Day, plus a first-words guide', '✓ Coloring, word search, letter tracing & a certificate'],
+        bullets: ['✓ 20-page activity pack in English, Spanish & French', '✓ Mini story, Pawa’s Big Day, plus a first-words guide', '✓ Coloring, word search, letter tracing & a certificate', '✓ Age-appropriate book recommendations'],
         cta: 'Get My Free Kit 🎨',
       },
       es: {
         blurb: 'Veinte páginas trilingües para empezar la aventura lectora de tu familia, con un mini cuento, primeras palabras y actividades divertidas en español, inglés y francés. Para niños de 3 a 8 años.',
-        bullets: ['✓ Pack de 20 páginas de actividades en español, inglés y francés', '✓ Mini cuento «El gran día de Pawa» y guía de primeras palabras', '✓ Colorear, sopa de letras, trazar letras y un certificado'],
+        bullets: ['✓ Pack de 20 páginas de actividades en español, inglés y francés', '✓ Mini cuento «El gran día de Pawa» y guía de primeras palabras', '✓ Colorear, sopa de letras, trazar letras y un certificado', '✓ Recomendaciones de libros por edad'],
         cta: 'Quiero mi kit gratis 🎨',
       },
       fr: {
         blurb: 'Vingt pages trilingues pour lancer l’aventure lecture de votre famille, avec une mini-histoire, les premiers mots et des activités ludiques en français, anglais et espagnol. Pour les 3 à 8 ans.',
-        bullets: ['✓ Pack d’activités de 20 pages en français, anglais et espagnol', '✓ Mini-histoire « Le grand jour de Pawa » et guide des premiers mots', '✓ Coloriage, mots cachés, lettres à tracer et certificat'],
+        bullets: ['✓ Pack d’activités de 20 pages en français, anglais et espagnol', '✓ Mini-histoire « Le grand jour de Pawa » et guide des premiers mots', '✓ Coloriage, mots cachés, lettres à tracer et certificat', '✓ Recommandations de livres par tranche d\'âge'],
         cta: 'Recevoir mon kit gratuit 🎨',
       },
     },
