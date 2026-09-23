@@ -395,6 +395,8 @@ languages, and the build fails if one is missing.
   guide, the body promises the activity pack. Each magnet needs its own blurb,
   bullets and button in EN/ES/FR (Eva's `magnet.copy` shape) before a pin or ad
   points at it.
+  **Drafted 23 September 2026** from each PDF's actual contents (PR pending the
+  owner's approval of the wording; FR/ES need a native read).
 
 ### P2-4 Pinterest server-side conversions
 
