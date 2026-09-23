@@ -517,6 +517,10 @@ Griot Moon has no tests. Port Eva's in this order, highest value first:
 
 1. **SEO** (`tests/seo/seo.test.mjs`): unique titles, canonical, reciprocal
    hreflang, no accidental noindex, across every sitemap route.
+   **Done 23 September 2026:** 200 tests over the 186 sitemap URLs, run in `verify`
+   as `npm run test:seo`. All 176 React pages passed as-is. The 12 standalone games
+   lacked the self-referencing `hreflang="en"` / `x-default` that Eva's carry; added.
+   Negative-tested (a duplicate title and a stray noindex both fail it).
 2. **Linking** (`tests/seo/linking.test.mjs`): no orphan routes, no thin pages.
 3. **Monetization** (`tests/seo/monetization.test.mjs`): every Amazon link carries
    the Associates tag, opens in a new tab, has `rel="noopener"`, and points at the
