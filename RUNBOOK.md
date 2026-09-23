@@ -199,9 +199,9 @@ After any deploy, navigate to:
 ### How the funnel works (data flow)
 
 1. Visitor fills out `EmailSignup.tsx` on griotmoon.com
-2. `EmailSignup.tsx` POSTs (no-cors) to the MailerLite JSONP endpoint with `fields[email]`, `fields[name]`, `fields[language]`, `fields[lead_magnet]`
-3. MailerLite creates a subscriber, sends double-opt-in confirmation
-4. Subscriber clicks confirmation → joins `griotmoon-signups` group
+2. `EmailSignup.tsx` POSTs (JSON, same-origin) to the **`/.netlify/functions/subscribe`** Netlify Function (parity plan P2-1). A submit before the page hydrates posts natively to the same function, which redirects back with `?signup=<result>`.
+3. `subscribe.mjs` calls the MailerLite API server-side with `MAILERLITE_API_KEY` (never in the browser) and adds the subscriber directly to `griotmoon-signups`: **single opt-in**, no confirmation email (P2-2, 22 September 2026). If the group cannot be resolved it fails with a retryable error rather than creating an ungrouped subscriber.
+4. The form fires `Lead Created` only on the function's success.
 5. Welcome automation triggers (subscriber joined group → fire Email 1 immediately, then delays 3 / 4 / 5 days between Emails 2, 3, 4)
 
 ### Welcome automation contents (current)
@@ -228,7 +228,7 @@ After any deploy, navigate to:
 | Symptom | First check |
 |---|---|
 | **Subscribers not joining group** | Test the form on the live site → check MailerLite Subscribers list for new entry within ~30 sec. If POST returns HTTP 503 to browser: that's normal under `no-cors` — the subscriber still records. |
-| **Emails not sending** | Automation enabled? (`enabled: true` via MailerLite MCP, or top-right shows "Pause" not "Activate"). Subscriber confirmed double-opt-in? |
+| **Emails not sending** | Automation enabled? (`enabled: true` via MailerLite MCP, or top-right shows "Pause" not "Activate"). Subscriber in `griotmoon-signups` and `active`? (Single opt-in since P2-2: there is no confirmation step.) |
 | **Wrong subject / wrong banner on an email** | Open automation → click email → edit. Subject in the side panel, banner inside the block editor. Click Save → Done editing. Re-verify via MailerLite MCP. |
 | **Subscriber complains they didn't receive Email N** | Subscribers tab → search subscriber → Activity tab → check delivery status for each automation step |
 | **Trial expired** | Pick plan (Free for ≤1K subs, or Growing Business $10/mo for more). Or migrate to GoatCounter/MailerLite competitor — see migration playbook in scenarios. |
@@ -403,7 +403,7 @@ See PUNCH_LIST long-term backlog → "Social & marketing channels" cluster.
 ### "A subscriber didn't receive their welcome email"
 
 1. MailerLite → Subscribers → search by email
-2. Check Status: `unconfirmed` means they didn't click double-opt-in → resend confirmation (Actions → Resend confirmation)
+2. Check Status: `unconfirmed` should not occur for signups after P2-2 (single opt-in); it marks a signup from the double opt-in era that never confirmed
 3. Check `language` field is populated correctly (`en/es/fr`)
 4. Check Activity tab → look for "Automation queued" entries for `Storytimewitheva — Welcome + Bilingual Starter Kit`
 5. If no automation entries → subscriber didn't actually join the group; check form submission flow

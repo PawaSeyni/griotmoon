@@ -110,7 +110,7 @@ if (!rows) {
   md += `## Book views by age range\n\n${Object.entries(count('Book View', {}, 'age')).map(([k, v]) => `${k} ${v}`).join(' · ') || 'none'}\n\n`;
   const unknown = [...new Set(rows.filter((r) => r.props?.book && !bookById[r.props.book]).map((r) => r.props.book))];
   if (unknown.length) md += `⚠︎ ${unknown.length} book id(s) in the data are not in the catalog: ${unknown.join(', ')}. Usually retired or renamed books; they appear as "(not in catalog)" in the age breakdown.\n\n`;
-  md += `## Known gaps\n\n- Amazon purchases are not observable; every purchase figure is an outbound click (intent).\n- Until parity plan P2-1, \`Lead Created\` fires when the browser's request did not throw, not on a confirmed subscriber. Double opt-in: created is not confirmed.\n- Each book has one Amazon listing, so \`language\` on a purchase is the site language, not an edition.\n`;
+  md += `## Known gaps\n\n- Amazon purchases are not observable; every purchase figure is an outbound click (intent).\n- \`Lead Created\` is a backend-confirmed, active subscriber since parity plan P2-1 (single opt-in, P2-2). Before that change it only meant the browser's request did not throw, so do not compare it across the change without saying so.\n- Each book has one Amazon listing, so \`language\` on a purchase is the site language, not an edition.\n`;
 }
 // A frozen snapshot is a record, not an output: refuse to overwrite one (P1-4).
 if (args.out && existsSync(args.out) && readFileSync(args.out, 'utf8').includes('FROZEN SNAPSHOT')) {

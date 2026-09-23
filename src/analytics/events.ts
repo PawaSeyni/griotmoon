@@ -54,7 +54,7 @@ export const EVENTS = [
     values: { language: LANGUAGES, placement: FORM_PLACEMENTS }, privacy: 'first focus only; never the typed value' },
   { name: 'Lead Created', kind: 'outcome', required: ['language', 'lead_magnet', 'placement'], optional: [],
     values: { language: LANGUAGES, placement: FORM_PLACEMENTS }, privacy: 'never the email or name',
-    notes: 'Until P2-1 the browser posts to MailerLite with no-cors and cannot read the answer, so this fires when the request did not throw, not on confirmed creation. Double opt-in: a created subscriber is not yet a confirmed one.' },
+    notes: 'Fires only when the subscribe function (P2-1) returns success, i.e. MailerLite created the subscriber. Single opt-in (P2-2), so created means active. Before P2-1 (up to 22 September 2026) it fired when the browser request did not throw.' },
   { name: 'Magnet Download', kind: 'outcome', required: ['language', 'lead_magnet', 'asset'], optional: ['placement'],
     values: { language: LANGUAGES, placement: FORM_PLACEMENTS }, privacy: 'asset path only' },
   // ---- engagement ----

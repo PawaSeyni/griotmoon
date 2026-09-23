@@ -28,7 +28,7 @@ export const FUNNELS: FunnelDefinition[] = [
   { id: 'signup-by-placement', title: 'Newsletter: view → start → lead',
     steps: [{ event: 'Form View' }, { event: 'Form Start' }, { event: 'Lead Created' }],
     dimensions: ['placement', 'lead_magnet', 'language'], measures: 'outcome',
-    notes: 'Lead Created is browser-assumed until P2-1 moves the subscribe call server-side.' },
+    notes: 'Lead Created is a backend-confirmed, active subscriber (P2-1 server-side, P2-2 single opt-in).' },
   { id: 'lead-to-download', title: 'Lead → magnet download',
     steps: [{ event: 'Lead Created' }, { event: 'Magnet Download' }],
     dimensions: ['lead_magnet', 'language'], measures: 'outcome' },
