@@ -4,6 +4,7 @@ import { useTranslation } from '../lib/language';
 // Plain-language privacy policy. Content reflects the site's ACTUAL data
 // practices as implemented in code:
 //   • Newsletter  -> MailerLite (email + optional first name, single opt-in)
+//   • Pinterest   -> server-side conversion, SHA-256 hashed email only (P2-4)
 //   • Contact     -> Netlify Forms (name, email, subject, message)
 //   • Analytics   -> Plausible Analytics (cookieless, aggregate, no personal data)
 //   • Feedback widget -> Netlify Forms (rating, page, language, optional comment)
@@ -44,6 +45,7 @@ const TRANSLATIONS = {
         heading: 'Newsletter sign-up',
         body: [
           'If you join our mailing list, we collect your email address and, optionally, your first name. This is handled by MailerLite (single opt-in: you are added directly, without a confirmation email). We use it only to send the free activity kit and occasional reading tips and updates. You can unsubscribe at any time using the link in every email.',
+          'If you subscribe for a free printable, we also share a one-way hashed (irreversible) version of your email address with Pinterest, solely to measure whether one of our Pinterest ads led to your signup. This happens on our server and sets no cookies; we share only that hash, and no IP address, browsing activity, or other identifier. Pinterest never receives your readable email. It applies only to adults who sign up and never involves any child\'s information. To opt your address out, email contact@griotmoon.com.',
         ],
       },
       {
@@ -111,6 +113,7 @@ const TRANSLATIONS = {
         heading: 'Suscripción al boletín',
         body: [
           'Si te unes a nuestra lista, recopilamos tu correo electrónico y, opcionalmente, tu nombre. Lo gestiona MailerLite (opt-in simple: te suscribes directamente, sin correo de confirmación). Lo usamos solo para enviar el kit gratuito y, de vez en cuando, consejos de lectura y novedades. Puedes darte de baja en cualquier momento con el enlace de cada correo.',
+          'Si te suscribes para recibir un recurso gratuito, también compartimos una versión cifrada de forma irreversible de tu correo electrónico con Pinterest, únicamente para medir si uno de nuestros anuncios en Pinterest te llevó a suscribirte. Esto ocurre en nuestro servidor y no usa cookies; compartimos solo ese hash, sin tu dirección IP, tu actividad de navegación ni ningún otro identificador. Pinterest nunca recibe tu correo legible. Solo se aplica a adultos que se suscriben y nunca incluye información de ningún niño. Para excluir tu dirección, escribe a contact@griotmoon.com.',
         ],
       },
       {
@@ -178,6 +181,7 @@ const TRANSLATIONS = {
         heading: 'Inscription à la newsletter',
         body: [
           'Si vous rejoignez notre liste, nous collectons votre adresse e-mail et, facultativement, votre prénom. Cela est géré par MailerLite (opt-in simple : vous êtes inscrit directement, sans e-mail de confirmation). Nous l\'utilisons uniquement pour envoyer le kit gratuit et, occasionnellement, des conseils de lecture et des nouvelles. Vous pouvez vous désinscrire à tout moment via le lien présent dans chaque e-mail.',
+          'Si vous vous inscrivez pour recevoir une ressource gratuite, nous partageons aussi une version hachée et irréversible de votre adresse e-mail avec Pinterest, uniquement pour mesurer si l\'une de nos publicités Pinterest a mené à votre inscription. Cela se passe sur notre serveur et sans cookies ; nous ne partageons que ce haché, sans votre adresse IP, votre activité de navigation ni aucun autre identifiant. Pinterest ne reçoit jamais votre e-mail lisible. Cela ne concerne que les adultes qui s\'inscrivent et n\'implique jamais les informations d\'un enfant. Pour exclure votre adresse, écrivez à contact@griotmoon.com.',
         ],
       },
       {

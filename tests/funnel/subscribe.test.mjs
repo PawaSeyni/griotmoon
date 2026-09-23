@@ -143,3 +143,25 @@ test('#4 native form: an off-site return_to is neutralized to the root', async (
   assert.equal(res.statusCode, 303);
   assert.equal(res.headers.Location, '/?signup=ok#email-signup');
 });
+
+// P2-4: the Pinterest conversion is best-effort. A Pinterest outage must not turn a
+// good signup into an error, and the conversion must only follow a created subscriber.
+test('#5 a Pinterest network failure (the call throws) never changes a successful signup', async () => {
+  process.env.PINTEREST_CONVERSIONS_TOKEN = 'test-token';
+  process.env.PINTEREST_AD_ACCOUNT_ID = '1234567890';
+  try {
+    const calls = stubFetch([
+      GROUPS_OK,
+      SUBS_OK,
+    ]);
+    const res = await handler(jsonEvent({ email: 'pin-fail@example.com', lead_magnet: 'parents-guide' }, { 'x-nf-client-connection-ip': '203.0.113.50' }));
+    assert.equal(res.statusCode, 200);
+    assert.equal(JSON.parse(res.body).ok, true);
+    const pin = calls.find(c => c.url.includes('api.pinterest.com'));
+    assert.ok(pin, 'the conversion is attempted after a created subscriber');
+    assert.ok(!pin.body.includes('pin-fail@example.com'), 'raw email sent to Pinterest');
+  } finally {
+    delete process.env.PINTEREST_CONVERSIONS_TOKEN;
+    delete process.env.PINTEREST_AD_ACCOUNT_ID;
+  }
+});
