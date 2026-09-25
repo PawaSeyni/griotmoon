@@ -4,7 +4,9 @@
   # and a failure in either fails the deploy. These checks also run in CI, but
   # CI runs in parallel with this deploy and cannot stop it, so they must be
   # in the deploy's own command to actually gate production.
-  command = "npm run verify"
+  # IndexNow runs only after every gate has passed, so a rejected build never
+  # announces anything; it never fails the deploy (see scripts/indexnow.mjs).
+  command = "npm run verify && (npm run indexnow || true)"
   publish = "dist"
 
 # Node version deliberately NOT set here. It comes from .nvmrc, which GitHub
@@ -53,6 +55,13 @@
 # file to catch exactly that.
 [[headers]]
   for = "/version.json"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0"
+
+# The IndexNow manifest is read back by the NEXT production build to decide which
+# pages changed (scripts/indexnow.mjs), so it must never be served from a cache.
+[[headers]]
+  for = "/indexnow-manifest.json"
   [headers.values]
     Cache-Control = "no-store, max-age=0"
 

@@ -16,6 +16,7 @@
     "check:i18n": "node scripts/check-i18n-catalog.mjs",
     "check:analytics": "node scripts/check-analytics.mjs",
     "check:hydration": "node scripts/check-hydration.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
     "report:funnels": "node scripts/report-funnels.mjs",
     "typecheck": "tsc -b",
     "test": "node --test tests/funnel/*.test.mjs tests/hydration/*.test.mjs",
