@@ -35,10 +35,16 @@ snapshot shows. Hydration breaks if a component:
 - renders `Math.random()`, `Date.now()`/`new Date()` or other per-load values, or
 - changes visible output in a mount effect (e.g. `useState(false)` then
   `useEffect(() => setShown(true))`; start from the value the snapshot will contain).
+- updates state ABOVE the route `<Suspense>` boundary in a mount effect (a provider
+  flipping `loading`, resolving a theme, a delayed popup). If the page's lazy chunk is
+  still loading when that update lands (slow phone, cold CDN), React abandons
+  hydrating the page (#421). Wrap such updates in `startTransition`.
 
 A broken page still looks right, it just silently repaints and loses the LCP gain.
 `scripts/check-hydration.mjs` (last step of `npm run verify`) loads every prerendered
-route at its production URL and fails the build on React errors #418/#422/#423/#425.
+route at its production URL and fails the build on React errors #418/#421/#422/#423/#425.
+It then reloads three representative routes with their lazy chunks held back 2 s
+(everything outside the entry's static import graph), so the #421 race always happens.
 Attribute-only differences (e.g. a `className`) are not reported by React's production
 build, so the check cannot see them.
 
