@@ -18,13 +18,10 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-// On CI (Netlify) use @sparticuz/chromium — a statically-linked build that
-// works in containers without system-level Chrome libs.
-// Locally (macOS / dev) fall back to puppeteer's own bundled Chromium.
-const IS_CI = process.env.CI === 'true' || process.env.NETLIFY === 'true';
-const { default: puppeteer } = IS_CI
-  ? await import('puppeteer-core')
-  : await import('puppeteer');
+// Chrome launch (@sparticuz/chromium on CI, puppeteer's bundled Chromium
+// locally) and analytics blocking live in lib/chrome.mjs, shared with
+// check-hydration.mjs.
+import { IS_CI, launchChrome, blockAnalytics } from './lib/chrome.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.resolve(__dirname, '..', 'dist');
@@ -130,49 +127,16 @@ console.log(`Prerendering ${routes.length} routes (${extraRoutes.length} noindex
 // SPA fallback (`/* -> /index.html 200`) that used to serve a working shell for
 // every URL has been removed (it caused soft-404s — unknown URLs returned the
 // home page with HTTP 200), so a partial prerender must NOT ship silently.
-let launchOpts;
-if (IS_CI) {
-  const chromium = (await import('@sparticuz/chromium')).default;
-  launchOpts = {
-    args: chromium.args,
-    executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
-  };
-  console.log('CI mode: using @sparticuz/chromium');
-} else {
-  launchOpts = {
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-dev-shm-usage',
-      '--disable-gpu',
-    ],
-  };
-}
-
 let browser;
 try {
-  browser = await puppeteer.launch(launchOpts);
+  browser = await launchChrome();
 } catch (e) {
   console.error(`❌ Prerender could not launch Chrome: ${e.message}`);
   console.error('   Failing the build so the last good deploy stays live.');
   server.close();
   process.exit(1);
 }
-console.log('Chrome launched OK');
-
-// Analytics beacons to abort during prerender. Every build loads ~165 pages in
-// headless Chromium; without this they'd land in the dashboard as real traffic.
-// The snapshot keeps the <script> tags, so actual visitors are still counted.
-// Keep in sync with the active analytics scripts in index.html. Cloudflare Web Analytics was removed; keeping stale hosts here can hide accidental regressions during build QA.
-const ANALYTICS_HOSTS = ['plausible.io'];
-
-async function blockAnalytics(page) {
-  await page.setRequestInterception(true);
-  page.on('request', req =>
-    ANALYTICS_HOSTS.some(h => req.url().includes(h)) ? req.abort() : req.continue()
-  );
-}
+console.log(`Chrome launched OK${IS_CI ? ' (CI mode: @sparticuz/chromium)' : ''}`);
 
 // Wait for the route to actually finish rendering, and THROW if it doesn't.
 //
