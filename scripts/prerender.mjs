@@ -117,7 +117,9 @@ const LANDING_SLUGS = ['bedtime-routine', 'bilingual-starter-kit', 'bilingual-fl
   console.log(`Landing-page guard OK: ${registered.length} magnets, each with a /free/ page in ${LANG_PREFIXES.length} languages.`);
 }
 
-const extraRoutes = [...NOINDEX_SPA_ROUTES, ...LANDING_SLUGS.map(s => `/free/${s}`)].flatMap(p => LANG_PREFIXES.map(pre => `${pre}${p}`));
+// Snapshot at the trailing-slash URL production serves (/x 301s to /x/), the same
+// shape as the sitemap routes, so the page renders exactly as a visitor gets it.
+const extraRoutes = [...NOINDEX_SPA_ROUTES, ...LANDING_SLUGS.map(s => `/free/${s}`)].flatMap(p => LANG_PREFIXES.map(pre => `${pre}${p}/`));
 
 const routes = [...new Set([...sitemapRoutes, ...extraRoutes])];
 console.log(`Prerendering ${routes.length} routes (${extraRoutes.length} noindex SPA routes)…`);
