@@ -18,7 +18,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { existsSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { launchChrome, blockAnalytics } from './lib/chrome.mjs';
+import { launchChrome, blockAnalytics, ANALYTICS_HOSTS } from './lib/chrome.mjs';
 import { isHydrationError } from './lib/hydration.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -138,6 +138,59 @@ async function worker(queue) {
 const queue = [...routes];
 await Promise.all(Array.from({ length: TABS }, () => worker(queue)));
 
+// Slow-chunk pass. On a fast machine a lazy page chunk resolves before the app's
+// mount effects run, so an effect that updates state above the page's Suspense
+// boundary goes unnoticed. On a slow phone or a cold CDN the effect wins, and
+// React abandons hydration of the page (#421). Reload a few representative pages
+// with their lazy chunks held back 2 s, so that race always happens here.
+// Only chunks OUTSIDE the entry's static import graph are held: holding the
+// entry's own static imports would delay the app's boot by the same 2 s and the
+// race would never happen. (Found on opttutor.com on 2026-09-25; the fix there
+// was startTransition for the mount-time updates.)
+// The entry plus everything it imports statically (import ... from "./x.js").
+// Dynamic import("./x.js") calls are the lazy chunks and are not followed.
+const STATIC_IMPORT = /(?:^|[;}\n])\s*import\s*(?:[\w$*{}\s,]+?\s*from\s*)?["'](\.{1,2}\/[^"']+)["']/g;
+async function staticGraph(entry) {
+  const seen = new Set();
+  const visit = async p => {
+    if (seen.has(p)) return;
+    seen.add(p);
+    const src = await (await fetch(ORIGIN + p)).text();
+    for (const m of src.matchAll(STATIC_IMPORT)) await visit(new URL(m[1], ORIGIN + p).pathname);
+  };
+  await visit(entry);
+  return seen;
+}
+const SLOW_ROUTES = ['/books/', '/activities/', '/free/bilingual-starter-kit/'].filter(r => routes.includes(r));
+async function slowPass(route) {
+  const label = `${route} (slow chunks)`;
+  const html = await (await fetch(ORIGIN + route)).text();
+  const entry = (html.match(/<script type="module"[^>]*src="([^"]+)"/) || [])[1];
+  if (!entry) return fail(label, 'no entry <script type="module"> found');
+  const boot = await staticGraph(entry);
+  const page = await browser.newPage();
+  await page.setRequestInterception(true);
+  page.on('request', req => {
+    const u = new URL(req.url());
+    if (ANALYTICS_HOSTS.some(h => u.host.includes(h))) return req.abort();
+    const hold = u.origin === ORIGIN && u.pathname.endsWith('.js') && !boot.has(u.pathname);
+    if (hold) setTimeout(() => req.continue(), 2000);
+    else req.continue();
+  });
+  const report = (kind, text) => { if (isHydrationError(text)) fail(label, `${kind}: ${String(text).split('\n')[0]}`); };
+  page.on('pageerror', err => report('pageerror', err?.message ?? err));
+  page.on('console', msg => { if (msg.type() === 'error') report('console.error', msg.text()); });
+  try {
+    await page.goto(ORIGIN + route, { waitUntil: 'networkidle0', timeout: 60000 });
+    await page.waitForFunction('window.__PRERENDER_READY__ === true', { polling: 100, timeout: 15000 });
+    await new Promise(r => setTimeout(r, SETTLE_MS));
+  } catch (e) {
+    fail(label, `did not load/boot: ${e.message.split('\n')[0]}`);
+  }
+  await page.close();
+}
+await Promise.all(SLOW_ROUTES.map(slowPass));
+
 await browser.close();
 server.close();
 
@@ -155,4 +208,4 @@ if (failures.size) {
   );
   process.exit(1);
 }
-console.log(`Hydration check OK: ${routes.length} routes hydrated cleanly (${sitemapRoutes.length} sitemap, ${extraRoutes.length} noindex, 404) in ${secs}s.`);
+console.log(`Hydration check OK: ${routes.length} routes hydrated cleanly (${sitemapRoutes.length} sitemap, ${extraRoutes.length} noindex, 404; ${SLOW_ROUTES.length} again with slow chunks) in ${secs}s.`);

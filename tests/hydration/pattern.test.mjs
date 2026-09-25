@@ -11,7 +11,7 @@ const decoder = n =>
   `Minified React error #${n}; visit https://reactjs.org/docs/error-decoder.html?invariant=${n} for the full message`;
 
 test('flags the production hydration errors', () => {
-  for (const n of [418, 422, 423, 425]) assert.ok(isHydrationError(decoder(n)), `#${n}`);
+  for (const n of [418, 421, 422, 423, 425]) assert.ok(isHydrationError(decoder(n)), `#${n}`);
 });
 
 test('flags the development wordings', () => {
