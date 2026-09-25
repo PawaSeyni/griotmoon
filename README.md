@@ -17,9 +17,30 @@ React + Vite + Tailwind + Netlify architecture with the "Midnight Indigo" theme.
 ## Commands
 
 - `npm run dev` — local dev server
-- `npm run build` — typecheck + build + prerender (what Netlify runs)
+- `npm run build` — typecheck + build + prerender
 - `npm run build:spa` — build without prerendering
 - `npm run gen:sitemap` — regenerate `public/sitemap.xml` from the book catalog
+- `npm run verify` — the deploy gate (Netlify build command and CI): checks, build +
+  prerender, SEO output, then the hydration check
+- `npm run check:hydration` — hydrate every prerendered page in headless Chrome
+  (needs a built `dist/`)
+
+## Hydration contract
+
+`src/main.tsx` hydrates the prerendered snapshots (`scripts/prerender.mjs`) rather than
+repainting them; that is what keeps mobile Lighthouse in the 90s. The snapshot is taken
+**after** effects run, so a component's first render must already produce what the
+snapshot shows. Hydration breaks if a component:
+
+- renders `Math.random()`, `Date.now()`/`new Date()` or other per-load values, or
+- changes visible output in a mount effect (e.g. `useState(false)` then
+  `useEffect(() => setShown(true))`; start from the value the snapshot will contain).
+
+A broken page still looks right, it just silently repaints and loses the LCP gain.
+`scripts/check-hydration.mjs` (last step of `npm run verify`) loads every prerendered
+route at its production URL and fails the build on React errors #418/#422/#423/#425.
+Attribute-only differences (e.g. a `className`) are not reported by React's production
+build, so the check cannot see them.
 
 ## Content
 

@@ -17,7 +17,8 @@ import listeningUrl from '../assets/pixel/listening.svg';
 // Pixel is ON for all visitors. A reader can opt out by visiting any page with
 // ?pixel=0 (the choice persists via localStorage); ?pixel=1 turns her back on.
 // To hide her from everyone again, default the localStorage branch back to
-// `=== 'on'` (and return false from the no-window / catch branches).
+// `=== 'on'` (and return false from the no-window / catch branches, and start
+// usePixelEnabled at false so the snapshot and first render agree).
 
 export type PixelMood = 'hello' | 'reading' | 'praise' | 'sleepy' | 'pointing' | 'listening';
 
@@ -73,8 +74,12 @@ function readEnabled(): boolean {
   }
 }
 
+// Starts ON, the default every visitor gets and what the prerendered snapshot
+// shows. Starting OFF made the first client render drop the <img> the snapshot
+// has, so every /profile/ page failed hydration (#418) and repainted. The effect
+// only changes anything for a reader who opted out (?pixel=0).
 export function usePixelEnabled(): boolean {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(true);
   useEffect(() => {
     setEnabled(readEnabled());
   }, []);

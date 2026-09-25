@@ -1,0 +1,158 @@
+// Post-build hydration check (runs in `npm run verify`, after prerender).
+//
+// Why: since PR #46, src/main.tsx HYDRATES the prerendered snapshots instead of
+// repainting them, which is what took mobile Lighthouse from 81 to 96. The
+// contract is fragile: a component that renders Math.random()/Date output, or
+// changes what it shows in a mount effect, gets baked into the snapshot with one
+// value and hydrates with another. React then throws #418/#422/#423/#425 and quietly
+// falls back to a full client repaint. The page still looks fine, so nothing
+// else in the build would notice; only the LCP gain is gone.
+//
+// How: serve dist/ the way Netlify does (each route from its own index.html, no
+// SPA fallback, unknown URLs get 404.html), load every prerendered route in a
+// few reused headless Chrome tabs, and fail if any page reports a hydration error
+// as a page error or a console error.
+
+import http from 'node:http';
+import { readFile, readdir } from 'node:fs/promises';
+import { existsSync, statSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { launchChrome, blockAnalytics } from './lib/chrome.mjs';
+import { isHydrationError } from './lib/hydration.mjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DIST = path.resolve(__dirname, '..', 'dist');
+const PORT = 5098; // prerender uses 5099
+const ORIGIN = `http://localhost:${PORT}`;
+const SETTLE_MS = 300;
+const NOT_FOUND_ROUTE = '/__hydration_check_not_found__';
+
+const MIME = {
+  '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
+  '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png',
+  '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif',
+  '.ico': 'image/x-icon', '.xml': 'application/xml', '.txt': 'text/plain',
+  '.pdf': 'application/pdf', '.woff': 'font/woff', '.woff2': 'font/woff2',
+};
+
+const isFile = p => existsSync(p) && statSync(p).isFile();
+
+// Unlike prerender's server (which boots every route from the pristine shell),
+// this one serves the SNAPSHOTS, because hydrating them is what is under test.
+const server = http.createServer(async (req, res) => {
+  try {
+    const urlPath = decodeURIComponent(req.url.split('?')[0]);
+    let file = path.join(DIST, urlPath);
+    if (!path.extname(urlPath)) file = path.join(file, 'index.html');
+    if (!file.startsWith(DIST) || !isFile(file)) {
+      res.statusCode = 404;
+      file = path.join(DIST, '404.html');
+    }
+    res.setHeader('Content-Type', MIME[path.extname(file)] || 'application/octet-stream');
+    res.end(await readFile(file));
+  } catch (e) {
+    res.statusCode = 500;
+    res.end(String(e));
+  }
+});
+
+// Every React route in the sitemap. The standalone /games/<slug>.html pages are
+// static and have no React to hydrate, so they are skipped.
+const xml = await readFile(path.join(DIST, 'sitemap.xml'), 'utf8');
+const sitemapRoutes = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)]
+  .map(m => new URL(m[1]).pathname)
+  .filter(r => !path.extname(r));
+
+// Plus the prerendered noindex routes that are kept out of the sitemap (/profile,
+// /search, /links, the /free/<slug> landing pages, in every language). Landing
+// pages have no [data-suspense-outlet], so their Suspense markers wrap #root
+// directly; that is a separate hydration shape and worth covering. The 404 page
+// hydrates too. "index 2.html" style names are iCloud conflict copies, never deployed.
+async function* snapshots(dir) {
+  for (const e of await readdir(dir, { withFileTypes: true })) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) yield* snapshots(full);
+    else if (e.name === 'index.html') yield full;
+  }
+}
+const seen = new Set(sitemapRoutes.map(r => (r.endsWith('/') ? r : r + '/')));
+const extraRoutes = [];
+for await (const file of snapshots(DIST)) {
+  const dir = path.relative(DIST, path.dirname(file)).split(path.sep).join('/');
+  const route = dir ? `/${dir}/` : '/';
+  if (!seen.has(route)) extraRoutes.push(route);
+}
+const routes = [...sitemapRoutes, ...extraRoutes, NOT_FOUND_ROUTE];
+
+await new Promise(resolve => server.listen(PORT, resolve));
+
+let browser;
+try {
+  browser = await launchChrome();
+} catch (e) {
+  console.error(`❌ Hydration check could not launch Chrome: ${e.message}`);
+  server.close();
+  process.exit(1);
+}
+
+// A few tabs, each reused for its share of the routes. Nearly all of the time per
+// route is networkidle0's 500 ms quiet window plus the settle, i.e. waiting, so
+// running tabs side by side cuts the wall time without making the pages race.
+const TABS = 4;
+const started = Date.now();
+const failures = new Map(); // route -> Map(message -> count)
+const fail = (route, message) => {
+  const byMsg = failures.get(route) ?? new Map();
+  byMsg.set(message, (byMsg.get(message) ?? 0) + 1);
+  failures.set(route, byMsg);
+};
+
+async function worker(queue) {
+  const page = await browser.newPage();
+  await blockAnalytics(page);
+  let current = null;
+  const report = (kind, text) => {
+    if (current && isHydrationError(text)) fail(current, `${kind}: ${String(text).split('\n')[0]}`);
+  };
+  page.on('pageerror', err => report('pageerror', err?.message ?? err));
+  page.on('console', msg => {
+    if (msg.type() === 'error') report('console.error', msg.text());
+  });
+  for (let route; (route = queue.shift()) !== undefined; ) {
+    current = route;
+    try {
+      await page.goto(ORIGIN + route, { waitUntil: 'networkidle0', timeout: 30000 });
+      // App's mount effect sets this. If it never fires, React never committed, so
+      // hydration was never exercised and a clean result would mean nothing.
+      await page.waitForFunction('window.__PRERENDER_READY__ === true', { polling: 100, timeout: 10000 });
+      await new Promise(r => setTimeout(r, SETTLE_MS));
+    } catch (e) {
+      fail(route, `did not load/boot: ${e.message.split('\n')[0]}`);
+    }
+    current = null;
+  }
+  await page.close();
+}
+
+const queue = [...routes];
+await Promise.all(Array.from({ length: TABS }, () => worker(queue)));
+
+await browser.close();
+server.close();
+
+const secs = ((Date.now() - started) / 1000).toFixed(1);
+if (failures.size) {
+  const lines = [...failures].flatMap(([route, byMsg]) =>
+    [...byMsg].map(([msg, n]) => `${route} — ${msg}${n > 1 ? ` (×${n})` : ''}`),
+  );
+  console.error(
+    `\n❌ Hydration check failed on ${failures.size} of ${routes.length} routes:\n  ` +
+      lines.join('\n  ') +
+      '\n\nA prerendered page no longer matches what React renders on the client, so it falls back\n' +
+      'to a full repaint and loses the mobile LCP gain. Usual causes: Math.random()/Date output in\n' +
+      'render, or a mount effect that changes visible output. See "Hydration contract" in README.md.\n',
+  );
+  process.exit(1);
+}
+console.log(`Hydration check OK: ${routes.length} routes hydrated cleanly (${sitemapRoutes.length} sitemap, ${extraRoutes.length} noindex, 404) in ${secs}s.`);

@@ -40,8 +40,9 @@ jobs:
       # the production rendering path, not a local-only one.
       # One command, shared with netlify.toml, so CI and the deploy can never
       # disagree about what "passes": catalog check, build (tsc + vite +
-      # prerender all routes), then the SEO/dead-link check on the output.
-      - name: Verify (check:i18n, build, check:seo)
+      # prerender all routes), then the SEO/dead-link check on the output, then
+      # the hydration check (every prerendered page must hydrate without #418 etc).
+      - name: Verify (check:i18n, build, check:seo, check:hydration)
         run: npm run verify
 
       # End-to-end suite (parity plan P3-2): accessibility (axe), signup, search, run in a
