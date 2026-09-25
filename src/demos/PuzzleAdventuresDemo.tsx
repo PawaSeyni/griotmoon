@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { CheckCircle2, XCircle, Lightbulb, Eye, ChevronRight } from 'lucide-react';
@@ -451,10 +451,10 @@ export default function PuzzleAdventuresDemo() {
   // reflect the real puzzle count instead of a hardcoded 8.
   const totalPuzzles = scrambledWords.length + riddles.length + 2;
 
-  // Pick a random starting puzzle index on mount (run once; pools are same length across langs)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const initialLogicIndex = useMemo(() => Math.floor(Math.random() * logicPuzzles.length), []);
-  const [logicIndex, setLogicIndex] = useState(initialLogicIndex);
+  // Start on the first logic puzzle. A random start differed between the
+  // prerendered snapshot and the browser's first render, which broke hydration
+  // (#425); "Next" still cycles through every puzzle.
+  const [logicIndex, setLogicIndex] = useState(0);
   const logic = logicPuzzles[logicIndex];
 
   const [score, setScore] = useState(0);

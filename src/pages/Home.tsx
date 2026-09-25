@@ -8,7 +8,19 @@ import JsonLd from '../components/JsonLd';
 import { useTranslation } from '../lib/language';
 import { track } from '../lib/analytics';
 import griotFire from '../assets/griot-fire.jpg'; // hero scene: the griot's fire under the cowrie moon
-import griotFireWebp from '../assets/griot-fire.webp'; // smaller webp for browsers that support it
+// Responsive hero (640/768/960/1254 px) so phones don't download the full-size
+// scene; AVIF first (much smaller), WebP for browsers without AVIF. Vite needs
+// literal glob options, hence two declarations.
+const HERO_SRCSET_AVIF = Object.values(import.meta.glob<string>('../assets/griot-fire.jpg', {
+  eager: true,
+  import: 'default',
+  query: '?w=640;768;960;1254&format=avif&as=srcset',
+}))[0];
+const HERO_SRCSET_WEBP = Object.values(import.meta.glob<string>('../assets/griot-fire.jpg', {
+  eager: true,
+  import: 'default',
+  query: '?w=640;768;960;1254&format=webp&as=srcset',
+}))[0];
 
 const SITE_URL = 'https://griotmoon.com';
 
@@ -200,7 +212,8 @@ export default function Home() {
           copy sits in the darker left sky so the storyteller and children stay visible. */}
       <section className="hero-bg min-h-[85vh] flex items-center relative overflow-hidden px-4 py-20">
         <picture>
-          <source type="image/webp" srcSet={griotFireWebp} />
+          <source type="image/avif" srcSet={HERO_SRCSET_AVIF} sizes="100vw" />
+          <source type="image/webp" srcSet={HERO_SRCSET_WEBP} sizes="100vw" />
           <img
             src={griotFire}
             alt={t.heroImageAlt}
@@ -268,8 +281,10 @@ export default function Home() {
             <div className="w-20 h-1 bg-gradient-to-r from-orange-400 to-pink-400 mx-auto mt-6 rounded-full" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            {/* Not `priority`: this row sits below the 85vh hero, and eager covers
+                competed with the hero image (the LCP element) for bandwidth on mobile. */}
             {featuredBooks.map(book => (
-              <BookCard key={book.id} book={book} priority placement="home" />
+              <BookCard key={book.id} book={book} placement="home" />
             ))}
           </div>
           <div className="text-center">
