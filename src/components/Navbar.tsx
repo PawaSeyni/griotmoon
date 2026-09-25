@@ -46,8 +46,11 @@ export default function Navbar() {
   const location = useLocation();
   const t = useTranslation(TRANSLATIONS);
   // Active state must ignore the /es | /fr language prefix, otherwise no nav
-  // item ever highlights for Spanish/French visitors.
-  const currentPath = splitLangFromPath(location.pathname).rest;
+  // item ever highlights for Spanish/French visitors. It must also ignore the
+  // trailing slash: production serves every page at /x/ (Netlify 301s /x there),
+  // while the links point at /x, so without this only Home ever highlighted.
+  const { rest } = splitLangFromPath(location.pathname);
+  const currentPath = rest.length > 1 ? rest.replace(/\/+$/, '') : rest;
 
   // Close the mobile menu on any navigation, including a language switch (which
   // changes the path prefix), the in-menu language switcher doesn't close it itself.
