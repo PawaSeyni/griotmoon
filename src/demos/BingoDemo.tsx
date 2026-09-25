@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { RefreshCw, Trophy, Award } from 'lucide-react';
@@ -278,6 +278,30 @@ const BADGE_DEFS: { id: string; emoji: string; condition: 'marks' | 'bingo' | 'f
   { id: 'explorer', emoji: '🗺️', condition: 'themes', value: 2 },
 ];
 
+// The first card must be identical in the prerendered snapshot and in the
+// browser's first render, or hydration fails (#425). So it is shuffled with a
+// fixed seed; "New card" and theme/language changes still use Math.random.
+function seededRandom(seed: string): () => number {
+  let h = 2166136261;
+  for (const ch of seed) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  return () => {
+    h = Math.imul(h ^ (h >>> 15), 2246822507);
+    h = Math.imul(h ^ (h >>> 13), 3266489909);
+    return ((h ^= h >>> 16) >>> 0) / 4294967296;
+  };
+}
+
+function buildCard(items: Item[], freeSpace: Item, random: () => number): Item[] {
+  const shuffled = [...items];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  const card = shuffled.slice(0, 24);
+  card.splice(12, 0, freeSpace);
+  return card;
+}
+
 export default function BingoDemo() {
   const { language } = useLanguage();
   const t = useTranslation(TRANSLATIONS);
@@ -293,22 +317,21 @@ export default function BingoDemo() {
   const [completedSquares, setCompletedSquares] = useState<Set<number>>(new Set([12]));
   const [hasBingo, setHasBingo] = useState(false);
   const [bingoLines, setBingoLines] = useState<BingoLine[]>([]);
-  const [currentCard, setCurrentCard] = useState<Item[]>([]);
+  const [currentCard, setCurrentCard] = useState<Item[]>(() => buildCard(themes.fairytale.items, freeSpace, seededRandom(`fairytale-${language}`)));
   const [bingoCount, setBingoCount] = useState(0);
   const [fullCardCount, setFullCardCount] = useState(0);
   // Lines/full-card already credited for the *current* card, so re-checking an
   // unchanged winning card doesn't keep inflating the cumulative counters.
   const [awardedLines, setAwardedLines] = useState<Set<string>>(new Set());
   const [fullCardAwarded, setFullCardAwarded] = useState(false);
-  const [unlockedBadges, setUnlockedBadges] = useState<Set<string>>(new Set());
+  // The free centre square already counts as one mark, so the 'first' badge is
+  // unlocked from the start (the effect below used to add it right after mount,
+  // which made the prerendered count differ from the first render).
+  const [unlockedBadges, setUnlockedBadges] = useState<Set<string>>(() => new Set(['first']));
   const [themesPlayed, setThemesPlayed] = useState<Set<ThemeKey>>(new Set(['fairytale']));
 
   const generateCard = useCallback(() => {
-    const theme = themes[currentTheme];
-    const shuffled = [...theme.items].sort(() => Math.random() - 0.5);
-    const newCard = shuffled.slice(0, 24);
-    newCard.splice(12, 0, freeSpace);
-    setCurrentCard(newCard);
+    setCurrentCard(buildCard(themes[currentTheme].items, freeSpace, Math.random));
     setCompletedSquares(new Set([12]));
     setHasBingo(false);
     setBingoLines([]);
@@ -316,8 +339,11 @@ export default function BingoDemo() {
     setFullCardAwarded(false);
   }, [currentTheme, themes, freeSpace]);
 
-  // Rebuild card whenever language changes so labels match the active locale
+  // Rebuild the card when the theme or language changes (labels must match the
+  // active locale). Skipped on mount: the seeded first card is already in place.
+  const isFirstRender = useRef(true);
   useEffect(() => {
+    if (isFirstRender.current) { isFirstRender.current = false; return; }
     generateCard();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTheme, language]);

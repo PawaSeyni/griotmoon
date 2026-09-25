@@ -219,6 +219,30 @@ async function snapshot(route) {
     // snapshots shipped with localhost hrefs that production CSP then blocked.
     // Rewrite every occurrence to root-relative; check-seo-output.mjs fails the
     // build if any snapshot still mentions localhost.
+    // The live DOM holds adjacent text nodes ("See all ", "33", " books") that
+    // HTML serialization merges into one. main.tsx hydrates these snapshots, and
+    // React expects one text node per child, so without a separator every page
+    // failed hydration (#418) and fell back to a full client repaint. React's own
+    // SSR puts <!-- --> between adjacent text nodes; do the same.
+    await page.evaluate(() => {
+      const root = document.getElementById('root');
+      if (!root) return;
+      // The route <Suspense> boundary (App.tsx) renders its content inside
+      // [data-suspense-outlet], or straight into #root on landing pages. React's
+      // SSR marks a resolved boundary as <!--$--> … <!--/$-->; without those
+      // markers hydration cannot find the boundary and falls back to a repaint.
+      const outlet = root.querySelector('[data-suspense-outlet]') || root;
+      outlet.insertBefore(document.createComment('$'), outlet.firstChild);
+      outlet.appendChild(document.createComment('/$'));
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const texts = [];
+      while (walker.nextNode()) texts.push(walker.currentNode);
+      for (const node of texts) {
+        if (node.nextSibling && node.nextSibling.nodeType === Node.TEXT_NODE) {
+          node.parentNode.insertBefore(document.createComment(' '), node.nextSibling);
+        }
+      }
+    });
     return (await page.content()).replaceAll(ORIGIN + '/', '/').replaceAll(ORIGIN, '/');
   } finally {
     await page.close();

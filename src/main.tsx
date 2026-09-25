@@ -7,7 +7,7 @@ import { ToastProvider } from './lib/toast'
 import '@fontsource-variable/lexend' // self-hosted Lexend (legibility-tuned for early/dyslexic readers)
 import './index.css'
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const app = (
   <React.StrictMode>
     <BrowserRouter>
       <LanguageProvider>
@@ -16,5 +16,16 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </ToastProvider>
       </LanguageProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 )
+
+// Production pages are prerendered snapshots (scripts/prerender.mjs). Hydrating
+// adopts that markup instead of discarding it and repainting after the JS loads,
+// which is what held back mobile LCP (the hero was painted ~3 s after it had
+// downloaded). The empty shell (dev server, prerender itself) still client-renders.
+const container = document.getElementById('root')!
+if (container.hasChildNodes()) {
+  ReactDOM.hydrateRoot(container, app)
+} else {
+  ReactDOM.createRoot(container).render(app)
+}
