@@ -225,7 +225,7 @@ accounts or payments.
   - Webhook-driven provisioning and idempotent weekly releases.
   - One story with three editions sharing one expiry.
   - These are the right rules; keep them if this is ever built.
-- **Its suspicion about languages is correct**, and the gap may be larger than it guessed (see 2).
+- **Its caution about languages was fair**, but the French and Spanish files exist (see 2).
 - **Not re-checked here:** the competitor prices (Epic, BookBox, Bookroo), Stripe's rates and EDRLab's fee. They are dated research.
 
 ### What it missed
@@ -237,13 +237,17 @@ accounts or payments.
 - **Timing:** the traffic work (P4 in [PARITY_WORK_PLAN.md](../PARITY_WORK_PLAN.md)) is held until Story Time with Eva's Day 30 readout in late October.
 - **Consequence:** building first would ship a store with no shoppers.
 
-**2. The French and Spanish ebooks may not exist as files.**
-- **Site flags:** the site marks 21 of 33 books trilingual and 12 English-only. The 12 are Yam and the Egg, Kweku, A Little Light for the Dark, Finding My Quiet, Full Pot, Grandmother's Trees, Brothers, Thankful Farmer, Slow and Strong, Professor Hawel, Garden of Second Chances, and Grandmère's Garden.
-- **What the flag is:** a flag in `src/data/books.ts`, not evidence of finished editions.
-- **KDP records:** the Kindle editions published in July 2026 (Ubuntu, Talking Tree, Our Child, Clever Pots, Hunt, Spirit, Broken Toy and others) are **English** fixed-layout EPUBs.
-- **Search result:** no finished FR/ES Pawa Seyni ebook files turned up on this Mac.
-- **Pilot need:** a 13-week pilot needs 13 stories × 3 approved editions, plus 4 reserve stories. That is 39 to 51 edition files, most of which may still need translation, layout and native review.
-- **Content inventory:** this is the real gating task, and it is production work, not software.
+**2. Content supply is much better than first thought (corrected 8 Oct, same day).**
+- **Where the files are:** the French and Spanish ebooks live in iCloud, under `PaWa Press/01_Imprints/Pawa Seyni/<book>/Ebook/{EN,FR,ES}/`, not on the Desktop where I first looked.
+- **FR/ES coverage:** all 32 book folders have a fixed-layout KDP EPUB in French and in Spanish. They are `v01` builds dated 3 to 5 October 2026, with matching 2560×2560 covers.
+- **EN coverage:** English EPUBs exist for 29 of the 32. Hope and Humor, The Chief's Green Rule and The Chief's 3 Gifts have none in that folder; their English Kindle editions sit on the other KDP account.
+- **Missing book:** The Yam and the Egg has no folder.
+- **Approval state:** they are drafts, not approved releases. `PawaSeyni_Production_Tracker.xlsx` has 69 items: 32 Done, 30 "Done (to verify)", 7 Open.
+  - PS-067 (French Kindle eBooks for all 32) is still Open.
+  - PS-068 (Spanish interiors for all 32) is still Open.
+  - I did not check whether any FR/ES edition is already on sale.
+- **Site is out of date:** `src/data/books.ts` still marks 12 books English-only. The site understates the catalogue once these are approved.
+- **Pilot math:** a 13-story trilingual pilot (39 edition files plus reserves) is achievable from existing files after review. Content is no longer the gating task; review and approval are.
 
 **3. It undercuts the books' own price.**
 - **Kindle price:** each Pawa Seyni Kindle ebook sells at **$7.99**, earning about $4.80 per sale.
@@ -287,10 +291,10 @@ accounts or payments.
 
 ### Recommended sequence
 
-1. **Now (no site changes):** inventory, per book:
-   - complete EN/FR/ES ebook files and their approval state;
-   - KDP Select status on both accounts.
-   This decides whether a 13-story trilingual pilot is possible at all.
+1. **Now (no site changes):**
+   - Close the FR/ES review: PS-067, PS-068 and the "Done (to verify)" items.
+   - Check KDP Select status on both accounts.
+   The files already exist (see 2).
 2. **Papa's decisions:**
    - backend exception: yes or no;
    - payment provider: Gumroad (merchant of record) or Stripe + Stripe Tax;
@@ -298,3 +302,45 @@ accounts or payments.
 3. **After Eva's Day 30 readout, inside P4:**
    - **Demand test:** run it before any build, as a Story Club waitlist landing page with the price shown, feeding MailerLite. Set the go threshold in advance (for example, 30 waitlist signups or 10 paid pre-orders).
    - **Build:** only if the threshold is met, using the lean pilot above.
+
+---
+
+## Part 3: Options other than a subscription (Claude, 8 October 2026)
+
+Papa asked for alternatives.
+
+### Starting point
+
+The real asset is **96 ebook editions: 32 stories × English, French and Spanish**. That is a rare thing for African heritage picture books. Most options below sell or distribute those files without building accounts, a reader or billing.
+
+### The options
+
+| # | Option | What it is | Build on Griot Moon | Who handles tax | Fits today's traffic? |
+|---|---|---|---|---|---|
+| 1 | **Publish FR/ES on Amazon** | List the French and Spanish Kindle editions, plus paperbacks if wanted. Amazon.fr, .ca, .es, .com.mx and .com (US Spanish). | None (book pages link to each edition) | Amazon | **Yes**: Amazon brings its own shoppers |
+| 2 | **Go wide** | Same files on Apple Books, Kobo (strong in Canada and France), Google Play and Barnes & Noble, following the Eva `EBOOK_DISTRIBUTION_WORKFLOW.md` playbook | None | Each store | Yes |
+| 3 | **Libraries and schools** | Distribute to OverDrive/Libby and hoopla through an aggregator (e.g. Draft2Digital or PublishDrive), and pitch Canadian French-immersion and US dual-language programs | None, or one "For schools" page | Distributor / invoice | Yes; institutions buy without visiting the site |
+| 4 | **Trilingual bundles sold direct** | One story in all three languages (e.g. CA$9.99), or themed 4-story sets (e.g. CA$24.99), as permanent downloads | Small: Buy buttons only | Gumroad (merchant of record, as for VettedCounsel) | Partly; needs traffic |
+| 5 | **Classroom licence** | A yearly licence for a teacher to project and read the trilingual editions in class (e.g. CA$49 per classroom), with the activity PDFs | Small: one page + Gumroad | Gumroad | Partly; sold by outreach |
+| 6 | **Kindle Unlimited (KDP Select)** | Amazon's own subscription: readers borrow, Amazon pays per page read | None | Amazon | Yes |
+| 7 | **Hosted membership** (Patreon / Ko-fi) | A weekly story post to paying members; tests subscription demand without building anything | None | Platform | Needs an audience |
+| 8 | **Free trilingual sample → list** | One complete story free in all three languages as the email magnet, then offers 1, 2 and 4 | Small: new magnet in the existing funnel | n/a | Grows the audience the other options need |
+
+### Conflicts to know before mixing them
+
+- **Kindle Unlimited (6) blocks 2, 4, 5 and 7** for every ebook enrolled, because Select requires ebook exclusivity for 90 days. It also contradicts the house rule from July 2026 (never enroll new Kindle ebooks). Picture books earn little per page read. **Not recommended**, except perhaps as a short test on a few FR/ES titles kept out of every other channel.
+- **Direct prices (4) must respect KDP price parity.** A single-language ebook sold cheaper elsewhere invites Amazon to price-match it down. A three-language bundle is a different product from any single Amazon edition, which is why the option is shaped that way.
+- **Direct files are DRM-free.** That is normal for Gumroad sellers (VettedCounsel already sells this way), and it is fine for a permanent purchase.
+- **Approval comes first.** All options except 8 need the FR/ES editions approved, meaning PS-067 and PS-068 closed.
+
+### Recommendation
+
+| Step | Do | Why |
+|---|---|---|
+| Now | **1 + 2**: publish the reviewed FR/ES ebooks on Amazon and wide, in batches | Zero site work and existing demand. They triple the number of editions that can be found. Griot Moon's book pages then link to each edition, which also fixes the 12 "English only" labels. |
+| Now | **8**: make one trilingual story the free magnet | The cheapest way to grow the email list, which every later option needs |
+| Next | **3**: libraries and schools in Canada | French immersion is the natural buyer for EN/FR/ES picture books, and institutions do not depend on site traffic |
+| Later | **4 or 5** on Gumroad | Only once the list or school outreach shows interest; a few days' work |
+| If demand shows | **7, then the Story Club** | Test recurring payment on a hosted platform before building the reader in Part 1 |
+
+Options 1, 2 and 3 change nothing on the live sites and need no campaign, so they fit inside the Story Time with Eva freeze. Options 4, 5 and 8 touch the Griot Moon funnel and belong in P4, after the readout.
