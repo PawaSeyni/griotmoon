@@ -23,8 +23,20 @@ for (const id of ids) {
     }
   }
 
-  const langs = block.match(/languages:\s*(TRI|EN)/)?.[1];
-  if (!langs) failures.push(`${id}: languages must use TRI or EN catalog constant`);
+  // Edition honesty. A book's flags and its structured-data inLanguage are derived from
+  // `editions`, so the only way to claim a Spanish or French edition is to name its ASIN.
+  // Until 2026-10-11 this check accepted a bare TRI constant, and 21 of 33 books used it
+  // while the catalogue held two non-English listings in total.
+  if (/^\s*languages:/m.test(block)) {
+    failures.push(`${id}: remove the literal languages field; flags derive from editions`);
+  }
+  const editions = block.match(/editions:\s*\{([^}]*)\}/)?.[1];
+  if (editions) {
+    for (const [, lang, asin] of editions.matchAll(/(\w+):\s*'([^']*)'/g)) {
+      if (!['es', 'fr'].includes(lang)) failures.push(`${id}: editions.${lang} is not a translated edition`);
+      if (!/^[A-Z0-9]{10}$/.test(asin)) failures.push(`${id}: editions.${lang} is not an ASIN (${asin})`);
+    }
+  }
 
   // Catch the exact cross-book contamination that previously leaked Kofi's
   // Whistling Secret copy into another title.

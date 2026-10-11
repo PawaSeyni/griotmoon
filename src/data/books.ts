@@ -63,8 +63,23 @@ export interface Book {
   id: string;
   coverImage: string;
   ageRange: string;
-  languages: string[];
+  /** The ENGLISH edition's product link. Every book has one. */
   amazonUrl: string;
+  /**
+   * ASINs of the non-English editions that are LIVE on Amazon — nothing else.
+   *
+   * The flags a book page shows, and the `inLanguage` it puts in its structured data,
+   * are derived from this and from `amazonUrl`, so a book cannot advertise an edition
+   * that does not exist. It previously could, and did: until 2026-10-11, 21 of 33 books
+   * declared English, Spanish and French editions while the catalogue held exactly two
+   * non-English listings, both of A Little Light for the Dark — the one book that was
+   * marked English-only. Verified against amazon.com: 39 Pawa Seyni listings, 2 of them
+   * not in English.
+   *
+   * Add a language here only once that edition is live and you have its ASIN. FR/ES
+   * drafts are staged weekly in KDP; a draft is not an edition.
+   */
+  editions?: Partial<Record<Exclude<Language, 'en'>, string>>;
   featured?: boolean;
   /** Publication state. Absent/'published' = live with a Buy CTA; 'coming-soon' shows a placeholder. */
   status?: 'published' | 'coming-soon';
@@ -83,8 +98,14 @@ export interface LocalizedBook {
   /** WebP srcset (330w/660w/1000w) for <img srcSet>; coverImage stays the JPEG fallback. */
   coverSrcSet: string;
   ageRange: string;
+  /** Flags for the editions that actually exist, derived from `Book.editions`. */
   languages: string[];
+  /** Link to the edition this page should sell: the reader's language where that
+   *  edition exists, English otherwise. */
   amazonUrl: string;
+  /** Which language edition `amazonUrl` points at. When it differs from the page's
+   *  language the page must say so, or it promises a book in a language it won't ship. */
+  editionLanguage: Language;
   featured?: boolean;
   status?: 'published' | 'coming-soon';
   title: string;
@@ -94,8 +115,8 @@ export interface LocalizedBook {
 }
 
 const dp = amazonDp;
-const TRI = ['🇺🇸', '🇪🇸', '🇫🇷'];
-const EN = ['🇺🇸'];
+const EDITION_FLAG: Record<Language, string> = { en: '🇺🇸', es: '🇪🇸', fr: '🇫🇷' };
+const EDITION_ORDER: Language[] = ['en', 'es', 'fr'];
 
 /** A book not yet for sale, show a "coming soon" placeholder instead of a Buy CTA. */
 export const isComingSoon = (b: { status?: string }): boolean => b.status === 'coming-soon';
@@ -106,7 +127,6 @@ export const books: Book[] = [
     id: 'ubuntu-we-are-together',
     coverImage: ubuntuWeAreTogether,
     ageRange: '3-8',
-    languages: TRI,
     amazonUrl: dp('1069462837'),
     featured: true,
     title: { en: 'Ubuntu We Are Together', es: 'Ubuntu We Are Together', fr: 'Ubuntu We Are Together' },
@@ -130,7 +150,6 @@ export const books: Book[] = [
     id: 'the-mighty-fist',
     coverImage: theMightyFist,
     ageRange: '4-8',
-    languages: TRI,
     amazonUrl: dp('1069628816'),
     featured: true,
     title: { en: 'The Mighty Fist', es: 'The Mighty Fist', fr: 'The Mighty Fist' },
@@ -154,7 +173,6 @@ export const books: Book[] = [
     id: 'the-whistling-secret',
     coverImage: theWhistlingSecret,
     ageRange: '3-8',
-    languages: TRI,
     amazonUrl: dp('1069462845'),
     featured: true,
     title: { en: 'The Whistling Secret', es: 'The Whistling Secret', fr: 'The Whistling Secret' },
@@ -178,7 +196,6 @@ export const books: Book[] = [
     id: 'the-yam-and-the-egg',
     coverImage: theYamAndTheEgg,
     ageRange: '4-6',
-    languages: EN,
     amazonUrl: dp('1069462802'),
     title: { en: 'The Yam and the Egg', es: 'The Yam and the Egg', fr: 'The Yam and the Egg' },
     subtitle: {
@@ -201,7 +218,6 @@ export const books: Book[] = [
     id: 'the-talking-tree',
     coverImage: theTalkingTree,
     ageRange: '3-8',
-    languages: TRI,
     amazonUrl: dp('1069462810'),
     title: { en: 'The Talking Tree', es: 'The Talking Tree', fr: 'The Talking Tree' },
     subtitle: {
@@ -224,7 +240,6 @@ export const books: Book[] = [
     id: 'the-laughing-village',
     coverImage: theLaughingVillage,
     ageRange: '4-8',
-    languages: TRI,
     amazonUrl: dp('1069628859'),
     title: { en: 'The Laughing Village', es: 'The Laughing Village', fr: 'The Laughing Village' },
     subtitle: {
@@ -247,7 +262,6 @@ export const books: Book[] = [
     id: 'our-child',
     coverImage: ourChild,
     ageRange: '3-6',
-    languages: TRI,
     amazonUrl: dp('1996972014'),
     title: { en: 'Our Child', es: 'Our Child', fr: 'Our Child' },
     subtitle: {
@@ -270,7 +284,6 @@ export const books: Book[] = [
     id: 'the-clever-pots',
     coverImage: theCleverPots,
     ageRange: '4-7',
-    languages: TRI,
     amazonUrl: dp('1996972073'),
     title: { en: 'The Clever Pots', es: 'The Clever Pots', fr: 'The Clever Pots' },
     subtitle: {
@@ -293,7 +306,6 @@ export const books: Book[] = [
     id: 'the-hunt-with-two-paths',
     coverImage: theHuntWithTwoPaths,
     ageRange: '4-8',
-    languages: TRI,
     amazonUrl: dp('1996972138'),
     title: { en: 'The Hunt with Two Paths', es: 'The Hunt with Two Paths', fr: 'The Hunt with Two Paths' },
     subtitle: {
@@ -316,7 +328,6 @@ export const books: Book[] = [
     id: 'kweku-and-the-wise-forest',
     coverImage: kwekuAndTheWiseForest,
     ageRange: '7-10',
-    languages: EN,
     amazonUrl: dp('1996972316'),
     title: { en: 'Kweku and the Wise Forest', es: 'Kweku and the Wise Forest', fr: 'Kweku and the Wise Forest' },
     subtitle: {
@@ -339,7 +350,6 @@ export const books: Book[] = [
     id: 'the-spirit-that-shares',
     coverImage: theSpiritThatShares,
     ageRange: '3-8',
-    languages: TRI,
     amazonUrl: dp('1069628832'),
     title: { en: 'The Spirit That Shares', es: 'The Spirit That Shares', fr: 'The Spirit That Shares' },
     subtitle: {
@@ -363,7 +373,6 @@ export const books: Book[] = [
     id: 'yama-and-luna',
     coverImage: yamaAndLuna,
     ageRange: '3-6',
-    languages: TRI,
     amazonUrl: dp('1996972006'),
     title: { en: 'Yama and Luna', es: 'Yama and Luna', fr: 'Yama and Luna' },
     subtitle: {
@@ -386,7 +395,6 @@ export const books: Book[] = [
     id: 'yamas-brave-choice',
     coverImage: yamasBraveChoice,
     ageRange: '5-9',
-    languages: TRI,
     amazonUrl: dp('1996972235'),
     title: { en: "Yama's Brave Choice", es: "Yama's Brave Choice", fr: "Yama's Brave Choice" },
     subtitle: {
@@ -409,8 +417,10 @@ export const books: Book[] = [
     id: 'a-little-light-for-the-dark',
     coverImage: aLittleLightForTheDark,
     ageRange: '3-8',
-    languages: EN,
     amazonUrl: dp('1996972286'),
+    // The only Pawa Seyni title with live non-English editions, verified on
+    // amazon.com 2026-10-11 (FR and ES submitted 2026-10-05).
+    editions: { fr: 'B0HM2CPCGH', es: 'B0HM2FTSFQ' },
     title: { en: 'A Little Light for the Dark', es: 'A Little Light for the Dark', fr: 'A Little Light for the Dark' },
     subtitle: {
       en: 'A Story About Courage, Curiosity, and the Night',
@@ -432,7 +442,6 @@ export const books: Book[] = [
     id: 'finding-my-quiet',
     coverImage: findingMyQuiet,
     ageRange: '3-8',
-    languages: EN,
     amazonUrl: dp('1996972294'),
     title: { en: 'Finding My Quiet', es: 'Finding My Quiet', fr: 'Finding My Quiet' },
     subtitle: {
@@ -455,7 +464,6 @@ export const books: Book[] = [
     id: 'the-kindness-garden',
     coverImage: theKindnessGarden,
     ageRange: '3-6',
-    languages: TRI,
     amazonUrl: dp('1069628840'),
     title: { en: 'The Kindness Garden', es: 'The Kindness Garden', fr: 'The Kindness Garden' },
     subtitle: {
@@ -478,7 +486,6 @@ export const books: Book[] = [
     id: 'the-servant-king',
     coverImage: theServantKing,
     ageRange: '5-9',
-    languages: TRI,
     amazonUrl: dp('1996972200'),
     title: { en: 'The Servant King', es: 'The Servant King', fr: 'The Servant King' },
     subtitle: {
@@ -501,7 +508,6 @@ export const books: Book[] = [
     id: 'the-full-pot-and-the-empty-pot',
     coverImage: theFullPotAndTheEmptyPot,
     ageRange: '5-9',
-    languages: EN,
     amazonUrl: dp('1996972553'),
     title: { en: 'The Full Pot and the Empty Pot', es: 'The Full Pot and the Empty Pot', fr: 'The Full Pot and the Empty Pot' },
     subtitle: {
@@ -524,7 +530,6 @@ export const books: Book[] = [
     id: 'the-grandmothers-trees',
     coverImage: theGrandmothersTrees,
     ageRange: '4-8',
-    languages: EN,
     amazonUrl: dp('1996972618'),
     title: { en: "The Grandmother's Trees", es: "The Grandmother's Trees", fr: "The Grandmother's Trees" },
     subtitle: {
@@ -547,7 +552,6 @@ export const books: Book[] = [
     id: 'the-brothers-and-the-wise-land',
     coverImage: theBrothersAndTheWiseLand,
     ageRange: '6-10',
-    languages: EN,
     amazonUrl: dp('1996972499'),
     title: { en: 'The Brothers and the Wise Land', es: 'The Brothers and the Wise Land', fr: 'The Brothers and the Wise Land' },
     subtitle: {
@@ -571,7 +575,6 @@ export const books: Book[] = [
     id: 'the-chiefs-green-rule',
     coverImage: theChiefsGreenRule,
     ageRange: '3-9',
-    languages: TRI,
     amazonUrl: dp('B0FB4B7235'),
     title: { en: "The Chief's Green Rule", es: "The Chief's Green Rule", fr: "The Chief's Green Rule" },
     subtitle: {
@@ -594,7 +597,6 @@ export const books: Book[] = [
     id: 'chief-maels-final-gift',
     coverImage: chiefMaelsFinalGift,
     ageRange: '3-9',
-    languages: TRI,
     amazonUrl: dp('106946287X'),
     title: { en: "Chief Mael's Final Gift", es: "Chief Mael's Final Gift", fr: "Chief Mael's Final Gift" },
     subtitle: {
@@ -617,7 +619,6 @@ export const books: Book[] = [
     id: 'the-chiefs-3-gifts',
     coverImage: theChiefs3Gifts,
     ageRange: '3-6',
-    languages: TRI,
     amazonUrl: dp('1996972928'),
     title: { en: "The Chief's 3 Gifts", es: "The Chief's 3 Gifts", fr: "The Chief's 3 Gifts" },
     subtitle: {
@@ -640,7 +641,6 @@ export const books: Book[] = [
     id: 'the-broken-toy',
     coverImage: theBrokenToy,
     ageRange: '3-8',
-    languages: TRI,
     amazonUrl: dp('1069628891'),
     title: { en: 'The Broken Toy', es: 'The Broken Toy', fr: 'The Broken Toy' },
     subtitle: {
@@ -663,7 +663,6 @@ export const books: Book[] = [
     id: 'the-hand-that-gives',
     coverImage: theHandThatGives,
     ageRange: '3-8',
-    languages: TRI,
     amazonUrl: dp('1069628875'),
     title: { en: 'The Hand That Gives', es: 'The Hand That Gives', fr: 'The Hand That Gives' },
     subtitle: {
@@ -686,7 +685,6 @@ export const books: Book[] = [
     id: 'the-thankful-farmer',
     coverImage: theThankfulFarmer,
     ageRange: '4-8',
-    languages: EN,
     amazonUrl: dp('1069628824'),
     title: { en: 'The Thankful Farmer', es: 'The Thankful Farmer', fr: 'The Thankful Farmer' },
     subtitle: {
@@ -709,7 +707,6 @@ export const books: Book[] = [
     id: 'slow-and-strong-wins-the-race',
     coverImage: slowAndStrongWinsTheRace,
     ageRange: '6-10',
-    languages: EN,
     amazonUrl: dp('1996972464'),
     title: { en: 'Slow and Strong Wins the Race', es: 'Slow and Strong Wins the Race', fr: 'Slow and Strong Wins the Race' },
     subtitle: {
@@ -732,7 +729,6 @@ export const books: Book[] = [
     id: 'the-clever-scientist-professor-hawel',
     coverImage: theCleverScientist,
     ageRange: '5-8',
-    languages: EN,
     amazonUrl: dp('1996972529'),
     title: { en: 'The Clever Scientist, Professor Hawel', es: 'The Clever Scientist, Professor Hawel', fr: 'The Clever Scientist, Professor Hawel' },
     subtitle: {
@@ -755,7 +751,6 @@ export const books: Book[] = [
     id: 'the-garden-of-second-chances',
     coverImage: theGardenOfSecondChances,
     ageRange: '5-9',
-    languages: EN,
     amazonUrl: dp('1996972588'),
     title: { en: 'The Garden of Second Chances', es: 'The Garden of Second Chances', fr: 'The Garden of Second Chances' },
     subtitle: {
@@ -778,7 +773,6 @@ export const books: Book[] = [
     id: 'the-trees-we-plant-for-tomorrow',
     coverImage: theTreesWePlantForTomorrow,
     ageRange: '3-8',
-    languages: TRI,
     amazonUrl: dp('1996972049'),
     title: { en: 'The Trees We Plant for Tomorrow', es: 'The Trees We Plant for Tomorrow', fr: 'The Trees We Plant for Tomorrow' },
     subtitle: {
@@ -801,7 +795,6 @@ export const books: Book[] = [
     id: 'a-tale-of-hope-and-humor',
     coverImage: aTaleOfHopeAndHumor,
     ageRange: '3-8',
-    languages: TRI,
     amazonUrl: dp('1069628867'),
     title: { en: 'A Tale of Hope and Humor', es: 'A Tale of Hope and Humor', fr: 'A Tale of Hope and Humor' },
     subtitle: {
@@ -824,7 +817,6 @@ export const books: Book[] = [
     id: 'grandmeres-garden-under-the-moon',
     coverImage: grandmeresGardenUnderTheMoon,
     ageRange: '3-8',
-    languages: EN,
     amazonUrl: dp('1996972308'),
     title: { en: "Grandmère's Garden Under the Moon", es: "Grandmère's Garden Under the Moon", fr: "Grandmère's Garden Under the Moon" },
     subtitle: {
@@ -847,7 +839,6 @@ export const books: Book[] = [
     id: 'the-day-we-woke-up-as-dinosaurs',
     coverImage: theDayWeWokeUpAsDinosaurs,
     ageRange: '3-7',
-    languages: TRI,
     amazonUrl: dp('1996972103'),
     title: {
       en: 'The Day We Woke Up as Dinosaurs',
@@ -868,13 +859,17 @@ export const books: Book[] = [
 ];
 
 function localize(book: Book, lang: Language): LocalizedBook {
+  // Sell the reader's own edition when it exists; otherwise the English one, and the
+  // page says which (BookDetail's edition note).
+  const editionAsin = lang === 'en' ? undefined : book.editions?.[lang];
   return {
     id: book.id,
     coverImage: book.coverImage,
     coverSrcSet: coverSrcSet(book.id),
     ageRange: book.ageRange,
-    languages: book.languages,
-    amazonUrl: book.amazonUrl,
+    languages: EDITION_ORDER.filter(l => l === 'en' || book.editions?.[l]).map(l => EDITION_FLAG[l]),
+    amazonUrl: editionAsin ? dp(editionAsin) : book.amazonUrl,
+    editionLanguage: editionAsin ? lang : 'en',
     featured: book.featured,
     status: book.status,
     title: book.title[lang] ?? book.title.en,
