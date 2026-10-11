@@ -43,6 +43,7 @@ import theTreesWePlantForTomorrow from '../assets/covers/the-trees-we-plant-for-
 import aTaleOfHopeAndHumor from '../assets/covers/a-tale-of-hope-and-humor.jpg';
 import grandmeresGardenUnderTheMoon from '../assets/covers/grandmeres-garden-under-the-moon.jpg';
 import theDayWeWokeUpAsDinosaurs from '../assets/covers/the-day-we-woke-up-as-dinosaurs.jpg';
+import { clampMeta } from '../lib/seoText';
 
 type LocalizedString = Record<Language, string>;
 
@@ -89,6 +90,15 @@ export interface Book {
   title: LocalizedString;
   subtitle?: LocalizedString;
   description: LocalizedString;
+  /**
+   * Optional hand-written meta description, when the trimmed `description` is
+   * not the sentence you want in a search result.
+   *
+   * Leave it unset and `localize` derives one by clamping `description` to 160
+   * characters — correct for most books. Set it only where the page is worth
+   * the copy, and keep every language under 160: see `src/lib/seoText.ts`.
+   */
+  seoDescription?: LocalizedString;
   theme: LocalizedString;
 }
 
@@ -111,6 +121,12 @@ export interface LocalizedBook {
   title: string;
   subtitle?: string;
   description: string;
+  /**
+   * What belongs in `<meta name="description">`: the per-book override when set,
+   * otherwise `description` trimmed to 160 characters. Derived here rather than
+   * at the call site so a page cannot ship the raw blurb by forgetting to trim.
+   */
+  metaDescription: string;
   theme: string;
 }
 
@@ -829,6 +845,13 @@ export const books: Book[] = [
       es: 'Bajo la luna, el jardín de Grandmère sigue su propio ritmo. Mientras Yama ayuda a su abuela a sembrar, esperar y cuidar, aprende que las mejores cosas crecen despacio y se cultivan juntos: los jardines, las historias y el amor. Un luminoso cuento de la serie Yama sobre la paciencia y la sabiduría de las abuelas.',
       fr: "Sous la lune, le jardin de Grandmère suit son propre rythme. En aidant sa grand-mère à planter, attendre et soigner, Yama découvre que les plus belles choses poussent lentement et se cultivent ensemble : les jardins, les histoires et l'amour. Une lumineuse histoire du soir de la série Yama sur la patience et la sagesse des grands-mères.",
     },
+    // Hand-written: the trimmed blurb would cut mid-clause. Grandmère is the
+    // title the 2026-10-11 review identified as the one worth the copy.
+    seoDescription: {
+      en: "Under the moon, Grandmère's garden keeps its own time. Yama learns that the best things grow slowly, and are grown together.",
+      es: 'Bajo la luna, el jardín de Grandmère sigue su propio ritmo. Yama aprende que las mejores cosas crecen despacio y se cultivan juntos.',
+      fr: "Sous la lune, le jardin de Grandmère suit son propre rythme. Yama découvre que les plus belles choses poussent lentement et se cultivent ensemble.",
+    },
     theme: {
       en: 'Patience and intergenerational wisdom',
       es: 'Paciencia y sabiduría entre generaciones',
@@ -875,6 +898,9 @@ function localize(book: Book, lang: Language): LocalizedBook {
     title: book.title[lang] ?? book.title.en,
     subtitle: book.subtitle ? (book.subtitle[lang] ?? book.subtitle.en) : undefined,
     description: book.description[lang] ?? book.description.en,
+    metaDescription:
+      book.seoDescription?.[lang] ??
+      clampMeta(book.description[lang] ?? book.description.en),
     theme: book.theme[lang] ?? book.theme.en,
   };
 }

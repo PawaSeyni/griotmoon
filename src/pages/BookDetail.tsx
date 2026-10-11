@@ -84,7 +84,10 @@ export default function BookDetail() {
 
   return (
     <main className="py-8 px-4">
-      <Seo title={book.subtitle ? `${book.title}: ${book.subtitle}` : book.title} description={book.description} path={`/books/${book.id}`} image={ogImage} />
+      {/* The subtitle stays on the page but out of the title tag: with it, 26 of 33
+          titles ran past 60 characters. The description is the derived meta value,
+          never the full blurb — see src/lib/seoText.ts. */}
+      <Seo title={book.title} description={book.metaDescription} path={`/books/${book.id}`} image={ogImage} />
       <JsonLd id="book" data={bookSchema} />
 
       <div className="max-w-4xl mx-auto">
