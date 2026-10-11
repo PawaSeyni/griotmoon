@@ -11,7 +11,11 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
-/** @returns {{ id: string, ageRange: string | null, asin: string | null, status: string | null }[]} */
+/** @returns {{ id: string, ageRange: string | null, asin: string | null, status: string | null,
+ *             editions: Record<string, string> }[]}
+ *  `asin` is the ENGLISH edition. `editions` holds the ASIN of each live non-English
+ *  edition, keyed by language — empty for most books. A page sells `editions[lang]`
+ *  where it exists and `asin` otherwise. */
 export function loadBooks() {
   const src = readFileSync(path.join(ROOT, 'src', 'data', 'books.ts'), 'utf8');
   const starts = [...src.matchAll(/^ {4}id: '([^']+)',/gm)];
@@ -23,6 +27,10 @@ export function loadBooks() {
       ageRange: /^ {4}ageRange: '([^']+)',/m.exec(block)?.[1] ?? null,
       asin: /^ {4}amazonUrl: dp\('([A-Z0-9]{10})'\),/m.exec(block)?.[1] ?? null,
       status: /^ {4}status: '([^']+)',/m.exec(block)?.[1] ?? null,
+      editions: Object.fromEntries(
+        [...(/^ {4}editions: \{([^}]*)\},/m.exec(block)?.[1] ?? '').matchAll(/(\w+): '([A-Z0-9]{10})'/g)]
+          .map((e) => [e[1], e[2]]),
+      ),
     };
   });
 }

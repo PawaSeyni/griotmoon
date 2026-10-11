@@ -1,6 +1,9 @@
 // Retailer links and affiliate disclosure (parity plan P3-2), ported from Story Time with
-// Eva and adapted: Griot Moon sells one Amazon listing per book, so there is no per-language
-// edition mapping, and it has no featured-titles or related-book policy to check here.
+// Eva. Griot Moon DOES have a per-language edition mapping as of 2026-10-11: where a book
+// has a live French or Spanish edition, that locale's page sells it, and where it does not,
+// the page sells the English edition and says so. Before then every locale sold the English
+// ASIN while 21 of 33 books claimed three editions existed (concern L17). It has no
+// featured-titles or related-book policy to check here.
 // Runs on the prerendered dist/ after `npm run build`.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -47,12 +50,28 @@ test('every Amazon link anywhere on the site carries the affiliate tag, opens in
   assert.deepEqual(bad, [], bad.slice(0, 20).join('\n'));
 });
 
-test('book pages: a published book has a Buy link to its own ASIN; a coming-soon book has none', () => {
-  for (const [, prefix] of Object.entries(LOCALES)) for (const b of books) {
+test('book pages: a published book sells the edition for that page\u2019s language; a coming-soon book sells nothing', () => {
+  for (const [loc, prefix] of Object.entries(LOCALES)) for (const b of books) {
     const h = read(`${prefix}/books/${b.id}`);
-    const own = amazonAnchors(h).filter((a) => a.includes(`/dp/${b.asin}?`));
+    const expected = b.editions[loc] ?? b.asin;
+    const own = amazonAnchors(h).filter((a) => a.includes(`/dp/${expected}?`));
     if (b.status === 'coming-soon') assert.equal(own.length, 0, `${prefix}/books/${b.id}: coming soon must not sell`);
-    else assert.ok(own.length >= 1, `${prefix}/books/${b.id}: no Buy link to ASIN ${b.asin}`);
+    else assert.ok(own.length >= 1, `${prefix}/books/${b.id}: no Buy link to the ${loc} edition (${expected})`);
+  }
+});
+
+test('book pages: a page that sells an English edition to a non-English reader says so', () => {
+  // The honesty guarantee, as a test. A translated page that links to the English book
+  // without saying so promises a book in a language it will not ship.
+  const NOTE = { es: 'La edici\u00f3n que vendemos de este t\u00edtulo est\u00e1 en ingl\u00e9s.', fr: 'L\u2019\u00e9dition vendue pour ce titre est en anglais.' };
+  for (const loc of ['es', 'fr']) for (const b of books) {
+    if (b.status === 'coming-soon') continue;
+    const h = read(`${LOCALES[loc]}/books/${b.id}`);
+    if (b.editions[loc]) {
+      assert.ok(!h.includes(NOTE[loc]), `${LOCALES[loc]}/books/${b.id}: sells the ${loc} edition, must not claim English`);
+    } else {
+      assert.ok(h.includes(NOTE[loc]), `${LOCALES[loc]}/books/${b.id}: sells the English edition without saying so`);
+    }
   }
 });
 
