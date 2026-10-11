@@ -9,6 +9,8 @@ import TapToTranslate from '../components/TapToTranslate';
 import BookStatusButton from '../components/BookStatusButton';
 import { books, useBook, useBooks, isComingSoon } from '../data/books';
 import BookCard from '../components/BookCard';
+import EmailSignup from '../components/EmailSignup';
+import { bookMagnet } from '../lib/bookMagnet';
 import { LANGUAGE_LABELS, SUPPORTED_LANGUAGES, localizePath, useLanguage, useTranslation } from '../lib/language';
 import type { Language } from '../lib/language';
 import { track } from '../lib/analytics';
@@ -200,6 +202,14 @@ export default function BookDetail() {
             )}
           </div>
         </div>
+      </div>
+
+      {/* The capture. Until 2026-10-11 this page handed every visitor to Amazon and kept
+          nothing, which is why griotmoon-signups sat at 0 while the site itself shipped
+          weekly (concern L18). Placed after the buy button on purpose: the reader who was
+          going to buy has already gone, and this is the one still here. */}
+      <div className="mt-12 -mx-4">
+        <EmailSignup placement="book" magnet={bookMagnet(book.id)} />
       </div>
 
       {winningCluster && (
