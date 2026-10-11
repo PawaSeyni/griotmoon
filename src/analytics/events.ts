@@ -32,8 +32,9 @@ export interface EventDefinition {
 }
 
 const LANGUAGES = ['en', 'es', 'fr'] as const;
-/** Pages that render <EmailSignup>; 'landing' is a /free/<magnet> page (P2-3). */
-const FORM_PLACEMENTS = ['home', 'books', 'about', 'activities', 'resources', 'landing'] as const;
+/** Pages that render <EmailSignup>; 'landing' is a /free/<magnet> page (P2-3),
+ *  'book' a single book's detail page (added 2026-10-11, concern L18). */
+const FORM_PLACEMENTS = ['home', 'books', 'about', 'activities', 'resources', 'landing', 'book'] as const;
 /** Where a buy button sits: the book page, or a BookCard on one of these surfaces. */
 const PURCHASE_PLACEMENTS = ['detail', 'home', 'books', 'related', 'recommended'] as const;
 

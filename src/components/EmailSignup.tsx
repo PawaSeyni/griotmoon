@@ -223,8 +223,9 @@ const TRANSLATIONS = {
   },
 };
 
-/** Which page the form sits on; the `placement` property on every newsletter event. */
-export type SignupPlacement = 'home' | 'books' | 'about' | 'activities' | 'resources' | 'landing';
+/** Which page the form sits on; the `placement` property on every newsletter event.
+ *  'book' is a single book's detail page: the surface ads and pins actually land on. */
+export type SignupPlacement = 'home' | 'books' | 'about' | 'activities' | 'resources' | 'landing' | 'book';
 
 export default function EmailSignup({ placement, magnet: magnetSlug }: { placement: SignupPlacement; magnet?: string }) {
   const [firstName, setFirstName] = useState('');
