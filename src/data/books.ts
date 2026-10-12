@@ -94,9 +94,10 @@ export interface Book {
    * Optional hand-written meta description, when the trimmed `description` is
    * not the sentence you want in a search result.
    *
+   * Every live book sets one (catalog metadata pass, 2026-10-12), written for
+   * the adult buyer: format, theme and age band first, then the story's hook.
    * Leave it unset and `localize` derives one by clamping `description` to 160
-   * characters — correct for most books. Set it only where the page is worth
-   * the copy, and keep every language under 160: see `src/lib/seoText.ts`.
+   * characters. Keep every language under 160: see `src/lib/seoText.ts`.
    */
   seoDescription?: LocalizedString;
   /**
@@ -202,6 +203,11 @@ export const books: Book[] = [
       es: 'Durante una sequía devastadora, la pequeña Yama aprende de su abuela, Mama Sagar, una verdad antigua: «Un dedo es débil, pero un puño es poderoso». Cuando el pueblo enfrenta la crisis, Yama enseña a su comunidad que los esfuerzos individuales son pequeños, pero cuando todos unen recursos y fuerzas, se vuelven imparables.',
       fr: 'Pendant une sécheresse dévastatrice, la petite Yama apprend de sa grand-mère, Mama Sagar, une vérité ancienne : « Un doigt est faible, mais un poing est puissant. » Quand le village affronte la crise, Yama montre à sa communauté que les efforts individuels sont petits, mais quand chacun met en commun ressources et forces, ils deviennent inarrêtables.',
     },
+    seoDescription: {
+      en: "An African picture book about community for ages 4–8. In a drought, Yama learns from her grandmother: one finger is weak, but a fist is mighty.",
+      es: "Un libro ilustrado africano sobre la comunidad, de 4 a 8 años. En plena sequía, Yama aprende de su abuela: un dedo es débil, pero un puño es poderoso.",
+      fr: "Un album africain sur l'entraide, de 4 à 8 ans. Pendant la sécheresse, Yama apprend de sa grand-mère : un doigt est faible, mais un poing est puissant.",
+    },
     theme: {
       en: 'Community and collective strength',
       es: 'Comunidad y fuerza colectiva',
@@ -225,6 +231,11 @@ export const books: Book[] = [
       es: 'En el pueblo de Kofi, en África Occidental, todos conocen la regla: no se silba después del anochecer. Nadie la cuestiona. Pero a Kofi le encanta silbar, silba como un cálao, silba la canción del mercado, le devuelve silbando la nana a su abuela. Y la noche está llena de música que le tira de los labios.',
       fr: "Dans le village ouest-africain de Kofi, tout le monde connaît la règle : on ne siffle pas après la tombée de la nuit. Personne ne la questionne. Mais Kofi adore siffler, il siffle comme un calao, siffle la chanson du marché, siffle la berceuse de sa grand-mère. Et la nuit est pleine de musiques qui attirent ses lèvres.",
     },
+    seoDescription: {
+      en: "A West African folktale about curiosity and elder wisdom for ages 3–8. Kofi loves to whistle, but the village rule says: no whistling after dark.",
+      es: "Un cuento de África Occidental sobre la curiosidad y la sabiduría, de 3 a 8 años. A Kofi le encanta silbar, pero la regla dice: nada de silbar de noche.",
+      fr: "Un conte ouest-africain sur la curiosité et la sagesse des anciens, de 3 à 8 ans. Kofi adore siffler, mais la règle dit : pas de sifflement la nuit.",
+    },
     theme: {
       en: 'Curiosity and elder wisdom',
       es: 'Curiosidad y sabiduría de los mayores',
@@ -246,6 +257,11 @@ export const books: Book[] = [
       en: 'When Yama asks why a yam and an egg are cooking together in the same pot, her grandmother answers with a Wolof saying that takes Yama the rest of the day to understand. A market-day tale of elder wisdom, steam rising from a clay pot, and how the same situation changes each of us differently.',
       es: 'Cuando Yama pregunta por qué un ñame y un huevo se cocinan juntos en la misma olla, su abuela responde con un dicho wolof que a Yama le toma el resto del día entender. Un cuento de día de mercado sobre la sabiduría de los mayores y cómo la misma situación nos transforma a cada uno de manera diferente.',
       fr: "Quand Yama demande pourquoi une igname et un œuf cuisent ensemble dans la même marmite, sa grand-mère répond par un dicton wolof que Yama mettra le reste de la journée à comprendre. Un conte de jour de marché sur la sagesse des anciens et la façon dont une même épreuve nous transforme chacun différemment.",
+    },
+    seoDescription: {
+      en: "A Wolof wisdom tale for ages 4–6. Why do a yam and an egg cook in the same pot? Yama's grandmother answers with a saying that takes all day to understand.",
+      es: "Un cuento wolof de sabiduría, de 4 a 6 años. ¿Por qué se cuecen juntos un ñame y un huevo? La abuela de Yama responde con un dicho que cuesta entender.",
+      fr: "Un conte de sagesse wolof, de 4 à 6 ans. Pourquoi une igname et un œuf cuisent-ils ensemble ? La grand-mère de Yama répond par un proverbe qui prend la journée.",
     },
     theme: {
       en: 'Elder wisdom and tradition',
@@ -269,6 +285,11 @@ export const books: Book[] = [
       es: 'Entre dos orgullosos pueblos de África Occidental hay una pradera compartida, y una disputa que crece. Cada pueblo reclama la pradera como suya, y las discusiones suben de tono cada día. Se levantan cercas. Las amistades se apagan. Los niños ya no pueden jugar juntos. Entonces el viejo baobab ofrece otro camino.',
       fr: "Entre deux fiers villages d'Afrique de l'Ouest s'étend une prairie partagée, et une dispute qui grandit. Chaque village revendique la prairie, et les querelles montent chaque jour. Des clôtures se dressent. Les amitiés s'éteignent. Les enfants ne peuvent plus jouer ensemble. Alors le vieux baobab propose un autre chemin.",
     },
+    seoDescription: {
+      en: "A West African folktale about peace and listening for ages 3–8. Two villages fight over a shared meadow, until the old baobab offers another way.",
+      es: "Un cuento de África Occidental sobre la paz y la escucha, de 3 a 8 años. Dos aldeas se disputan un prado, hasta que el viejo baobab ofrece otro camino.",
+      fr: "Un conte ouest-africain sur la paix et l'écoute, de 3 à 8 ans. Deux villages se disputent une prairie, jusqu'à ce que le vieux baobab propose une autre voie.",
+    },
     theme: {
       en: 'Peace and conflict resolution',
       es: 'Paz y resolución de conflictos',
@@ -290,6 +311,11 @@ export const books: Book[] = [
       en: 'A village that has forgotten how to laugh, and a girl who refuses to let the silence win. A joyful Yama story about how laughter, shared at the right moment, in the right company, can knit a weary community back together.',
       es: 'Un pueblo que ha olvidado cómo reír, y una niña que se niega a dejar ganar al silencio. Una alegre historia de Yama sobre cómo la risa, compartida en el momento justo y en buena compañía, puede volver a unir a una comunidad cansada.',
       fr: "Un village qui a oublié comment rire, et une petite fille qui refuse de laisser gagner le silence. Une joyeuse histoire de Yama sur la façon dont le rire, partagé au bon moment, en bonne compagnie, peut retisser une communauté fatiguée.",
+    },
+    seoDescription: {
+      en: "An African picture book about joy and resilience for ages 4–8. A village has forgotten how to laugh, and Yama refuses to let the silence win.",
+      es: "Un libro ilustrado africano sobre la alegría y la resiliencia, de 4 a 8 años. Una aldea ha olvidado cómo reír, y Yama no deja que gane el silencio.",
+      fr: "Un album africain sur la joie et la résilience, de 4 à 8 ans. Un village a oublié comment rire, et Yama refuse de laisser gagner le silence.",
     },
     theme: {
       en: 'Joy and community resilience',
@@ -313,6 +339,11 @@ export const books: Book[] = [
       es: 'A orillas del río Senegal, todo un pueblo ayuda a criar a un niño, porque en la tradición fulani del pulaaku, cada niño pertenece a todos. Una cálida introducción a la comunidad, la pertenencia y los valores que mantienen unido a un pueblo.',
       fr: "Sur les rives du fleuve Sénégal, tout un village aide à élever un enfant, car dans la tradition peule du pulaaku, chaque enfant appartient à tous. Une belle introduction à la communauté, à l'appartenance et aux valeurs qui unissent un peuple.",
     },
+    seoDescription: {
+      en: "A Fulani tale about community and belonging for ages 3–6. On the banks of the Senegal River, a whole village helps raise one child.",
+      es: "Un cuento fulani sobre la comunidad y la pertenencia, de 3 a 6 años. A orillas del río Senegal, toda una aldea ayuda a criar a un niño.",
+      fr: "Un conte peul sur la communauté et l'appartenance, de 3 à 6 ans. Au bord du fleuve Sénégal, tout un village aide à élever un enfant.",
+    },
     theme: {
       en: 'Community and belonging',
       es: 'Comunidad y pertenencia',
@@ -334,6 +365,11 @@ export const books: Book[] = [
       en: 'When the village needs to keep its water cool and its grain dry, a young girl watches how nature solves its own problems, and shapes the answer from river clay. A Haalpulaar story about learning from nature and the quiet genius of everyday invention.',
       es: 'Cuando el pueblo necesita mantener fresca el agua y seco el grano, una niña observa cómo la naturaleza resuelve sus propios problemas, y moldea la respuesta con arcilla del río. Una historia haalpulaar sobre aprender de la naturaleza y el genio silencioso de la invención cotidiana.',
       fr: "Quand le village doit garder son eau fraîche et son grain au sec, une petite fille observe comment la nature résout ses propres problèmes, et façonne la réponse dans l'argile du fleuve. Une histoire haalpulaar sur l'art d'apprendre de la nature et le génie discret de l'invention quotidienne.",
+    },
+    seoDescription: {
+      en: "An African picture book about learning from nature for ages 4–7. A young girl watches how nature solves problems, and shapes the answer from river clay.",
+      es: "Un libro ilustrado africano sobre aprender de la naturaleza, de 4 a 7 años. Una niña observa la naturaleza y moldea la solución con arcilla del río.",
+      fr: "Un album africain sur la nature qui nous inspire, de 4 à 7 ans. Une fillette observe la nature et façonne la solution dans l'argile du fleuve.",
     },
     theme: {
       en: 'Learning from nature and invention',
@@ -357,6 +393,11 @@ export const books: Book[] = [
       es: 'Dos cazadores salen a la misma cacería y vuelven a casa con dos historias diferentes, y ambas son ciertas. Un cuento de sabiduría sobre la perspectiva: cómo el mismo día puede verse completamente distinto con otros ojos, y por qué escuchar ambos caminos hace más sabio al pueblo.',
       fr: "Deux chasseurs partent pour la même chasse et rentrent avec deux histoires différentes, et toutes deux sont vraies. Un conte de sagesse sur la perspective : comment la même journée peut sembler toute autre à travers d'autres yeux, et pourquoi écouter les deux chemins rend le village plus sage.",
     },
+    seoDescription: {
+      en: "An African wisdom tale about perspective for ages 4–8. Two hunters share one hunt and come home with two different stories, and both are true.",
+      es: "Un cuento africano sobre los puntos de vista, de 4 a 8 años. Dos cazadores comparten una cacería y vuelven con dos historias distintas, y ambas son ciertas.",
+      fr: "Un conte africain sur les points de vue, de 4 à 8 ans. Deux chasseurs partagent une chasse et rentrent avec deux récits différents, tous deux vrais.",
+    },
     theme: {
       en: 'Perspective and wisdom',
       es: 'Perspectiva y sabiduría',
@@ -378,6 +419,11 @@ export const books: Book[] = [
       en: 'When the older boys laugh and call him too small, Kweku decides to prove them wrong by entering the western forest on the night of the new moon, the very night his grandfather warned him never to go. The forest swallows the last light, the familiar trees turn strange, and Kweku realizes he is lost.',
       es: 'Cuando los chicos mayores se ríen y lo llaman demasiado pequeño, Kweku decide demostrarles lo contrario entrando en el bosque del oeste la noche de luna nueva, la misma noche que su abuelo le advirtió que jamás fuera. El bosque se traga la última luz, los árboles conocidos se vuelven extraños, y Kweku descubre que está perdido.',
       fr: "Quand les grands se moquent de lui et le trouvent trop petit, Kweku décide de leur prouver le contraire en entrant dans la forêt de l'ouest la nuit de la nouvelle lune, la nuit même où son grand-père lui avait interdit d'y aller. La forêt avale la dernière lumière, les arbres familiers deviennent étranges, et Kweku comprend qu'il est perdu.",
+    },
+    seoDescription: {
+      en: "A West African tale about listening to elders for ages 7–10. To prove he isn't too small, Kweku enters the forest on the night his grandfather forbade.",
+      es: "Un cuento de África Occidental sobre escuchar a los mayores, de 7 a 10 años. Para demostrar que no es pequeño, Kweku entra al bosque la noche prohibida.",
+      fr: "Un conte ouest-africain sur l'écoute des anciens, de 7 à 10 ans. Pour prouver qu'il n'est pas trop petit, Kweku entre dans la forêt la nuit interdite.",
     },
     theme: {
       en: 'Listening to elders and resilience',
@@ -401,6 +447,11 @@ export const books: Book[] = [
       es: 'En un pequeño pueblo africano, una viuda bondadosa con dos hijos vive con poco y comparte lo poco que tiene. Cuando un viajero agotado llega a su puerta en medio de una tormenta feroz, ella lo recibe sin dudar, ofreciéndole su pequeña cena y el calor de su fuego. No sabe que el misterioso visitante es un sabio anciano que pone a prueba los corazones del pueblo.',
       fr: "Dans un petit village africain, une veuve généreuse et ses deux enfants vivent de peu, et partagent ce peu. Quand un voyageur épuisé frappe à sa porte au cœur d'un violent orage, elle l'accueille sans hésiter, offrant son maigre repas et la chaleur de son feu. Elle ignore que le mystérieux visiteur est un sage venu éprouver le cœur des villageois.",
     },
+    seoDescription: {
+      en: "An African folktale about generosity for ages 3–8. A widow with little welcomes a stranger in a storm, not knowing he is a wise elder testing hearts.",
+      es: "Un cuento africano sobre la generosidad, de 3 a 8 años. Una viuda humilde acoge a un viajero en la tormenta sin saber que es un sabio que prueba los corazones.",
+      fr: "Un conte africain sur la générosité, de 3 à 8 ans. Une veuve modeste accueille un voyageur dans la tempête, sans savoir qu'il éprouve les cœurs.",
+    },
     theme: {
       en: 'Generosity and abundance',
       es: 'Generosidad y abundancia',
@@ -423,6 +474,11 @@ export const books: Book[] = [
       en: 'Yama loves the night sky, but from her bedroom window it feels impossibly far away. Then Luna arrives, a mysterious cat with a glowing star on her chest and a purr like a tiny thunderstorm. Together they leap into the velvet dark on a safari through the cosmos.',
       es: 'A Yama le encanta el cielo nocturno, pero desde la ventana de su cuarto se siente imposiblemente lejos. Entonces llega Luna, una gata misteriosa con una estrella brillante en el pecho y un ronroneo como una pequeña tormenta. Juntas saltan a la oscuridad de terciopelo en un safari por el cosmos.',
       fr: "Yama adore le ciel nocturne, mais depuis la fenêtre de sa chambre il semble impossiblement loin. Puis Luna arrive, une chatte mystérieuse avec une étoile lumineuse sur la poitrine et un ronronnement comme un petit orage. Ensemble, elles bondissent dans le noir de velours pour un safari à travers le cosmos.",
+    },
+    seoDescription: {
+      en: "A bedtime picture book about the night sky for ages 3–6. Luna, a cat with a glowing star, takes Yama on a starlight safari through the cosmos.",
+      es: "Un cuento ilustrado para dormir sobre el cielo nocturno, de 3 a 6 años. Luna, una gata con una estrella brillante, lleva a Yama de safari por el cosmos.",
+      fr: "Un album du soir sur le ciel étoilé, de 3 à 6 ans. Luna, une chatte à l'étoile brillante, emmène Yama dans un safari à travers le cosmos.",
     },
     theme: {
       en: 'Wonder and turning fear into curiosity',
@@ -483,6 +539,11 @@ export const books: Book[] = [
       es: 'Yama le tiene miedo a la oscuridad. Las sombras de su pared parecen formas extrañas y aterradoras, y la noche se siente demasiado grande y demasiado silenciosa. Entonces una pequeña luciérnaga dorada llamada Flicker golpea su ventana, y la noche empieza a cambiar.',
       fr: "Yama a peur du noir. Les ombres sur son mur ressemblent à des formes étranges et effrayantes, et la nuit semble trop grande et trop silencieuse. Puis une minuscule luciole dorée nommée Flicker tapote à sa fenêtre, et la nuit commence à changer.",
     },
+    seoDescription: {
+      en: "A bedtime picture book about fear of the dark for ages 3–8. Yama is scared of the shadows, until a tiny firefly named Flicker taps at her window.",
+      es: "Un cuento para dormir sobre el miedo a la oscuridad, de 3 a 8 años. Yama teme las sombras, hasta que una luciérnaga llamada Flicker toca su ventana.",
+      fr: "Un album du soir sur la peur du noir, de 3 à 8 ans. Yama a peur des ombres, jusqu'à ce qu'une petite luciole nommée Flicker frappe à sa fenêtre.",
+    },
     theme: {
       en: 'Courage and the wonder of night',
       es: 'Valentía y el asombro de la noche',
@@ -504,6 +565,11 @@ export const books: Book[] = [
       en: "Yama loves her big, bright, busy world, the rumble of the market, the singing birds, the tinkling of Mama's wind chimes. But sometimes all the sounds crash together like thunder, and her whole body wants to say: Stop. I need a quiet place.",
       es: 'Yama ama su mundo grande, brillante y ajetreado, el rumor del mercado, el canto de los pájaros, el tintineo de las campanillas de Mamá. Pero a veces todos los sonidos chocan como un trueno, y todo su cuerpo quiere decir: Alto. Necesito un lugar tranquilo.',
       fr: "Yama aime son monde grand, lumineux et animé, le grondement du marché, le chant des oiseaux, le tintement des carillons de Maman. Mais parfois tous les sons s'entrechoquent comme le tonnerre, et tout son corps veut dire : Stop. J'ai besoin d'un endroit calme.",
+    },
+    seoDescription: {
+      en: "A picture book about mindfulness and big feelings for ages 3–8. When all the sounds of her busy world crash together, Yama looks for a quiet place.",
+      es: "Un libro ilustrado sobre la calma y las emociones, de 3 a 8 años. Cuando los ruidos de su mundo chocan como truenos, Yama busca un lugar tranquilo.",
+      fr: "Un album sur la pleine conscience et les émotions, de 3 à 8 ans. Quand tous les bruits de son monde s'entrechoquent, Yama cherche un coin calme.",
     },
     theme: {
       en: 'Mindfulness and self-regulation',
@@ -527,6 +593,11 @@ export const books: Book[] = [
       es: 'La bondad, descubre Yama, funciona como un jardín: siembra una pequeña buena acción, cuídala, y mira cómo se extiende más lejos de lo que imaginabas. Una historia tierna sobre la bondad y echar una mano, y cómo una pequeña ayudante puede cambiar todo un vecindario.',
       fr: "La gentillesse, découvre Yama, fonctionne comme un jardin : plante une petite bonne action, entretiens-la, et regarde-la s'étendre plus loin que tu ne l'imaginais. Une douce histoire de gentillesse et d'entraide, et comment une petite main peut changer tout un quartier.",
     },
+    seoDescription: {
+      en: "A picture book about kindness for ages 3–6. Yama discovers that kindness works like a garden: plant one good deed and watch it spread.",
+      es: "Un libro ilustrado sobre la bondad, de 3 a 6 años. Yama descubre que la bondad es como un jardín: siembra una buena acción y mira cómo crece.",
+      fr: "Un album sur la gentillesse, de 3 à 6 ans. Yama découvre que la gentillesse est comme un jardin : on sème une bonne action et elle se propage.",
+    },
     theme: {
       en: 'Kindness and community service',
       es: 'Bondad y servicio comunitario',
@@ -548,6 +619,11 @@ export const books: Book[] = [
       en: 'What makes a king truly great, his crown, or his hands? A story of a ruler who leads by serving: carrying water, kneeling in the fields, and listening before he speaks. A tale of humility and what leadership looks like when it bows.',
       es: '¿Qué hace verdaderamente grande a un rey, su corona o sus manos? La historia de un gobernante que lidera sirviendo: cargando agua, arrodillándose en los campos y escuchando antes de hablar. Un cuento sobre la humildad y cómo se ve el liderazgo cuando se inclina.',
       fr: "Qu'est-ce qui rend un roi vraiment grand, sa couronne ou ses mains ? L'histoire d'un souverain qui dirige en servant : portant l'eau, s'agenouillant dans les champs, écoutant avant de parler. Un conte d'humilité, où l'on découvre à quoi ressemble un chef qui s'incline.",
+    },
+    seoDescription: {
+      en: "An African tale about humble leadership for ages 5–9. A king who carries water, kneels in the fields and listens before he speaks.",
+      es: "Un cuento africano sobre el liderazgo humilde, de 5 a 9 años. Un rey que carga agua, se arrodilla en el campo y escucha antes de hablar.",
+      fr: "Un conte africain sur l'humilité du chef, de 5 à 9 ans. Un roi qui porte l'eau, s'agenouille aux champs et écoute avant de parler.",
     },
     theme: {
       en: 'Service, humility, and leadership',
@@ -571,6 +647,11 @@ export const books: Book[] = [
       es: 'Los hermanos Kael y Seni acuden al consejo del pueblo para resolver una disputa por el campo de mijo de su padre. Kael es ruidoso, orgulloso e imposible de detener cuando empieza a hablar. Seni es callado, cuidadoso, y escucha antes de dar su opinión, a veces sin darla en absoluto.',
       fr: "Les frères Kael et Seni se présentent au conseil du village pour régler un différend sur le champ de mil de leur père. Kael est bruyant, fier, impossible à arrêter quand il parle. Seni est silencieux, prudent, et écoute avant d'offrir sa pensée, parfois sans l'offrir du tout.",
     },
+    seoDescription: {
+      en: "An African wisdom tale about quiet strength for ages 5–9. Loud Kael and quiet Seni bring their dispute over a millet field to the village council.",
+      es: "Un cuento africano sobre la fuerza tranquila, de 5 a 9 años. El ruidoso Kael y el callado Seni llevan su disputa por un campo de mijo al consejo.",
+      fr: "Un conte africain sur la force tranquille, de 5 à 9 ans. Kael le bavard et Seni le discret portent leur litige sur un champ de mil devant le conseil.",
+    },
     theme: {
       en: 'Quiet strength and listening',
       es: 'Fuerza serena y escucha',
@@ -593,6 +674,11 @@ export const books: Book[] = [
       es: '«¿Por qué plantamos árboles bajo los que nunca nos sentaremos?», pregunta Yaw, sosteniendo un pequeño retoño junto a su abuela en el campo. Ella le habla del gran baobab del pueblo de su propia abuela, plantado hace mucho por alguien que nunca descansó a su sombra.',
       fr: "« Pourquoi plantons-nous des arbres sous lesquels nous ne nous assiérons jamais ? » demande Yaw, un petit plant à la main, près de sa grand-mère dans le champ. Elle lui raconte le grand baobab du village de sa propre grand-mère, planté jadis par quelqu'un qui ne s'est jamais reposé à son ombre.",
     },
+    seoDescription: {
+      en: "An African picture book about legacy for ages 4–8. Why plant trees we will never sit under? Yaw's grandmother answers with the story of a baobab.",
+      es: "Un libro ilustrado africano sobre el legado, de 4 a 8 años. ¿Por qué plantar árboles cuya sombra no veremos? La abuela de Yaw responde con un baobab.",
+      fr: "Un album africain sur la transmission, de 4 à 8 ans. Pourquoi planter des arbres dont on ne verra pas l'ombre ? La grand-mère de Yaw répond par un baobab.",
+    },
     theme: {
       en: 'Legacy and intergenerational giving',
       es: 'Legado y generosidad entre generaciones',
@@ -614,6 +700,11 @@ export const books: Book[] = [
       en: 'Kwame and Kwesi are brothers farming their first independent season in Tamale, northern Ghana. Kwame trusts his farming guidebooks. Kwesi trusts the soil, the indicator plants, and what the land has always said. When their seeds struggle and the rains are uncertain, both brothers must question what they know.',
       es: 'Kwame y Kwesi son hermanos que cultivan su primera temporada por cuenta propia en Tamale, al norte de Ghana. Kwame confía en sus manuales de agricultura. Kwesi confía en el suelo, en las plantas indicadoras y en lo que la tierra siempre ha dicho. Cuando sus semillas sufren y las lluvias son inciertas, ambos hermanos deben cuestionar lo que saben.',
       fr: "Kwame et Kwesi sont deux frères qui cultivent leur première saison indépendante à Tamale, au nord du Ghana. Kwame fait confiance à ses manuels d'agriculture. Kwesi fait confiance au sol, aux plantes indicatrices et à ce que la terre a toujours dit. Quand leurs semences peinent et que les pluies se font incertaines, les deux frères doivent remettre en question ce qu'ils savent.",
+    },
+    seoDescription: {
+      en: "A Ghanaian story about traditional knowledge for ages 6–10. One brother trusts his farming books, the other trusts the soil. The land teaches both.",
+      es: "Una historia de Ghana sobre el saber tradicional, de 6 a 10 años. Un hermano confía en sus libros de cultivo, el otro en la tierra. Ambos aprenden.",
+      fr: "Une histoire du Ghana sur les savoirs traditionnels, de 6 à 10 ans. Un frère se fie à ses livres, l'autre à la terre. Le sol leur apprend à tous deux.",
     },
     theme: {
       en: 'Traditional knowledge and cooperation',
@@ -638,6 +729,11 @@ export const books: Book[] = [
       es: 'En un pueblo enclavado en las tierras altas de Etiopía, el jefe Mael creó una regla especial: por cada árbol que tomamos, debemos plantar cinco nuevos. No todos lo entendieron al principio. El trabajo era duro, el suelo estaba seco y las piernas de los niños se cansaban, pero la tierra estaba escuchando.',
       fr: "Dans un village niché sur les hauts plateaux d'Éthiopie, le chef Mael a instauré une règle spéciale : pour chaque arbre que nous prenons, nous devons en planter cinq nouveaux. Tout le monde n'a pas compris au début. Le travail était dur, le sol était sec, et les jambes des enfants fatiguaient, mais la terre écoutait.",
     },
+    seoDescription: {
+      en: "An Ethiopian picture book about caring for the land for ages 3–9. Chief Mael's rule: for every tree we take, we plant five new ones.",
+      es: "Un libro ilustrado etíope sobre el cuidado de la tierra, de 3 a 9 años. La regla del jefe Mael: por cada árbol que cortamos, plantamos cinco.",
+      fr: "Un album éthiopien sur le soin de la terre, de 3 à 9 ans. La règle du chef Mael : pour chaque arbre coupé, on en plante cinq.",
+    },
     theme: {
       en: 'Caring for the land',
       es: 'Cuidar la tierra',
@@ -659,6 +755,11 @@ export const books: Book[] = [
       en: 'When devastating floods threaten the villages, the old chiefs argue over what to do. Chief Abebe wants everyone to move. Chief Berkeley points fingers. Chief Hanif calls for ceremonies. But wise Chief Mael, with that special twinkle in his eye, sees what the others cannot: it is time for a new voice.',
       es: 'Cuando inundaciones devastadoras amenazan los pueblos, los viejos jefes discuten sobre qué hacer. El jefe Abebe quiere que todos se muden. El jefe Berkeley busca culpables. El jefe Hanif pide ceremonias. Pero el sabio jefe Mael, con ese brillo especial en los ojos, ve lo que los demás no pueden: es hora de una nueva voz.',
       fr: "Quand des inondations dévastatrices menacent les villages, les vieux chefs se disputent sur la marche à suivre. Le chef Abebe veut que tout le monde parte. Le chef Berkeley cherche des coupables. Le chef Hanif réclame des cérémonies. Mais le sage chef Mael, avec cette étincelle dans les yeux, voit ce que les autres ne voient pas : il est temps d'écouter une nouvelle voix.",
+    },
+    seoDescription: {
+      en: "An African tale about leadership for ages 3–9. As floods threaten the villages and the chiefs argue, wise Chief Mael sees it is time for a new voice.",
+      es: "Un cuento africano sobre el liderazgo, de 3 a 9 años. Ante las inundaciones y las discusiones, el sabio jefe Mael ve que es hora de una nueva voz.",
+      fr: "Un conte africain sur le leadership, de 3 à 9 ans. Face aux inondations et aux disputes, le sage chef Mael comprend qu'il faut une nouvelle voix.",
     },
     theme: {
       en: 'Leadership and sharing power',
@@ -682,6 +783,11 @@ export const books: Book[] = [
       es: '¿Qué revelan una piedra, un trozo de carbón y una pluma sobre el liderazgo? Cuando el joven Mael se convierte en consejero del pueblo, recibe del jefe tres regalos misteriosos, cada uno con una sabiduría transmitida por generaciones: sé fuerte como la piedra, cálido como el carbón y suave como la pluma.',
       fr: "Que révèlent une pierre, un morceau de charbon et une plume sur le leadership ? Quand le jeune Mael devient conseiller du village, il reçoit du chef trois cadeaux mystérieux, chacun portant une sagesse transmise de génération en génération : sois fort comme la pierre, chaleureux comme le charbon et doux comme la plume.",
     },
+    seoDescription: {
+      en: "An African tale about leadership and values for ages 3–6. A stone, a piece of charcoal and a feather: three gifts that teach young Mael to lead.",
+      es: "Un cuento africano sobre el liderazgo y los valores, de 3 a 6 años. Una piedra, un carbón y una pluma: tres regalos que enseñan a liderar.",
+      fr: "Un conte africain sur le leadership et les valeurs, de 3 à 6 ans. Une pierre, un charbon et une plume : trois cadeaux pour apprendre à guider.",
+    },
     theme: {
       en: 'Leadership and values',
       es: 'Liderazgo y valores',
@@ -703,6 +809,11 @@ export const books: Book[] = [
       en: 'Yama and Max are best friends. They share everything, especially the bright little wooden car they push through the courtyard from morning until dusk. Then one sunny morning, a tiny wheel cracks off, and something bigger breaks between them: they blame each other, turn their backs, and walk away.',
       es: 'Yama y Max son mejores amigos. Lo comparten todo, especialmente el pequeño coche de madera pintada que empujan por el patio de la mañana al atardecer. Entonces, una mañana soleada, una ruedita se rompe, y algo más grande se rompe entre ellos: se culpan, se dan la espalda y se alejan.',
       fr: "Yama et Max sont les meilleurs amis du monde. Ils partagent tout, surtout la petite voiture en bois peint qu'ils poussent dans la cour du matin au soir. Puis, un matin ensoleillé, une petite roue se casse, et quelque chose de plus grand se brise entre eux : ils s'accusent, se tournent le dos et s'en vont.",
+    },
+    seoDescription: {
+      en: "A picture book about friendship and forgiveness for ages 3–8. When their wooden car breaks, best friends Yama and Max blame each other and walk away.",
+      es: "Un libro ilustrado sobre la amistad y el perdón, de 3 a 8 años. Cuando se rompe su coche de madera, Yama y Max se culpan y se separan.",
+      fr: "Un album sur l'amitié et le pardon, de 3 à 8 ans. Quand leur petite voiture en bois se casse, Yama et Max s'accusent et se tournent le dos.",
     },
     theme: {
       en: 'Friendship and forgiveness',
@@ -726,6 +837,11 @@ export const books: Book[] = [
       es: 'Kael es un cazador generoso cuyo espíritu es tan vasto como la sabana africana: comparte su caza libremente con las familias hambrientas, sin pedir nada a cambio. Años después, cuando una enfermedad repentina lo deja demasiado débil para sembrar sus campos, el círculo del dar vuelve a él.',
       fr: "Kael est un chasseur généreux dont l'esprit est aussi vaste que la savane africaine, il partage librement son butin avec les familles affamées, sans rien demander en retour. Des années plus tard, quand une maladie soudaine le laisse trop faible pour planter ses champs, le cercle du don revient vers lui.",
     },
+    seoDescription: {
+      en: "An African tale about generosity for ages 3–8. Kael shares freely with hungry families, and years later, when he falls ill, the circle of giving returns.",
+      es: "Un cuento africano sobre la generosidad, de 3 a 8 años. Kael comparte con las familias hambrientas, y años después el círculo de dar vuelve a él.",
+      fr: "Un conte africain sur la générosité, de 3 à 8 ans. Kael partage avec les familles affamées, et des années plus tard, le cercle du don lui revient.",
+    },
     theme: {
       en: 'Generosity and reciprocity',
       es: 'Generosidad y reciprocidad',
@@ -747,6 +863,11 @@ export const books: Book[] = [
       en: "Kwame begins each morning kneeling to give thanks for his soil, rain, and sunshine. His neighbor Kofi rushes through his days complaining about the weather, the weeds, the endless work. When drought strikes both fields, Kwame's grateful heart helps him notice what others miss: a tiny green sprout hiding a spring of water below.",
       es: 'Kwame comienza cada mañana arrodillado, dando gracias por su tierra, la lluvia y el sol. Su vecino Kofi corre por sus días quejándose del clima, de las malas hierbas, del trabajo interminable. Cuando la sequía golpea ambos campos, el corazón agradecido de Kwame le ayuda a notar lo que otros no ven: un pequeño brote verde que esconde un manantial.',
       fr: "Kwame commence chaque matin à genoux, remerciant pour sa terre, la pluie et le soleil. Son voisin Kofi traverse ses journées en se plaignant du temps, des mauvaises herbes, du travail sans fin. Quand la sécheresse frappe les deux champs, le cœur reconnaissant de Kwame lui fait remarquer ce que les autres manquent : une petite pousse verte cachant une source.",
+    },
+    seoDescription: {
+      en: "An African tale about gratitude for ages 4–8. When drought strikes two farms, Kwame's grateful heart helps him notice what his neighbor misses.",
+      es: "Un cuento africano sobre la gratitud, de 4 a 8 años. Cuando la sequía golpea dos granjas, la gratitud de Kwame le ayuda a ver lo que su vecino no ve.",
+      fr: "Un conte africain sur la gratitude, de 4 à 8 ans. Quand la sécheresse frappe deux fermes, la gratitude de Kwame l'aide à voir ce que son voisin manque.",
     },
     theme: {
       en: 'Gratitude and perspective',
@@ -770,6 +891,11 @@ export const books: Book[] = [
       es: 'Mientras sus compañeros corren, se atiborran y entran en pánico antes de cada examen, Zahra hace algo diferente. Dos lápices afilados. El cuaderno abierto en la fecha de ayer. Un poco cada día, siempre repasando antes de avanzar. Ella lo llama el Plan Constante, y todos la llaman Tortuga.',
       fr: "Pendant que ses camarades se précipitent, bachotent et paniquent avant chaque contrôle, Zahra fait autrement. Deux crayons taillés. Le cahier ouvert à la date d'hier. Un peu chaque jour, toujours révisé avant d'avancer. Elle appelle ça le Plan Régulier, et tout le monde l'appelle Tortue.",
     },
+    seoDescription: {
+      en: "A picture book about perseverance and study habits for ages 6–10. While classmates cram and panic, Zahra follows her Steady Plan, a little each day.",
+      es: "Un libro ilustrado sobre la constancia y los hábitos de estudio, de 6 a 10 años. Mientras otros se agobian, Zahra sigue su plan: un poco cada día.",
+      fr: "Un album sur la persévérance et les habitudes d'étude, de 6 à 10 ans. Pendant que d'autres paniquent, Zahra suit son plan : un peu chaque jour.",
+    },
     theme: {
       en: 'Perseverance and steady habits',
       es: 'Perseverancia y hábitos constantes',
@@ -791,6 +917,11 @@ export const books: Book[] = [
       en: 'Professor Hawel was once a young girl who saved her village with clever clay pots. Now she teaches at a great university, until a letter arrives from Dr. Yama, a scientist whose grandparents came from the same river basin. "Please come," Yama wrote. "Our people need us both."',
       es: 'La profesora Hawel fue una vez una niña que salvó su pueblo con ingeniosas ollas de barro. Ahora enseña en una gran universidad, hasta que llega una carta de la Dra. Yama, una científica cuyos abuelos venían de la misma cuenca del río. «Por favor, ven», escribió Yama. «Nuestro pueblo nos necesita a las dos».',
       fr: "La professeure Hawel fut jadis une petite fille qui sauva son village avec d'ingénieuses poteries d'argile. Aujourd'hui elle enseigne dans une grande université, jusqu'à ce qu'arrive une lettre de la Dre Yama, une scientifique dont les grands-parents venaient du même bassin fluvial. « Viens, je t'en prie », écrit Yama. « Notre peuple a besoin de nous deux. »",
+    },
+    seoDescription: {
+      en: "A picture book about women in science for ages 5–8. Professor Hawel, who once saved her village with clay pots, is called home by a fellow scientist.",
+      es: "Un libro ilustrado sobre mujeres en la ciencia, de 5 a 8 años. La profesora Hawel, que salvó su aldea con vasijas de barro, recibe una llamada de casa.",
+      fr: "Un album sur les femmes scientifiques, de 5 à 8 ans. La professeure Hawel, qui sauva son village avec des pots d'argile, est rappelée chez elle.",
     },
     theme: {
       en: 'Women in science and heritage knowledge',
@@ -814,6 +945,11 @@ export const books: Book[] = [
       es: 'Dayo tenía hambre. Por eso se metió en el huerto de Mama Nia y tomó lo que necesitaba. Pero Nana Kweku lo vio, y el consejo del pueblo vio algo que el castigo solo no podía arreglar. En lugar de vergüenza y exclusión, le ofrecen a Dayo un camino: trabajar en el huerto de Mama Nia y hacer crecer algo de vuelta.',
       fr: "Dayo avait faim. C'est pourquoi il s'est glissé dans le jardin de Mama Nia pour prendre ce qu'il lui fallait. Mais Nana Kweku l'a vu, et le conseil du village a vu ce qu'une punition seule ne pouvait réparer. Au lieu de la honte et de l'exclusion, on offre à Dayo un chemin : travailler dans le jardin de Mama Nia, et faire repousser quelque chose.",
     },
+    seoDescription: {
+      en: "An African tale about second chances for ages 5–9. Instead of punishing hungry Dayo, the village offers him a path: work in the garden and grow again.",
+      es: "Un cuento africano sobre las segundas oportunidades, de 5 a 9 años. En vez de castigar a Dayo, la aldea le ofrece trabajar en el huerto y volver a crecer.",
+      fr: "Un conte africain sur la seconde chance, de 5 à 9 ans. Au lieu de punir Dayo, le village lui propose de travailler au jardin et de grandir à nouveau.",
+    },
     theme: {
       en: 'Second chances and earning trust',
       es: 'Segundas oportunidades y ganarse la confianza',
@@ -836,6 +972,11 @@ export const books: Book[] = [
       es: 'Un retoño no da sombra hoy, ni fruto mañana, entonces, ¿para qué plantarlo? Un cuento fulani sobre la paciencia, el cuidado de la tierra y la fuerza serena de cultivar lo que nos sobrevivirá, para los niños que estarán donde estuvimos.',
       fr: "Un jeune arbre ne donne pas d'ombre aujourd'hui, pas de fruit demain, alors pourquoi le planter ? Un conte peul sur la patience, le soin de la terre et la force tranquille de cultiver ce qui nous survivra, pour les enfants qui se tiendront là où nous étions.",
     },
+    seoDescription: {
+      en: "A Fulani tale about patience and caring for the earth for ages 3–8. A sapling gives no shade today, so why plant it? For the children still to come.",
+      es: "Un cuento fulani sobre la paciencia y el cuidado de la tierra, de 3 a 8 años. Un arbolito no da sombra hoy, ¿por qué plantarlo? Por los niños que vendrán.",
+      fr: "Un conte peul sur la patience et le soin de la terre, de 3 à 8 ans. Un jeune arbre ne donne pas d'ombre aujourd'hui. Pourquoi le planter ? Pour demain.",
+    },
     theme: {
       en: 'Patience and stewardship',
       es: 'Paciencia y cuidado de la tierra',
@@ -857,6 +998,11 @@ export const books: Book[] = [
       en: 'When a plague of locusts destroys the harvest and hope seems lost, Elder Kwesi gathers the children under the great baobab and begins to tell his most ridiculous stories. Laughter spreads through the hungry village, and with it the strength to rebuild: laughter cannot fill empty bellies, but it feeds hungry hearts.',
       es: 'Cuando una plaga de langostas destruye la cosecha y la esperanza parece perdida, el anciano Kwesi reúne a los niños bajo el gran baobab y empieza a contar sus historias más disparatadas. La risa se extiende por el pueblo hambriento, y con ella la fuerza para reconstruir: la risa no llena estómagos vacíos, pero alimenta corazones hambrientos.',
       fr: "Quand une nuée de criquets détruit la récolte et que l'espoir semble perdu, le vieux Kwesi rassemble les enfants sous le grand baobab et se met à raconter ses histoires les plus loufoques. Le rire gagne le village affamé, et avec lui la force de reconstruire : le rire ne remplit pas les ventres vides, mais il nourrit les cœurs affamés.",
+    },
+    seoDescription: {
+      en: "A West African tale about resilience and joy for ages 3–8. After locusts destroy the harvest, Elder Kwesi's funny stories give the village strength.",
+      es: "Un cuento de África Occidental sobre la resiliencia y la alegría, de 3 a 8 años. Tras las langostas, los cuentos del anciano Kwesi dan fuerza a la aldea.",
+      fr: "Un conte ouest-africain sur la résilience et la joie, de 3 à 8 ans. Après les criquets, les histoires drôles de l'ancien Kwesi redonnent force au village.",
     },
     theme: {
       en: 'Resilience and joy',
@@ -908,6 +1054,11 @@ export const books: Book[] = [
       en: 'One morning, everything is different: tails, claws, and very big footsteps. A playful romp about imagination and friendship, where waking up as dinosaurs turns an ordinary day into the best adventure of all.',
       es: 'Una mañana, todo es diferente: colas, garras y pasos muy, muy grandes. Una divertida aventura sobre la imaginación y la amistad, donde despertar convertidos en dinosaurios transforma un día cualquiera en la mejor aventura de todas.',
       fr: "Un matin, tout est différent : des queues, des griffes et de très grands pas. Une joyeuse cavalcade sur l'imagination et l'amitié, où se réveiller en dinosaures transforme une journée ordinaire en la plus belle des aventures.",
+    },
+    seoDescription: {
+      en: "A playful picture book about imagination and friendship for ages 3–7. One morning: tails, claws and big footsteps. An ordinary day becomes an adventure.",
+      es: "Un libro ilustrado divertido sobre la imaginación y la amistad, de 3 a 7 años. Una mañana: colas, garras y grandes pisadas. El día se vuelve una aventura.",
+      fr: "Un album joyeux sur l'imagination et l'amitié, de 3 à 7 ans. Un matin : des queues, des griffes et de grands pas. Une journée ordinaire devient une aventure.",
     },
     theme: {
       en: 'Imagination and friendship',
