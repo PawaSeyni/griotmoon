@@ -99,6 +99,13 @@ export interface Book {
    * the copy, and keep every language under 160: see `src/lib/seoText.ts`.
    */
   seoDescription?: LocalizedString;
+  /**
+   * Optional `<title>` override, when the bare book title gives a search engine
+   * too little to go on ("Ubuntu" alone pulls Linux results). Seo appends
+   * " | Griot Moon", so keep every language at 47 characters or fewer: the
+   * whole tag must stay within TITLE_MAX (60). Leave unset to use the title.
+   */
+  seoTitle?: LocalizedString;
   theme: LocalizedString;
 }
 
@@ -127,6 +134,8 @@ export interface LocalizedBook {
    * at the call site so a page cannot ship the raw blurb by forgetting to trim.
    */
   metaDescription: string;
+  /** What goes in `<title>` before the site suffix: `seoTitle` when set, else the title. */
+  metaTitle: string;
   theme: string;
 }
 
@@ -155,6 +164,20 @@ export const books: Book[] = [
       en: 'When a researcher offers a basket of fruit as a prize for a race, the children surprise everyone, they hold hands and walk to the finish line together. "How can I be happy if my friends are sad?" one child asks. Through their choice, a village elder shares the meaning of Ubuntu: "I am, because we are."',
       es: 'Cuando un investigador ofrece una cesta de fruta como premio de una carrera, los niños sorprenden a todos: se toman de las manos y caminan juntos hasta la meta. «¿Cómo puedo ser feliz si mis amigos están tristes?», pregunta un niño. A través de su elección, un anciano del pueblo comparte el significado de Ubuntu: «Soy, porque somos».',
       fr: 'Quand un chercheur offre un panier de fruits comme prix d’une course, les enfants surprennent tout le monde : ils se prennent la main et marchent ensemble jusqu’à l’arrivée. « Comment puis-je être heureux si mes amis sont tristes ? » demande un enfant. À travers leur choix, un ancien du village partage le sens d’Ubuntu : « Je suis, parce que nous sommes. »',
+    },
+    // Buyer-intent meta (pilot metadata audit, 2026-10-12): "Ubuntu" on its own
+    // collides with the Linux distribution, so the title tag and description say
+    // what the book is and who it is for. The visible title and subtitle stay as
+    // printed on the cover.
+    seoTitle: {
+      en: 'Ubuntu We Are Together: African Kindness Story',
+      es: 'Ubuntu We Are Together: cuento africano',
+      fr: 'Ubuntu We Are Together : conte africain',
+    },
+    seoDescription: {
+      en: 'An African picture book about kindness for ages 3–8. The children choose to finish the race together, and an elder shares Ubuntu: I am, because we are.',
+      es: 'Un libro ilustrado africano sobre la bondad, de 3 a 8 años. Los niños terminan la carrera juntos y un anciano comparte Ubuntu: soy, porque somos.',
+      fr: "Un album africain sur la bonté, de 3 à 8 ans. Les enfants finissent la course ensemble et un ancien partage l'Ubuntu : je suis, parce que nous sommes.",
     },
     theme: {
       en: 'Ubuntu, togetherness, and empathy',
@@ -422,6 +445,18 @@ export const books: Book[] = [
       en: 'Telling the truth is easy when it costs nothing. But when Yama sees something unfair happen, and staying quiet would be so much simpler, she has to decide what kind of person she wants to be. A Yama story about honesty, integrity, and standing up for what is right.',
       es: 'Decir la verdad es fácil cuando no cuesta nada. Pero cuando Yama ve algo injusto, y quedarse callada sería mucho más simple, tiene que decidir qué clase de persona quiere ser. Una historia de Yama sobre la honestidad, la integridad y defender lo que es justo.',
       fr: "Dire la vérité est facile quand cela ne coûte rien. Mais quand Yama est témoin d'une injustice, et que se taire serait tellement plus simple, elle doit décider quelle personne elle veut être. Une histoire de Yama sur l'honnêteté, l'intégrité et le courage de défendre ce qui est juste.",
+    },
+    // Buyer-intent meta (pilot metadata audit, 2026-10-12): the Amazon listing has
+    // no subtitle, so this page is where "picture book about honesty" can be said.
+    seoTitle: {
+      en: "Yama's Brave Choice: A Story About Honesty",
+      es: "Yama's Brave Choice: sobre la honestidad",
+      fr: "Yama's Brave Choice : histoire d'honnêteté",
+    },
+    seoDescription: {
+      en: 'A picture book about honesty for ages 5–9. When staying quiet would be easier, Yama must decide what kind of person she wants to be.',
+      es: 'Un libro ilustrado sobre la honestidad, de 5 a 9 años. Cuando callar sería más fácil, Yama debe decidir qué clase de persona quiere ser.',
+      fr: "Un album sur l'honnêteté, de 5 à 9 ans. Quand se taire serait plus simple, Yama doit décider quelle personne elle veut être.",
     },
     theme: {
       en: 'Honesty and standing up for what is right',
@@ -845,12 +880,13 @@ export const books: Book[] = [
       es: 'Bajo la luna, el jardín de Grandmère sigue su propio ritmo. Mientras Yama ayuda a su abuela a sembrar, esperar y cuidar, aprende que las mejores cosas crecen despacio y se cultivan juntos: los jardines, las historias y el amor. Un luminoso cuento de la serie Yama sobre la paciencia y la sabiduría de las abuelas.',
       fr: "Sous la lune, le jardin de Grandmère suit son propre rythme. En aidant sa grand-mère à planter, attendre et soigner, Yama découvre que les plus belles choses poussent lentement et se cultivent ensemble : les jardins, les histoires et l'amour. Une lumineuse histoire du soir de la série Yama sur la patience et la sagesse des grands-mères.",
     },
-    // Hand-written: the trimmed blurb would cut mid-clause. Grandmère is the
-    // title the 2026-10-11 review identified as the one worth the copy.
+    // Hand-written: the trimmed blurb would cut mid-clause. Rewritten for buyer
+    // intent (pilot metadata audit, 2026-10-12): shoppers type "grandmother" and
+    // "bedtime story", not "Grandmère", and the shelf for that search is shallow.
     seoDescription: {
-      en: "Under the moon, Grandmère's garden keeps its own time. Yama learns that the best things grow slowly, and are grown together.",
-      es: 'Bajo la luna, el jardín de Grandmère sigue su propio ritmo. Yama aprende que las mejores cosas crecen despacio y se cultivan juntos.',
-      fr: "Sous la lune, le jardin de Grandmère suit son propre rythme. Yama découvre que les plus belles choses poussent lentement et se cultivent ensemble.",
+      en: 'A grandmother and grandchild bedtime story for ages 3–8. Under the moon, Yama learns from Grandmère that the best things grow slowly, and together.',
+      es: 'Un cuento para dormir sobre una abuela y su nieta, de 3 a 8 años. Bajo la luna, Yama aprende que las mejores cosas crecen despacio y juntos.',
+      fr: 'Une histoire du soir entre une grand-mère et sa petite-fille, de 3 à 8 ans. Sous la lune, Yama apprend que les belles choses poussent lentement, ensemble.',
     },
     theme: {
       en: 'Patience and intergenerational wisdom',
@@ -901,6 +937,7 @@ function localize(book: Book, lang: Language): LocalizedBook {
     metaDescription:
       book.seoDescription?.[lang] ??
       clampMeta(book.description[lang] ?? book.description.en),
+    metaTitle: book.seoTitle?.[lang] ?? book.title[lang] ?? book.title.en,
     theme: book.theme[lang] ?? book.theme.en,
   };
 }
