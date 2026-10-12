@@ -15,6 +15,20 @@ import { LANGUAGE_LABELS, SUPPORTED_LANGUAGES, localizePath, useLanguage, useTra
 import type { Language } from '../lib/language';
 import { track } from '../lib/analytics';
 
+
+/** schema.org audience for an ageRange like '3-8'; nothing if it doesn't parse. */
+function ageAudience(range: string) {
+  const m = range.match(/^(\d+)\s*[-–]\s*(\d+)$/);
+  if (!m) return {};
+  return {
+    audience: {
+      '@type': 'PeopleAudience',
+      suggestedMinAge: Number(m[1]),
+      suggestedMaxAge: Number(m[2]),
+    },
+  };
+}
+
 const SITE_URL = 'https://griotmoon.com';
 const FLAG_TO_LANG: Record<string, string> = { '🇺🇸': 'en', '🇪🇸': 'es', '🇫🇷': 'fr' };
 
@@ -62,6 +76,9 @@ export default function BookDetail() {
       ...(book.subtitle ? { alternativeHeadline: book.subtitle } : {}),
       ...(book.amazonUrl ? { sameAs: book.amazonUrl.split('?')[0] } : {}),
       abstract: book.description,
+      // The reading age as structured data, so age-led searches ("books for
+      // 5 year olds") can match it. Derived from ageRange, e.g. '3-8'.
+      ...ageAudience(book.ageRange),
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug, language, ogImage]);
@@ -87,7 +104,7 @@ export default function BookDetail() {
       {/* The subtitle stays on the page but out of the title tag: with it, 26 of 33
           titles ran past 60 characters. The description is the derived meta value,
           never the full blurb — see src/lib/seoText.ts. */}
-      <Seo title={book.title} description={book.metaDescription} path={`/books/${book.id}`} image={ogImage} />
+      <Seo title={book.metaTitle} description={book.metaDescription} path={`/books/${book.id}`} image={ogImage} />
       <JsonLd id="book" data={bookSchema} />
 
       <div className="max-w-4xl mx-auto">
