@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from '../components/LocalizedLink';
 import { CheckCircle2 } from 'lucide-react';
 import EmailSignup from '../components/EmailSignup';
 import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
 import { useActivities } from '../data/activities';
 import { isActivityCompleted, loadProgress, type Progress } from '../lib/progress';
+import { localizePath, useLanguage } from '../lib/language';
 import { matchesAgeFilter } from '../lib/ages';
 import { useTranslation } from '../lib/language';
 
@@ -59,11 +61,43 @@ const TRANSLATIONS = {
   },
 };
 
+const SITE_URL = 'https://griotmoon.com';
+
 export default function Activities() {
   const [progress, setProgress] = useState<Progress>(() => loadProgress());
   const [ageFilter, setAgeFilter] = useState('All');
   const t = useTranslation(TRANSLATIONS);
   const activities = useActivities();
+  const { language } = useLanguage();
+
+  // One ItemList for the whole hub, same shape as the catalog's on /books/.
+  // Each entry points at where that activity actually lives: the React page at
+  // /activities/<slug>/ or, for the 12 standalone games, the static HTML file.
+  const activitiesSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: t.heading,
+      numberOfItems: activities.length,
+      itemListElement: activities.map((a, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'LearningResource',
+          name: a.title,
+          description: a.desc,
+          url: a.game
+            ? `${SITE_URL}/games/${a.slug}.html`
+            : `${SITE_URL}${localizePath(`/activities/${a.slug}`, language)}/`,
+          learningResourceType: 'Activity',
+          typicalAgeRange: a.ages,
+          isAccessibleForFree: true,
+          inLanguage: language,
+        },
+      })),
+    }),
+    [activities, language, t.heading],
+  );
 
   const ageFilters = [
     { key: 'All', label: t.ageAll },
@@ -86,6 +120,7 @@ export default function Activities() {
   return (
     <main>
       <Seo title={t.seoTitle} description={t.seoDesc} path="/activities" />
+      <JsonLd id="activities-list" data={activitiesSchema} />
 
       <section className="bg-gradient-to-b from-green-50 to-white py-16 px-4">
         <div className="max-w-3xl mx-auto text-center">

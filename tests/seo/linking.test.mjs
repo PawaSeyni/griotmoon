@@ -75,6 +75,13 @@ test('structured data: every same-site URL in any JSON-LD block is a real preren
         const route = url.slice(SITE.length).split(/[?#]/)[0];
         if (/\.(pdf|jpe?g|png|webp|svg|ico|xml|json)$/i.test(route)) {
           if (!existsSync(path.join(DIST, route))) bad.push(`${p}: asset ${url} is not in dist/`);
+        } else if (route.endsWith('.html')) {
+          // The 12 standalone games are static files under public/games, not SPA
+          // snapshots, so they resolve to the file itself and never to
+          // <route>/index.html. They are real pages: the Activities hub links to
+          // them in HTML and its ItemList schema names them.
+          checked++;
+          if (!existsSync(path.join(DIST, route))) bad.push(`${p}: ${url} is not a file in dist/`);
         } else {
           checked++;
           if (!html.has(norm(route)) && !existsSync(fileFor(route))) bad.push(`${p}: ${url} is not a prerendered route`);
