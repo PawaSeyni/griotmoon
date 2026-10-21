@@ -7,9 +7,9 @@ import { useLanguage, useTranslation } from '../lib/language';
 import { track } from '../lib/analytics';
 
 const TRANSLATIONS = {
-  en: { featured: 'Featured', discoverMore: 'Discover More ✨', buy: '🛒 Buy', comingSoon: 'Coming soon', coverAlt: 'book cover' },
-  es: { featured: 'Destacado', discoverMore: 'Descubrir más ✨', buy: '🛒 Comprar', comingSoon: 'Próximamente', coverAlt: 'portada del libro' },
-  fr: { featured: 'En vedette', discoverMore: 'Découvrir plus ✨', buy: '🛒 Acheter', comingSoon: 'Bientôt disponible', coverAlt: 'couverture du livre' },
+  en: { freeActivity: 'Free activity', featured: 'Featured', discoverMore: 'Discover More ✨', buy: '🛒 Buy', comingSoon: 'Coming soon', coverAlt: 'book cover' },
+  es: { freeActivity: 'Actividad gratuita', featured: 'Destacado', discoverMore: 'Descubrir más ✨', buy: '🛒 Comprar', comingSoon: 'Próximamente', coverAlt: 'portada del libro' },
+  fr: { freeActivity: 'Activité gratuite', featured: 'En vedette', discoverMore: 'Découvrir plus ✨', buy: '🛒 Acheter', comingSoon: 'Bientôt disponible', coverAlt: 'couverture du livre' },
 };
 
 interface BookCardProps {
@@ -49,11 +49,18 @@ export default function BookCard({ book, priority = false, placement }: BookCard
         {/* The Featured pill lives in the meta row, not over the artwork: the
             redesigned covers carry display-size titles across the top, and an
             overlay in the top-right corner sat on the title letters. */}
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex flex-wrap items-center gap-2 mb-2">
           <span className="text-xs bg-purple-100 text-purple-700 font-medium px-2 py-0.5 rounded-full">
             {book.ageRange.replace('-', '–')}
           </span>
           <span className="text-sm">{book.languages.join('')}</span>
+          {/* Every book is backed by the free activity library at /activities,
+              which is catalog-wide rather than per-title. The pill is a label,
+              not a link: the card already has its own destination, and the book
+              page carries the "Try free activities" CTA. */}
+          <span className="text-xs bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full">
+            {t.freeActivity}
+          </span>
           {book.featured && (
             <span className="ml-auto bg-gradient-to-r from-yellow-400 to-orange-400 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow flex items-center gap-1">
               <span className="text-sm leading-none">⭐</span>
