@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import EmailSignup from '../components/EmailSignup';
 import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
 import ReadAloudButton from '../components/ReadAloudButton';
 import { localizePath, useLanguage, useTranslation } from '../lib/language';
 import { amazonDp } from '../lib/amazon';
@@ -829,6 +830,8 @@ export function ArticleBilingualReading({ t }: { t: Article6T }) {
   return <ArticleSimple id="bilingual-reading" t={t} />;
 }
 
+const SITE_URL = 'https://griotmoon.com';
+
 export default function Resources() {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>('all');
   const [search, setSearch] = useState('');
@@ -850,6 +853,33 @@ export default function Resources() {
     slug: RESOURCE_SLUGS[i],
   }));
 
+  // The hub lists the same six articles that have their own pages (and their
+  // own Article schema there); this ItemList is what ties them together as a
+  // collection. Built from `merged`, not `filtered`, so the search box and the
+  // category tabs never change what a crawler sees.
+  const resourcesSchema = useMemo(
+    () => ({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: t.seoTitle,
+      numberOfItems: merged.length,
+      itemListElement: merged.map((r, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Article',
+          headline: r.title,
+          description: r.desc,
+          url: `${SITE_URL}${localizePath(`/resources/${r.slug}`, language)}/`,
+          author: { '@type': 'Person', name: 'Pawa Seyni' },
+          inLanguage: language,
+          isAccessibleForFree: true,
+        },
+      })),
+    }),
+    [merged, language, t.seoTitle],
+  );
+
   const filtered = merged.filter(r => {
     const matchesCat = activeCategory === 'all' || r.categoryKey === activeCategory;
     const q = search.toLowerCase();
@@ -861,6 +891,7 @@ export default function Resources() {
   return (
     <main>
       <Seo title={t.seoTitle} description={t.seoDesc} path="/resources" />
+      <JsonLd id="resources-list" data={resourcesSchema} />
 
       <section className="bg-gradient-to-b from-blue-50 to-white py-14 px-4">
         <div className="max-w-3xl mx-auto text-center">

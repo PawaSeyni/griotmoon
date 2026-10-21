@@ -4,11 +4,14 @@ import { Link } from '../components/LocalizedLink';
 import ActivityStatusButton from '../components/ActivityStatusButton';
 import EmailSignup from '../components/EmailSignup';
 import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
 import { useActivity } from '../data/activities';
-import { useTranslation } from '../lib/language';
+import { useLanguage, useTranslation } from '../lib/language';
 
 const TRANSLATIONS = {
   en: {
+    crumbHome: 'Home',
+    crumbActivities: 'Activities',
     back: '← Back to Activities',
     seoSuffix: 'Free interactive activity for ages',
     storyDiceTitle: 'Free Online Story Dice Generator for Kids',
@@ -17,6 +20,8 @@ const TRANSLATIONS = {
     storyDiceIntro: 'Roll six story dice to create a character, setting, goal, problem, solution, and surprise twist. Use the result as a creative writing prompt, tell the story aloud, or roll again for a completely new adventure.',
   },
   es: {
+    crumbHome: 'Inicio',
+    crumbActivities: 'Actividades',
     back: '← Volver a actividades',
     seoSuffix: 'Actividad interactiva gratuita para edades',
     storyDiceTitle: 'Generador gratuito de dados de historias para niños',
@@ -25,6 +30,8 @@ const TRANSLATIONS = {
     storyDiceIntro: 'Lanza seis dados narrativos para crear un personaje, escenario, objetivo, problema, solución y giro sorpresa. Usa el resultado como idea para escribir, contar una historia en voz alta o vuelve a lanzar.',
   },
   fr: {
+    crumbHome: 'Accueil',
+    crumbActivities: 'Activités',
     back: '← Retour aux activités',
     seoSuffix: 'Activité interactive gratuite pour les',
     storyDiceTitle: 'Générateur gratuit de dés à histoire pour enfants',
@@ -38,16 +45,53 @@ interface DemoPageProps {
   children: ReactNode;
 }
 
+const SITE = 'https://griotmoon.com';
+
 export default function DemoPage({ children }: DemoPageProps) {
   const { pathname } = useLocation();
   // pathname like "/activities/story-builder"
   const slug = pathname.split('/').filter(Boolean).pop() ?? '';
   const activity = useActivity(slug);
+  const { language } = useLanguage();
   const t = useTranslation(TRANSLATIONS);
   const isStoryDice = slug === 'story-builder';
 
+  // Every activity page is a free, interactive learning resource, which is what
+  // LearningResource says and what these pages are actually found for ("free
+  // online story dice generator"). isAccessibleForFree is the claim that makes
+  // the "Free activity" promise machine-readable, and it is true: no signup,
+  // no paywall. Breadcrumbs mirror the ones the resource articles already ship.
+  const prefix = language === 'en' ? '' : `/${language}`;
+  const canonical = `${SITE}${prefix}/activities/${slug}/`;
+  const schema = activity && {
+    '@context': 'https://schema.org',
+    '@type': 'LearningResource',
+    name: isStoryDice ? t.storyDiceHeading : activity.title,
+    description: isStoryDice ? t.storyDiceDesc : activity.desc,
+    url: canonical,
+    learningResourceType: 'Activity',
+    educationalUse: 'Interactive activity',
+    typicalAgeRange: activity.ages,
+    isAccessibleForFree: true,
+    inLanguage: language,
+    isFamilyFriendly: true,
+    author: { '@type': 'Person', name: 'Pawa Seyni' },
+    provider: { '@type': 'Organization', name: 'Griot Moon', url: SITE },
+  };
+  const breadcrumbSchema = activity && {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: t.crumbHome, item: `${SITE}${prefix}/` },
+      { '@type': 'ListItem', position: 2, name: t.crumbActivities, item: `${SITE}${prefix}/activities/` },
+      { '@type': 'ListItem', position: 3, name: activity.title, item: canonical },
+    ],
+  };
+
   return (
     <main className="py-8 px-4">
+      {schema && <JsonLd id="activity" data={schema} />}
+      {breadcrumbSchema && <JsonLd id="activity-breadcrumbs" data={breadcrumbSchema} />}
       {activity && (
         <Seo
           title={isStoryDice ? t.storyDiceTitle : activity.title}
