@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from '../components/LocalizedLink';
 import ActivityStatusButton from '../components/ActivityStatusButton';
+import EmailSignup from '../components/EmailSignup';
 import Seo from '../components/Seo';
 import { useActivity } from '../data/activities';
 import { useTranslation } from '../lib/language';
@@ -74,6 +75,12 @@ export default function DemoPage({ children }: DemoPageProps) {
         )}
         {children}
       </div>
+
+      {/* The activities hub has a signup but the activity pages themselves did
+          not, so the visitor who actually played something had nowhere to
+          subscribe. 'activity' is its own placement (the hub keeps
+          'activities') so the two can be told apart in the funnel. */}
+      <EmailSignup placement="activity" />
     </main>
   );
 }
