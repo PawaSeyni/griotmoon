@@ -1,0 +1,94 @@
+# Production deploy watchdog.
+#
+# Netlify deploys this site from a push to main through its GitHub App. On
+# 2026-10-21 that push event produced no build at all: the PR preview built
+# normally, the site's build settings were untouched (stop_builds false,
+# repo_branch main), and GitHub showed zero Netlify statuses on the merge
+# commit, so the live site quietly served the previous commit for two hours
+# until the build was triggered by hand. The shared Netlify team has a second
+# way to fail the same silent way: when its credits run out, production deploys
+# are SKIPPED and the last good deploy stays published.
+#
+# Both failures look identical from the outside: a green merge and a stale site.
+# So this job treats "production is serving this commit" as the thing to prove,
+# not "a build was requested":
+#
+#   1. wait for /version.json to report the merged SHA;
+#   2. if it does not, fire the Netlify build hook once;
+#   3. wait again, then fail red if production still is not on this commit.
+#
+# When the webhook works (the normal case) step 1 passes in a few minutes and
+# nothing else runs. The hook is a fallback, not the usual path, so a single
+# merge never builds twice.
+name: Deploy watch
+
+on:
+  push:
+    branches: [main]
+  # Re-runnable by hand: the SHA then comes from the checked-out ref.
+  workflow_dispatch: {}
+
+# Never let two merges race each other's deploys. Do NOT cancel in progress: a
+# superseded run still has to prove ITS commit reached production, and
+# cancelling would leave a silent no-deploy undetected.
+concurrency:
+  group: deploy-watch
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      # scripts/verify-deploy.mjs uses only Node built-ins, so no npm ci here:
+      # this job must stay fast and must not depend on the dependency tree of
+      # the commit it is checking.
+      - name: Wait for the Netlify deploy triggered by this push
+        id: first
+        run: |
+          for i in $(seq 1 24); do   # 24 x 20s = 8 minutes
+            if npm run --silent verify:deploy -- "$GITHUB_SHA" >/dev/null 2>&1; then
+              echo "live=true" >> "$GITHUB_OUTPUT"; echo "Production is on $GITHUB_SHA after $((i * 20))s."; exit 0
+            fi
+            sleep 20
+          done
+          echo "live=false" >> "$GITHUB_OUTPUT"
+          echo "::warning::No production deploy for $GITHUB_SHA after 8 minutes. Firing the Netlify build hook."
+
+      - name: Fire the Netlify build hook
+        if: steps.first.outputs.live == 'false'
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::error::NETLIFY_BUILD_HOOK_URL is not set, so the deploy cannot be recovered automatically."
+            echo "Create a build hook for main in Netlify and store it as that repository secret."
+            exit 1
+          fi
+          # Netlify answers 200 with the queued build's id.
+          curl -fsS -X POST -d '{}' "$HOOK" && echo "Build hook accepted."
+
+      - name: Wait for the recovered deploy
+        if: steps.first.outputs.live == 'false'
+        run: |
+          for i in $(seq 1 45); do   # 45 x 20s = 15 minutes
+            if npm run --silent verify:deploy -- "$GITHUB_SHA" >/dev/null 2>&1; then
+              echo "Production is on $GITHUB_SHA after the build hook."; exit 0
+            fi
+            sleep 20
+          done
+          echo "::error::Build hook fired but production never reached $GITHUB_SHA."
+
+      # Always end on the real assertion, with its output visible: this is the
+      # same command to run by hand (npm run verify:deploy) and it checks the
+      # context and branch too, so a preview URL cannot read as a pass.
+      - name: Verify production is serving this commit
+        run: npm run verify:deploy -- "$GITHUB_SHA"

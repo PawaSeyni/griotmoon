@@ -108,7 +108,7 @@ git push -u origin <branch-name>
 
 | Frequency | Task |
 |---|---|
-| Push-driven | Watch deploy status. Builds auto-trigger on every push to `main`. Typical build ~12 s. |
+| Push-driven | Nothing to watch by hand. The **Deploy watch** workflow proves production is serving the merged commit and fires a Netlify build hook if it is not (see Troubleshooting). To check by hand: `npm run verify:deploy`. |
 | Weekly | Check **Forms** tab for new contact submissions. (Email notifications already fire, but keep an eye out for spam.) |
 | Monthly | Glance at **Analytics → Bandwidth** to make sure free-tier limits aren't approaching |
 | Per major change | Watch the Lighthouse plugin report in the deploy summary |
@@ -118,10 +118,27 @@ git push -u origin <branch-name>
 | Symptom | First check | Then check |
 |---|---|---|
 | **Build failed** | Deploy log in dashboard | TypeScript errors? Push a fix. |
-| **Site shows old version** | Hard reload (`Cmd+Shift+R`); deploy "Published" status | Cloudflare DNS cache; wait up to TTL (3600s) |
+| **Site shows old version** | `npm run verify:deploy` (compares local HEAD against what production reports) | If it says production is on an older commit, the deploy never happened: see **Merged but never deployed** below. |
+| **Merged but never deployed** | The **Deploy watch** run for that commit in Actions | It waits 8 min, fires the build hook, waits 15 more, then fails red. If the hook step says the secret is missing, re-create a build hook for `main` in Netlify (**Project configuration → Build & deploy → Build hooks**) and store it as the repo secret `NETLIFY_BUILD_HOOK_URL`. To deploy right now: `netlify api createSiteBuild --data '{"site_id":"<site id>"}'`. |
 | **Form submissions not arriving** | Forms tab — are submissions showing? | If yes → notification rule. If no → form-name match between Contact.tsx and index.html |
 | **HTTPS broken** | Domain settings → SSL/TLS status | Re-trigger "Verify DNS configuration" — Let's Encrypt should auto-retry |
 | **Custom domain not resolving** | DNS resolution via `dns.google/resolve?name=griotmoon.com&type=A` (must return `75.2.60.5`) | IONOS DNS settings (see section 3) |
+
+### Why the watchdog exists
+
+Twice now production has gone stale behind a green merge, and both times the
+site looked fine while serving old content:
+
+- **2026-10-21** a push to `main` produced no Netlify build at all. The PR
+  preview built normally, the site's build settings were untouched
+  (`stop_builds` false, `repo_branch` main, `allowed_branches` [main]), and the
+  merge commit carried zero Netlify statuses on GitHub, so nothing anywhere
+  went red. Netlify's GitHub App simply never acted on that push event.
+- The shared Netlify team fails the same way when its build credits run out:
+  deploys are **skipped**, and the previous deploy stays published.
+
+Neither shows up in CI, because CI checks the commit, not the site. The
+watchdog checks the site.
 
 ### Smoke tests
 
