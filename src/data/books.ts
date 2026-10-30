@@ -792,7 +792,7 @@ export const books: Book[] = [
     id: 'the-chiefs-green-rule',
     coverImage: theChiefsGreenRule,
     ageRange: '3-9',
-    amazonUrl: dp('B0FB4B7235'),
+    amazonUrl: dp('1069462861'),
     title: { en: "The Chief's Green Rule", es: "The Chief's Green Rule", fr: "The Chief's Green Rule" },
     subtitle: {
       en: 'Five Seeds for One',
@@ -854,12 +854,12 @@ export const books: Book[] = [
     id: 'the-chiefs-3-gifts',
     coverImage: theChiefs3Gifts,
     ageRange: '3-6',
-    amazonUrl: dp('1996972928'),
-    title: { en: "The Chief's 3 Gifts", es: "The Chief's 3 Gifts", fr: "The Chief's 3 Gifts" },
+    amazonUrl: dp('1069462853'),
+    title: { en: "The Chief's Three Gifts", es: "The Chief's Three Gifts", fr: "The Chief's Three Gifts" },
     subtitle: {
-      en: 'A Wise Way of Teaching Leadership',
-      es: 'Una manera sabia de enseñar liderazgo',
-      fr: "Une sage façon d'enseigner le leadership",
+      en: 'A Story About Wisdom, Strength, and Gentle Leadership',
+      es: 'Una historia sobre la sabiduría, la fuerza y el liderazgo amable',
+      fr: "Une histoire de sagesse, de force et de leadership bienveillant",
     },
     description: {
       en: 'What do a stone, a piece of charcoal, and a feather reveal about leadership? When young Mael becomes the village advisor, he receives three mysterious gifts from the chief, each holding wisdom passed through generations: be strong as stone, warm as charcoal, and gentle as a feather.',
@@ -867,8 +867,8 @@ export const books: Book[] = [
       fr: "Que révèlent une pierre, un morceau de charbon et une plume sur le leadership ? Quand le jeune Mael devient conseiller du village, il reçoit du chef trois cadeaux mystérieux, chacun portant une sagesse transmise de génération en génération : sois fort comme la pierre, chaleureux comme le charbon et doux comme la plume.",
     },
     seoTitle: {
-      es: "The Chief's 3 Gifts: cuento africano",
-      fr: "The Chief's 3 Gifts : conte africain",
+      es: "The Chief's Three Gifts: cuento africano",
+      fr: "The Chief's Three Gifts : conte africain",
     },
     seoDescription: {
       en: "An African tale about leadership and values for ages 3–6. A stone, a piece of charcoal and a feather: three gifts that teach young Mael to lead.",
