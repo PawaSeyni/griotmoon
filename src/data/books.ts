@@ -256,7 +256,7 @@ export const books: Book[] = [
   {
     id: 'the-yam-and-the-egg',
     coverImage: theYamAndTheEgg,
-    ageRange: '4-6',
+    ageRange: '4-9',
     amazonUrl: dp('1069462802'),
     title: { en: 'The Yam and the Egg', es: 'The Yam and the Egg', fr: 'The Yam and the Egg' },
     subtitle: {
@@ -274,9 +274,9 @@ export const books: Book[] = [
       fr: "The Yam and the Egg : conte africain",
     },
     seoDescription: {
-      en: "A Wolof wisdom tale for ages 4–6. Why do a yam and an egg cook in the same pot? Yama's grandmother answers with a saying that takes all day to understand.",
-      es: "Un cuento wolof de sabiduría, de 4 a 6 años. ¿Por qué se cuecen juntos un ñame y un huevo? La abuela de Yama responde con un dicho que cuesta entender.",
-      fr: "Un conte de sagesse wolof, de 4 à 6 ans. Pourquoi une igname et un œuf cuisent-ils ensemble ? La grand-mère de Yama répond par un proverbe qui prend la journée.",
+      en: "A Wolof wisdom tale for ages 4–9. Why do a yam and an egg cook in the same pot? Yama's grandmother answers with a saying that takes all day to understand.",
+      es: "Un cuento wolof de sabiduría, de 4 a 9 años. ¿Por qué se cuecen juntos un ñame y un huevo? La abuela de Yama responde con un dicho que cuesta entender.",
+      fr: "Un conte de sagesse wolof, de 4 à 9 ans. Pourquoi une igname et un œuf cuisent-ils ensemble ? La grand-mère de Yama répond par un proverbe qui prend la journée.",
     },
     theme: {
       en: 'Elder wisdom and tradition',
@@ -442,7 +442,7 @@ export const books: Book[] = [
   {
     id: 'kweku-and-the-wise-forest',
     coverImage: kwekuAndTheWiseForest,
-    ageRange: '7-10',
+    ageRange: '7-8',
     amazonUrl: dp('1996972316'),
     title: { en: 'Kweku and the Wise Forest', es: 'Kweku and the Wise Forest', fr: 'Kweku and the Wise Forest' },
     subtitle: {
@@ -460,9 +460,9 @@ export const books: Book[] = [
       fr: "Kweku and the Wise Forest : conte africain",
     },
     seoDescription: {
-      en: "A West African tale about listening to elders for ages 7–10. To prove he isn't too small, Kweku enters the forest on the night his grandfather forbade.",
-      es: "Un cuento de África Occidental sobre escuchar a los mayores, de 7 a 10 años. Para demostrar que no es pequeño, Kweku entra al bosque la noche prohibida.",
-      fr: "Un conte ouest-africain sur l'écoute des anciens, de 7 à 10 ans. Pour prouver qu'il n'est pas trop petit, Kweku entre dans la forêt la nuit interdite.",
+      en: "A West African tale about listening to elders for ages 7–8. To prove he isn't too small, Kweku enters the forest on the night his grandfather forbade.",
+      es: "Un cuento de África Occidental sobre escuchar a los mayores, de 7 a 8 años. Para demostrar que no es pequeño, Kweku entra al bosque la noche prohibida.",
+      fr: "Un conte ouest-africain sur l'écoute des anciens, de 7 à 8 ans. Pour prouver qu'il n'est pas trop petit, Kweku entre dans la forêt la nuit interdite.",
     },
     theme: {
       en: 'Listening to elders and resilience',
@@ -759,7 +759,7 @@ export const books: Book[] = [
   {
     id: 'the-brothers-and-the-wise-land',
     coverImage: theBrothersAndTheWiseLand,
-    ageRange: '6-10',
+    ageRange: '6-8',
     amazonUrl: dp('1996972499'),
     title: { en: 'The Brothers and the Wise Land', es: 'The Brothers and the Wise Land', fr: 'The Brothers and the Wise Land' },
     subtitle: {
@@ -777,9 +777,9 @@ export const books: Book[] = [
       fr: "The Brothers and the Wise Land : conte africain",
     },
     seoDescription: {
-      en: "A Ghanaian story about traditional knowledge for ages 6–10. One brother trusts his farming books, the other trusts the soil. The land teaches both.",
-      es: "Una historia de Ghana sobre el saber tradicional, de 6 a 10 años. Un hermano confía en sus libros de cultivo, el otro en la tierra. Ambos aprenden.",
-      fr: "Une histoire du Ghana sur les savoirs traditionnels, de 6 à 10 ans. Un frère se fie à ses livres, l'autre à la terre. Le sol leur apprend à tous deux.",
+      en: "A Ghanaian story about traditional knowledge for ages 6–8. One brother trusts his farming books, the other trusts the soil. The land teaches both.",
+      es: "Una historia de Ghana sobre el saber tradicional, de 6 a 8 años. Un hermano confía en sus libros de cultivo, el otro en la tierra. Ambos aprenden.",
+      fr: "Une histoire du Ghana sur les savoirs traditionnels, de 6 à 8 ans. Un frère se fie à ses livres, l'autre à la terre. Le sol leur apprend à tous deux.",
     },
     theme: {
       en: 'Traditional knowledge and cooperation',
@@ -791,7 +791,7 @@ export const books: Book[] = [
   {
     id: 'the-chiefs-green-rule',
     coverImage: theChiefsGreenRule,
-    ageRange: '3-9',
+    ageRange: '3-8',
     amazonUrl: dp('B0FB4B7235'),
     title: { en: "The Chief's Green Rule", es: "The Chief's Green Rule", fr: "The Chief's Green Rule" },
     subtitle: {
@@ -809,9 +809,9 @@ export const books: Book[] = [
       fr: "The Chief's Green Rule : conte africain",
     },
     seoDescription: {
-      en: "An Ethiopian picture book about caring for the land for ages 3–9. Chief Mael's rule: for every tree we take, we plant five new ones.",
-      es: "Un libro ilustrado etíope sobre el cuidado de la tierra, de 3 a 9 años. La regla del jefe Mael: por cada árbol que cortamos, plantamos cinco.",
-      fr: "Un album éthiopien sur le soin de la terre, de 3 à 9 ans. La règle du chef Mael : pour chaque arbre coupé, on en plante cinq.",
+      en: "An Ethiopian picture book about caring for the land for ages 3–8. Chief Mael's rule: for every tree we take, we plant five new ones.",
+      es: "Un libro ilustrado etíope sobre el cuidado de la tierra, de 3 a 8 años. La regla del jefe Mael: por cada árbol que cortamos, plantamos cinco.",
+      fr: "Un album éthiopien sur le soin de la terre, de 3 à 8 ans. La règle du chef Mael : pour chaque arbre coupé, on en plante cinq.",
     },
     theme: {
       en: 'Caring for the land',
