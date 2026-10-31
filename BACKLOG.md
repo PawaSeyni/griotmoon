@@ -97,11 +97,14 @@ Check items off as they land; each item says who can do it
 
 ## P4 — Marketing & ecosystem (when ready)
 
-- [ ] **Social accounts** (You) — create Griot Moon profiles (Instagram, Pinterest, Facebook,
-  TikTok, YouTube, Threads), then re-add: Footer icon row, Links-page rows, and Home
-  JSON-LD `sameAs` (the removed markup is in git history, commit `11f039b`).
-- [ ] **Pinterest domain verification** — Eva's tag was removed from `index.html`; add Griot
-  Moon's own when the Pinterest account exists.
+- [ ] **Social accounts** (You) — handle `griotmoonbooks` on every platform (decided
+  2026-10-31). Pinterest DONE 2026-10-31 (PR #64: footer icon, Links row, Home `sameAs`).
+  Still to create: Instagram business account + Griot Moon Facebook Page, YouTube brand
+  channel. Each gets a one-line follow-up in Footer, Links and Home `sameAs` once it loads
+  publicly (the comments in those files mark the spot). TikTok and Threads are out of scope.
+- [x] **Pinterest domain verification** — DONE 2026-10-31: Griot Moon's own
+  `p:domain_verify` tag in `index.html` (PR #64), griotmoon.com claimed and verified in the
+  `griotmoonbooks` Pinterest account.
 - [ ] **Cross-link the sibling sites** (You decide) — add Griot Moon to storytimewitheva.com's
   Links page/footer and vice versa ("sister press" placement).
 - [ ] **Marketing assets** (Claude) — social announcement kit, Pinterest pins per book,
@@ -126,8 +129,9 @@ Check items off as they land; each item says who can do it
   and deploys automatically. Weekly release-watch Action validated with a manual dispatch.
 - [ ] **Review the Lighthouse report** — the `@netlify/plugin-lighthouse` audit runs on every
   deploy (see deploy summary in the Netlify dashboard); set score thresholds once baselined.
-- [ ] **Prune unused translation keys** — Links/Footer still carry unused social-CTA strings
-  (pinterestCta, tiktokCta, amazonAuthor, …). Harmless; clean up on the next content pass.
+- [ ] **Prune unused translation keys** — Links still carries unused social-CTA strings
+  (tiktokCta, amazonAuthor, …; pinterestCta is in use since PR #64, instagramCta is ready for
+  the Instagram row). Harmless; clean up on the next content pass.
 - [ ] **Optimize cover weight** — 30 covers ≈ 4.8 MB total (~165 KB each). Fine for now;
   consider WebP/AVIF via the build pipeline if the Books page LCP needs it.
 
