@@ -99,12 +99,16 @@ export default function Footer() {
           <div>
             <p className="text-white font-semibold mb-4">{t.connect}</p>
             <p className="text-sm text-gray-400 mb-4">{t.connectBlurb}</p>
-            {/* One icon per live Griot Moon account. Instagram and YouTube are added
-                as each one goes live (handle: griotmoonbooks on every platform). */}
+            {/* One icon per live Griot Moon account. Instagram is added when it
+                goes live (handle: griotmoonbooks on every platform). */}
             <div className="flex gap-3">
               <a href="https://www.pinterest.com/griotmoonbooks/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest @griotmoonbooks"
                 className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors text-lg">
                 📌
+              </a>
+              <a href="https://www.youtube.com/@griotmoonbooks" target="_blank" rel="noopener noreferrer" aria-label="YouTube @griotmoonbooks"
+                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors text-lg">
+                ▶️
               </a>
             </div>
             <div className="mt-4">

@@ -22,6 +22,8 @@ const TRANSLATIONS = {
     sectionFollow: 'Follow Along',
     pinterestCta: '📌 Pinterest @griotmoonbooks',
     pinterestSub: 'Book pins, free printables, and reading ideas',
+    youtubeCta: '▶️ YouTube @griotmoonbooks',
+    youtubeSub: 'Read-alouds and story clips in English, Spanish and French',
     instagramCta: '📷 Instagram @griotmoonbooks',
     threadsCta: '🧵 Threads @pawaseyni.books',
     tiktokCta: '🎵 TikTok @pawaseyni',
@@ -50,6 +52,8 @@ const TRANSLATIONS = {
     sectionFollow: 'Síguenos',
     pinterestCta: '📌 Pinterest @griotmoonbooks',
     pinterestSub: 'Pines de libros, imprimibles gratis e ideas de lectura',
+    youtubeCta: '▶️ YouTube @griotmoonbooks',
+    youtubeSub: 'Lecturas en voz alta y clips de cuentos en inglés, español y francés',
     instagramCta: '📷 Instagram @griotmoonbooks',
     threadsCta: '🧵 Threads @pawaseyni.books',
     tiktokCta: '🎵 TikTok @pawaseyni',
@@ -78,6 +82,8 @@ const TRANSLATIONS = {
     sectionFollow: 'Suivez-nous',
     pinterestCta: '📌 Pinterest @griotmoonbooks',
     pinterestSub: 'Épingles de livres, imprimables gratuits et idées de lecture',
+    youtubeCta: '▶️ YouTube @griotmoonbooks',
+    youtubeSub: 'Lectures à voix haute et extraits d’histoires en anglais, espagnol et français',
     instagramCta: '📷 Instagram @griotmoonbooks',
     threadsCta: '🧵 Threads @pawaseyni.books',
     tiktokCta: '🎵 TikTok @pawaseyni',
@@ -125,9 +131,10 @@ export default function Links() {
     {
       heading: t.sectionFollow,
       rows: [
-        // One row per live Griot Moon account; Instagram and YouTube are added as
-        // each one goes live (handle: griotmoonbooks on every platform).
+        // One row per live Griot Moon account; Instagram is added when it goes
+        // live (handle: griotmoonbooks on every platform).
         { href: 'https://www.pinterest.com/griotmoonbooks/', external: true, title: t.pinterestCta, subtitle: t.pinterestSub, variant: 'secondary' },
+        { href: 'https://www.youtube.com/@griotmoonbooks', external: true, title: t.youtubeCta, subtitle: t.youtubeSub, variant: 'secondary' },
         { href: '/', external: false, title: t.homepageCta, variant: 'tertiary' },
       ],
     },
