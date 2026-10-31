@@ -36,7 +36,8 @@ const ORG_SCHEMA = [
     description:
       'The Pawa Seyni Collection: African heritage picture books for children ages 3–9, with free activities in English, Spanish, and French.',
     founder: { '@type': 'Person', name: 'Pawa Seyni' },
-    // sameAs: add the Griot Moon social profiles here as each account goes live.
+    // One entry per live Griot Moon account (handle: griotmoonbooks on every platform).
+    sameAs: ['https://www.pinterest.com/griotmoonbooks/'],
   },
   {
     '@context': 'https://schema.org',

@@ -20,8 +20,9 @@ const TRANSLATIONS = {
     guideCta: '📖 Parent\'s Guide to Bilingual Reading',
     guideSub: 'Free PDF · available in EN · ES · FR',
     sectionFollow: 'Follow Along',
-    pinterestCta: '📌 Pinterest: daily reading inspiration',
-    instagramCta: '📷 Instagram @pawaseyni.books',
+    pinterestCta: '📌 Pinterest @griotmoonbooks',
+    pinterestSub: 'Book pins, free printables, and reading ideas',
+    instagramCta: '📷 Instagram @griotmoonbooks',
     threadsCta: '🧵 Threads @pawaseyni.books',
     tiktokCta: '🎵 TikTok @pawaseyni',
     homepageCta: '🏠 Explore griotmoon.com',
@@ -47,8 +48,9 @@ const TRANSLATIONS = {
     guideCta: '📖 Guía para padres, lectura bilingüe',
     guideSub: 'PDF gratis · EN · ES · FR',
     sectionFollow: 'Síguenos',
-    pinterestCta: '📌 Pinterest, inspiración de lectura diaria',
-    instagramCta: '📷 Instagram @pawaseyni.books',
+    pinterestCta: '📌 Pinterest @griotmoonbooks',
+    pinterestSub: 'Pines de libros, imprimibles gratis e ideas de lectura',
+    instagramCta: '📷 Instagram @griotmoonbooks',
     threadsCta: '🧵 Threads @pawaseyni.books',
     tiktokCta: '🎵 TikTok @pawaseyni',
     homepageCta: '🏠 Explora griotmoon.com',
@@ -74,8 +76,9 @@ const TRANSLATIONS = {
     guideCta: '📖 Guide parental, lecture bilingue',
     guideSub: 'PDF gratuit · EN · ES · FR',
     sectionFollow: 'Suivez-nous',
-    pinterestCta: '📌 Pinterest, inspiration lecture quotidienne',
-    instagramCta: '📷 Instagram @pawaseyni.books',
+    pinterestCta: '📌 Pinterest @griotmoonbooks',
+    pinterestSub: 'Épingles de livres, imprimables gratuits et idées de lecture',
+    instagramCta: '📷 Instagram @griotmoonbooks',
     threadsCta: '🧵 Threads @pawaseyni.books',
     tiktokCta: '🎵 TikTok @pawaseyni',
     homepageCta: '🏠 Découvrez griotmoon.com',
@@ -122,8 +125,9 @@ export default function Links() {
     {
       heading: t.sectionFollow,
       rows: [
-        // Social rows removed until the Griot Moon accounts exist, re-add each
-        // as it goes live (see git history for the row shape).
+        // One row per live Griot Moon account; Instagram and YouTube are added as
+        // each one goes live (handle: griotmoonbooks on every platform).
+        { href: 'https://www.pinterest.com/griotmoonbooks/', external: true, title: t.pinterestCta, subtitle: t.pinterestSub, variant: 'secondary' },
         { href: '/', external: false, title: t.homepageCta, variant: 'tertiary' },
       ],
     },
