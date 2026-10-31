@@ -105,6 +105,10 @@ export default function Footer() {
                 className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors text-lg">
                 📷
               </a>
+              <a href="https://www.tiktok.com/@griotmoonbooks" target="_blank" rel="noopener noreferrer" aria-label="TikTok @griotmoonbooks"
+                className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors text-lg">
+                🎵
+              </a>
               <a href="https://www.pinterest.com/griotmoonbooks/" target="_blank" rel="noopener noreferrer" aria-label="Pinterest @griotmoonbooks"
                 className="w-9 h-9 bg-gray-800 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors text-lg">
                 📌
