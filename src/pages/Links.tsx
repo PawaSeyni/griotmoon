@@ -20,6 +20,7 @@ const TRANSLATIONS = {
     guideCta: '📖 Parent\'s Guide to Bilingual Reading',
     guideSub: 'Free PDF · available in EN · ES · FR',
     sectionFollow: 'Follow Along',
+    instagramSub: 'Book reels, printables, and new releases',
     pinterestCta: '📌 Pinterest @griotmoonbooks',
     pinterestSub: 'Book pins, free printables, and reading ideas',
     youtubeCta: '▶️ YouTube @griotmoonbooks',
@@ -50,6 +51,7 @@ const TRANSLATIONS = {
     guideCta: '📖 Guía para padres, lectura bilingüe',
     guideSub: 'PDF gratis · EN · ES · FR',
     sectionFollow: 'Síguenos',
+    instagramSub: 'Reels de libros, imprimibles y novedades',
     pinterestCta: '📌 Pinterest @griotmoonbooks',
     pinterestSub: 'Pines de libros, imprimibles gratis e ideas de lectura',
     youtubeCta: '▶️ YouTube @griotmoonbooks',
@@ -80,6 +82,7 @@ const TRANSLATIONS = {
     guideCta: '📖 Guide parental, lecture bilingue',
     guideSub: 'PDF gratuit · EN · ES · FR',
     sectionFollow: 'Suivez-nous',
+    instagramSub: 'Reels de livres, imprimables et nouveautés',
     pinterestCta: '📌 Pinterest @griotmoonbooks',
     pinterestSub: 'Épingles de livres, imprimables gratuits et idées de lecture',
     youtubeCta: '▶️ YouTube @griotmoonbooks',
@@ -131,8 +134,8 @@ export default function Links() {
     {
       heading: t.sectionFollow,
       rows: [
-        // One row per live Griot Moon account; Instagram is added when it goes
-        // live (handle: griotmoonbooks on every platform).
+        // One row per live Griot Moon account (handle: griotmoonbooks on every platform).
+        { href: 'https://www.instagram.com/griotmoonbooks/', external: true, title: t.instagramCta, subtitle: t.instagramSub, variant: 'secondary' },
         { href: 'https://www.pinterest.com/griotmoonbooks/', external: true, title: t.pinterestCta, subtitle: t.pinterestSub, variant: 'secondary' },
         { href: 'https://www.youtube.com/@griotmoonbooks', external: true, title: t.youtubeCta, subtitle: t.youtubeSub, variant: 'secondary' },
         { href: '/', external: false, title: t.homepageCta, variant: 'tertiary' },
