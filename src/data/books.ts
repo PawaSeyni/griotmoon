@@ -820,6 +820,7 @@ export const books: Book[] = [
     coverImage: theChiefsGreenRule,
     ageRange: '3-9',
     amazonUrl: dp('B0FB4B7235'),
+    ebookUrl: 'https://payhip.com/b/l19xY',
     title: { en: "The Chief's Green Rule", es: "The Chief's Green Rule", fr: "The Chief's Green Rule" },
     subtitle: {
       en: 'Five Seeds for One',
@@ -883,6 +884,7 @@ export const books: Book[] = [
     coverImage: theChiefs3Gifts,
     ageRange: '3-6',
     amazonUrl: dp('1996972928'),
+    ebookUrl: 'https://payhip.com/b/cMvoH',
     title: { en: "The Chief's 3 Gifts", es: "The Chief's 3 Gifts", fr: "The Chief's 3 Gifts" },
     subtitle: {
       en: 'A Wise Way of Teaching Leadership',
@@ -1138,6 +1140,7 @@ export const books: Book[] = [
     coverImage: aTaleOfHopeAndHumor,
     ageRange: '3-8',
     amazonUrl: dp('1069628867'),
+    ebookUrl: 'https://payhip.com/b/ZXkqI',
     title: { en: 'A Tale of Hope and Humor', es: 'A Tale of Hope and Humor', fr: 'A Tale of Hope and Humor' },
     subtitle: {
       en: 'A West African Tale of Resilience and Joy',
