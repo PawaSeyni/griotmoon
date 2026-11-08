@@ -73,6 +73,12 @@ export interface Book {
    */
   ebookUrl?: string;
   /**
+   * Languages included in the Payhip eBook product, when not all three (added 2026-11-08).
+   * Unset = English, French and Spanish. The Chief's Green Rule ships EN + ES only while its
+   * French Kindle edition is enrolled in KDP Select (Amazon-exclusive; auto-renews 2027-01-17).
+   */
+  ebookLanguages?: Array<'en' | 'fr' | 'es'>;
+  /**
    * ASINs of the non-English editions that are LIVE on Amazon — nothing else.
    *
    * The flags a book page shows, and the `inLanguage` it puts in its structured data,
@@ -132,6 +138,8 @@ export interface LocalizedBook {
   amazonUrl: string;
   /** Direct eBook (Payhip) product page, when the title has one. Same URL in every language. */
   ebookUrl?: string;
+  /** Languages in the Payhip eBook product; unset = all three. */
+  ebookLanguages?: Array<'en' | 'fr' | 'es'>;
   /** Which language edition `amazonUrl` points at. When it differs from the page's
    *  language the page must say so, or it promises a book in a language it won't ship. */
   editionLanguage: Language;
@@ -821,6 +829,7 @@ export const books: Book[] = [
     ageRange: '3-9',
     amazonUrl: dp('B0FB4B7235'),
     ebookUrl: 'https://payhip.com/b/l19xY',
+    ebookLanguages: ['en', 'es'],
     title: { en: "The Chief's Green Rule", es: "The Chief's Green Rule", fr: "The Chief's Green Rule" },
     subtitle: {
       en: 'Five Seeds for One',
@@ -1243,6 +1252,7 @@ function localize(book: Book, lang: Language): LocalizedBook {
     languages: EDITION_ORDER.filter(l => l === 'en' || book.editions?.[l]).map(l => EDITION_FLAG[l]),
     amazonUrl: editionAsin ? dp(editionAsin) : book.amazonUrl,
     ebookUrl: book.ebookUrl,
+    ebookLanguages: book.ebookLanguages,
     editionLanguage: editionAsin ? lang : 'en',
     featured: book.featured,
     status: book.status,
