@@ -67,6 +67,12 @@ export interface Book {
   /** The ENGLISH edition's product link. Every book has one. */
   amazonUrl: string;
   /**
+   * Payhip product page for the direct eBook (added 2026-11-07). One product per title,
+   * priced US$2.99, holding the English, French and Spanish fixed-layout EPUBs together.
+   * Set only once the Payhip product exists and has its three files; unset = no eBook CTA.
+   */
+  ebookUrl?: string;
+  /**
    * ASINs of the non-English editions that are LIVE on Amazon — nothing else.
    *
    * The flags a book page shows, and the `inLanguage` it puts in its structured data,
@@ -124,6 +130,8 @@ export interface LocalizedBook {
   /** Link to the edition this page should sell: the reader's language where that
    *  edition exists, English otherwise. */
   amazonUrl: string;
+  /** Direct eBook (Payhip) product page, when the title has one. Same URL in every language. */
+  ebookUrl?: string;
   /** Which language edition `amazonUrl` points at. When it differs from the page's
    *  language the page must say so, or it promises a book in a language it won't ship. */
   editionLanguage: Language;
@@ -157,6 +165,7 @@ export const books: Book[] = [
     coverImage: ubuntuWeAreTogether,
     ageRange: '3-8',
     amazonUrl: dp('1069462837'),
+    ebookUrl: 'https://payhip.com/b/1Xtdv',
     featured: true,
     title: { en: 'Ubuntu We Are Together', es: 'Ubuntu We Are Together', fr: 'Ubuntu We Are Together' },
     subtitle: {
@@ -194,6 +203,7 @@ export const books: Book[] = [
     coverImage: theMightyFist,
     ageRange: '4-8',
     amazonUrl: dp('1069628816'),
+    ebookUrl: 'https://payhip.com/b/ghDeJ',
     featured: true,
     title: { en: 'The Mighty Fist', es: 'The Mighty Fist', fr: 'The Mighty Fist' },
     subtitle: {
@@ -226,6 +236,7 @@ export const books: Book[] = [
     coverImage: theWhistlingSecret,
     ageRange: '3-8',
     amazonUrl: dp('1069462845'),
+    ebookUrl: 'https://payhip.com/b/dLJRv',
     featured: true,
     title: { en: 'The Whistling Secret', es: 'The Whistling Secret', fr: 'The Whistling Secret' },
     subtitle: {
@@ -289,6 +300,7 @@ export const books: Book[] = [
     coverImage: theTalkingTree,
     ageRange: '3-8',
     amazonUrl: dp('1069462810'),
+    ebookUrl: 'https://payhip.com/b/50nJv',
     title: { en: 'The Talking Tree', es: 'The Talking Tree', fr: 'The Talking Tree' },
     subtitle: {
       en: 'A West African Tale of Peace and Listening',
@@ -320,6 +332,7 @@ export const books: Book[] = [
     coverImage: theLaughingVillage,
     ageRange: '4-8',
     amazonUrl: dp('1069628859'),
+    ebookUrl: 'https://payhip.com/b/7cuXG',
     title: { en: 'The Laughing Village', es: 'The Laughing Village', fr: 'The Laughing Village' },
     subtitle: {
       en: 'A Yama Story of Joy and Resilience',
@@ -351,6 +364,7 @@ export const books: Book[] = [
     coverImage: ourChild,
     ageRange: '3-6',
     amazonUrl: dp('1996972014'),
+    ebookUrl: 'https://payhip.com/b/1mEbr',
     title: { en: 'Our Child', es: 'Our Child', fr: 'Our Child' },
     subtitle: {
       en: 'A Fulani Tale of Community and Belonging',
@@ -382,6 +396,7 @@ export const books: Book[] = [
     coverImage: theCleverPots,
     ageRange: '4-7',
     amazonUrl: dp('1996972073'),
+    ebookUrl: 'https://payhip.com/b/NpxBt',
     title: { en: 'The Clever Pots', es: 'The Clever Pots', fr: 'The Clever Pots' },
     subtitle: {
       en: 'A Haalpulaar Story',
@@ -413,6 +428,7 @@ export const books: Book[] = [
     coverImage: theHuntWithTwoPaths,
     ageRange: '4-8',
     amazonUrl: dp('1996972138'),
+    ebookUrl: 'https://payhip.com/b/X4OSo',
     title: { en: 'The Hunt with Two Paths', es: 'The Hunt with Two Paths', fr: 'The Hunt with Two Paths' },
     subtitle: {
       en: 'A Story About Seeing Many Truths',
@@ -637,6 +653,7 @@ export const books: Book[] = [
     coverImage: theKindnessGarden,
     ageRange: '3-6',
     amazonUrl: dp('1069628840'),
+    ebookUrl: 'https://payhip.com/b/S1J5t',
     title: { en: 'The Kindness Garden', es: 'The Kindness Garden', fr: 'The Kindness Garden' },
     subtitle: {
       en: 'A Yama Story About Kindness That Grows',
@@ -668,6 +685,7 @@ export const books: Book[] = [
     coverImage: theServantKing,
     ageRange: '5-9',
     amazonUrl: dp('1996972200'),
+    ebookUrl: 'https://payhip.com/b/0SGWY',
     title: { en: 'The Servant King', es: 'The Servant King', fr: 'The Servant King' },
     subtitle: {
       en: 'The Kabir Edition',
@@ -824,6 +842,7 @@ export const books: Book[] = [
     coverImage: chiefMaelsFinalGift,
     ageRange: '3-9',
     amazonUrl: dp('106946287X'),
+    ebookUrl: 'https://payhip.com/b/orAfi',
     title: { en: "Chief Mael's Final Gift", es: "Chief Mael's Final Gift", fr: "Chief Mael's Final Gift" },
     subtitle: {
       en: 'A Storytime with Pawa Tale',
@@ -886,6 +905,7 @@ export const books: Book[] = [
     coverImage: theBrokenToy,
     ageRange: '3-8',
     amazonUrl: dp('1069628891'),
+    ebookUrl: 'https://payhip.com/b/ezDfA',
     title: { en: 'The Broken Toy', es: 'The Broken Toy', fr: 'The Broken Toy' },
     subtitle: {
       en: 'A Yama Story About Friendship, Forgiveness, and Ubuntu',
@@ -1202,6 +1222,7 @@ function localize(book: Book, lang: Language): LocalizedBook {
     ageRange: book.ageRange,
     languages: EDITION_ORDER.filter(l => l === 'en' || book.editions?.[l]).map(l => EDITION_FLAG[l]),
     amazonUrl: editionAsin ? dp(editionAsin) : book.amazonUrl,
+    ebookUrl: book.ebookUrl,
     editionLanguage: editionAsin ? lang : 'en',
     featured: book.featured,
     status: book.status,
