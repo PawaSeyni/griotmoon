@@ -460,6 +460,7 @@ export const books: Book[] = [
     coverImage: kwekuAndTheWiseForest,
     ageRange: '7-10',
     amazonUrl: dp('1996972316'),
+    ebookUrl: 'https://payhip.com/b/vxaAn',
     title: { en: 'Kweku and the Wise Forest', es: 'Kweku and the Wise Forest', fr: 'Kweku and the Wise Forest' },
     subtitle: {
       en: 'A Tale of Listening and Learning',
@@ -491,6 +492,7 @@ export const books: Book[] = [
     coverImage: theSpiritThatShares,
     ageRange: '3-8',
     amazonUrl: dp('1069628832'),
+    ebookUrl: 'https://payhip.com/b/Qv5ug',
     title: { en: 'The Spirit That Shares', es: 'The Spirit That Shares', fr: 'The Spirit That Shares' },
     subtitle: {
       en: 'A Tale of Generosity and Abundance',
@@ -523,6 +525,7 @@ export const books: Book[] = [
     coverImage: yamaAndLuna,
     ageRange: '3-6',
     amazonUrl: dp('1996972006'),
+    ebookUrl: 'https://payhip.com/b/ofGWZ',
     title: { en: 'Yama and Luna', es: 'Yama and Luna', fr: 'Yama and Luna' },
     subtitle: {
       en: 'A Starlight Safari',
@@ -554,6 +557,7 @@ export const books: Book[] = [
     coverImage: yamasBraveChoice,
     ageRange: '5-9',
     amazonUrl: dp('1996972235'),
+    ebookUrl: 'https://payhip.com/b/t9QfV',
     title: { en: "Yama's Brave Choice", es: "Yama's Brave Choice", fr: "Yama's Brave Choice" },
     subtitle: {
       en: 'A Yama Story About Honesty',
@@ -588,6 +592,7 @@ export const books: Book[] = [
     coverImage: aLittleLightForTheDark,
     ageRange: '3-8',
     amazonUrl: dp('1996972286'),
+    ebookUrl: 'https://payhip.com/b/pXh8M',
     // The only Pawa Seyni title with live non-English editions, verified on
     // amazon.com 2026-10-11 (FR and ES submitted 2026-10-05).
     editions: { fr: 'B0HM2CPCGH', es: 'B0HM2FTSFQ' },
@@ -622,6 +627,7 @@ export const books: Book[] = [
     coverImage: findingMyQuiet,
     ageRange: '3-8',
     amazonUrl: dp('1996972294'),
+    ebookUrl: 'https://payhip.com/b/t7Z5C',
     title: { en: 'Finding My Quiet', es: 'Finding My Quiet', fr: 'Finding My Quiet' },
     subtitle: {
       en: 'A Story About Stillness in a Big, Busy World',
@@ -717,6 +723,7 @@ export const books: Book[] = [
     coverImage: theFullPotAndTheEmptyPot,
     ageRange: '5-9',
     amazonUrl: dp('1996972553'),
+    ebookUrl: 'https://payhip.com/b/BT2iZ',
     title: { en: 'The Full Pot and the Empty Pot', es: 'The Full Pot and the Empty Pot', fr: 'The Full Pot and the Empty Pot' },
     subtitle: {
       en: 'A Tale of Wisdom and Quiet Strength',
@@ -748,6 +755,7 @@ export const books: Book[] = [
     coverImage: theGrandmothersTrees,
     ageRange: '4-8',
     amazonUrl: dp('1996972618'),
+    ebookUrl: 'https://payhip.com/b/3HmYR',
     title: { en: "The Grandmother's Trees", es: "The Grandmother's Trees", fr: "The Grandmother's Trees" },
     subtitle: {
       en: 'A Story About Planting for People You Will Never Meet',
@@ -779,6 +787,7 @@ export const books: Book[] = [
     coverImage: theBrothersAndTheWiseLand,
     ageRange: '6-10',
     amazonUrl: dp('1996972499'),
+    ebookUrl: 'https://payhip.com/b/VeaPz',
     title: { en: 'The Brothers and the Wise Land', es: 'The Brothers and the Wise Land', fr: 'The Brothers and the Wise Land' },
     subtitle: {
       en: 'A Tale of Books, Soil, and the Wisdom Between Them',
@@ -937,6 +946,7 @@ export const books: Book[] = [
     coverImage: theHandThatGives,
     ageRange: '3-8',
     amazonUrl: dp('1069628875'),
+    ebookUrl: 'https://payhip.com/b/U4cDo',
     title: { en: 'The Hand That Gives', es: 'The Hand That Gives', fr: 'The Hand That Gives' },
     subtitle: {
       en: 'A Tale of Generosity and the Circle of Giving',
@@ -968,6 +978,7 @@ export const books: Book[] = [
     coverImage: theThankfulFarmer,
     ageRange: '4-8',
     amazonUrl: dp('1069628824'),
+    ebookUrl: 'https://payhip.com/b/lI371',
     title: { en: 'The Thankful Farmer', es: 'The Thankful Farmer', fr: 'The Thankful Farmer' },
     subtitle: {
       en: 'A Tale of Gratitude and Opening Your Eyes to Blessings',
@@ -999,6 +1010,7 @@ export const books: Book[] = [
     coverImage: slowAndStrongWinsTheRace,
     ageRange: '6-10',
     amazonUrl: dp('1996972464'),
+    ebookUrl: 'https://payhip.com/b/azFG8',
     title: { en: 'Slow and Strong Wins the Race', es: 'Slow and Strong Wins the Race', fr: 'Slow and Strong Wins the Race' },
     subtitle: {
       en: 'A Story About the Power of the Steady Plan',
@@ -1030,6 +1042,7 @@ export const books: Book[] = [
     coverImage: theCleverScientist,
     ageRange: '5-8',
     amazonUrl: dp('1996972529'),
+    ebookUrl: 'https://payhip.com/b/M3Nue',
     title: { en: 'The Clever Scientist, Professor Hawel', es: 'The Clever Scientist, Professor Hawel', fr: 'The Clever Scientist, Professor Hawel' },
     subtitle: {
       en: 'Roots of Tomorrow: A Journey to the Past',
@@ -1061,6 +1074,7 @@ export const books: Book[] = [
     coverImage: theGardenOfSecondChances,
     ageRange: '5-9',
     amazonUrl: dp('1996972588'),
+    ebookUrl: 'https://payhip.com/b/Qv0Ch',
     title: { en: 'The Garden of Second Chances', es: 'The Garden of Second Chances', fr: 'The Garden of Second Chances' },
     subtitle: {
       en: 'A Story About Repair, Trust, and Growing Again',
@@ -1092,6 +1106,7 @@ export const books: Book[] = [
     coverImage: theTreesWePlantForTomorrow,
     ageRange: '3-8',
     amazonUrl: dp('1996972049'),
+    ebookUrl: 'https://payhip.com/b/MxN8H',
     title: { en: 'The Trees We Plant for Tomorrow', es: 'The Trees We Plant for Tomorrow', fr: 'The Trees We Plant for Tomorrow' },
     subtitle: {
       en: 'A Fulani Tale of Patience and Strength',
@@ -1154,6 +1169,7 @@ export const books: Book[] = [
     coverImage: grandmeresGardenUnderTheMoon,
     ageRange: '3-8',
     amazonUrl: dp('1996972308'),
+    ebookUrl: 'https://payhip.com/b/LjJeI',
     title: { en: "Grandmère's Garden Under the Moon", es: "Grandmère's Garden Under the Moon", fr: "Grandmère's Garden Under the Moon" },
     subtitle: {
       en: 'A Story of Patience, Magic, and What We Grow Together',
@@ -1188,6 +1204,7 @@ export const books: Book[] = [
     coverImage: theDayWeWokeUpAsDinosaurs,
     ageRange: '3-7',
     amazonUrl: dp('1996972103'),
+    ebookUrl: 'https://payhip.com/b/ShRD1',
     title: {
       en: 'The Day We Woke Up as Dinosaurs',
       es: 'El Día que nos Despertamos como Dinosaurios',
