@@ -148,6 +148,35 @@ const LEAD_MAGNETS: Record<string, Magnet> = {
     },
     pdf: { en: '/follow-up-activities.pdf', es: '/follow-up-activities-es.pdf', fr: '/follow-up-activities-fr.pdf' },
   },
+  'grandmere-thankful-jar': {
+    // Seasonal (Thanksgiving 2026): shown on the Grandmère's Garden page through Nov 30,
+    // see SEASONAL_OVERRIDES in src/lib/bookMagnet.ts. PDF is English only, two pages:
+    // the Moon Garden Thankful Jar and the Thankful Questions discussion card.
+    tag: 'grandmere-thankful-jar',
+    title: {
+      en: 'Get the Moon Garden Thankful Jar',
+      es: 'Descarga el frasco de gratitud del jardín de la luna',
+      fr: 'Téléchargez le bocal de gratitude du jardin de lune',
+    },
+    copy: {
+      en: {
+        blurb: 'Grow a little gratitude before Thanksgiving. Inspired by Grandmère’s Garden Under the Moon: one moonlit leaf a night for your child to fill with something they’re thankful for, plus three gentle questions to ask after the story.',
+        bullets: ['✓ Printable Thankful Jar with 14 leaves, one per night', '✓ Thankful Questions card for home or the classroom', '✓ Pairs with Grandmère’s Garden Under the Moon, ages 3 to 8'],
+        cta: 'Get My Free Thankful Jar 🌙',
+      },
+      es: {
+        blurb: 'Cultiva un poco de gratitud antes de Acción de Gracias. Inspirado en Grandmère’s Garden Under the Moon: una hoja a la luz de la luna cada noche para que tu hijo escriba algo por lo que está agradecido, y tres preguntas para después del cuento.',
+        bullets: ['✓ Frasco de gratitud imprimible con 14 hojas, una por noche', '✓ Tarjeta de preguntas para casa o el aula', '✓ PDF en inglés, ideal para leer en familia'],
+        cta: 'Quiero mi frasco gratis 🌙',
+      },
+      fr: {
+        blurb: 'Faites pousser un peu de gratitude avant Thanksgiving. Inspiré de Grandmère’s Garden Under the Moon : une feuille au clair de lune chaque soir, que votre enfant remplit avec ce qui le rend reconnaissant, et trois questions à poser après l’histoire.',
+        bullets: ['✓ Bocal de gratitude à imprimer, 14 feuilles, une par soir', '✓ Carte de questions pour la maison ou la classe', '✓ PDF en anglais, à partager en famille'],
+        cta: 'Recevoir mon bocal gratuit 🌙',
+      },
+    },
+    pdf: { en: '/grandmere-thankful-jar.pdf', es: '/grandmere-thankful-jar.pdf', fr: '/grandmere-thankful-jar.pdf' },
+  },
 };
 const DEFAULT_MAGNET = 'bilingual-starter-kit';
 
