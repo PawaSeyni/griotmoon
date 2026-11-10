@@ -14,7 +14,7 @@
  * Bedtime titles get the bedtime chart instead. Keep that list short and evidence-led:
  * add an id only when the book is genuinely read at bedtime, not merely set at night.
  */
-export type BookMagnet = 'follow-up-activities' | 'bedtime-routine';
+export type BookMagnet = 'follow-up-activities' | 'bedtime-routine' | 'grandmere-thankful-jar';
 
 const BEDTIME_BOOKS = new Set([
   'grandmeres-garden-under-the-moon', // listed on Amazon as a bedtime story
@@ -23,6 +23,16 @@ const BEDTIME_BOOKS = new Set([
   'finding-my-quiet',                 // mindfulness and self-regulation
 ]);
 
+/**
+ * Seasonal offers that replace a book's usual magnet for a holiday push. Hard-coded
+ * rather than date-checked so the prerendered HTML and the hydrated page always agree.
+ * REMOVE on 2026-12-01 (Thanksgiving push ends; BACKLOG.md has the reminder).
+ */
+const SEASONAL_OVERRIDES: Record<string, BookMagnet> = {
+  'grandmeres-garden-under-the-moon': 'grandmere-thankful-jar',
+};
+
 export function bookMagnet(bookId: string): BookMagnet {
+  if (SEASONAL_OVERRIDES[bookId]) return SEASONAL_OVERRIDES[bookId];
   return BEDTIME_BOOKS.has(bookId) ? 'bedtime-routine' : 'follow-up-activities';
 }

@@ -145,3 +145,5 @@ cowrie emblem + village-fire hero · repo scaffolded from storytimewitheva (tril
 with production covers and 20 live ASINs · real author bio (EN/ES/FR) · Netlify site + Forms ·
 IONOS DNS cutover (mail untouched) · HTTPS + canonical redirect · sitemap ·
 MailerLite `griotmoon-signups` group + form, endpoint verified.
+
+- [ ] 2026-12-01: remove the Thanksgiving seasonal magnet (SEASONAL_OVERRIDES in src/lib/bookMagnet.ts) so the Grandmère page goes back to the bedtime chart. Keep /free/grandmere-thankful-jar registered so old pins still work.

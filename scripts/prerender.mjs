@@ -94,7 +94,7 @@ const LANG_PREFIXES = ['', '/es', '/fr'];
 // and out of the sitemap, so they are listed here. The guard below fails the build if a
 // magnet registered in EmailSignup.tsx has no page here, which would otherwise ship as
 // a silent production 404 on every pin or ad that points at it.
-const LANDING_SLUGS = ['bedtime-routine', 'bilingual-starter-kit', 'bilingual-flashcards', 'parents-guide', 'follow-up-activities'];
+const LANDING_SLUGS = ['bedtime-routine', 'bilingual-starter-kit', 'bilingual-flashcards', 'parents-guide', 'follow-up-activities', 'grandmere-thankful-jar'];
 {
   const registry = await readFile(path.resolve(__dirname, '..', 'src/components/EmailSignup.tsx'), 'utf8');
   const block = registry.slice(registry.indexOf('const LEAD_MAGNETS'), registry.indexOf('const DEFAULT_MAGNET'));
