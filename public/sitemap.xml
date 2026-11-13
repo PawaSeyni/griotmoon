@@ -406,6 +406,33 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://griotmoon.com/ebooks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/ebooks/"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/es/ebooks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/ebooks/"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://griotmoon.com/fr/ebooks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://griotmoon.com/fr/ebooks/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://griotmoon.com/ebooks/"/>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://griotmoon.com/faq/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://griotmoon.com/faq/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://griotmoon.com/es/faq/"/>

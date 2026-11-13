@@ -36,7 +36,7 @@ const LANGUAGES = ['en', 'es', 'fr'] as const;
  *  'book' a single book's detail page (added 2026-10-11, concern L18). */
 const FORM_PLACEMENTS = ['home', 'books', 'about', 'activities', 'activity', 'resources', 'landing', 'book'] as const;
 /** Where a buy button sits: the book page, or a BookCard on one of these surfaces. */
-const PURCHASE_PLACEMENTS = ['detail', 'home', 'books', 'related', 'recommended', 'detail-ebook'] as const;
+const PURCHASE_PLACEMENTS = ['detail', 'home', 'books', 'related', 'recommended', 'detail-ebook', 'detail-set', 'ebooks-set', 'ebooks-library'] as const;
 
 export const EVENTS = [
   // ---- discovery and purchase ----
@@ -47,7 +47,7 @@ export const EVENTS = [
   { name: 'Purchase Click', kind: 'intent', required: ['book', 'placement', 'language'], optional: [],
     values: { placement: PURCHASE_PLACEMENTS, language: LANGUAGES },
     privacy: 'stable book id; no retailer purchase data exists',
-    notes: 'Outbound retailer click, the conversion proxy. Amazon for every placement except detail-ebook, the Payhip eBook button on the book page (added 2026-11-07). One listing per book, so language is the site language, not an edition.' },
+    notes: 'Outbound retailer click, the conversion proxy. Amazon for every placement except detail-ebook, the Payhip eBook button on the book page (added 2026-11-07), and the Payhip set and library buttons (added 2026-11-13: detail-set on the book page, ebooks-set and ebooks-library on /ebooks; there book is set:<key> or library). One listing per book, so language is the site language, not an edition.' },
   // ---- newsletter ----
   { name: 'Landing View', kind: 'exposure', required: ['language', 'lead_magnet', 'landing_page'], optional: [],
     values: { language: LANGUAGES }, privacy: 'magnet slug and route pattern only',

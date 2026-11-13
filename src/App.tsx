@@ -52,6 +52,7 @@ const NotFound            = lazy(() => import('./pages/NotFound'));
 const Links               = lazy(() => import('./pages/Links'));
 const DemoPage            = lazy(() => import('./pages/DemoPage'));
 const LandingPage         = lazy(() => import('./pages/LandingPage'));
+const Ebooks              = lazy(() => import('./pages/Ebooks'));
 
 // The 8 interactive demos are also code-split.
 // A Suspense boundary (below) renders a fallback while a demo chunk loads; the
@@ -74,6 +75,7 @@ const routeDefs = [
   { path: '/', element: <Home /> },
   { path: '/books', element: <Books /> },
   { path: '/books/:slug', element: <BookDetail /> },
+  { path: '/ebooks', element: <Ebooks /> },
   { path: '/activities', element: <Activities /> },
   { path: '/activities/story-builder', element: <DemoPage><StoryBuilderDemo /></DemoPage> },
   { path: '/activities/character-workshop', element: <DemoPage><CharacterWorkshopDemo /></DemoPage> },

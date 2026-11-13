@@ -4,6 +4,7 @@ import BookCard from '../components/BookCard';
 import BookRecommendations from '../components/BookRecommendations';
 import EmailSignup from '../components/EmailSignup';
 import Seo from '../components/Seo';
+import { Link } from '../components/LocalizedLink';
 import JsonLd from '../components/JsonLd';
 import { matchesAgeFilter } from '../lib/ages';
 import { AMAZON_AUTHOR_URL } from '../lib/amazon';
@@ -18,6 +19,7 @@ const TRANSLATIONS = {
     seoDesc: 'Browse all {n} African heritage tales in the Pawa Seyni Collection: picture books for children and families in the diaspora, rooted in the griot tradition, ages 3–9.',
     heading: 'African heritage tales for children and families in the diaspora.',
     subheading: 'Rooted in the griot tradition, these stories reconnect young readers with the wisdom, values, and community spirit passed down around the village fire for generations.',
+    ebooksBanner: '📚 New: 11 eBook sets of 3 for $6.99, or all 32 eBooks for $29.99 a year.', ebooksBannerCta: 'See the sets →',
     searchPlaceholder: 'Search books by title or theme...',
     ageAll: 'All',
     age3to5: '3-5 years',
@@ -58,6 +60,7 @@ const TRANSLATIONS = {
     seoDesc: 'Explora los {n} libros de la Colección Pawa Seyni, álbumes multiculturales para niños de 3 a 9 años sobre asombro tranquilo, bondad y curiosidad.',
     heading: 'Cuentos de herencia africana para niños y familias de la diáspora.',
     subheading: 'Enraizadas en la tradición del griot, estas historias reconectan a los pequeños lectores con la sabiduría, los valores y el espíritu comunitario transmitidos alrededor del fuego del pueblo durante generaciones.',
+    ebooksBanner: '📚 Nuevo: 11 paquetes de 3 eBooks por 6,99 US$, o los 32 eBooks por 29,99 US$ al año.', ebooksBannerCta: 'Ver los paquetes →',
     searchPlaceholder: 'Buscar libros por título o tema...',
     ageAll: 'Todos',
     age3to5: '3-5 años',
@@ -98,6 +101,7 @@ const TRANSLATIONS = {
     seoDesc: 'Parcourez les {n} livres de la Collection Pawa Seyni, albums multiculturels pour enfants de 3 à 9 ans sur l\'émerveillement tranquille, la bonté et la curiosité.',
     heading: 'Contes du patrimoine africain pour les enfants et les familles de la diaspora.',
     subheading: 'Enracinées dans la tradition du griot, ces histoires reconnectent les jeunes lecteurs à la sagesse, aux valeurs et à l\'esprit communautaire transmis autour du feu du village depuis des générations.',
+    ebooksBanner: '📚 Nouveau : 11 coffrets de 3 livres numériques pour 6,99 $ US, ou les 32 livres pour 29,99 $ US par an.', ebooksBannerCta: 'Voir les coffrets →',
     searchPlaceholder: 'Rechercher un livre par titre ou thème...',
     ageAll: 'Tous',
     age3to5: '3-5 ans',
@@ -196,6 +200,10 @@ export default function Books() {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">{t.heading}</h1>
           <p className="text-gray-500 text-lg">{t.subheading}</p>
+          <p className="mt-5 inline-block bg-indigo-50 text-indigo-900 text-sm rounded-full px-4 py-2" data-ebooks-banner>
+            {t.ebooksBanner}{' '}
+            <Link to="/ebooks" className="font-semibold underline hover:text-indigo-700">{t.ebooksBannerCta}</Link>
+          </p>
           <div className="w-20 h-1 bg-gradient-to-r from-orange-400 to-pink-400 mx-auto mt-6 mb-8 rounded-full" />
 
           <div className="relative max-w-md mx-auto mb-6">
