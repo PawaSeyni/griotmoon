@@ -35,6 +35,7 @@ const staticPages = [
   ['/resources', 'monthly', '0.6'],
   ['/about', 'monthly', '0.6'],
   ['/contact', 'monthly', '0.5'],
+  ['/ebooks', 'weekly', '0.8'],
   ['/faq', 'monthly', '0.6'],
   ['/privacy', 'yearly', '0.3'],
   ['/terms', 'yearly', '0.3'],
