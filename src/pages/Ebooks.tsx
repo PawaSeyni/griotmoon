@@ -38,6 +38,7 @@ const TRANSLATIONS = {
     enEsNote: '{title} comes in English and Spanish.',
     singleNote: 'Prefer just one story? Every book page sells its eBook on its own for $2.99.',
     browse: 'Browse all books →',
+    etsyNote: 'Also on Etsy:',
   },
   es: {
     seoTitle: 'Paquetes de eBooks y la Biblioteca Griot Moon',
@@ -61,6 +62,7 @@ const TRANSLATIONS = {
     enEsNote: '{title} viene en inglés y español.',
     singleNote: '¿Prefieres solo una historia? Cada página de libro vende su eBook por separado a 2,99 US$.',
     browse: 'Ver todos los libros →',
+    etsyNote: 'También en Etsy:',
   },
   fr: {
     seoTitle: 'Coffrets de livres numériques et Bibliothèque Griot Moon',
@@ -84,6 +86,7 @@ const TRANSLATIONS = {
     enEsNote: '{title} existe en anglais et en espagnol.',
     singleNote: 'Une seule histoire vous suffit ? Chaque page de livre vend son livre numérique seul à 2,99 $ US.',
     browse: 'Voir tous les livres →',
+    etsyNote: 'Aussi sur Etsy :',
   },
 };
 
@@ -207,6 +210,18 @@ export default function Ebooks() {
         <Link to="/books" className="text-indigo-700 font-semibold hover:underline">
           {t.browse}
         </Link>
+      </p>
+      <p className="text-center text-gray-600 mt-3">
+        {t.etsyNote}{' '}
+        <a
+          href="https://www.etsy.com/shop/GriotMoonBooks"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => track('Purchase Click', { book: 'etsy-shop', placement: 'ebooks-etsy', language })}
+          className="text-indigo-700 font-semibold hover:underline"
+        >
+          GriotMoonBooks
+        </a>
       </p>
     </div>
   );
