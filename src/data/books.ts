@@ -2,8 +2,10 @@
 //
 // Catalog built from the production archive (Desktop/Organized/17_Completed_
 // Books_Archive) and the live Amazon listings (verified 2026-07-04).
-// Titles keep their English name in every language (they're the brand on the
-// printed covers); subtitles, descriptions, and themes are localized.
+// Every book carries its own French and Spanish title, subtitle, description and
+// theme (the FR/ES edition's own, from the Pawa Seyni production folder, 2026-11-24),
+// and a per-language cover where the FR/ES front cover exists:
+// `src/assets/covers/<id>.<lang>.jpg`, falling back to the English cover.
 // 'coming-soon' books have finished covers but no live Amazon listing yet.
 // Add the ASIN via dp('...') and drop the flag as each goes live.
 
@@ -58,7 +60,14 @@ const COVER_SRCSET = import.meta.glob<string>('../assets/covers/*.jpg', {
   import: 'default',
   query: '?w=330;660;1000&format=webp&as=srcset',
 });
-const coverSrcSet = (id: string): string => COVER_SRCSET[`../assets/covers/${id}.jpg`] ?? '';
+const COVER_URL = import.meta.glob<string>('../assets/covers/*.jpg', { eager: true, import: 'default' });
+/** The cover for this language: `<id>.<lang>.jpg` when the translated front cover
+ *  exists (added 2026-11-24 for every FR/ES edition), else the English `<id>.jpg`. */
+const coverKey = (id: string, lang: Language): string =>
+  lang !== 'en' && COVER_URL[`../assets/covers/${id}.${lang}.jpg`] ? `${id}.${lang}` : id;
+const coverSrcSet = (id: string, lang: Language): string => COVER_SRCSET[`../assets/covers/${coverKey(id, lang)}.jpg`] ?? '';
+const coverUrl = (id: string, lang: Language, fallback: string): string =>
+  lang !== 'en' ? (COVER_URL[`../assets/covers/${coverKey(id, lang)}.jpg`] ?? fallback) : fallback;
 
 export interface Book {
   id: string;
@@ -94,20 +103,15 @@ export interface Book {
    * 2026-11-23: 14 FR/ES editions live across 10 titles.
    */
   editions?: Partial<Record<Exclude<Language, 'en'>, string>>;
-  /**
-   * The translated title each French / Spanish edition carries (added 2026-11-23).
-   * Every title is being published in all three languages; this names the edition
-   * whether or not it is live yet, so the book page can list it. An edition with a
-   * title here but no ASIN in `editions` shows as "not on Amazon yet", never as a
-   * buyable edition, and it stays out of the structured data.
-   */
-  editionTitles?: Partial<Record<Exclude<Language, 'en'>, string>>;
   featured?: boolean;
   /** Publication state. Absent/'published' = live with a Buy CTA; 'coming-soon' shows a placeholder. */
   status?: 'published' | 'coming-soon';
   /** ISBN-10 the paperback will have once printed. Not used by the UI; read by
    *  scripts/check-amazon-releases.mjs to auto-publish when the listing goes live. */
   expectedAsin?: string;
+  /** The edition's own title per language (FR/ES from the production folder, 2026-11-24).
+   *  A FR/ES title that still equals the English one means that edition's title is not
+   *  final; the book page then lists it without a translated name. */
   title: LocalizedString;
   subtitle?: LocalizedString;
   description: LocalizedString;
@@ -122,11 +126,9 @@ export interface Book {
    */
   seoDescription?: LocalizedString;
   /**
-   * Optional `<title>` override, per language. Titles stay English on every
-   * page (they are the brand on the printed covers), so the ES/FR pages add a
-   * short descriptor in the reader's language ("The Mighty Fist: cuento
-   * africano"); EN sets one only where the bare title gives a search engine too
-   * little to go on ("Ubuntu" alone pulls Linux results). A language left unset
+   * Optional `<title>` override, per language. Set one only where the bare title
+   * gives a search engine too little to go on ("Ubuntu" alone pulls Linux
+   * results). A language left unset
    * uses the title. Seo appends " | Griot Moon", so keep every value at 47
    * characters or fewer: the whole tag must stay within TITLE_MAX (60).
    */
@@ -188,13 +190,12 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069462837'),
     ebookUrl: 'https://payhip.com/b/1Xtdv',
-    editionTitles: { es: 'Ubuntu: Estamos juntos' },
     featured: true,
-    title: { en: 'Ubuntu We Are Together', es: 'Ubuntu We Are Together', fr: 'Ubuntu We Are Together' },
+    title: { en: 'Ubuntu We Are Together', es: 'Ubuntu: Estamos juntos', fr: 'Ubuntu : Nous sommes ensemble' },
     subtitle: {
       en: 'A Story of Ubuntu',
-      es: 'Una historia de Ubuntu',
-      fr: 'Une histoire d’Ubuntu',
+      es: 'Una historia de solidaridad',
+      fr: 'Une histoire de solidarité',
     },
     description: {
       en: 'When a researcher offers a basket of fruit as a prize for a race, the children surprise everyone, they hold hands and walk to the finish line together. "How can I be happy if my friends are sad?" one child asks. Through their choice, a village elder shares the meaning of Ubuntu: "I am, because we are."',
@@ -207,8 +208,6 @@ export const books: Book[] = [
     // printed on the cover.
     seoTitle: {
       en: 'Ubuntu We Are Together: African Kindness Story',
-      es: 'Ubuntu We Are Together: cuento africano',
-      fr: 'Ubuntu We Are Together : conte africain',
     },
     seoDescription: {
       en: 'An African picture book about kindness for ages 3–8. The children choose to finish the race together, and an elder shares Ubuntu: I am, because we are.',
@@ -227,9 +226,8 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1069628816'),
     ebookUrl: 'https://payhip.com/b/ghDeJ',
-    editionTitles: { fr: 'Le Poing puissant', es: 'El puño poderoso' },
     featured: true,
-    title: { en: 'The Mighty Fist', es: 'The Mighty Fist', fr: 'The Mighty Fist' },
+    title: { en: 'The Mighty Fist', es: 'El puño poderoso', fr: 'Le Poing puissant' },
     subtitle: {
       en: 'An African Tale of Community and Shared Strength',
       es: 'Un cuento africano de comunidad y fuerza compartida',
@@ -239,10 +237,6 @@ export const books: Book[] = [
       en: 'During a devastating drought, young Yama learns an ancient truth from her grandmother, Mama Sagar: "One finger is weak, but a fist is mighty." As the village faces crisis, Yama teaches her community that individual efforts are small, but when everyone pools resources and strength, they become unstoppable.',
       es: 'Durante una sequía devastadora, la pequeña Yama aprende de su abuela, Mama Sagar, una verdad antigua: «Un dedo es débil, pero un puño es poderoso». Cuando el pueblo enfrenta la crisis, Yama enseña a su comunidad que los esfuerzos individuales son pequeños, pero cuando todos unen recursos y fuerzas, se vuelven imparables.',
       fr: 'Pendant une sécheresse dévastatrice, la petite Yama apprend de sa grand-mère, Mama Sagar, une vérité ancienne : « Un doigt est faible, mais un poing est puissant. » Quand le village affronte la crise, Yama montre à sa communauté que les efforts individuels sont petits, mais quand chacun met en commun ressources et forces, ils deviennent inarrêtables.',
-    },
-    seoTitle: {
-      es: "The Mighty Fist: cuento africano",
-      fr: "The Mighty Fist : conte africain",
     },
     seoDescription: {
       en: "An African picture book about community for ages 4–8. In a drought, Yama learns from her grandmother: one finger is weak, but a fist is mighty.",
@@ -261,22 +255,17 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069462845'),
     ebookUrl: 'https://payhip.com/b/dLJRv',
-    editionTitles: { es: 'El secreto del silbido' },
     featured: true,
-    title: { en: 'The Whistling Secret', es: 'The Whistling Secret', fr: 'The Whistling Secret' },
+    title: { en: 'The Whistling Secret', es: 'El secreto del silbido', fr: 'Le Secret du siffleur' },
     subtitle: {
       en: 'A West African Tale About the Wisdom Inside Old Rules',
-      es: 'Un cuento de África Occidental sobre la sabiduría dentro de las viejas reglas',
-      fr: 'Un conte ouest-africain sur la sagesse cachée dans les vieilles règles',
+      es: 'Un cuento sobre la sabiduría de las viejas reglas',
+      fr: 'Un conte sur la sagesse des vieilles règles',
     },
     description: {
       en: "In Kofi's West African village, everyone knows the rule: no whistling after dark. Nobody questions it. But Kofi loves to whistle, he can whistle like a hornbill, whistle the market song, whistle his grandmother's lullaby back to her. And the night is full of music that pulls at his lips.",
       es: 'En el pueblo de Kofi, en África Occidental, todos conocen la regla: no se silba después del anochecer. Nadie la cuestiona. Pero a Kofi le encanta silbar, silba como un cálao, silba la canción del mercado, le devuelve silbando la nana a su abuela. Y la noche está llena de música que le tira de los labios.',
       fr: "Dans le village ouest-africain de Kofi, tout le monde connaît la règle : on ne siffle pas après la tombée de la nuit. Personne ne la questionne. Mais Kofi adore siffler, il siffle comme un calao, siffle la chanson du marché, siffle la berceuse de sa grand-mère. Et la nuit est pleine de musiques qui attirent ses lèvres.",
-    },
-    seoTitle: {
-      es: "The Whistling Secret: cuento africano",
-      fr: "The Whistling Secret : conte africain",
     },
     seoDescription: {
       en: "A West African folktale about curiosity and elder wisdom for ages 3–8. Kofi loves to whistle, but the village rule says: no whistling after dark.",
@@ -305,10 +294,6 @@ export const books: Book[] = [
       es: 'Cuando Yama pregunta por qué un ñame y un huevo se cocinan juntos en la misma olla, su abuela responde con un dicho wolof que a Yama le toma el resto del día entender. Un cuento de día de mercado sobre la sabiduría de los mayores y cómo la misma situación nos transforma a cada uno de manera diferente.',
       fr: "Quand Yama demande pourquoi une igname et un œuf cuisent ensemble dans la même marmite, sa grand-mère répond par un dicton wolof que Yama mettra le reste de la journée à comprendre. Un conte de jour de marché sur la sagesse des anciens et la façon dont une même épreuve nous transforme chacun différemment.",
     },
-    seoTitle: {
-      es: "The Yam and the Egg: cuento africano",
-      fr: "The Yam and the Egg : conte africain",
-    },
     seoDescription: {
       en: "A Wolof wisdom tale for ages 4–6. Why do a yam and an egg cook in the same pot? Yama's grandmother answers with a saying that takes all day to understand.",
       es: "Un cuento wolof de sabiduría, de 4 a 6 años. ¿Por qué se cuecen juntos un ñame y un huevo? La abuela de Yama responde con un dicho que cuesta entender.",
@@ -326,21 +311,16 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069462810'),
     ebookUrl: 'https://payhip.com/b/50nJv',
-    editionTitles: { fr: "L'Arbre qui parle", es: 'El árbol que habla' },
-    title: { en: 'The Talking Tree', es: 'The Talking Tree', fr: 'The Talking Tree' },
+    title: { en: 'The Talking Tree', es: 'El árbol que habla', fr: 'L’Arbre qui parle' },
     subtitle: {
       en: 'A West African Tale of Peace and Listening',
       es: 'Un cuento de África Occidental sobre la paz y la escucha',
-      fr: "Un conte ouest-africain de paix et d'écoute",
+      fr: 'Un conte ouest-africain de paix et d’écoute',
     },
     description: {
       en: 'Between two proud West African villages lies a shared meadow, and a growing dispute. The people of each village claim the meadow as their own, and the arguments grow louder every day. Fences go up. Friendships fade. The children can no longer play together. Then the old baobab offers another way.',
       es: 'Entre dos orgullosos pueblos de África Occidental hay una pradera compartida, y una disputa que crece. Cada pueblo reclama la pradera como suya, y las discusiones suben de tono cada día. Se levantan cercas. Las amistades se apagan. Los niños ya no pueden jugar juntos. Entonces el viejo baobab ofrece otro camino.',
       fr: "Entre deux fiers villages d'Afrique de l'Ouest s'étend une prairie partagée, et une dispute qui grandit. Chaque village revendique la prairie, et les querelles montent chaque jour. Des clôtures se dressent. Les amitiés s'éteignent. Les enfants ne peuvent plus jouer ensemble. Alors le vieux baobab propose un autre chemin.",
-    },
-    seoTitle: {
-      es: "The Talking Tree: cuento africano",
-      fr: "The Talking Tree : conte africain",
     },
     seoDescription: {
       en: "A West African folktale about peace and listening for ages 3–8. Two villages fight over a shared meadow, until the old baobab offers another way.",
@@ -359,21 +339,16 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1069628859'),
     ebookUrl: 'https://payhip.com/b/7cuXG',
-    editionTitles: { fr: 'Le Village qui rit', es: 'El pueblo que ríe' },
-    title: { en: 'The Laughing Village', es: 'The Laughing Village', fr: 'The Laughing Village' },
+    title: { en: 'The Laughing Village', es: 'El pueblo que ríe', fr: 'Le Village qui rit' },
     subtitle: {
       en: 'A Yama Story of Joy and Resilience',
-      es: 'Una historia de Yama sobre la alegría y la resiliencia',
-      fr: 'Une histoire de Yama sur la joie et la résilience',
+      es: 'La risa que salvó al pueblo',
+      fr: 'Le rire qui a sauvé le village',
     },
     description: {
       en: 'A village that has forgotten how to laugh, and a girl who refuses to let the silence win. A joyful Yama story about how laughter, shared at the right moment, in the right company, can knit a weary community back together.',
       es: 'Un pueblo que ha olvidado cómo reír, y una niña que se niega a dejar ganar al silencio. Una alegre historia de Yama sobre cómo la risa, compartida en el momento justo y en buena compañía, puede volver a unir a una comunidad cansada.',
       fr: "Un village qui a oublié comment rire, et une petite fille qui refuse de laisser gagner le silence. Une joyeuse histoire de Yama sur la façon dont le rire, partagé au bon moment, en bonne compagnie, peut retisser une communauté fatiguée.",
-    },
-    seoTitle: {
-      es: "The Laughing Village: cuento africano",
-      fr: "The Laughing Village : conte africain",
     },
     seoDescription: {
       en: "An African picture book about joy and resilience for ages 4–8. A village has forgotten how to laugh, and Yama refuses to let the silence win.",
@@ -392,21 +367,16 @@ export const books: Book[] = [
     ageRange: '3-6',
     amazonUrl: dp('1996972014'),
     ebookUrl: 'https://payhip.com/b/1mEbr',
-    editionTitles: { fr: 'Notre enfant', es: 'Nuestro hijo' },
-    title: { en: 'Our Child', es: 'Our Child', fr: 'Our Child' },
+    title: { en: 'Our Child', es: 'Nuestro hijo', fr: 'Notre enfant' },
     subtitle: {
       en: 'A Fulani Tale of Community and Belonging',
       es: 'Un cuento fulani de comunidad y pertenencia',
-      fr: 'Un conte peul de communauté et d’appartenance',
+      fr: 'Un conte peul d’amour et de communauté',
     },
     description: {
       en: 'On the banks of the Senegal River, a whole village helps raise one child, because in the Fulani way of pulaaku, every child belongs to everyone. A warm introduction to community, belonging, and the values that hold a people together.',
       es: 'A orillas del río Senegal, todo un pueblo ayuda a criar a un niño, porque en la tradición fulani del pulaaku, cada niño pertenece a todos. Una cálida introducción a la comunidad, la pertenencia y los valores que mantienen unido a un pueblo.',
       fr: "Sur les rives du fleuve Sénégal, tout un village aide à élever un enfant, car dans la tradition peule du pulaaku, chaque enfant appartient à tous. Une belle introduction à la communauté, à l'appartenance et aux valeurs qui unissent un peuple.",
-    },
-    seoTitle: {
-      es: "Our Child: cuento africano",
-      fr: "Our Child : conte africain",
     },
     seoDescription: {
       en: "A Fulani tale about community and belonging for ages 3–6. On the banks of the Senegal River, a whole village helps raise one child.",
@@ -425,21 +395,16 @@ export const books: Book[] = [
     ageRange: '4-7',
     amazonUrl: dp('1996972073'),
     ebookUrl: 'https://payhip.com/b/NpxBt',
-    editionTitles: { fr: 'Les Pots malins', es: 'Las ollas inteligentes' },
-    title: { en: 'The Clever Pots', es: 'The Clever Pots', fr: 'The Clever Pots' },
+    title: { en: 'The Clever Pots', es: 'Las ollas inteligentes', fr: 'Les Pots malins' },
     subtitle: {
       en: 'A Haalpulaar Story',
-      es: 'Una historia haalpulaar',
-      fr: 'Une histoire haalpulaar',
+      es: 'Una historia sobre el ingenio',
+      fr: 'Une histoire d’ingéniosité',
     },
     description: {
       en: 'When the village needs to keep its water cool and its grain dry, a young girl watches how nature solves its own problems, and shapes the answer from river clay. A Haalpulaar story about learning from nature and the quiet genius of everyday invention.',
       es: 'Cuando el pueblo necesita mantener fresca el agua y seco el grano, una niña observa cómo la naturaleza resuelve sus propios problemas, y moldea la respuesta con arcilla del río. Una historia haalpulaar sobre aprender de la naturaleza y el genio silencioso de la invención cotidiana.',
       fr: "Quand le village doit garder son eau fraîche et son grain au sec, une petite fille observe comment la nature résout ses propres problèmes, et façonne la réponse dans l'argile du fleuve. Une histoire haalpulaar sur l'art d'apprendre de la nature et le génie discret de l'invention quotidienne.",
-    },
-    seoTitle: {
-      es: "The Clever Pots: cuento africano",
-      fr: "The Clever Pots : conte africain",
     },
     seoDescription: {
       en: "An African picture book about learning from nature for ages 4–7. A young girl watches how nature solves problems, and shapes the answer from river clay.",
@@ -458,21 +423,16 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1996972138'),
     ebookUrl: 'https://payhip.com/b/X4OSo',
-    editionTitles: { fr: 'La Chasse aux deux chemins', es: 'La caza con dos caminos' },
-    title: { en: 'The Hunt with Two Paths', es: 'The Hunt with Two Paths', fr: 'The Hunt with Two Paths' },
+    title: { en: 'The Hunt with Two Paths', es: 'La caza con dos caminos', fr: 'La Chasse aux deux chemins' },
     subtitle: {
       en: 'A Story About Seeing Many Truths',
-      es: 'Una historia sobre ver muchas verdades',
-      fr: 'Une histoire sur les nombreuses vérités',
+      es: 'Un cuento sobre las muchas verdades',
+      fr: 'Une histoire sur les multiples vérités',
     },
     description: {
       en: 'Two hunters set out on the same hunt and come home with two different stories, and both are true. A wisdom tale about perspective: how the same day can look entirely different through different eyes, and why listening to both paths makes the village wiser.',
       es: 'Dos cazadores salen a la misma cacería y vuelven a casa con dos historias diferentes, y ambas son ciertas. Un cuento de sabiduría sobre la perspectiva: cómo el mismo día puede verse completamente distinto con otros ojos, y por qué escuchar ambos caminos hace más sabio al pueblo.',
       fr: "Deux chasseurs partent pour la même chasse et rentrent avec deux histoires différentes, et toutes deux sont vraies. Un conte de sagesse sur la perspective : comment la même journée peut sembler toute autre à travers d'autres yeux, et pourquoi écouter les deux chemins rend le village plus sage.",
-    },
-    seoTitle: {
-      es: "The Hunt with Two Paths: cuento africano",
-      fr: "The Hunt with Two Paths : conte africain",
     },
     seoDescription: {
       en: "An African wisdom tale about perspective for ages 4–8. Two hunters share one hunt and come home with two different stories, and both are true.",
@@ -492,21 +452,16 @@ export const books: Book[] = [
     amazonUrl: dp('1996972316'),
     ebookUrl: 'https://payhip.com/b/vxaAn',
     editions: { fr: '1996972324', es: '1996972332' },
-    editionTitles: { fr: 'Kweku et la forêt sage', es: 'Kweku y el bosque sabio' },
-    title: { en: 'Kweku and the Wise Forest', es: 'Kweku and the Wise Forest', fr: 'Kweku and the Wise Forest' },
+    title: { en: 'Kweku and the Wise Forest', es: 'Kweku y el bosque sabio', fr: 'Kweku et la forêt sage' },
     subtitle: {
       en: 'A Tale of Listening and Learning',
-      es: 'Un cuento sobre escuchar y aprender',
-      fr: "Un conte sur l'écoute et l'apprentissage",
+      es: 'Una historia sobre la sabiduría',
+      fr: 'Une histoire de sagesse',
     },
     description: {
       en: 'When the older boys laugh and call him too small, Kweku decides to prove them wrong by entering the western forest on the night of the new moon, the very night his grandfather warned him never to go. The forest swallows the last light, the familiar trees turn strange, and Kweku realizes he is lost.',
       es: 'Cuando los chicos mayores se ríen y lo llaman demasiado pequeño, Kweku decide demostrarles lo contrario entrando en el bosque del oeste la noche de luna nueva, la misma noche que su abuelo le advirtió que jamás fuera. El bosque se traga la última luz, los árboles conocidos se vuelven extraños, y Kweku descubre que está perdido.',
       fr: "Quand les grands se moquent de lui et le trouvent trop petit, Kweku décide de leur prouver le contraire en entrant dans la forêt de l'ouest la nuit de la nouvelle lune, la nuit même où son grand-père lui avait interdit d'y aller. La forêt avale la dernière lumière, les arbres familiers deviennent étranges, et Kweku comprend qu'il est perdu.",
-    },
-    seoTitle: {
-      es: "Kweku and the Wise Forest: cuento africano",
-      fr: "Kweku and the Wise Forest : conte africain",
     },
     seoDescription: {
       en: "A West African tale about listening to elders for ages 7–10. To prove he isn't too small, Kweku enters the forest on the night his grandfather forbade.",
@@ -525,21 +480,16 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069628832'),
     ebookUrl: 'https://payhip.com/b/Qv5ug',
-    editionTitles: { fr: "L'Esprit qui partage", es: 'El espíritu que comparte' },
-    title: { en: 'The Spirit That Shares', es: 'The Spirit That Shares', fr: 'The Spirit That Shares' },
+    title: { en: 'The Spirit That Shares', es: 'El espíritu que comparte', fr: 'L’Esprit qui partage' },
     subtitle: {
       en: 'A Tale of Generosity and Abundance',
       es: 'Un cuento de generosidad y abundancia',
-      fr: "Un conte de générosité et d'abondance",
+      fr: 'Un conte de générosité et d’abondance',
     },
     description: {
       en: "In a small African village, a kind widow with two children lives with little, sharing what little she has. When a weary traveler arrives at her door during a fierce storm, she welcomes him without hesitation, offering her small meal and warm fire. She doesn't know the mysterious visitor is a wise elder testing the hearts of the villagers.",
       es: 'En un pequeño pueblo africano, una viuda bondadosa con dos hijos vive con poco y comparte lo poco que tiene. Cuando un viajero agotado llega a su puerta en medio de una tormenta feroz, ella lo recibe sin dudar, ofreciéndole su pequeña cena y el calor de su fuego. No sabe que el misterioso visitante es un sabio anciano que pone a prueba los corazones del pueblo.',
       fr: "Dans un petit village africain, une veuve généreuse et ses deux enfants vivent de peu, et partagent ce peu. Quand un voyageur épuisé frappe à sa porte au cœur d'un violent orage, elle l'accueille sans hésiter, offrant son maigre repas et la chaleur de son feu. Elle ignore que le mystérieux visiteur est un sage venu éprouver le cœur des villageois.",
-    },
-    seoTitle: {
-      es: "The Spirit That Shares: cuento africano",
-      fr: "The Spirit That Shares : conte africain",
     },
     seoDescription: {
       en: "An African folktale about generosity for ages 3–8. A widow with little welcomes a stranger in a storm, not knowing he is a wise elder testing hearts.",
@@ -560,21 +510,16 @@ export const books: Book[] = [
     amazonUrl: dp('1996972006'),
     ebookUrl: 'https://payhip.com/b/ofGWZ',
     editions: { es: '1996972278' },
-    editionTitles: { fr: 'Yama et Luna', es: 'Yama y Luna' },
-    title: { en: 'Yama and Luna', es: 'Yama and Luna', fr: 'Yama and Luna' },
+    title: { en: 'Yama and Luna', es: 'Yama y Luna', fr: 'Yama et Luna' },
     subtitle: {
       en: 'A Starlight Safari',
-      es: 'Un safari a la luz de las estrellas',
+      es: 'Un safari estelar',
       fr: 'Un safari sous les étoiles',
     },
     description: {
       en: 'Yama loves the night sky, but from her bedroom window it feels impossibly far away. Then Luna arrives, a mysterious cat with a glowing star on her chest and a purr like a tiny thunderstorm. Together they leap into the velvet dark on a safari through the cosmos.',
       es: 'A Yama le encanta el cielo nocturno, pero desde la ventana de su cuarto se siente imposiblemente lejos. Entonces llega Luna, una gata misteriosa con una estrella brillante en el pecho y un ronroneo como una pequeña tormenta. Juntas saltan a la oscuridad de terciopelo en un safari por el cosmos.',
       fr: "Yama adore le ciel nocturne, mais depuis la fenêtre de sa chambre il semble impossiblement loin. Puis Luna arrive, une chatte mystérieuse avec une étoile lumineuse sur la poitrine et un ronronnement comme un petit orage. Ensemble, elles bondissent dans le noir de velours pour un safari à travers le cosmos.",
-    },
-    seoTitle: {
-      es: "Yama and Luna: cuento para dormir",
-      fr: "Yama and Luna : histoire du soir",
     },
     seoDescription: {
       en: "A bedtime picture book about the night sky for ages 3–6. Luna, a cat with a glowing star, takes Yama on a starlight safari through the cosmos.",
@@ -593,12 +538,11 @@ export const books: Book[] = [
     ageRange: '5-9',
     amazonUrl: dp('1996972235'),
     ebookUrl: 'https://payhip.com/b/t9QfV',
-    editionTitles: { fr: 'Le Choix courageux de Yama', es: 'La valiente elección de Yama' },
-    title: { en: "Yama's Brave Choice", es: "Yama's Brave Choice", fr: "Yama's Brave Choice" },
+    title: { en: "Yama's Brave Choice", es: 'La valiente elección de Yama', fr: 'Le Choix courageux de Yama' },
     subtitle: {
       en: 'A Yama Story About Honesty',
-      es: 'Una historia de Yama sobre la honestidad',
-      fr: "Une histoire de Yama sur l'honnêteté",
+      es: 'Una historia sobre la honestidad y el valor',
+      fr: 'Une histoire d’honnêteté et de courage',
     },
     description: {
       en: 'Telling the truth is easy when it costs nothing. But when Yama sees something unfair happen, and staying quiet would be so much simpler, she has to decide what kind of person she wants to be. A Yama story about honesty, integrity, and standing up for what is right.',
@@ -609,8 +553,6 @@ export const books: Book[] = [
     // no subtitle, so this page is where "picture book about honesty" can be said.
     seoTitle: {
       en: "Yama's Brave Choice: A Story About Honesty",
-      es: "Yama's Brave Choice: sobre la honestidad",
-      fr: "Yama's Brave Choice : histoire d'honnêteté",
     },
     seoDescription: {
       en: 'A picture book about honesty for ages 5–9. When staying quiet would be easier, Yama must decide what kind of person she wants to be.',
@@ -630,21 +572,16 @@ export const books: Book[] = [
     amazonUrl: dp('1996972286'),
     ebookUrl: 'https://payhip.com/b/pXh8M',
     editions: { fr: 'B0HM2CPCGH', es: 'B0HM2FTSFQ' },
-    editionTitles: { fr: 'Une petite lumière dans le noir', es: 'Una pequeña luz en la oscuridad' },
-    title: { en: 'A Little Light for the Dark', es: 'A Little Light for the Dark', fr: 'A Little Light for the Dark' },
+    title: { en: 'A Little Light for the Dark', es: 'Una pequeña luz en la oscuridad', fr: 'Une petite lumière dans le noir' },
     subtitle: {
       en: 'A Story About Courage, Curiosity, and the Night',
-      es: 'Una historia sobre la valentía, la curiosidad y la noche',
-      fr: 'Une histoire de courage, de curiosité et de nuit',
+      es: 'Una historia sobre el valor, la curiosidad y la noche',
+      fr: 'Une histoire sur le courage, la curiosité et la nuit',
     },
     description: {
       en: 'Yama is scared of the dark. The shadows on her wall look like strange and frightening shapes, and the nighttime feels too big and too quiet. Then a tiny golden firefly named Flicker taps at her window, and the night begins to change.',
       es: 'Yama le tiene miedo a la oscuridad. Las sombras de su pared parecen formas extrañas y aterradoras, y la noche se siente demasiado grande y demasiado silenciosa. Entonces una pequeña luciérnaga dorada llamada Flicker golpea su ventana, y la noche empieza a cambiar.',
       fr: "Yama a peur du noir. Les ombres sur son mur ressemblent à des formes étranges et effrayantes, et la nuit semble trop grande et trop silencieuse. Puis une minuscule luciole dorée nommée Flicker tapote à sa fenêtre, et la nuit commence à changer.",
-    },
-    seoTitle: {
-      es: "A Little Light for the Dark: cuento para dormir",
-      fr: "A Little Light for the Dark : histoire du soir",
     },
     seoDescription: {
       en: "A bedtime picture book about fear of the dark for ages 3–8. Yama is scared of the shadows, until a tiny firefly named Flicker taps at her window.",
@@ -664,21 +601,16 @@ export const books: Book[] = [
     amazonUrl: dp('1996972294'),
     ebookUrl: 'https://payhip.com/b/t7Z5C',
     editions: { es: '1996972367' },
-    editionTitles: { es: 'Encontrando mi quietud' },
-    title: { en: 'Finding My Quiet', es: 'Finding My Quiet', fr: 'Finding My Quiet' },
+    title: { en: 'Finding My Quiet', es: 'Encontrando mi quietud', fr: 'Trouver mon calme' },
     subtitle: {
       en: 'A Story About Stillness in a Big, Busy World',
-      es: 'Una historia sobre la calma en un mundo grande y ruidoso',
-      fr: 'Une histoire de calme dans un monde grand et bruyant',
+      es: 'Una historia sobre la calma',
+      fr: 'Une histoire de sérénité',
     },
     description: {
       en: "Yama loves her big, bright, busy world, the rumble of the market, the singing birds, the tinkling of Mama's wind chimes. But sometimes all the sounds crash together like thunder, and her whole body wants to say: Stop. I need a quiet place.",
       es: 'Yama ama su mundo grande, brillante y ajetreado, el rumor del mercado, el canto de los pájaros, el tintineo de las campanillas de Mamá. Pero a veces todos los sonidos chocan como un trueno, y todo su cuerpo quiere decir: Alto. Necesito un lugar tranquilo.',
       fr: "Yama aime son monde grand, lumineux et animé, le grondement du marché, le chant des oiseaux, le tintement des carillons de Maman. Mais parfois tous les sons s'entrechoquent comme le tonnerre, et tout son corps veut dire : Stop. J'ai besoin d'un endroit calme.",
-    },
-    seoTitle: {
-      es: "Finding My Quiet: libro infantil",
-      fr: "Finding My Quiet : album jeunesse",
     },
     seoDescription: {
       en: "A picture book about mindfulness and big feelings for ages 3–8. When all the sounds of her busy world crash together, Yama looks for a quiet place.",
@@ -697,21 +629,16 @@ export const books: Book[] = [
     ageRange: '3-6',
     amazonUrl: dp('1069628840'),
     ebookUrl: 'https://payhip.com/b/S1J5t',
-    editionTitles: { fr: 'Le Jardin de la bienveillance', es: 'El jardín de la amabilidad' },
-    title: { en: 'The Kindness Garden', es: 'The Kindness Garden', fr: 'The Kindness Garden' },
+    title: { en: 'The Kindness Garden', es: 'El jardín de la amabilidad', fr: 'Le Jardin de la bienveillance' },
     subtitle: {
       en: 'A Yama Story About Kindness That Grows',
-      es: 'Una historia de Yama sobre la bondad que crece',
-      fr: 'Une histoire de Yama sur la gentillesse qui grandit',
+      es: 'Un cuento de Yama sobre la bondad en acción',
+      fr: 'Une histoire sur la gentillesse',
     },
     description: {
       en: 'Kindness, Yama discovers, works like a garden: plant a small good deed, tend it, and watch it spread further than you ever expected. A gentle story about kindness and lending a hand, and how one small helper can change a whole neighborhood.',
       es: 'La bondad, descubre Yama, funciona como un jardín: siembra una pequeña buena acción, cuídala, y mira cómo se extiende más lejos de lo que imaginabas. Una historia tierna sobre la bondad y echar una mano, y cómo una pequeña ayudante puede cambiar todo un vecindario.',
       fr: "La gentillesse, découvre Yama, fonctionne comme un jardin : plante une petite bonne action, entretiens-la, et regarde-la s'étendre plus loin que tu ne l'imaginais. Une douce histoire de gentillesse et d'entraide, et comment une petite main peut changer tout un quartier.",
-    },
-    seoTitle: {
-      es: "The Kindness Garden: libro infantil",
-      fr: "The Kindness Garden : album jeunesse",
     },
     seoDescription: {
       en: "A picture book about kindness for ages 3–6. Yama discovers that kindness works like a garden: plant one good deed and watch it spread.",
@@ -730,21 +657,16 @@ export const books: Book[] = [
     ageRange: '5-9',
     amazonUrl: dp('1996972200'),
     ebookUrl: 'https://payhip.com/b/0SGWY',
-    editionTitles: { fr: 'Le Roi serviteur', es: 'El rey sirviente' },
-    title: { en: 'The Servant King', es: 'The Servant King', fr: 'The Servant King' },
+    title: { en: 'The Servant King', es: 'El rey sirviente', fr: 'Le Roi serviteur' },
     subtitle: {
       en: 'The Kabir Edition',
-      es: 'Edición Kabir',
-      fr: 'Édition Kabir',
+      es: 'Un cuento de liderazgo y humildad',
+      fr: 'Une histoire sur l’art de diriger avec humilité',
     },
     description: {
       en: 'What makes a king truly great, his crown, or his hands? A story of a ruler who leads by serving: carrying water, kneeling in the fields, and listening before he speaks. A tale of humility and what leadership looks like when it bows.',
       es: '¿Qué hace verdaderamente grande a un rey, su corona o sus manos? La historia de un gobernante que lidera sirviendo: cargando agua, arrodillándose en los campos y escuchando antes de hablar. Un cuento sobre la humildad y cómo se ve el liderazgo cuando se inclina.',
       fr: "Qu'est-ce qui rend un roi vraiment grand, sa couronne ou ses mains ? L'histoire d'un souverain qui dirige en servant : portant l'eau, s'agenouillant dans les champs, écoutant avant de parler. Un conte d'humilité, où l'on découvre à quoi ressemble un chef qui s'incline.",
-    },
-    seoTitle: {
-      es: "The Servant King: cuento africano",
-      fr: "The Servant King : conte africain",
     },
     seoDescription: {
       en: "An African tale about humble leadership for ages 5–9. A king who carries water, kneels in the fields and listens before he speaks.",
@@ -763,21 +685,16 @@ export const books: Book[] = [
     ageRange: '5-9',
     amazonUrl: dp('1996972553'),
     ebookUrl: 'https://payhip.com/b/BT2iZ',
-    editionTitles: { es: 'La olla llena y la olla vacía' },
-    title: { en: 'The Full Pot and the Empty Pot', es: 'The Full Pot and the Empty Pot', fr: 'The Full Pot and the Empty Pot' },
+    title: { en: 'The Full Pot and the Empty Pot', es: 'La olla llena y la olla vacía', fr: 'Le Pot plein et le pot vide' },
     subtitle: {
       en: 'A Tale of Wisdom and Quiet Strength',
-      es: 'Un cuento de sabiduría y fuerza serena',
-      fr: 'Un conte de sagesse et de force tranquille',
+      es: 'Una historia sobre la honestidad',
+      fr: 'Une histoire sur l’honnêteté',
     },
     description: {
       en: "Brothers Kael and Seni have come to the village council to settle a dispute over their father's millet field. Kael is loud, proud, and impossible to stop once he starts speaking. Seni is quiet, careful, and listens before he offers his thoughts, sometimes not offering them at all.",
       es: 'Los hermanos Kael y Seni acuden al consejo del pueblo para resolver una disputa por el campo de mijo de su padre. Kael es ruidoso, orgulloso e imposible de detener cuando empieza a hablar. Seni es callado, cuidadoso, y escucha antes de dar su opinión, a veces sin darla en absoluto.',
       fr: "Les frères Kael et Seni se présentent au conseil du village pour régler un différend sur le champ de mil de leur père. Kael est bruyant, fier, impossible à arrêter quand il parle. Seni est silencieux, prudent, et écoute avant d'offrir sa pensée, parfois sans l'offrir du tout.",
-    },
-    seoTitle: {
-      es: "The Full Pot and the Empty Pot: cuento africano",
-      fr: "The Full Pot and the Empty Pot : conte africain",
     },
     seoDescription: {
       en: "An African wisdom tale about quiet strength for ages 5–9. Loud Kael and quiet Seni bring their dispute over a millet field to the village council.",
@@ -796,21 +713,16 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1996972618'),
     ebookUrl: 'https://payhip.com/b/3HmYR',
-    editionTitles: { fr: 'Les Arbres de Grand-mère', es: 'Los árboles de la abuela' },
-    title: { en: "The Grandmother's Trees", es: "The Grandmother's Trees", fr: "The Grandmother's Trees" },
+    title: { en: "The Grandmother's Trees", es: 'Los árboles de la abuela', fr: 'Les Arbres de Grand-mère' },
     subtitle: {
       en: 'A Story About Planting for People You Will Never Meet',
-      es: 'Una historia sobre plantar para personas que nunca conocerás',
-      fr: 'Une histoire sur planter pour ceux qu’on ne rencontrera jamais',
+      es: 'Una historia sobre el legado',
+      fr: 'Une histoire de transmission',
     },
     description: {
       en: '"Why do we plant trees we will never sit under?" Yaw asks, holding a small sapling beside his grandmother in the field. She tells him about the great baobab in her own grandmother\'s village, planted long ago by someone who never rested in its shade.',
       es: '«¿Por qué plantamos árboles bajo los que nunca nos sentaremos?», pregunta Yaw, sosteniendo un pequeño retoño junto a su abuela en el campo. Ella le habla del gran baobab del pueblo de su propia abuela, plantado hace mucho por alguien que nunca descansó a su sombra.',
       fr: "« Pourquoi plantons-nous des arbres sous lesquels nous ne nous assiérons jamais ? » demande Yaw, un petit plant à la main, près de sa grand-mère dans le champ. Elle lui raconte le grand baobab du village de sa propre grand-mère, planté jadis par quelqu'un qui ne s'est jamais reposé à son ombre.",
-    },
-    seoTitle: {
-      es: "The Grandmother's Trees: cuento africano",
-      fr: "The Grandmother's Trees : conte africain",
     },
     seoDescription: {
       en: "An African picture book about legacy for ages 4–8. Why plant trees we will never sit under? Yaw's grandmother answers with the story of a baobab.",
@@ -829,21 +741,16 @@ export const books: Book[] = [
     ageRange: '6-10',
     amazonUrl: dp('1996972499'),
     ebookUrl: 'https://payhip.com/b/VeaPz',
-    editionTitles: { fr: 'Les Frères et la terre sage', es: 'Los hermanos y la tierra sabia' },
-    title: { en: 'The Brothers and the Wise Land', es: 'The Brothers and the Wise Land', fr: 'The Brothers and the Wise Land' },
+    title: { en: 'The Brothers and the Wise Land', es: 'Los hermanos y la tierra sabia', fr: 'Les Frères et la terre sage' },
     subtitle: {
       en: 'A Tale of Books, Soil, and the Wisdom Between Them',
-      es: 'Un cuento de libros, tierra y la sabiduría entre ambos',
-      fr: 'Un conte de livres, de terre et de la sagesse entre les deux',
+      es: 'Una historia sobre compartir la tierra',
+      fr: 'Une histoire de partage de la terre',
     },
     description: {
       en: 'Kwame and Kwesi are brothers farming their first independent season in Tamale, northern Ghana. Kwame trusts his farming guidebooks. Kwesi trusts the soil, the indicator plants, and what the land has always said. When their seeds struggle and the rains are uncertain, both brothers must question what they know.',
       es: 'Kwame y Kwesi son hermanos que cultivan su primera temporada por cuenta propia en Tamale, al norte de Ghana. Kwame confía en sus manuales de agricultura. Kwesi confía en el suelo, en las plantas indicadoras y en lo que la tierra siempre ha dicho. Cuando sus semillas sufren y las lluvias son inciertas, ambos hermanos deben cuestionar lo que saben.',
       fr: "Kwame et Kwesi sont deux frères qui cultivent leur première saison indépendante à Tamale, au nord du Ghana. Kwame fait confiance à ses manuels d'agriculture. Kwesi fait confiance au sol, aux plantes indicatrices et à ce que la terre a toujours dit. Quand leurs semences peinent et que les pluies se font incertaines, les deux frères doivent remettre en question ce qu'ils savent.",
-    },
-    seoTitle: {
-      es: "The Brothers and the Wise Land: cuento africano",
-      fr: "The Brothers and the Wise Land : conte africain",
     },
     seoDescription: {
       en: "A Ghanaian story about traditional knowledge for ages 6–10. One brother trusts his farming books, the other trusts the soil. The land teaches both.",
@@ -865,21 +772,16 @@ export const books: Book[] = [
     ebookUrl: 'https://payhip.com/b/l19xY',
     ebookLanguages: ['en', 'es'],
     editions: { fr: 'B0HNLTLPZW' },
-    editionTitles: { fr: 'Le Décret vert du chef' },
-    title: { en: "The Chief's Green Rule", es: "The Chief's Green Rule", fr: "The Chief's Green Rule" },
+    title: { en: "The Chief's Green Rule", es: 'La regla verde del jefe', fr: 'Le Décret vert du chef' },
     subtitle: {
       en: 'Five Seeds for One',
-      es: 'Cinco semillas por una',
-      fr: 'Cinq graines pour une',
+      es: 'Un árbol cortado, cinco árboles plantados',
+      fr: 'Un arbre coupé, cinq arbres plantés',
     },
     description: {
       en: "In a village nestled in the Ethiopian highlands, Chief Mael made a special rule: for every tree we take, we must plant five new ones. Not everyone understood at first. The work was hard, the soil was dry, and the children's legs grew tired, but the land was listening.",
       es: 'En un pueblo enclavado en las tierras altas de Etiopía, el jefe Mael creó una regla especial: por cada árbol que tomamos, debemos plantar cinco nuevos. No todos lo entendieron al principio. El trabajo era duro, el suelo estaba seco y las piernas de los niños se cansaban, pero la tierra estaba escuchando.',
       fr: "Dans un village niché sur les hauts plateaux d'Éthiopie, le chef Mael a instauré une règle spéciale : pour chaque arbre que nous prenons, nous devons en planter cinq nouveaux. Tout le monde n'a pas compris au début. Le travail était dur, le sol était sec, et les jambes des enfants fatiguaient, mais la terre écoutait.",
-    },
-    seoTitle: {
-      es: "The Chief's Green Rule: cuento africano",
-      fr: "The Chief's Green Rule : conte africain",
     },
     seoDescription: {
       en: "An Ethiopian picture book about caring for the land for ages 3–9. Chief Mael's rule: for every tree we take, we plant five new ones.",
@@ -899,21 +801,16 @@ export const books: Book[] = [
     amazonUrl: dp('106946287X'),
     ebookUrl: 'https://payhip.com/b/orAfi',
     editions: { es: 'B0HNP6NDDJ' },
-    editionTitles: { es: 'El último regalo del jefe Mael' },
-    title: { en: "Chief Mael's Final Gift", es: "Chief Mael's Final Gift", fr: "Chief Mael's Final Gift" },
+    title: { en: "Chief Mael's Final Gift", es: 'El último regalo del jefe Mael', fr: 'Le Dernier Don du chef Mael' },
     subtitle: {
       en: 'A Storytime with Pawa Tale',
-      es: 'Un cuento de Storytime with Pawa',
-      fr: 'Un conte Storytime with Pawa',
+      es: 'Una historia de legado y amor',
+      fr: 'Une histoire d’héritage et d’amour',
     },
     description: {
       en: 'When devastating floods threaten the villages, the old chiefs argue over what to do. Chief Abebe wants everyone to move. Chief Berkeley points fingers. Chief Hanif calls for ceremonies. But wise Chief Mael, with that special twinkle in his eye, sees what the others cannot: it is time for a new voice.',
       es: 'Cuando inundaciones devastadoras amenazan los pueblos, los viejos jefes discuten sobre qué hacer. El jefe Abebe quiere que todos se muden. El jefe Berkeley busca culpables. El jefe Hanif pide ceremonias. Pero el sabio jefe Mael, con ese brillo especial en los ojos, ve lo que los demás no pueden: es hora de una nueva voz.',
       fr: "Quand des inondations dévastatrices menacent les villages, les vieux chefs se disputent sur la marche à suivre. Le chef Abebe veut que tout le monde parte. Le chef Berkeley cherche des coupables. Le chef Hanif réclame des cérémonies. Mais le sage chef Mael, avec cette étincelle dans les yeux, voit ce que les autres ne voient pas : il est temps d'écouter une nouvelle voix.",
-    },
-    seoTitle: {
-      es: "Chief Mael's Final Gift: cuento africano",
-      fr: "Chief Mael's Final Gift : conte africain",
     },
     seoDescription: {
       en: "An African tale about leadership for ages 3–9. As floods threaten the villages and the chiefs argue, wise Chief Mael sees it is time for a new voice.",
@@ -933,21 +830,16 @@ export const books: Book[] = [
     amazonUrl: dp('1069462853'),
     ebookUrl: 'https://payhip.com/b/cMvoH',
     editions: { fr: 'B0HPBG8BSD', es: 'B0HPBL4593' },
-    editionTitles: { fr: 'Les Trois Cadeaux du chef', es: 'Los tres regalos del jefe' },
-    title: { en: "The Chief's Three Gifts", es: "The Chief's Three Gifts", fr: "The Chief's Three Gifts" },
+    title: { en: "The Chief's Three Gifts", es: 'Los tres regalos del jefe', fr: 'Les Trois Cadeaux du chef' },
     subtitle: {
       en: 'A Story About Wisdom, Strength, and Gentle Leadership',
-      es: 'Una historia sobre la sabiduría, la fuerza y el liderazgo amable',
-      fr: 'Une histoire de sagesse, de force et de leadership tout en douceur',
+      es: 'Una sabia forma de enseñar el liderazgo',
+      fr: 'Une sage façon d’enseigner le leadership',
     },
     description: {
       en: 'What do a stone, a piece of charcoal, and a feather reveal about leadership? When young Mael becomes the village advisor, he receives three mysterious gifts from the chief, each holding wisdom passed through generations: be strong as stone, warm as charcoal, and gentle as a feather.',
       es: '¿Qué revelan una piedra, un trozo de carbón y una pluma sobre el liderazgo? Cuando el joven Mael se convierte en consejero del pueblo, recibe del jefe tres regalos misteriosos, cada uno con una sabiduría transmitida por generaciones: sé fuerte como la piedra, cálido como el carbón y suave como la pluma.',
       fr: "Que révèlent une pierre, un morceau de charbon et une plume sur le leadership ? Quand le jeune Mael devient conseiller du village, il reçoit du chef trois cadeaux mystérieux, chacun portant une sagesse transmise de génération en génération : sois fort comme la pierre, chaleureux comme le charbon et doux comme la plume.",
-    },
-    seoTitle: {
-      es: "The Chief's Three Gifts: cuento africano",
-      fr: "The Chief's Three Gifts : conte africain",
     },
     seoDescription: {
       en: "An African tale about leadership and values for ages 3–6. A stone, a piece of charcoal and a feather: three gifts that teach young Mael to lead.",
@@ -966,21 +858,16 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069628891'),
     ebookUrl: 'https://payhip.com/b/ezDfA',
-    editionTitles: { es: 'El juguete roto' },
-    title: { en: 'The Broken Toy', es: 'The Broken Toy', fr: 'The Broken Toy' },
+    title: { en: 'The Broken Toy', es: 'El juguete roto', fr: 'Le Jouet cassé' },
     subtitle: {
       en: 'A Yama Story About Friendship, Forgiveness, and Ubuntu',
-      es: 'Una historia de Yama sobre la amistad, el perdón y el Ubuntu',
-      fr: "Une histoire de Yama sur l'amitié, le pardon et l'Ubuntu",
+      es: 'Una historia de amistad, perdón y el valor de regresar',
+      fr: 'Une histoire sur le pardon',
     },
     description: {
       en: 'Yama and Max are best friends. They share everything, especially the bright little wooden car they push through the courtyard from morning until dusk. Then one sunny morning, a tiny wheel cracks off, and something bigger breaks between them: they blame each other, turn their backs, and walk away.',
       es: 'Yama y Max son mejores amigos. Lo comparten todo, especialmente el pequeño coche de madera pintada que empujan por el patio de la mañana al atardecer. Entonces, una mañana soleada, una ruedita se rompe, y algo más grande se rompe entre ellos: se culpan, se dan la espalda y se alejan.',
       fr: "Yama et Max sont les meilleurs amis du monde. Ils partagent tout, surtout la petite voiture en bois peint qu'ils poussent dans la cour du matin au soir. Puis, un matin ensoleillé, une petite roue se casse, et quelque chose de plus grand se brise entre eux : ils s'accusent, se tournent le dos et s'en vont.",
-    },
-    seoTitle: {
-      es: "The Broken Toy: libro infantil",
-      fr: "The Broken Toy : album jeunesse",
     },
     seoDescription: {
       en: "A picture book about friendship and forgiveness for ages 3–8. When their wooden car breaks, best friends Yama and Max blame each other and walk away.",
@@ -999,21 +886,16 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069628875'),
     ebookUrl: 'https://payhip.com/b/U4cDo',
-    editionTitles: { fr: 'La Main qui donne', es: 'La mano que da' },
-    title: { en: 'The Hand That Gives', es: 'The Hand That Gives', fr: 'The Hand That Gives' },
+    title: { en: 'The Hand That Gives', es: 'La mano que da', fr: 'La Main qui donne' },
     subtitle: {
       en: 'A Tale of Generosity and the Circle of Giving',
-      es: 'Un cuento de generosidad y el círculo del dar',
-      fr: 'Un conte de générosité et du cercle du don',
+      es: 'Un cuento de generosidad, karma y el círculo del dar',
+      fr: 'Un conte de générosité, de karma et du cercle du don',
     },
     description: {
       en: 'Kael is a generous hunter whose spirit is as vast as the African savanna, he shares his bounty freely with hungry families, asking nothing in return. Years later, when sudden illness leaves him too weak to plant his fields, the circle of giving comes back around.',
       es: 'Kael es un cazador generoso cuyo espíritu es tan vasto como la sabana africana: comparte su caza libremente con las familias hambrientas, sin pedir nada a cambio. Años después, cuando una enfermedad repentina lo deja demasiado débil para sembrar sus campos, el círculo del dar vuelve a él.',
       fr: "Kael est un chasseur généreux dont l'esprit est aussi vaste que la savane africaine, il partage librement son butin avec les familles affamées, sans rien demander en retour. Des années plus tard, quand une maladie soudaine le laisse trop faible pour planter ses champs, le cercle du don revient vers lui.",
-    },
-    seoTitle: {
-      es: "The Hand That Gives: cuento africano",
-      fr: "The Hand That Gives : conte africain",
     },
     seoDescription: {
       en: "An African tale about generosity for ages 3–8. Kael shares freely with hungry families, and years later, when he falls ill, the circle of giving returns.",
@@ -1032,21 +914,16 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1069628824'),
     ebookUrl: 'https://payhip.com/b/lI371',
-    editionTitles: { fr: 'Le Fermier reconnaissant', es: 'El granjero agradecido' },
-    title: { en: 'The Thankful Farmer', es: 'The Thankful Farmer', fr: 'The Thankful Farmer' },
+    title: { en: 'The Thankful Farmer', es: 'El granjero agradecido', fr: 'Le Fermier reconnaissant' },
     subtitle: {
       en: 'A Tale of Gratitude and Opening Your Eyes to Blessings',
-      es: 'Un cuento de gratitud y de abrir los ojos a las bendiciones',
-      fr: 'Un conte de gratitude et de bénédictions révélées',
+      es: 'Una historia sobre la gratitud',
+      fr: 'Une histoire sur la gratitude',
     },
     description: {
       en: "Kwame begins each morning kneeling to give thanks for his soil, rain, and sunshine. His neighbor Kofi rushes through his days complaining about the weather, the weeds, the endless work. When drought strikes both fields, Kwame's grateful heart helps him notice what others miss: a tiny green sprout hiding a spring of water below.",
       es: 'Kwame comienza cada mañana arrodillado, dando gracias por su tierra, la lluvia y el sol. Su vecino Kofi corre por sus días quejándose del clima, de las malas hierbas, del trabajo interminable. Cuando la sequía golpea ambos campos, el corazón agradecido de Kwame le ayuda a notar lo que otros no ven: un pequeño brote verde que esconde un manantial.',
       fr: "Kwame commence chaque matin à genoux, remerciant pour sa terre, la pluie et le soleil. Son voisin Kofi traverse ses journées en se plaignant du temps, des mauvaises herbes, du travail sans fin. Quand la sécheresse frappe les deux champs, le cœur reconnaissant de Kwame lui fait remarquer ce que les autres manquent : une petite pousse verte cachant une source.",
-    },
-    seoTitle: {
-      es: "The Thankful Farmer: cuento africano",
-      fr: "The Thankful Farmer : conte africain",
     },
     seoDescription: {
       en: "An African tale about gratitude for ages 4–8. When drought strikes two farms, Kwame's grateful heart helps him notice what his neighbor misses.",
@@ -1065,21 +942,16 @@ export const books: Book[] = [
     ageRange: '6-10',
     amazonUrl: dp('1996972464'),
     ebookUrl: 'https://payhip.com/b/azFG8',
-    editionTitles: { fr: 'Lentement et sûrement', es: 'Lenta y firme gana la carrera' },
-    title: { en: 'Slow and Strong Wins the Race', es: 'Slow and Strong Wins the Race', fr: 'Slow and Strong Wins the Race' },
+    title: { en: 'Slow and Strong Wins the Race', es: 'Lenta y firme gana la carrera', fr: 'Lentement et sûrement' },
     subtitle: {
       en: 'A Story About the Power of the Steady Plan',
-      es: 'Una historia sobre el poder del plan constante',
-      fr: 'Une histoire sur la force du plan régulier',
+      es: 'Una historia sobre la paciencia',
+      fr: 'Une histoire sur la patience',
     },
     description: {
       en: "While her classmates rush, cram, and panic before every test, Zahra does something different. Two sharpened pencils. Notebook open to yesterday's date. A little each day, always reviewed before moving on. She calls it the Steady Plan, and everyone calls her Tortoise.",
       es: 'Mientras sus compañeros corren, se atiborran y entran en pánico antes de cada examen, Zahra hace algo diferente. Dos lápices afilados. El cuaderno abierto en la fecha de ayer. Un poco cada día, siempre repasando antes de avanzar. Ella lo llama el Plan Constante, y todos la llaman Tortuga.',
       fr: "Pendant que ses camarades se précipitent, bachotent et paniquent avant chaque contrôle, Zahra fait autrement. Deux crayons taillés. Le cahier ouvert à la date d'hier. Un peu chaque jour, toujours révisé avant d'avancer. Elle appelle ça le Plan Régulier, et tout le monde l'appelle Tortue.",
-    },
-    seoTitle: {
-      es: "Slow and Strong Wins the Race: libro infantil",
-      fr: "Slow and Strong Wins the Race : album jeunesse",
     },
     seoDescription: {
       en: "A picture book about perseverance and study habits for ages 6–10. While classmates cram and panic, Zahra follows her Steady Plan, a little each day.",
@@ -1098,21 +970,16 @@ export const books: Book[] = [
     ageRange: '5-8',
     amazonUrl: dp('1996972529'),
     ebookUrl: 'https://payhip.com/b/M3Nue',
-    editionTitles: { fr: 'La Scientifique ingénieuse : Professeure Hawel', es: 'La científica ingeniosa: Profesora Hawel' },
-    title: { en: 'The Clever Scientist, Professor Hawel', es: 'The Clever Scientist, Professor Hawel', fr: 'The Clever Scientist, Professor Hawel' },
+    title: { en: 'The Clever Scientist, Professor Hawel', es: 'La científica ingeniosa: Profesora Hawel', fr: 'La Scientifique ingénieuse : Professeure Hawel' },
     subtitle: {
       en: 'Roots of Tomorrow: A Journey to the Past',
-      es: 'Raíces del mañana: un viaje al pasado',
-      fr: 'Racines de demain : un voyage vers le passé',
+      es: 'Una historia sobre la curiosidad',
+      fr: 'Une histoire sur la curiosité',
     },
     description: {
       en: 'Professor Hawel was once a young girl who saved her village with clever clay pots. Now she teaches at a great university, until a letter arrives from Dr. Yama, a scientist whose grandparents came from the same river basin. "Please come," Yama wrote. "Our people need us both."',
       es: 'La profesora Hawel fue una vez una niña que salvó su pueblo con ingeniosas ollas de barro. Ahora enseña en una gran universidad, hasta que llega una carta de la Dra. Yama, una científica cuyos abuelos venían de la misma cuenca del río. «Por favor, ven», escribió Yama. «Nuestro pueblo nos necesita a las dos».',
       fr: "La professeure Hawel fut jadis une petite fille qui sauva son village avec d'ingénieuses poteries d'argile. Aujourd'hui elle enseigne dans une grande université, jusqu'à ce qu'arrive une lettre de la Dre Yama, une scientifique dont les grands-parents venaient du même bassin fluvial. « Viens, je t'en prie », écrit Yama. « Notre peuple a besoin de nous deux. »",
-    },
-    seoTitle: {
-      es: "The Clever Scientist, Professor Hawel: cuento",
-      fr: "The Clever Scientist, Professor Hawel : album",
     },
     seoDescription: {
       en: "A picture book about women in science for ages 5–8. Professor Hawel, who once saved her village with clay pots, is called home by a fellow scientist.",
@@ -1131,21 +998,16 @@ export const books: Book[] = [
     ageRange: '5-9',
     amazonUrl: dp('1996972588'),
     ebookUrl: 'https://payhip.com/b/Qv0Ch',
-    editionTitles: { fr: 'Le Jardin des deuxièmes chances', es: 'El jardín de las segundas oportunidades' },
-    title: { en: 'The Garden of Second Chances', es: 'The Garden of Second Chances', fr: 'The Garden of Second Chances' },
+    title: { en: 'The Garden of Second Chances', es: 'El jardín de las segundas oportunidades', fr: 'Le Jardin des deuxièmes chances' },
     subtitle: {
       en: 'A Story About Repair, Trust, and Growing Again',
-      es: 'Una historia sobre reparar, confiar y volver a crecer',
-      fr: 'Une histoire de réparation, de confiance et de renouveau',
+      es: 'Una historia sobre el perdón',
+      fr: 'Une histoire de pardon',
     },
     description: {
       en: "Dayo was hungry. That is why he crept into Mama Nia's garden and took what he needed. But Nana Kweku saw him, and the village council saw something punishment alone could not fix. Instead of shame and exclusion, they offer Dayo a path: work in Mama Nia's garden, and grow something back.",
       es: 'Dayo tenía hambre. Por eso se metió en el huerto de Mama Nia y tomó lo que necesitaba. Pero Nana Kweku lo vio, y el consejo del pueblo vio algo que el castigo solo no podía arreglar. En lugar de vergüenza y exclusión, le ofrecen a Dayo un camino: trabajar en el huerto de Mama Nia y hacer crecer algo de vuelta.',
       fr: "Dayo avait faim. C'est pourquoi il s'est glissé dans le jardin de Mama Nia pour prendre ce qu'il lui fallait. Mais Nana Kweku l'a vu, et le conseil du village a vu ce qu'une punition seule ne pouvait réparer. Au lieu de la honte et de l'exclusion, on offre à Dayo un chemin : travailler dans le jardin de Mama Nia, et faire repousser quelque chose.",
-    },
-    seoTitle: {
-      es: "The Garden of Second Chances: cuento africano",
-      fr: "The Garden of Second Chances : conte africain",
     },
     seoDescription: {
       en: "An African tale about second chances for ages 5–9. Instead of punishing hungry Dayo, the village offers him a path: work in the garden and grow again.",
@@ -1164,21 +1026,16 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1996972049'),
     ebookUrl: 'https://payhip.com/b/MxN8H',
-    editionTitles: { fr: 'Les Arbres que nous plantons pour demain', es: 'Los árboles que plantamos para mañana' },
-    title: { en: 'The Trees We Plant for Tomorrow', es: 'The Trees We Plant for Tomorrow', fr: 'The Trees We Plant for Tomorrow' },
+    title: { en: 'The Trees We Plant for Tomorrow', es: 'Los árboles que plantamos para mañana', fr: 'Les Arbres que nous plantons pour demain' },
     subtitle: {
       en: 'A Fulani Tale of Patience and Strength',
-      es: 'Un cuento fulani de paciencia y fortaleza',
-      fr: 'Un conte peul de patience et de force',
+      es: 'Un cuento fulani de paciencia y fuerza',
+      fr: 'Une histoire d’espoir',
     },
     description: {
       en: 'A sapling gives no shade today, no fruit tomorrow, so why plant it at all? A Fulani tale about patience, stewardship, and the quiet strength of tending what will outlive us, for the children who will stand where we stood.',
       es: 'Un retoño no da sombra hoy, ni fruto mañana, entonces, ¿para qué plantarlo? Un cuento fulani sobre la paciencia, el cuidado de la tierra y la fuerza serena de cultivar lo que nos sobrevivirá, para los niños que estarán donde estuvimos.',
       fr: "Un jeune arbre ne donne pas d'ombre aujourd'hui, pas de fruit demain, alors pourquoi le planter ? Un conte peul sur la patience, le soin de la terre et la force tranquille de cultiver ce qui nous survivra, pour les enfants qui se tiendront là où nous étions.",
-    },
-    seoTitle: {
-      es: "The Trees We Plant for Tomorrow: cuento",
-      fr: "The Trees We Plant for Tomorrow : conte",
     },
     seoDescription: {
       en: "A Fulani tale about patience and caring for the earth for ages 3–8. A sapling gives no shade today, so why plant it? For the children still to come.",
@@ -1198,21 +1055,16 @@ export const books: Book[] = [
     amazonUrl: dp('1069628867'),
     ebookUrl: 'https://payhip.com/b/ZXkqI',
     editions: { fr: 'B0HMWW9GY8', es: 'B0HMX9HC1L' },
-    editionTitles: { fr: "Un conte d'espoir et d'humour", es: 'Un cuento de esperanza y humor' },
-    title: { en: 'A Tale of Hope and Humor', es: 'A Tale of Hope and Humor', fr: 'A Tale of Hope and Humor' },
+    title: { en: 'A Tale of Hope and Humor', es: 'Un cuento de esperanza y humor', fr: 'Un conte d’espoir et d’humour' },
     subtitle: {
       en: 'A West African Tale of Resilience and Joy',
-      es: 'Un cuento de África Occidental sobre la resiliencia y la alegría',
-      fr: 'Un conte ouest-africain de résilience et de joie',
+      es: 'Una historia sobre la risa',
+      fr: 'Une histoire sur le rire',
     },
     description: {
       en: 'When a plague of locusts destroys the harvest and hope seems lost, Elder Kwesi gathers the children under the great baobab and begins to tell his most ridiculous stories. Laughter spreads through the hungry village, and with it the strength to rebuild: laughter cannot fill empty bellies, but it feeds hungry hearts.',
       es: 'Cuando una plaga de langostas destruye la cosecha y la esperanza parece perdida, el anciano Kwesi reúne a los niños bajo el gran baobab y empieza a contar sus historias más disparatadas. La risa se extiende por el pueblo hambriento, y con ella la fuerza para reconstruir: la risa no llena estómagos vacíos, pero alimenta corazones hambrientos.',
       fr: "Quand une nuée de criquets détruit la récolte et que l'espoir semble perdu, le vieux Kwesi rassemble les enfants sous le grand baobab et se met à raconter ses histoires les plus loufoques. Le rire gagne le village affamé, et avec lui la force de reconstruire : le rire ne remplit pas les ventres vides, mais il nourrit les cœurs affamés.",
-    },
-    seoTitle: {
-      es: "A Tale of Hope and Humor: cuento africano",
-      fr: "A Tale of Hope and Humor : conte africain",
     },
     seoDescription: {
       en: "A West African tale about resilience and joy for ages 3–8. After locusts destroy the harvest, Elder Kwesi's funny stories give the village strength.",
@@ -1232,12 +1084,11 @@ export const books: Book[] = [
     amazonUrl: dp('1996972308'),
     ebookUrl: 'https://payhip.com/b/LjJeI',
     editions: { fr: '1996972391', es: '1996972383' },
-    editionTitles: { fr: 'Le Jardin de Grand-mère sous la lune', es: 'El jardín de la Abuela bajo la luna' },
-    title: { en: "Grandmère's Garden Under the Moon", es: "Grandmère's Garden Under the Moon", fr: "Grandmère's Garden Under the Moon" },
+    title: { en: "Grandmère's Garden Under the Moon", es: 'El jardín de la Abuela bajo la luna', fr: 'Le Jardin de Grand-mère sous la lune' },
     subtitle: {
       en: 'A Story of Patience, Magic, and What We Grow Together',
-      es: 'Una historia de paciencia, magia y lo que cultivamos juntos',
-      fr: 'Une histoire de patience, de magie et de ce que nous cultivons ensemble',
+      es: 'Una historia de paciencia, de magia y de lo que cultivamos juntos',
+      fr: 'Une histoire de patience, de magie et de ce que l’on fait grandir ensemble',
     },
     description: {
       en: "Under the moon, Grandmère's garden keeps its own time. As Yama helps her grandmother plant, wait, and tend, she learns that the best things grow slowly and are grown together: gardens, stories, and love. A luminous Yama Series bedtime story about patience and the wisdom grandmothers pass down.",
@@ -1247,10 +1098,6 @@ export const books: Book[] = [
     // Hand-written: the trimmed blurb would cut mid-clause. Rewritten for buyer
     // intent (pilot metadata audit, 2026-10-12): shoppers type "grandmother" and
     // "bedtime story", not "Grandmère", and the shelf for that search is shallow.
-    seoTitle: {
-      es: "Grandmère's Garden Under the Moon: cuento",
-      fr: "Grandmère's Garden Under the Moon : album",
-    },
     seoDescription: {
       en: 'A grandmother and grandchild bedtime story for ages 3–8. Under the moon, Yama learns from Grandmère that the best things grow slowly, and together.',
       es: 'Un cuento para dormir sobre una abuela y su nieta, de 3 a 8 años. Bajo la luna, Yama aprende que las mejores cosas crecen despacio y juntos.',
@@ -1268,11 +1115,10 @@ export const books: Book[] = [
     ageRange: '3-7',
     amazonUrl: dp('1996972103'),
     ebookUrl: 'https://payhip.com/b/ShRD1',
-    editionTitles: { fr: "Le Jour où on s'est réveillés en dinosaures", es: 'El día que nos despertamos como dinosaurios' },
     title: {
       en: 'The Day We Woke Up as Dinosaurs',
-      es: 'El Día que nos Despertamos como Dinosaurios',
-      fr: "Le Jour où on s'est Réveillés en Dinosaures",
+      es: 'El día que nos despertamos como dinosaurios',
+      fr: 'Le Jour où on s’est réveillés en dinosaures',
     },
     description: {
       en: 'One morning, everything is different: tails, claws, and very big footsteps. A playful romp about imagination and friendship, where waking up as dinosaurs turns an ordinary day into the best adventure of all.',
@@ -1298,8 +1144,8 @@ function localize(book: Book, lang: Language): LocalizedBook {
   const editionAsin = lang === 'en' ? undefined : book.editions?.[lang];
   return {
     id: book.id,
-    coverImage: book.coverImage,
-    coverSrcSet: coverSrcSet(book.id),
+    coverImage: coverUrl(book.id, lang, book.coverImage),
+    coverSrcSet: coverSrcSet(book.id, lang),
     ageRange: book.ageRange,
     languages: EDITION_ORDER.filter(l => l === 'en' || book.editions?.[l]).map(l => EDITION_FLAG[l]),
     upcomingLanguages: EDITION_ORDER.filter(l => l !== 'en' && !book.editions?.[l]).map(l => EDITION_FLAG[l]),
@@ -1309,7 +1155,7 @@ function localize(book: Book, lang: Language): LocalizedBook {
       return {
         lang: l,
         flag: EDITION_FLAG[l],
-        title: l === 'en' ? book.title.en : book.editionTitles?.[l],
+        title: l === 'en' ? book.title.en : book.title[l] !== book.title.en ? book.title[l] : undefined,
         live,
         url: l === 'en' ? (live ? book.amazonUrl : undefined) : asin ? dp(asin) : undefined,
       };
