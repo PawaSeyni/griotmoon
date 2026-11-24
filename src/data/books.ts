@@ -90,9 +90,18 @@ export interface Book {
    * not in English.
    *
    * Add a language here only once that edition is live and you have its ASIN. FR/ES
-   * drafts are staged weekly in KDP; a draft is not an edition.
+   * drafts are staged weekly in KDP; a draft is not an edition. Rechecked on amazon.com
+   * 2026-11-23: 14 FR/ES editions live across 10 titles.
    */
   editions?: Partial<Record<Exclude<Language, 'en'>, string>>;
+  /**
+   * The translated title each French / Spanish edition carries (added 2026-11-23).
+   * Every title is being published in all three languages; this names the edition
+   * whether or not it is live yet, so the book page can list it. An edition with a
+   * title here but no ASIN in `editions` shows as "not on Amazon yet", never as a
+   * buyable edition, and it stays out of the structured data.
+   */
+  editionTitles?: Partial<Record<Exclude<Language, 'en'>, string>>;
   featured?: boolean;
   /** Publication state. Absent/'published' = live with a Buy CTA; 'coming-soon' shows a placeholder. */
   status?: 'published' | 'coming-soon';
@@ -133,6 +142,11 @@ export interface LocalizedBook {
   ageRange: string;
   /** Flags for the editions that actually exist, derived from `Book.editions`. */
   languages: string[];
+  /** Flags of the FR/ES editions still in production (not live on Amazon yet). */
+  upcomingLanguages: string[];
+  /** All three language editions in EN, ES, FR order: live ones carry their Amazon
+   *  link, the others are marked not live. */
+  editionList: Array<{ lang: Language; flag: string; title?: string; live: boolean; url?: string }>;
   /** Link to the edition this page should sell: the reader's language where that
    *  edition exists, English otherwise. */
   amazonUrl: string;
@@ -174,6 +188,7 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069462837'),
     ebookUrl: 'https://payhip.com/b/1Xtdv',
+    editionTitles: { es: 'Ubuntu: Estamos juntos' },
     featured: true,
     title: { en: 'Ubuntu We Are Together', es: 'Ubuntu We Are Together', fr: 'Ubuntu We Are Together' },
     subtitle: {
@@ -212,6 +227,7 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1069628816'),
     ebookUrl: 'https://payhip.com/b/ghDeJ',
+    editionTitles: { fr: 'Le Poing puissant', es: 'El puño poderoso' },
     featured: true,
     title: { en: 'The Mighty Fist', es: 'The Mighty Fist', fr: 'The Mighty Fist' },
     subtitle: {
@@ -245,6 +261,7 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069462845'),
     ebookUrl: 'https://payhip.com/b/dLJRv',
+    editionTitles: { es: 'El secreto del silbido' },
     featured: true,
     title: { en: 'The Whistling Secret', es: 'The Whistling Secret', fr: 'The Whistling Secret' },
     subtitle: {
@@ -309,6 +326,7 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069462810'),
     ebookUrl: 'https://payhip.com/b/50nJv',
+    editionTitles: { fr: "L'Arbre qui parle", es: 'El árbol que habla' },
     title: { en: 'The Talking Tree', es: 'The Talking Tree', fr: 'The Talking Tree' },
     subtitle: {
       en: 'A West African Tale of Peace and Listening',
@@ -341,6 +359,7 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1069628859'),
     ebookUrl: 'https://payhip.com/b/7cuXG',
+    editionTitles: { fr: 'Le Village qui rit', es: 'El pueblo que ríe' },
     title: { en: 'The Laughing Village', es: 'The Laughing Village', fr: 'The Laughing Village' },
     subtitle: {
       en: 'A Yama Story of Joy and Resilience',
@@ -373,6 +392,7 @@ export const books: Book[] = [
     ageRange: '3-6',
     amazonUrl: dp('1996972014'),
     ebookUrl: 'https://payhip.com/b/1mEbr',
+    editionTitles: { fr: 'Notre enfant', es: 'Nuestro hijo' },
     title: { en: 'Our Child', es: 'Our Child', fr: 'Our Child' },
     subtitle: {
       en: 'A Fulani Tale of Community and Belonging',
@@ -405,6 +425,7 @@ export const books: Book[] = [
     ageRange: '4-7',
     amazonUrl: dp('1996972073'),
     ebookUrl: 'https://payhip.com/b/NpxBt',
+    editionTitles: { fr: 'Les Pots malins', es: 'Las ollas inteligentes' },
     title: { en: 'The Clever Pots', es: 'The Clever Pots', fr: 'The Clever Pots' },
     subtitle: {
       en: 'A Haalpulaar Story',
@@ -437,6 +458,7 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1996972138'),
     ebookUrl: 'https://payhip.com/b/X4OSo',
+    editionTitles: { fr: 'La Chasse aux deux chemins', es: 'La caza con dos caminos' },
     title: { en: 'The Hunt with Two Paths', es: 'The Hunt with Two Paths', fr: 'The Hunt with Two Paths' },
     subtitle: {
       en: 'A Story About Seeing Many Truths',
@@ -469,6 +491,8 @@ export const books: Book[] = [
     ageRange: '7-10',
     amazonUrl: dp('1996972316'),
     ebookUrl: 'https://payhip.com/b/vxaAn',
+    editions: { fr: '1996972324', es: '1996972332' },
+    editionTitles: { fr: 'Kweku et la forêt sage', es: 'Kweku y el bosque sabio' },
     title: { en: 'Kweku and the Wise Forest', es: 'Kweku and the Wise Forest', fr: 'Kweku and the Wise Forest' },
     subtitle: {
       en: 'A Tale of Listening and Learning',
@@ -501,6 +525,7 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069628832'),
     ebookUrl: 'https://payhip.com/b/Qv5ug',
+    editionTitles: { fr: "L'Esprit qui partage", es: 'El espíritu que comparte' },
     title: { en: 'The Spirit That Shares', es: 'The Spirit That Shares', fr: 'The Spirit That Shares' },
     subtitle: {
       en: 'A Tale of Generosity and Abundance',
@@ -534,6 +559,8 @@ export const books: Book[] = [
     ageRange: '3-6',
     amazonUrl: dp('1996972006'),
     ebookUrl: 'https://payhip.com/b/ofGWZ',
+    editions: { es: '1996972278' },
+    editionTitles: { fr: 'Yama et Luna', es: 'Yama y Luna' },
     title: { en: 'Yama and Luna', es: 'Yama and Luna', fr: 'Yama and Luna' },
     subtitle: {
       en: 'A Starlight Safari',
@@ -566,6 +593,7 @@ export const books: Book[] = [
     ageRange: '5-9',
     amazonUrl: dp('1996972235'),
     ebookUrl: 'https://payhip.com/b/t9QfV',
+    editionTitles: { fr: 'Le Choix courageux de Yama', es: 'La valiente elección de Yama' },
     title: { en: "Yama's Brave Choice", es: "Yama's Brave Choice", fr: "Yama's Brave Choice" },
     subtitle: {
       en: 'A Yama Story About Honesty',
@@ -601,9 +629,8 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1996972286'),
     ebookUrl: 'https://payhip.com/b/pXh8M',
-    // The only Pawa Seyni title with live non-English editions, verified on
-    // amazon.com 2026-10-11 (FR and ES submitted 2026-10-05).
     editions: { fr: 'B0HM2CPCGH', es: 'B0HM2FTSFQ' },
+    editionTitles: { fr: 'Une petite lumière dans le noir', es: 'Una pequeña luz en la oscuridad' },
     title: { en: 'A Little Light for the Dark', es: 'A Little Light for the Dark', fr: 'A Little Light for the Dark' },
     subtitle: {
       en: 'A Story About Courage, Curiosity, and the Night',
@@ -636,6 +663,8 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1996972294'),
     ebookUrl: 'https://payhip.com/b/t7Z5C',
+    editions: { es: '1996972367' },
+    editionTitles: { es: 'Encontrando mi quietud' },
     title: { en: 'Finding My Quiet', es: 'Finding My Quiet', fr: 'Finding My Quiet' },
     subtitle: {
       en: 'A Story About Stillness in a Big, Busy World',
@@ -668,6 +697,7 @@ export const books: Book[] = [
     ageRange: '3-6',
     amazonUrl: dp('1069628840'),
     ebookUrl: 'https://payhip.com/b/S1J5t',
+    editionTitles: { fr: 'Le Jardin de la bienveillance', es: 'El jardín de la amabilidad' },
     title: { en: 'The Kindness Garden', es: 'The Kindness Garden', fr: 'The Kindness Garden' },
     subtitle: {
       en: 'A Yama Story About Kindness That Grows',
@@ -700,6 +730,7 @@ export const books: Book[] = [
     ageRange: '5-9',
     amazonUrl: dp('1996972200'),
     ebookUrl: 'https://payhip.com/b/0SGWY',
+    editionTitles: { fr: 'Le Roi serviteur', es: 'El rey sirviente' },
     title: { en: 'The Servant King', es: 'The Servant King', fr: 'The Servant King' },
     subtitle: {
       en: 'The Kabir Edition',
@@ -732,6 +763,7 @@ export const books: Book[] = [
     ageRange: '5-9',
     amazonUrl: dp('1996972553'),
     ebookUrl: 'https://payhip.com/b/BT2iZ',
+    editionTitles: { es: 'La olla llena y la olla vacía' },
     title: { en: 'The Full Pot and the Empty Pot', es: 'The Full Pot and the Empty Pot', fr: 'The Full Pot and the Empty Pot' },
     subtitle: {
       en: 'A Tale of Wisdom and Quiet Strength',
@@ -764,6 +796,7 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1996972618'),
     ebookUrl: 'https://payhip.com/b/3HmYR',
+    editionTitles: { fr: 'Les Arbres de Grand-mère', es: 'Los árboles de la abuela' },
     title: { en: "The Grandmother's Trees", es: "The Grandmother's Trees", fr: "The Grandmother's Trees" },
     subtitle: {
       en: 'A Story About Planting for People You Will Never Meet',
@@ -796,6 +829,7 @@ export const books: Book[] = [
     ageRange: '6-10',
     amazonUrl: dp('1996972499'),
     ebookUrl: 'https://payhip.com/b/VeaPz',
+    editionTitles: { fr: 'Les Frères et la terre sage', es: 'Los hermanos y la tierra sabia' },
     title: { en: 'The Brothers and the Wise Land', es: 'The Brothers and the Wise Land', fr: 'The Brothers and the Wise Land' },
     subtitle: {
       en: 'A Tale of Books, Soil, and the Wisdom Between Them',
@@ -830,6 +864,8 @@ export const books: Book[] = [
     amazonUrl: dp('B0FB4B7235'),
     ebookUrl: 'https://payhip.com/b/l19xY',
     ebookLanguages: ['en', 'es'],
+    editions: { fr: 'B0HNLTLPZW' },
+    editionTitles: { fr: 'Le Décret vert du chef' },
     title: { en: "The Chief's Green Rule", es: "The Chief's Green Rule", fr: "The Chief's Green Rule" },
     subtitle: {
       en: 'Five Seeds for One',
@@ -862,6 +898,8 @@ export const books: Book[] = [
     ageRange: '3-9',
     amazonUrl: dp('106946287X'),
     ebookUrl: 'https://payhip.com/b/orAfi',
+    editions: { es: 'B0HNP6NDDJ' },
+    editionTitles: { es: 'El último regalo del jefe Mael' },
     title: { en: "Chief Mael's Final Gift", es: "Chief Mael's Final Gift", fr: "Chief Mael's Final Gift" },
     subtitle: {
       en: 'A Storytime with Pawa Tale',
@@ -892,13 +930,15 @@ export const books: Book[] = [
     id: 'the-chiefs-3-gifts',
     coverImage: theChiefs3Gifts,
     ageRange: '3-6',
-    amazonUrl: dp('1996972928'),
+    amazonUrl: dp('1069462853'),
     ebookUrl: 'https://payhip.com/b/cMvoH',
-    title: { en: "The Chief's 3 Gifts", es: "The Chief's 3 Gifts", fr: "The Chief's 3 Gifts" },
+    editions: { fr: 'B0HPBG8BSD', es: 'B0HPBL4593' },
+    editionTitles: { fr: 'Les Trois Cadeaux du chef', es: 'Los tres regalos del jefe' },
+    title: { en: "The Chief's Three Gifts", es: "The Chief's Three Gifts", fr: "The Chief's Three Gifts" },
     subtitle: {
-      en: 'A Wise Way of Teaching Leadership',
-      es: 'Una manera sabia de enseñar liderazgo',
-      fr: "Une sage façon d'enseigner le leadership",
+      en: 'A Story About Wisdom, Strength, and Gentle Leadership',
+      es: 'Una historia sobre la sabiduría, la fuerza y el liderazgo amable',
+      fr: 'Une histoire de sagesse, de force et de leadership tout en douceur',
     },
     description: {
       en: 'What do a stone, a piece of charcoal, and a feather reveal about leadership? When young Mael becomes the village advisor, he receives three mysterious gifts from the chief, each holding wisdom passed through generations: be strong as stone, warm as charcoal, and gentle as a feather.',
@@ -906,8 +946,8 @@ export const books: Book[] = [
       fr: "Que révèlent une pierre, un morceau de charbon et une plume sur le leadership ? Quand le jeune Mael devient conseiller du village, il reçoit du chef trois cadeaux mystérieux, chacun portant une sagesse transmise de génération en génération : sois fort comme la pierre, chaleureux comme le charbon et doux comme la plume.",
     },
     seoTitle: {
-      es: "The Chief's 3 Gifts: cuento africano",
-      fr: "The Chief's 3 Gifts : conte africain",
+      es: "The Chief's Three Gifts: cuento africano",
+      fr: "The Chief's Three Gifts : conte africain",
     },
     seoDescription: {
       en: "An African tale about leadership and values for ages 3–6. A stone, a piece of charcoal and a feather: three gifts that teach young Mael to lead.",
@@ -926,6 +966,7 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069628891'),
     ebookUrl: 'https://payhip.com/b/ezDfA',
+    editionTitles: { es: 'El juguete roto' },
     title: { en: 'The Broken Toy', es: 'The Broken Toy', fr: 'The Broken Toy' },
     subtitle: {
       en: 'A Yama Story About Friendship, Forgiveness, and Ubuntu',
@@ -958,6 +999,7 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069628875'),
     ebookUrl: 'https://payhip.com/b/U4cDo',
+    editionTitles: { fr: 'La Main qui donne', es: 'La mano que da' },
     title: { en: 'The Hand That Gives', es: 'The Hand That Gives', fr: 'The Hand That Gives' },
     subtitle: {
       en: 'A Tale of Generosity and the Circle of Giving',
@@ -990,6 +1032,7 @@ export const books: Book[] = [
     ageRange: '4-8',
     amazonUrl: dp('1069628824'),
     ebookUrl: 'https://payhip.com/b/lI371',
+    editionTitles: { fr: 'Le Fermier reconnaissant', es: 'El granjero agradecido' },
     title: { en: 'The Thankful Farmer', es: 'The Thankful Farmer', fr: 'The Thankful Farmer' },
     subtitle: {
       en: 'A Tale of Gratitude and Opening Your Eyes to Blessings',
@@ -1022,6 +1065,7 @@ export const books: Book[] = [
     ageRange: '6-10',
     amazonUrl: dp('1996972464'),
     ebookUrl: 'https://payhip.com/b/azFG8',
+    editionTitles: { fr: 'Lentement et sûrement', es: 'Lenta y firme gana la carrera' },
     title: { en: 'Slow and Strong Wins the Race', es: 'Slow and Strong Wins the Race', fr: 'Slow and Strong Wins the Race' },
     subtitle: {
       en: 'A Story About the Power of the Steady Plan',
@@ -1054,6 +1098,7 @@ export const books: Book[] = [
     ageRange: '5-8',
     amazonUrl: dp('1996972529'),
     ebookUrl: 'https://payhip.com/b/M3Nue',
+    editionTitles: { fr: 'La Scientifique ingénieuse : Professeure Hawel', es: 'La científica ingeniosa: Profesora Hawel' },
     title: { en: 'The Clever Scientist, Professor Hawel', es: 'The Clever Scientist, Professor Hawel', fr: 'The Clever Scientist, Professor Hawel' },
     subtitle: {
       en: 'Roots of Tomorrow: A Journey to the Past',
@@ -1086,6 +1131,7 @@ export const books: Book[] = [
     ageRange: '5-9',
     amazonUrl: dp('1996972588'),
     ebookUrl: 'https://payhip.com/b/Qv0Ch',
+    editionTitles: { fr: 'Le Jardin des deuxièmes chances', es: 'El jardín de las segundas oportunidades' },
     title: { en: 'The Garden of Second Chances', es: 'The Garden of Second Chances', fr: 'The Garden of Second Chances' },
     subtitle: {
       en: 'A Story About Repair, Trust, and Growing Again',
@@ -1118,6 +1164,7 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1996972049'),
     ebookUrl: 'https://payhip.com/b/MxN8H',
+    editionTitles: { fr: 'Les Arbres que nous plantons pour demain', es: 'Los árboles que plantamos para mañana' },
     title: { en: 'The Trees We Plant for Tomorrow', es: 'The Trees We Plant for Tomorrow', fr: 'The Trees We Plant for Tomorrow' },
     subtitle: {
       en: 'A Fulani Tale of Patience and Strength',
@@ -1150,6 +1197,8 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1069628867'),
     ebookUrl: 'https://payhip.com/b/ZXkqI',
+    editions: { fr: 'B0HMWW9GY8', es: 'B0HMX9HC1L' },
+    editionTitles: { fr: "Un conte d'espoir et d'humour", es: 'Un cuento de esperanza y humor' },
     title: { en: 'A Tale of Hope and Humor', es: 'A Tale of Hope and Humor', fr: 'A Tale of Hope and Humor' },
     subtitle: {
       en: 'A West African Tale of Resilience and Joy',
@@ -1182,6 +1231,8 @@ export const books: Book[] = [
     ageRange: '3-8',
     amazonUrl: dp('1996972308'),
     ebookUrl: 'https://payhip.com/b/LjJeI',
+    editions: { fr: '1996972391', es: '1996972383' },
+    editionTitles: { fr: 'Le Jardin de Grand-mère sous la lune', es: 'El jardín de la Abuela bajo la luna' },
     title: { en: "Grandmère's Garden Under the Moon", es: "Grandmère's Garden Under the Moon", fr: "Grandmère's Garden Under the Moon" },
     subtitle: {
       en: 'A Story of Patience, Magic, and What We Grow Together',
@@ -1217,6 +1268,7 @@ export const books: Book[] = [
     ageRange: '3-7',
     amazonUrl: dp('1996972103'),
     ebookUrl: 'https://payhip.com/b/ShRD1',
+    editionTitles: { fr: "Le Jour où on s'est réveillés en dinosaures", es: 'El día que nos despertamos como dinosaurios' },
     title: {
       en: 'The Day We Woke Up as Dinosaurs',
       es: 'El Día que nos Despertamos como Dinosaurios',
@@ -1250,6 +1302,18 @@ function localize(book: Book, lang: Language): LocalizedBook {
     coverSrcSet: coverSrcSet(book.id),
     ageRange: book.ageRange,
     languages: EDITION_ORDER.filter(l => l === 'en' || book.editions?.[l]).map(l => EDITION_FLAG[l]),
+    upcomingLanguages: EDITION_ORDER.filter(l => l !== 'en' && !book.editions?.[l]).map(l => EDITION_FLAG[l]),
+    editionList: EDITION_ORDER.map((l) => {
+      const asin = l === 'en' ? undefined : book.editions?.[l];
+      const live = l === 'en' ? !isComingSoon(book) : Boolean(asin);
+      return {
+        lang: l,
+        flag: EDITION_FLAG[l],
+        title: l === 'en' ? book.title.en : book.editionTitles?.[l],
+        live,
+        url: l === 'en' ? (live ? book.amazonUrl : undefined) : asin ? dp(asin) : undefined,
+      };
+    }),
     amazonUrl: editionAsin ? dp(editionAsin) : book.amazonUrl,
     ebookUrl: book.ebookUrl,
     ebookLanguages: book.ebookLanguages,
