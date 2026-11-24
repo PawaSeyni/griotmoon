@@ -8,8 +8,8 @@ const TRANSLATIONS = {
     seoDesc: 'Quick links from the Pawa Seyni Collection: the books on Amazon, free printables, and where to follow along.',
     tagline: 'African heritage picture books for curious minds · EN · ES · FR',
     sectionFeatured: 'Featured Book',
-    whistlingCta: '🎶 The Whistling Secret',
-    whistlingSub: 'A West African picture book about curiosity and the wisdom of elders, ages 3 to 8',
+    ubuntuCta: '🤝 Ubuntu We Are Together',
+    ubuntuSub: 'An African picture book about kindness and community, ages 3 to 8',
     sectionBooks: 'The Books',
     amazonCta: '📚 The Pawa Seyni Collection',
     amazonSub: 'Browse all the books, African heritage picture books, ages 3–9',
@@ -45,8 +45,8 @@ const TRANSLATIONS = {
     seoDesc: 'Enlaces rápidos de la Colección Pawa Seyni: los libros en Amazon, imprimibles gratis y dónde seguirnos.',
     tagline: 'Libros de herencia africana para mentes curiosas · EN · ES · FR',
     sectionFeatured: 'Libro destacado',
-    whistlingCta: '🎶 The Whistling Secret',
-    whistlingSub: 'Un álbum ilustrado de África Occidental sobre la curiosidad y la sabiduría de los mayores, de 3 a 8 años',
+    ubuntuCta: '🤝 Ubuntu We Are Together',
+    ubuntuSub: 'Un álbum ilustrado africano sobre la bondad y la comunidad, de 3 a 8 años',
     sectionBooks: 'Los libros',
     amazonCta: '📚 La Colección Pawa Seyni',
     amazonSub: 'Explora todos los libros, herencia africana, 3 a 9 años',
@@ -82,8 +82,8 @@ const TRANSLATIONS = {
     seoDesc: 'Liens rapides de la Collection Pawa Seyni : les livres sur Amazon, des imprimés gratuits et où nous suivre.',
     tagline: "Albums d'héritage africain pour les esprits curieux · EN · ES · FR",
     sectionFeatured: 'Livre à la une',
-    whistlingCta: '🎶 The Whistling Secret',
-    whistlingSub: 'Un album ouest-africain sur la curiosité et la sagesse des anciens, de 3 à 8 ans',
+    ubuntuCta: '🤝 Ubuntu We Are Together',
+    ubuntuSub: 'Un album africain sur la bonté et la communauté, de 3 à 8 ans',
     sectionBooks: 'Les livres',
     amazonCta: '📚 La Collection Pawa Seyni',
     amazonSub: 'Tous les livres, héritage africain, 3 à 9 ans',
@@ -129,15 +129,15 @@ export default function Links() {
 
   const sections: { heading: string; rows: LinkRow[] }[] = [
     {
-      // Featured row for the 5-day Whistling Secret social run (21-25 Nov 2026): every
-      // caption says "link in bio", so profile clicks land on the book, tagged for Plausible.
+      // Featured row for the 5-day Ubuntu We Are Together social run (30 Nov-4 Dec 2026):
+      // every caption says "link in bio", so profile clicks land on the book, tagged for Plausible.
       heading: t.sectionFeatured,
       rows: [
         {
-          href: '/books/the-whistling-secret/?utm_source=social&utm_medium=bio&utm_campaign=whistling-5day',
+          href: '/books/ubuntu-we-are-together/?utm_source=social&utm_medium=bio&utm_campaign=ubuntu-5day',
           external: false,
-          title: t.whistlingCta,
-          subtitle: t.whistlingSub,
+          title: t.ubuntuCta,
+          subtitle: t.ubuntuSub,
           variant: 'primary',
         },
       ],
