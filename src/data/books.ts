@@ -448,7 +448,7 @@ export const books: Book[] = [
   {
     id: 'kweku-and-the-wise-forest',
     coverImage: kwekuAndTheWiseForest,
-    ageRange: '7-10',
+    ageRange: '7-8',
     amazonUrl: dp('1996972316'),
     ebookUrl: 'https://payhip.com/b/vxaAn',
     editions: { fr: '1996972324', es: '1996972332' },
@@ -464,9 +464,9 @@ export const books: Book[] = [
       fr: "Quand les grands se moquent de lui et le trouvent trop petit, Kweku décide de leur prouver le contraire en entrant dans la forêt de l'ouest la nuit de la nouvelle lune, la nuit même où son grand-père lui avait interdit d'y aller. La forêt avale la dernière lumière, les arbres familiers deviennent étranges, et Kweku comprend qu'il est perdu.",
     },
     seoDescription: {
-      en: "A West African tale about listening to elders for ages 7–10. To prove he isn't too small, Kweku enters the forest on the night his grandfather forbade.",
-      es: "Un cuento de África Occidental sobre escuchar a los mayores, de 7 a 10 años. Para demostrar que no es pequeño, Kweku entra al bosque la noche prohibida.",
-      fr: "Un conte ouest-africain sur l'écoute des anciens, de 7 à 10 ans. Pour prouver qu'il n'est pas trop petit, Kweku entre dans la forêt la nuit interdite.",
+      en: "A West African tale about listening to elders for ages 7–8. To prove he isn't too small, Kweku enters the forest on the night his grandfather forbade.",
+      es: "Un cuento de África Occidental sobre escuchar a los mayores, de 7 a 8 años. Para demostrar que no es pequeño, Kweku entra al bosque la noche prohibida.",
+      fr: "Un conte ouest-africain sur l'écoute des anciens, de 7 à 8 ans. Pour prouver qu'il n'est pas trop petit, Kweku entre dans la forêt la nuit interdite.",
     },
     theme: {
       en: 'Listening to elders and resilience',
@@ -738,7 +738,7 @@ export const books: Book[] = [
   {
     id: 'the-brothers-and-the-wise-land',
     coverImage: theBrothersAndTheWiseLand,
-    ageRange: '6-10',
+    ageRange: '6-8',
     amazonUrl: dp('1996972499'),
     ebookUrl: 'https://payhip.com/b/VeaPz',
     title: { en: 'The Brothers and the Wise Land', es: 'Los hermanos y la tierra sabia', fr: 'Les Frères et la terre sage' },
@@ -753,9 +753,9 @@ export const books: Book[] = [
       fr: "Kwame et Kwesi sont deux frères qui cultivent leur première saison indépendante à Tamale, au nord du Ghana. Kwame fait confiance à ses manuels d'agriculture. Kwesi fait confiance au sol, aux plantes indicatrices et à ce que la terre a toujours dit. Quand leurs semences peinent et que les pluies se font incertaines, les deux frères doivent remettre en question ce qu'ils savent.",
     },
     seoDescription: {
-      en: "A Ghanaian story about traditional knowledge for ages 6–10. One brother trusts his farming books, the other trusts the soil. The land teaches both.",
-      es: "Una historia de Ghana sobre el saber tradicional, de 6 a 10 años. Un hermano confía en sus libros de cultivo, el otro en la tierra. Ambos aprenden.",
-      fr: "Une histoire du Ghana sur les savoirs traditionnels, de 6 à 10 ans. Un frère se fie à ses livres, l'autre à la terre. Le sol leur apprend à tous deux.",
+      en: "A Ghanaian story about traditional knowledge for ages 6–8. One brother trusts his farming books, the other trusts the soil. The land teaches both.",
+      es: "Una historia de Ghana sobre el saber tradicional, de 6 a 8 años. Un hermano confía en sus libros de cultivo, el otro en la tierra. Ambos aprenden.",
+      fr: "Une histoire du Ghana sur les savoirs traditionnels, de 6 à 8 ans. Un frère se fie à ses livres, l'autre à la terre. Le sol leur apprend à tous deux.",
     },
     theme: {
       en: 'Traditional knowledge and cooperation',
@@ -767,8 +767,8 @@ export const books: Book[] = [
   {
     id: 'the-chiefs-green-rule',
     coverImage: theChiefsGreenRule,
-    ageRange: '3-9',
-    amazonUrl: dp('B0FB4B7235'),
+    ageRange: '3-8',
+    amazonUrl: dp('1069462861'),
     ebookUrl: 'https://payhip.com/b/l19xY',
     ebookLanguages: ['en', 'es'],
     editions: { fr: 'B0HNLTLPZW' },
@@ -784,9 +784,9 @@ export const books: Book[] = [
       fr: "Dans un village niché sur les hauts plateaux d'Éthiopie, le chef Mael a instauré une règle spéciale : pour chaque arbre que nous prenons, nous devons en planter cinq nouveaux. Tout le monde n'a pas compris au début. Le travail était dur, le sol était sec, et les jambes des enfants fatiguaient, mais la terre écoutait.",
     },
     seoDescription: {
-      en: "An Ethiopian picture book about caring for the land for ages 3–9. Chief Mael's rule: for every tree we take, we plant five new ones.",
-      es: "Un libro ilustrado etíope sobre el cuidado de la tierra, de 3 a 9 años. La regla del jefe Mael: por cada árbol que cortamos, plantamos cinco.",
-      fr: "Un album éthiopien sur le soin de la terre, de 3 à 9 ans. La règle du chef Mael : pour chaque arbre coupé, on en plante cinq.",
+      en: "An Ethiopian picture book about caring for the land for ages 3–8. Chief Mael's rule: for every tree we take, we plant five new ones.",
+      es: "Un libro ilustrado etíope sobre el cuidado de la tierra, de 3 a 8 años. La regla del jefe Mael: por cada árbol que cortamos, plantamos cinco.",
+      fr: "Un album éthiopien sur le soin de la terre, de 3 à 8 ans. La règle du chef Mael : pour chaque arbre coupé, on en plante cinq.",
     },
     theme: {
       en: 'Caring for the land',
