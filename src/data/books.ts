@@ -420,7 +420,7 @@ export const books: Book[] = [
   {
     id: 'the-hunt-with-two-paths',
     coverImage: theHuntWithTwoPaths,
-    ageRange: '4-8',
+    ageRange: '5-9',
     amazonUrl: dp('1996972138'),
     ebookUrl: 'https://payhip.com/b/X4OSo',
     title: { en: 'The Hunt with Two Paths', es: 'La caza con dos caminos', fr: 'La Chasse aux deux chemins' },
@@ -435,9 +435,9 @@ export const books: Book[] = [
       fr: "Deux chasseurs partent pour la même chasse et rentrent avec deux histoires différentes, et toutes deux sont vraies. Un conte de sagesse sur la perspective : comment la même journée peut sembler toute autre à travers d'autres yeux, et pourquoi écouter les deux chemins rend le village plus sage.",
     },
     seoDescription: {
-      en: "An African wisdom tale about perspective for ages 4–8. Two hunters share one hunt and come home with two different stories, and both are true.",
-      es: "Un cuento africano sobre los puntos de vista, de 4 a 8 años. Dos cazadores comparten una cacería y vuelven con dos historias distintas, y ambas son ciertas.",
-      fr: "Un conte africain sur les points de vue, de 4 à 8 ans. Deux chasseurs partagent une chasse et rentrent avec deux récits différents, tous deux vrais.",
+      en: "An African wisdom tale about perspective for ages 5–9. Two hunters share one hunt and come home with two different stories, and both are true.",
+      es: "Un cuento africano sobre los puntos de vista, de 5 a 9 años. Dos cazadores comparten una cacería y vuelven con dos historias distintas, y ambas son ciertas.",
+      fr: "Un conte africain sur les points de vue, de 5 à 9 ans. Deux chasseurs partagent une chasse et rentrent avec deux récits différents, tous deux vrais.",
     },
     theme: {
       en: 'Perspective and wisdom',
@@ -1023,7 +1023,7 @@ export const books: Book[] = [
   {
     id: 'the-trees-we-plant-for-tomorrow',
     coverImage: theTreesWePlantForTomorrow,
-    ageRange: '3-8',
+    ageRange: '3-6',
     amazonUrl: dp('1996972049'),
     ebookUrl: 'https://payhip.com/b/MxN8H',
     title: { en: 'The Trees We Plant for Tomorrow', es: 'Los árboles que plantamos para mañana', fr: 'Les Arbres que nous plantons pour demain' },
@@ -1038,9 +1038,9 @@ export const books: Book[] = [
       fr: "Un jeune arbre ne donne pas d'ombre aujourd'hui, pas de fruit demain, alors pourquoi le planter ? Un conte peul sur la patience, le soin de la terre et la force tranquille de cultiver ce qui nous survivra, pour les enfants qui se tiendront là où nous étions.",
     },
     seoDescription: {
-      en: "A Fulani tale about patience and caring for the earth for ages 3–8. A sapling gives no shade today, so why plant it? For the children still to come.",
-      es: "Un cuento fulani sobre la paciencia y el cuidado de la tierra, de 3 a 8 años. Un arbolito no da sombra hoy, ¿por qué plantarlo? Por los niños que vendrán.",
-      fr: "Un conte peul sur la patience et le soin de la terre, de 3 à 8 ans. Un jeune arbre ne donne pas d'ombre aujourd'hui. Pourquoi le planter ? Pour demain.",
+      en: "A Fulani tale about patience and caring for the earth for ages 3–6. A sapling gives no shade today, so why plant it? For the children still to come.",
+      es: "Un cuento fulani sobre la paciencia y el cuidado de la tierra, de 3 a 6 años. Un arbolito no da sombra hoy, ¿por qué plantarlo? Por los niños que vendrán.",
+      fr: "Un conte peul sur la patience et le soin de la terre, de 3 à 6 ans. Un jeune arbre ne donne pas d'ombre aujourd'hui. Pourquoi le planter ? Pour demain.",
     },
     theme: {
       en: 'Patience and stewardship',
@@ -1112,7 +1112,7 @@ export const books: Book[] = [
   {
     id: 'the-day-we-woke-up-as-dinosaurs',
     coverImage: theDayWeWokeUpAsDinosaurs,
-    ageRange: '3-7',
+    ageRange: '4-8',
     amazonUrl: dp('1996972103'),
     ebookUrl: 'https://payhip.com/b/ShRD1',
     title: {
@@ -1126,9 +1126,9 @@ export const books: Book[] = [
       fr: "Un matin, tout est différent : des queues, des griffes et de très grands pas. Une joyeuse cavalcade sur l'imagination et l'amitié, où se réveiller en dinosaures transforme une journée ordinaire en la plus belle des aventures.",
     },
     seoDescription: {
-      en: "A playful picture book about imagination and friendship for ages 3–7. One morning: tails, claws and big footsteps. An ordinary day becomes an adventure.",
-      es: "Un libro ilustrado divertido sobre la imaginación y la amistad, de 3 a 7 años. Una mañana: colas, garras y grandes pisadas. El día se vuelve una aventura.",
-      fr: "Un album joyeux sur l'imagination et l'amitié, de 3 à 7 ans. Un matin : des queues, des griffes et de grands pas. Une journée ordinaire devient une aventure.",
+      en: "A playful picture book about imagination and friendship for ages 4–8. One morning: tails, claws and big footsteps. An ordinary day becomes an adventure.",
+      es: "Un libro ilustrado divertido sobre la imaginación y la amistad, de 4 a 8 años. Una mañana: colas, garras y grandes pisadas. El día se vuelve una aventura.",
+      fr: "Un album joyeux sur l'imagination et l'amitié, de 4 à 8 ans. Un matin : des queues, des griffes et de grands pas. Une journée ordinaire devient une aventure.",
     },
     theme: {
       en: 'Imagination and friendship',
