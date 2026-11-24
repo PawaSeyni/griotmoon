@@ -7,9 +7,9 @@ import { useLanguage, useTranslation } from '../lib/language';
 import { track } from '../lib/analytics';
 
 const TRANSLATIONS = {
-  en: { freeActivity: 'Free activity', featured: 'Featured', discoverMore: 'Discover More ✨', buy: '🛒 Buy', comingSoon: 'Coming soon', coverAlt: 'book cover' },
-  es: { freeActivity: 'Actividad gratuita', featured: 'Destacado', discoverMore: 'Descubrir más ✨', buy: '🛒 Comprar', comingSoon: 'Próximamente', coverAlt: 'portada del libro' },
-  fr: { freeActivity: 'Activité gratuite', featured: 'En vedette', discoverMore: 'Découvrir plus ✨', buy: '🛒 Acheter', comingSoon: 'Bientôt disponible', coverAlt: 'couverture du livre' },
+  en: { freeActivity: 'Free activity', featured: 'Featured', discoverMore: 'Discover More ✨', buy: '🛒 Buy', comingSoon: 'Coming soon', coverAlt: 'book cover', soon: 'soon', soonTitle: 'Editions not on Amazon yet' },
+  es: { freeActivity: 'Actividad gratuita', featured: 'Destacado', discoverMore: 'Descubrir más ✨', buy: '🛒 Comprar', comingSoon: 'Próximamente', coverAlt: 'portada del libro', soon: 'pronto', soonTitle: 'Ediciones que aún no están en Amazon' },
+  fr: { freeActivity: 'Activité gratuite', featured: 'En vedette', discoverMore: 'Découvrir plus ✨', buy: '🛒 Acheter', comingSoon: 'Bientôt disponible', coverAlt: 'couverture du livre', soon: 'bientôt', soonTitle: 'Éditions pas encore sur Amazon' },
 };
 
 interface BookCardProps {
@@ -54,6 +54,11 @@ export default function BookCard({ book, priority = false, placement }: BookCard
             {book.ageRange.replace('-', '–')}
           </span>
           <span className="text-sm">{book.languages.join('')}</span>
+          {book.upcomingLanguages.length > 0 && (
+            <span className="text-xs text-gray-500" title={t.soonTitle} data-upcoming-editions>
+              <span className="opacity-40" aria-hidden>{book.upcomingLanguages.join('')}</span> {t.soon}
+            </span>
+          )}
           {/* Every book is backed by the free activity library at /activities,
               which is catalog-wide rather than per-title. The pill is a label,
               not a link: the card already has its own destination, and the book

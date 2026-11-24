@@ -90,8 +90,10 @@ Check items off as they land; each item says who can do it
   but not on the site because no local cover/metadata was found. Add it once assets exist.
 - [ ] **"The Bridge of Unity"** — finished covers exist (nested inside The Kindness Garden folder);
   decide whether it joins the catalog.
-- [ ] **ES/FR edition flags** — 11 books currently show 🇺🇸-only (EN-only covers found locally).
-  As translated editions publish, flip their `languages` to the trilingual set.
+- [x] **ES/FR edition flags** — DONE 2026-11-23: every book page lists its EN/ES/FR editions
+  (`editionTitles` in books.ts); live ones link their ASIN (`editions`), the rest read
+  "Not on Amazon yet". 14 FR/ES editions live across 10 titles. As each FR/ES edition goes
+  live on KDP, add its ASIN to `editions` and the flag turns on by itself.
 - [ ] **Wide ebook distribution** (You) — Kobo / Apple Books / B&N / Google Play per your
   `EBOOK_DISTRIBUTION_WORKFLOW.md` playbook.
 
