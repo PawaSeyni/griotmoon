@@ -133,7 +133,7 @@ export default function BookDetail() {
               </span>
               <span className="text-lg" aria-hidden>{book.languages.join(' ')}</span>
               {book.upcomingLanguages.length > 0 && (
-                <span className="text-lg opacity-40" aria-hidden title={t.editionNotLive}>{book.upcomingLanguages.join(' ')}</span>
+                <span className="text-lg grayscale" aria-hidden title={t.editionNotLive}>{book.upcomingLanguages.join(' ')}</span>
               )}
             </div>
 
@@ -207,12 +207,12 @@ export default function BookDetail() {
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => track('Purchase Click', { book: book.id, placement: `detail-edition-${e.lang}`, language })}
-                        className="text-xs font-semibold text-orange-600 hover:underline"
+                        className="text-xs font-semibold text-orange-700 hover:underline"
                       >
                         {t.editionLive} →
                       </a>
                     ) : (
-                      <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">{t.editionNotLive}</span>
+                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{t.editionNotLive}</span>
                     )}
                   </li>
                 ))}

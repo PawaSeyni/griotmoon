@@ -56,7 +56,7 @@ export default function BookCard({ book, priority = false, placement }: BookCard
           <span className="text-sm">{book.languages.join('')}</span>
           {book.upcomingLanguages.length > 0 && (
             <span className="text-xs text-gray-500" title={t.soonTitle} data-upcoming-editions>
-              <span className="opacity-40" aria-hidden>{book.upcomingLanguages.join('')}</span> {t.soon}
+              <span className="grayscale" aria-hidden>{book.upcomingLanguages.join('')}</span> {t.soon}
             </span>
           )}
           {/* Every book is backed by the free activity library at /activities,
